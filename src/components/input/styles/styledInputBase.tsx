@@ -45,7 +45,7 @@ export const StyledInputBase = styled(InputBase, {
     height: '24px',
     fontSize: 16,
     fontWeight: 500,
-    padding: theme.spacing(2),
+    padding: `${theme.spacing(2)} 15px`,
     color: theme.palette.primary.dark,
     '&::placeholder': { color: theme.palette.primary.dark, textTransform: 'capitalize' },
     '&.MuiInputBase-inputAdornedStart': {
