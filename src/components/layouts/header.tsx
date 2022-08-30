@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Profile } from 'components'
+// import { Profile } from 'components'
 
 type Props = {
   classNames?: ''
@@ -16,8 +16,8 @@ export const Header: FC<Props> = ({ classNames, withNavBar = true }): React.Reac
             Dashboard
           </TextButton> */}
           <div className="flex gap-[37px]">
-            <TextButton>Profile</TextButton>
-            <Profile />
+            {/* <TextButton>Profile</TextButton>
+            <Profile /> */}
           </div>
         </div>
       )}

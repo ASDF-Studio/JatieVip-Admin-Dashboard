@@ -97,5 +97,5 @@ declare module '@mui/material/Typography' {
   >
 }
 
-export * from './src/components'
-export * from './src/theme'
+export * from '../components'
+export * from '../theme'

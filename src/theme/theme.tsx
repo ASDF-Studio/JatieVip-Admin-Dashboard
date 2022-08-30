@@ -1,7 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider as MuiThemeProvider, useTheme as muiUseTheme } from '@mui/material'
 import React, { createContext, useContext } from 'react'
 import colors from './colors'
-import '../../types.d.ts'
 
 export const MoveTheme = {
   spacing: 4,

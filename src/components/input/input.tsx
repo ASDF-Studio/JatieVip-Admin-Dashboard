@@ -61,6 +61,8 @@ export const Input: React.FC<InputProperties> = (properties) => {
 
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const { value } = properties
+
   useEffect(() => {
     if (focus && inputRef.current) {
       inputRef.current.focus()
@@ -115,7 +117,7 @@ export const Input: React.FC<InputProperties> = (properties) => {
 
           {maxLength && withCounter && (
             <Typography variant="label1" classes={classes}>
-              {typeof properties.value === 'string' && `${properties.value.length} / ${maxLength}`}
+              {typeof value === 'string' && `${value.length} / ${maxLength}`}
             </Typography>
           )}
         </StyledFormLabel>
