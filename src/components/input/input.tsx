@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useRef } from 'react'
 import { Theme } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
@@ -26,6 +26,7 @@ export interface InputProperties extends InputBaseProps {
   endIcon?: ReactNode
   maxLength?: number
   withCounter?: boolean
+  focus?: boolean
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -52,10 +53,19 @@ export const Input: React.FC<InputProperties> = (properties) => {
     withCounter = false,
     maxLength, // Maximum number of characters
     inputProps, // Input Props
+    focus,
     ...otherProperties
   } = properties
 
   const classes = useStyles()
+
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (focus && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [focus])
 
   return (
     <StyledFormControl fullWidth variant="filled" disabled={disabled} color={status ?? 'primary'}>
@@ -73,6 +83,7 @@ export const Input: React.FC<InputProperties> = (properties) => {
         {...otherProperties}
         type={hidden !== undefined ? (hidden ? 'password' : 'text') : type}
         background={background}
+        inputRef={inputRef}
         startAdornment={
           startIcon ? (
             <StyledInputAdornment variant="outlined" position="start">

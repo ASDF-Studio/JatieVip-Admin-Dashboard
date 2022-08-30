@@ -140,7 +140,7 @@ export const MoveTheme = {
     body: {
       fontSize: '16px',
       lineHeight: '24px',
-      fontWeight: 'bold',
+      fontWeight: 'normal',
       '@media (max-width:900px)': {
         fontSize: '14px',
         lineHeight: '22px',

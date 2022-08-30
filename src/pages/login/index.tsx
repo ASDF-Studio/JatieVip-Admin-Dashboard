@@ -13,7 +13,7 @@ const Home: NextPage = (): React.ReactElement => {
           </Typography>
           <div className="flex flex-col gap-4">
             <Input placeholder="Enter Phone Number" />
-            <Button className="bg-secondary-light-blue rounded-[22px]" variant="fill">
+            <Button color="success" className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow" variant="fill">
               <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
                 Login
               </Typography>
