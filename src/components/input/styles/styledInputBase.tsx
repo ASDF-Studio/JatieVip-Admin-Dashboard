@@ -10,13 +10,9 @@ export const StyledInputBase = styled(InputBase, {
   padding: 0,
   backgroundColor: theme.palette.primary.light,
 
-  // Focused
-
   '&.Mui-focused.MuiInputBase-colorPrimary': {
     borderColor: theme.palette.primary.transParent,
   },
-
-  // Not Focused
 
   '&.MuiInputBase-colorPrimary': {
     borderColor: theme.palette.primary.transParent,
@@ -31,8 +27,6 @@ export const StyledInputBase = styled(InputBase, {
     borderColor: theme.palette.error.main,
   },
 
-  // Adornment a.k.a Start and End Icons
-
   '&.MuiInputBase-adornedStart': {
     paddingLeft: theme.spacing(4),
   },
@@ -40,9 +34,8 @@ export const StyledInputBase = styled(InputBase, {
     paddingRight: theme.spacing(4),
   },
 
-  // Input
   '& .MuiInputBase-input': {
-    height: '24px',
+    height: '22px',
     fontSize: 16,
     fontWeight: 500,
     padding: `${theme.spacing(2)} 15px`,
