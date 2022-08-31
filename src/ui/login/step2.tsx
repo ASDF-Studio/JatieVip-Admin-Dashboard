@@ -1,8 +1,13 @@
 import { Button, VerifyCodeInput } from 'components'
-import React, { useState } from 'react'
+import React, { Dispatch, useState } from 'react'
 import { Typography } from '@mui/material'
+import { LoginSteps } from 'types'
 
-const Step2: React.FC = (): React.ReactElement => {
+type Props = {
+  onChangeStep: Dispatch<LoginSteps>
+}
+
+const Step2: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
   const [code, setCode] = useState<string>('')
 
   return (
@@ -21,7 +26,7 @@ const Step2: React.FC = (): React.ReactElement => {
               <Typography className="text-primary-grey" variant="body2">
                 that was sent to <span className="text-primary-black">&nbsp;{`${'+976 99032894'}`}</span>
               </Typography>
-              <Button variant="text" className="p-0 transform-none">
+              <Button variant="text" className="p-0 transform-none" onClick={() => onChangeStep('step1')}>
                 <Typography variant="body2" className=" text-primary-brand">
                   Edit
                 </Typography>

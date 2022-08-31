@@ -14,7 +14,7 @@ const Home: NextPage = (): React.ReactElement => {
       case 'step1':
         return <Step1 onChangeStep={handleChangeStep} />
       default:
-        return <Step2 />
+        return <Step2 onChangeStep={handleChangeStep} />
     }
   }
 
