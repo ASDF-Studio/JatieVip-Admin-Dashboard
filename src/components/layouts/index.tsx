@@ -6,13 +6,14 @@ type Props = {
   children: ReactElement
   footer?: boolean
   withNavBar?: boolean
+  className?: string
 }
 
-const MainLayout: FC<Props> = ({ children, footer = true, withNavBar = true }): React.ReactElement => {
+const MainLayout: FC<Props> = ({ children, footer = true, withNavBar = true, className = "" }): React.ReactElement => {
   return (
-    <div className='flex flex-col h-screen w-full'>
+    <div>
       <Header withNavBar={withNavBar} />
-      <main className='grow'>{children}</main>
+      <main className={`${className} min-h-screen w-full relative`}>{children}</main>
       {footer && <Footer />}
     </div>
   )

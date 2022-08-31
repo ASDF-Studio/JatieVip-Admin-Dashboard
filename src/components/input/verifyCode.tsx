@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import { Input } from 'components'
+import { Input } from './input'
 
 interface Props {
   code?: string
@@ -9,7 +9,7 @@ interface Props {
   onFinish?: (input: string) => void
 }
 
-const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactElement => {
+export const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactElement => {
   const { onChange, code, onFinish, errorMessage, length } = props
 
   const handleKeyUp = (e: React.KeyboardEvent) => {
@@ -30,7 +30,7 @@ const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactElement => {
 
   return (
     <>
-      <div className="flex gap-2 ">
+      <div className="flex gap-5 ">
         {Array.from({ length }).map((_, index) => {
           const isActive = code.length === index
           const value = code[index]
@@ -40,7 +40,7 @@ const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactElement => {
               key={index}
               name="verifyCode"
               type="number"
-              className="w-10 h-10 md:h-14 md:w-14 lg:w-14 lg:h-14"
+              className="w-[52px] h-10"
               value={value || ''}
               focus={isActive}
               onKeyUp={handleKeyUp}
@@ -59,5 +59,3 @@ const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactElement => {
     </>
   )
 }
-
-export default VerifyCodeInput

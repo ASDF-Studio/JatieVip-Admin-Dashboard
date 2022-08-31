@@ -1,45 +1,26 @@
 import type { NextPage } from 'next'
-import { Button, MainLayout, Input } from 'components'
-import React from 'react'
-import { Typography } from '@mui/material'
+import { MainLayout } from 'components'
+import React, { useState } from 'react'
+import { Step1, Step2 } from 'ui/login'
+import { LoginSteps } from 'types'
 
 const Home: NextPage = (): React.ReactElement => {
+  const [step, setStep] = useState<LoginSteps>('step1')
+
+  const handleChangeStep = (step: LoginSteps) => setStep(step)
+
+  const getStepsUI = (step: LoginSteps) => {
+    switch (step) {
+      case 'step1':
+        return <Step1 onChangeStep={handleChangeStep} />
+      default:
+        return <Step2 />
+    }
+  }
+
   return (
     <MainLayout withNavBar={false} footer={false}>
-      <div className="flex justify-center items-center h-full">
-        <div className="w-[400px] flex flex-col justify-center gap-[43px]">
-          <Typography className="text-center" variant="heading1">
-            Welcome!
-          </Typography>
-          <div className="flex flex-col gap-4">
-            <Input placeholder="Enter Phone Number" />
-            <Button color="success" className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow" variant="fill">
-              <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
-                Login
-              </Typography>
-            </Button>
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="w-[40%] h-[1px] bg-primary-transparent" />
-            <Typography className="text-primary-grey">or</Typography>
-            <div className="w-[40%] h-[1px] bg-primary-transparent" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <div>
-              <Button className="p-0" variant="text">
-                <Typography className="text-primary-black" variant="body">
-                  Don’t have an account?
-                </Typography>
-              </Button>
-            </div>
-            <Button className="bg-fill-orange rounded-[22px]" variant="fill">
-              <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
-                Sign Up
-              </Typography>
-            </Button>
-          </div>
-        </div>
-      </div>
+      {getStepsUI(step)}
     </MainLayout>
   )
 }
