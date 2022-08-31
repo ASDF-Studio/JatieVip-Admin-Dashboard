@@ -15,7 +15,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-[400px] flex flex-col justify-center gap-[43px]">
         <Typography className="text-center" variant="heading1">
-          Welcome!
+          Sign Up
         </Typography>
         <div className="flex flex-col gap-4">
           <Input placeholder="Enter Phone Number" />
@@ -26,7 +26,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
             onClick={() => onChangeStep('step2')}
           >
             <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
-              Login
+              Sign Up
             </Typography>
           </Button>
         </div>
@@ -37,11 +37,11 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
         </div>
         <div className="flex flex-col gap-4">
           <Typography className="text-primary-black" variant="body">
-            Don’t have an account?
+            Already have an account?
           </Typography>
-          <Button onClick={() => navigateTo('signup')} className="bg-fill-orange rounded-[22px]" variant="fill">
+          <Button onClick={() => navigateTo('/login')} className="bg-fill-orange rounded-[22px]" variant="fill">
             <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
-              Sign Up
+              Login
             </Typography>
           </Button>
         </div>
