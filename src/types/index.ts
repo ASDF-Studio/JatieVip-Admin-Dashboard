@@ -15,3 +15,4 @@ export type SuccessResponse = BaseResponse<unknown>
 export type ApiResponseStatus = 'error' | 'bad_request' | 'success' | 'unauthorized' | 'unknown'
 
 export type LoginSteps = 'step1' | 'step2'
+export type SignUpSteps = 'step1' | 'step2' | 'step3'
