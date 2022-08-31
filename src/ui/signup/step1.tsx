@@ -12,7 +12,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
   const { navigateTo } = useNavigate()
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center pt-[203px]">
       <div className="w-[400px] flex flex-col justify-center gap-[43px]">
         <Typography className="text-center" variant="heading1">
           Sign Up

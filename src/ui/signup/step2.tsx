@@ -6,7 +6,7 @@ const Step2: React.FC = (): React.ReactElement => {
   const [code, setCode] = useState<string>('')
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center pt-[203px]">
       <div className="w-[400px] flex flex-col justify-center gap-[43px]">
         <Typography className="text-center" variant="heading1">
           Verify Login
