@@ -95,6 +95,7 @@ export const MoveTheme = {
       fontSize: '18px',
       lineHeight: '24px',
       fontWeight: 600,
+      textTransform: 'capitalize',
       // '@media (max-width:900px)': {
       //   fontSize: '16px',
       //   lineHeight: '24px',
@@ -200,6 +201,7 @@ export const MoveTheme = {
       fontSize: '14px',
       lineHeight: '22px',
       fontWeight: 'bold',
+      textTransform: 'capitalize',
       // '@media (max-width:900px)': {
       //   fontSize: '12px',
       //   lineHeight: '18px',
