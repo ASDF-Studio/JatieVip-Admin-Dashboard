@@ -4,11 +4,13 @@ declare module '@mui/material/styles/createPalette' {
   export interface Palette {
     primary?: SimplePaletteColorOptions
     secondary?: SimplePaletteColorOptions
+    border?: SimplePaletteColorOptions
   }
   export interface PaletteOptions {
     primary?: SimplePaletteColorOptions
     secondary?: SimplePaletteColorOptions
     fill?: SimplePaletteColorOptions
+    border?: SimplePaletteColorOptions
   }
 
   export interface TypeText {
@@ -20,6 +22,7 @@ declare module '@mui/material/styles/createPalette' {
     hop: string
     blue: string
     purple: string
+    blue: string
   }
 
   export interface TypeBackground {
@@ -30,6 +33,7 @@ declare module '@mui/material/styles/createPalette' {
     main?: string
     dark?: string
     transParent?: string
+    blue?: string
   }
 
   export interface SimplePaletteColorOptions {
@@ -38,6 +42,9 @@ declare module '@mui/material/styles/createPalette' {
     dark?: string
     transparent?: string
     orange?: string
+    blue?: string
+    pink?: string
+    grey?: string
   }
 }
 
@@ -76,6 +83,7 @@ declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     heading1?: true
     heading2?: true
+    heading3?: true
     title1?: true
     title2?: true
     title3?: true

@@ -11,9 +11,9 @@ type Props = {
 
 const MainLayout: FC<Props> = ({ children, footer = true, withNavBar = true, className = "" }): React.ReactElement => {
   return (
-    <div>
+    <div className='flex flex-col'>
       <Header withNavBar={withNavBar} />
-      <main className={`${className} min-h-screen w-full relative`}>{children}</main>
+      <main className={`${className}  w-full relative`}>{children}</main>
       {footer && <Footer />}
     </div>
   )

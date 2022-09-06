@@ -15,186 +15,201 @@ export const MoveTheme = {
   },
   palette: colors,
   typography: {
-    fontFamily: ['Brandon Grotesque', 'sans-serif'].join(','),
+    fontFamily: ['Avenir Next LT Pro', 'sans-serif'].join(','),
     heading1: {
       fontSize: '45px',
       lineHeight: '60px',
-      fontWeight: 'bold',
-      '@media (max-width:900px)': {
-        fontSize: '32px',
-        lineHeight: '40px',
-        fontWeight: 800,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '32px',
-        lineHeight: '40px',
-        fontWeight: 800,
-      },
+      fontWeight: '600',
+      // '@media (max-width:900px)': {
+      //   fontSize: '32px',
+      //   lineHeight: '40px',
+      //   fontWeight: 800,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '32px',
+      //   lineHeight: '40px',
+      //   fontWeight: 800,
+      // },
     },
     heading2: {
       fontSize: '34px',
       lineHeight: '40px',
       fontWeight: 700,
-      '@media (max-width:900px)': {
-        fontSize: '24px',
-        lineHeight: '30px',
-        fontWeight: 700,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '24px',
-        lineHeight: '30px',
-        fontWeight: 700,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '24px',
+      //   lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '24px',
+      //   lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
+    },
+    heading3: {
+      fontSize: '26px',
+      lineHeight: '40px',
+      fontWeight: 600,
+      // '@media (max-width:900px)': {
+      //   fontSize: '24px',
+      //   lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '24px',
+      //   lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
     },
     title1: {
       fontSize: '22px',
       lineHeight: '28px',
-      fontWeight: 'normal',
-      '@media (max-width:900px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 600,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 600,
-      },
+      fontWeight: 600,
+      // '@media (max-width:900px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
     },
     title2: {
       fontSize: '18px',
       lineHeight: '24px',
       fontWeight: 700,
-      '@media (max-width:900px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 700,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 700,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 700,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 700,
+      // },
     },
     title3: {
       fontSize: '18px',
       lineHeight: '24px',
       fontWeight: 600,
-      '@media (max-width:900px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 600,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 600,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
     },
     bodyBold: {
       fontSize: '16px',
       lineHeight: '24px',
-      fontWeight: 700,
-      '@media (max-width:900px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 700,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 700,
-      },
+      fontWeight: 600,
+      // '@media (max-width:900px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 700,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 700,
+      // },
     },
     body1: {
       fontSize: '16px',
       lineHeight: '24px',
       fontWeight: 600,
-      '@media (max-width:900px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 600,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        fontWeight: 600,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
     },
     body2: {
       fontSize: '16px',
       lineHeight: '24px',
       fontWeight: 500,
-      '@media (max-width:900px)': {
-        fontSize: '14px',
-        lineHeight: '22px',
-        fontWeight: 500,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '14px',
-        lineHeight: '22px',
-        fontWeight: 500,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '14px',
+      //   lineHeight: '22px',
+      //   fontWeight: 500,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '14px',
+      //   lineHeight: '22px',
+      //   fontWeight: 500,
+      // },
     },
     body: {
       fontSize: '16px',
       lineHeight: '24px',
       fontWeight: 'normal',
-      '@media (max-width:900px)': {
-        fontSize: '14px',
-        lineHeight: '22px',
-        fontWeight: 400,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '14px',
-        lineHeight: '22px',
-        fontWeight: 400,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '14px',
+      //   lineHeight: '22px',
+      //   fontWeight: 400,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '14px',
+      //   lineHeight: '22px',
+      //   fontWeight: 400,
+      // },
     },
     subhead: {
       fontSize: '14px',
       lineHeight: '22px',
       fontWeight: 400,
-      '@media (max-width:900px)': {
-        fontSize: '12px',
-        lineHeight: '16px',
-        fontWeight: 400,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '12px',
-        lineHeight: '16px',
-        fontWeight: 400,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '16px',
+      //   fontWeight: 400,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '16px',
+      //   fontWeight: 400,
+      // },
     },
     subheadBold: {
       fontSize: '14px',
       lineHeight: '22px',
       fontWeight: 600,
-      '@media (max-width:900px)': {
-        fontSize: '12px',
-        lineHeight: '18px',
-        fontWeight: 600,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '12px',
-        lineHeight: '18px',
-        fontWeight: 600,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 600,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 600,
+      // },
     },
     label1: {
       fontSize: '14px',
       lineHeight: '22px',
       fontWeight: 'bold',
-      '@media (max-width:900px)': {
-        fontSize: '12px',
-        lineHeight: '18px',
-        fontWeight: 400,
-      },
-      '@media (max-width:600px)': {
-        fontSize: '12px',
-        lineHeight: '18px',
-        fontWeight: 400,
-      },
+      // '@media (max-width:900px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 400,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 400,
+      // },
     },
   },
 }

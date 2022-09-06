@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme: ThemeProps) => ({
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
     },
+    '&:active': {
+      boxShadow: 'none',
+      background: 'none',
+    },
     '& *': {
       stroke: theme.palette.text.black,
     },
@@ -47,6 +51,7 @@ const useStyles = makeStyles((theme: ThemeProps) => ({
     },
   },
   text: {
+    textTransform: 'capitalize',
     backgroundColor: 'transparent',
     '&:hover': {
       backgroundColor: 'transparent',
@@ -71,4 +76,3 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
     </MuiButton>
   )
 }
-

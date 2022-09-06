@@ -41,3 +41,148 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-Cn.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-CnIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-It.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 275;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-UltLt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 275;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-UltLtIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 275;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-UltLtCn.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 275;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-UltLtCnIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-MediumCn.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 500;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-MediumIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 500;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-MediumCnIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-Demi.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-DemiCn.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 600;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-DemiCnIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 600;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-DemiIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-BoldCn.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-BoldCnIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Avenir Next LT Pro'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-Heavy.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-HeavyIt.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-HeavyCn.woff') format('woff');
+}
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  font-style: italic;
+  font-weight: 900;
+  src: local('Avenir Next LT Pro'),
+    url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-HeavyCnIt.woff') format('woff');
+}

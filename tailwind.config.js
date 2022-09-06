@@ -15,7 +15,7 @@ module.exports = {
         28: '445px',
       },
       maxWidth: {
-        'screen-ard-art': '1200px',
+        'screen-move-fit': '1007px',
         'screen-2xl': '1440px',
         'screen-3xl': '1792px',
         'scree[n-4xl': '2048px',
@@ -49,6 +49,15 @@ module.exports = {
         },
         fill: {
           orange: colors.fill.orange,
+          blue: colors.fill.blue,
+          pink: colors.fill.pink,
+          grey: colors.fill.grey,
+        },
+        accent: {
+          white: colors.accent.white,
+        },
+        border: {
+          blue: colors.border.blue,
         },
       },
       borderRadius: {
@@ -57,6 +66,7 @@ module.exports = {
       boxShadow: {
         mainShadow: '0px 5px 6px rgba(50,161,199, 0.25), 0px 0px 1px rgba(50,161,199, 0.1)',
         secondaryShadow: '0px 5px 6px rgba(111,166,252, 0.3), 0px 0px 1px rgba(111,166,252, 0.1)',
+        boxSelect: '0px 8px 8px rgba(0,0,0, 0.1)',
       },
     },
   },

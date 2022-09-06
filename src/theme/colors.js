@@ -1,6 +1,6 @@
 module.exports = {
   primary: {
-    main: '#32A1C7',
+    main: '#19A3D1',
     dark: '#000000',
     light: '#FFFFFF',
     transparent: 'rgba(229,229,229, 0.5)',
@@ -35,9 +35,12 @@ module.exports = {
     blue: '#007AFF',
     purple: '#9272FD',
   },
+  border: {
+    blue: "rgba(50,161,199, 1)"
+  },
   accent: {
-    white: '#FFFFFF',
-    blue: 'rgba(111,166,252, 1)',
+    white: '#F5F7F9',
+    blue: '#19A3D1',
     hop: '#FF9500',
     purple: '#9272FD',
   },
@@ -62,5 +65,8 @@ module.exports = {
   },
   fill: {
     orange: 'rgba(253,111,80, 1)',
+    blue: '#EAF5F9',
+    pink: '#D663D5',
+    grey: '#7F7F7F',
   },
 }
