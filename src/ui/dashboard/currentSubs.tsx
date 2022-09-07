@@ -25,6 +25,7 @@ const CurrentSubs: FC<Props> = ({ className }): ReactElement => {
         <div className="flex w-full justify-between items-center">
           <div className="flex flex-col">
             <Typography variant="heading4">You are subscribed to</Typography>
+            <br />
             <Typography className="text-text-blue" variant="heading4">
               3-Months Commitment Plan
             </Typography>
@@ -32,7 +33,7 @@ const CurrentSubs: FC<Props> = ({ className }): ReactElement => {
 
           <Button
             color="primary"
-            className="bg-secondary-light-blue rounded-[22px] shadow-buttonShadow w-[10.313rem] pt-[0.77rem] pb-[0.605rem]"
+            className="bg-secondary-light-blue rounded-[22px] shadow-buttonShadow w-[10.313rem] py-[11px]"
             variant="fill"
             onClick={() => navigateTo('account/plan')}
           >
