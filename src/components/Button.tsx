@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: ThemeProps) => ({
   root: {
     padding: `${theme.spacing(2)} ${theme.spacing(7)}`,
     textTransform: 'none',
-    color: theme.palette.text.white,
     '&.Mui-disabled': {
       color: theme.palette.text.disabled,
     },
@@ -43,18 +42,22 @@ const useStyles = makeStyles((theme: ThemeProps) => ({
     textDecoration: 'none',
   },
   ghost: {
-    backgroundColor: 'transparent',
-    border: `1px solid ${theme.palette.secondary.main}`,
+    backgroundColor: `${theme.palette.text.white}`,
     borderRadius: 4,
     '&.Mui-disabled': {
       borderColor: theme.palette.text.disabled,
     },
   },
   text: {
+    padding: 0,
     textTransform: 'capitalize',
     backgroundColor: 'transparent',
     '&:hover': {
       backgroundColor: 'transparent',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      background: 'none',
     },
   },
   link: {
@@ -71,7 +74,7 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
   const styles = useStyles()
 
   return (
-    <MuiButton {...otherProperties} className={[className, styles.root, styles[variant]].join(' ')}>
+    <MuiButton {...otherProperties} className={[styles.root, styles[variant], className].join(' ')}>
       {children}
     </MuiButton>
   )

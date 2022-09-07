@@ -32,11 +32,11 @@ module.exports = {
     disabled: 'rgba(255, 255, 255, 0.5)',
     nest: '#00DCF0',
     hop: '#FF9500',
-    blue: '#007AFF',
+    blue: '#32A1C7',
     purple: '#9272FD',
   },
   border: {
-    blue: "rgba(50,161,199, 1)"
+    blue: 'rgba(50,161,199, 1)',
   },
   accent: {
     white: '#F5F7F9',
@@ -68,5 +68,7 @@ module.exports = {
     blue: '#EAF5F9',
     pink: '#D663D5',
     grey: '#7F7F7F',
+    spice2: "rgb(63, 116, 183)",
+    lightBlue: "rgb(245, 247, 249)"
   },
 }

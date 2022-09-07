@@ -47,11 +47,16 @@ module.exports = {
             blue: colors.accent.blue,
           },
         },
+        text: {
+          blue: colors.text.blue,
+        },
         fill: {
           orange: colors.fill.orange,
           blue: colors.fill.blue,
           pink: colors.fill.pink,
           grey: colors.fill.grey,
+          spice: colors.fill.spice2,
+          lightBlue: colors.fill.lightBlue
         },
         accent: {
           white: colors.accent.white,
@@ -67,6 +72,7 @@ module.exports = {
         mainShadow: '0px 5px 6px rgba(50,161,199, 0.25), 0px 0px 1px rgba(50,161,199, 0.1)',
         secondaryShadow: '0px 5px 6px rgba(111,166,252, 0.3), 0px 0px 1px rgba(111,166,252, 0.1)',
         boxSelect: '0px 8px 8px rgba(0,0,0, 0.1)',
+        buttonShadow: 'rgba(14, 208, 233, 0.1)',
       },
     },
   },

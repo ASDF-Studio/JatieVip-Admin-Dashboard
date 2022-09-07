@@ -18,7 +18,6 @@ export const MoveTheme = {
     fontFamily: ['Avenir Next LT Pro', 'sans-serif'].join(','),
     heading1: {
       fontSize: '45px',
-      lineHeight: '60px',
       fontWeight: '600',
       // '@media (max-width:900px)': {
       //   fontSize: '32px',
@@ -48,7 +47,20 @@ export const MoveTheme = {
     },
     heading3: {
       fontSize: '26px',
-      lineHeight: '40px',
+      fontWeight: 600,
+      // '@media (max-width:900px)': {
+      //   fontSize: '24px',
+      //   lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '24px',
+      //   lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
+    },
+    heading4: {
+      fontSize: '30px',
       fontWeight: 600,
       // '@media (max-width:900px)': {
       //   fontSize: '24px',
@@ -93,7 +105,6 @@ export const MoveTheme = {
     },
     title3: {
       fontSize: '18px',
-      lineHeight: '24px',
       fontWeight: 600,
       textTransform: 'capitalize',
       // '@media (max-width:900px)': {
@@ -109,7 +120,6 @@ export const MoveTheme = {
     },
     bodyBold: {
       fontSize: '16px',
-      lineHeight: '24px',
       fontWeight: 600,
       // '@media (max-width:900px)': {
       //   fontSize: '16px',
@@ -170,7 +180,7 @@ export const MoveTheme = {
     subhead: {
       fontSize: '14px',
       lineHeight: '22px',
-      fontWeight: 400,
+      fontWeight: 500,
       // '@media (max-width:900px)': {
       //   fontSize: '12px',
       //   lineHeight: '16px',
@@ -201,6 +211,21 @@ export const MoveTheme = {
       fontSize: '14px',
       lineHeight: '22px',
       fontWeight: 'bold',
+      textTransform: 'capitalize',
+      // '@media (max-width:900px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 400,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 400,
+      // },
+    },
+    label2: {
+      fontSize: '13px',
+      fontWeight: '600',
       textTransform: 'capitalize',
       // '@media (max-width:900px)': {
       //   fontSize: '12px',

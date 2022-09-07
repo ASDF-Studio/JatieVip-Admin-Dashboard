@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import { MainLayout } from 'components'
-import { CreateSub } from 'ui/dashboard/'
+import { ManageSub } from 'ui/dashboard/'
 
 const Home: NextPage = () => {
   return (
     <MainLayout className="pt-[66px]">
-      <CreateSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[3.375rem]" />
+      <ManageSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[3.375rem]" />
     </MainLayout>
   )
 }
