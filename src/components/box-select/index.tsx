@@ -31,7 +31,7 @@ export const BoxSelect: FC<Props> = ({ onChange = undefined, data, classname = '
           return (
             <div
               onClick={() => handleOnChange(index)}
-              className={`w-[18.75rem] h-[6.25rem] rounded-[24px] flex gap-[1.188rem] items-center pl-[2.125rem] hover:cursor-pointer ${[
+              className={`h-[6.25rem] rounded-[24px] flex gap-[1.188rem] items-center pl-[2.125rem] hover:cursor-pointer ${[
                 index === state && 'border-2 border-border-blue shadow-boxSelect',
                 classname,
               ].join(' ')}`}

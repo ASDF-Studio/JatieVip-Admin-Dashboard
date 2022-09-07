@@ -35,7 +35,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
               discountValue: '$95.88',
             },
           ]}
-          classname="bg-primary-white"
+          classname="bg-primary-white w-[18.75rem]"
         />
         <div className="flex flex-col gap-2.5 items-center">
           <Button
