@@ -10,12 +10,8 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
   return (
     <div className={`${className}`}>
       <div className="flex flex-col gap-[2.813rem]">
-        <Typography fontFamily="Avenir Next LT Pro" variant="heading1">
-          Hey Louis! Welcome to your profile.
-        </Typography>
-        <Typography fontFamily="Avenir Next LT Pro" variant="heading3">
-          Manage Plan
-        </Typography>
+        <Typography variant="heading1">Hey Louis! Welcome to your profile.</Typography>
+        <Typography variant="heading3">Manage Plan</Typography>
       </div>
       <div className="flex flex-col gap-[2.063rem] mt-[1.375rem]">
         <BoxSelect
@@ -34,14 +30,12 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
         />
         <div className="flex flex-col gap-2.5 items-center">
           <Button
-            color="primary"
-            className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow w-full max-w-[29.063rem]"
+            className="w-full max-w-[29.063rem]"
             variant="fill"
+            textClassName='text-white'
             // onClick={() => onChangeStep('step2')}
           >
-            <Typography className="text-white" variant="bodyBold" fontFamily="Avenir Next LT Pro">
-              Upgrade
-            </Typography>
+            Upgrade
           </Button>
           <Typography variant="bodyBold" className="text-fill-grey">
             All transactions are secure and encrypted by <span className="text-border-blue">Stripe</span>

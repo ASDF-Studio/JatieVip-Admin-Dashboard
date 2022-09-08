@@ -29,10 +29,8 @@ export const AccountSubs: FC<Props> = ({ classname }): React.ReactElement => {
         <Typography variant="subhead" className="text-primary-grey">
           After canceling, you'll be able to use Movefit until the end of the current billing period.
         </Typography>
-        <Button className="border-border-blue border border-solid bg-white w-[12.5rem] rounded-[22px]" variant="ghost">
-          <Typography textTransform="capitalize" variant="bodyBold" className="border-border-blue">
-            Cancel Renewal
-          </Typography>
+        <Button className="w-full max-w-[12.5rem]" variant="ghost">
+          Cancel Renewal
         </Button>
       </div>
     </div>

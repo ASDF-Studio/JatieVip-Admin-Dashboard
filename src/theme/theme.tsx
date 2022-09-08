@@ -15,7 +15,7 @@ export const MoveTheme = {
   },
   palette: colors,
   typography: {
-    fontFamily: ['Avenir Next LT Pro', 'sans-serif'].join(','),
+    fontFamily: ['Avenir Next', 'sans-serif'].join(','),
     heading1: {
       fontSize: '45px',
       fontWeight: '600',
@@ -210,7 +210,7 @@ export const MoveTheme = {
     label1: {
       fontSize: '14px',
       lineHeight: '22px',
-      fontWeight: 'bold',
+      fontWeight: '600',
       textTransform: 'capitalize',
       // '@media (max-width:900px)': {
       //   fontSize: '12px',

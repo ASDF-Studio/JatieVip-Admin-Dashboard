@@ -12,11 +12,11 @@ export const History: FC<Props> = ({}): React.ReactElement => {
     <div className="w-full flex justify-between items-center">
       <div className="flex flex-col">
         <Typography variant="bodyBold">14 Aug 2022</Typography>
-        <Typography variant="bodyBold" className='text-primary-grey'>Total including tax $18.00</Typography>
+        <Typography variant="bodyBold" className="text-primary-grey">
+          Total including tax $18.00
+        </Typography>
       </div>
-      <Button variant="text">
-        <Typography textTransform="capitalize" variant="bodyBold">View Invoice</Typography>
-      </Button>
+      <Button disableRipple variant="text">View Invoice</Button>
     </div>
   )
 }

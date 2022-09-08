@@ -10,12 +10,8 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
   return (
     <div className={`${className} gap-5`}>
       <div className="flex flex-col gap-[3.313rem]">
-        <Typography fontFamily="Avenir Next LT Pro" variant="heading1">
-          Hey Louis! Welcome to your profile.
-        </Typography>
-        <Typography fontFamily="Avenir Next LT Pro" variant="heading3">
-          Upgrade your Plan
-        </Typography>
+        <Typography variant="heading1">Hey Louis! Welcome to your profile.</Typography>
+        <Typography variant="heading3">Upgrade your Plan</Typography>
       </div>
       <div className="w-full bg-fill-blue pt-[2.438rem] pb-[1.688rem] px-[1.875rem] rounded-[27px] gap-8 flex flex-col items-center">
         <BoxSelect
@@ -39,14 +35,12 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
         />
         <div className="flex flex-col gap-2.5 items-center">
           <Button
-            color="primary"
-            className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow w-full md:w-[25rem] pt-[0.77rem] pb-[0.605rem]"
+            className="w-[25rem]"
             variant="fill"
+            textClassName="text-white"
             // onClick={() => onChangeStep('step2')}
           >
-            <Typography className="text-white" variant="label1" fontFamily="Avenir Next LT Pro">
-              Subscribe Now
-            </Typography>
+            Subscribe Now
           </Button>
           <Typography variant="bodyBold" className="text-fill-grey">
             7 Days Free trial included with every plan

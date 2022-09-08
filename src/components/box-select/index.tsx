@@ -38,12 +38,12 @@ export const BoxSelect: FC<Props> = ({ onChange = undefined, data, classname = '
             >
               <Circle checked={index === state} />
               <div className="flex flex-col gap-py">
-                <Typography fontFamily="Avenir Next LT Pro" variant="title1">
+                <Typography  variant="title1">
                   {title}
                 </Typography>
 
                 <div className="flex gap-2.5">
-                  <Typography className="text-fill-grey" variant="title1" fontFamily="Avenir Next LT Pro">
+                  <Typography className="text-fill-grey" variant="title1" >
                     {value}
                   </Typography>
                   {discountValue && (
