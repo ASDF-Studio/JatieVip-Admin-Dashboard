@@ -27,6 +27,7 @@ export interface InputProperties extends InputBaseProps {
   maxLength?: number
   withCounter?: boolean
   focus?: boolean
+  className?: string
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -54,6 +55,7 @@ export const Input: React.FC<InputProperties> = (properties) => {
     maxLength, // Maximum number of characters
     inputProps, // Input Props
     focus,
+    className,
     ...otherProperties
   } = properties
 
@@ -82,6 +84,7 @@ export const Input: React.FC<InputProperties> = (properties) => {
       {/* Input Base */}
 
       <StyledInputBase
+        className={className}
         {...otherProperties}
         type={hidden !== undefined ? (hidden ? 'password' : 'text') : type}
         background={background}
@@ -125,5 +128,3 @@ export const Input: React.FC<InputProperties> = (properties) => {
     </StyledFormControl>
   )
 }
-
-

@@ -1,6 +1,7 @@
 import { createTheme, CssBaseline, ThemeProvider as MuiThemeProvider, useTheme as muiUseTheme } from '@mui/material'
 import React, { createContext, useContext } from 'react'
 import colors from './colors'
+import type {} from '@mui/x-date-pickers/themeAugmentation'
 
 export const MoveTheme = {
   spacing: 4,
@@ -14,6 +15,7 @@ export const MoveTheme = {
     },
   },
   palette: colors,
+
   typography: {
     fontFamily: ['Avenir Next', 'sans-serif'].join(','),
     heading1: {
@@ -149,7 +151,6 @@ export const MoveTheme = {
     },
     body2: {
       fontSize: '16px',
-      lineHeight: '24px',
       fontWeight: 500,
       // '@media (max-width:900px)': {
       //   fontSize: '14px',
@@ -251,8 +252,20 @@ const ThemeContext = createContext<ThemeContextInterface>({})
 export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const theme = createTheme({
     ...MoveTheme,
-    palette: colors,
+    palette: {
+      mode: 'light',
+      ...colors,
+    },
     components: {
+      MuiDatePicker: {
+        styleOverrides: {
+          root: {
+            'Mui-selected': {
+              backgroundColor: 'red',
+            },
+          },
+        },
+      },
       MuiCircularProgress: {
         styleOverrides: {
           circle: {

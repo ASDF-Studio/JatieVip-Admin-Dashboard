@@ -63,6 +63,7 @@ module.exports = {
         },
         border: {
           blue: colors.border.blue,
+          grey: colors.border.grey
         },
       },
       borderRadius: {

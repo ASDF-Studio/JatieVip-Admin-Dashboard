@@ -37,6 +37,7 @@ module.exports = {
   },
   border: {
     blue: 'rgba(50,161,199, 1)',
+    grey: 'rgba(245,247,249, 1)',
   },
   accent: {
     white: '#F5F7F9',
@@ -68,7 +69,7 @@ module.exports = {
     blue: '#EAF5F9',
     pink: '#D663D5',
     grey: '#7F7F7F',
-    spice2: "rgb(63, 116, 183)",
-    lightBlue: "rgb(245, 247, 249)"
+    spice2: 'rgb(63, 116, 183)',
+    lightBlue: 'rgb(245, 247, 249)',
   },
 }

@@ -36,7 +36,7 @@ export const StyledInputBase = styled(InputBase, {
 
   '& .MuiInputBase-input': {
     height: '22px',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 500,
     padding: `${theme.spacing(2)} 15px`,
     color: theme.palette.primary.dark,

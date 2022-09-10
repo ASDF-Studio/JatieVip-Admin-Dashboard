@@ -7,14 +7,21 @@ type Props = {
   footer?: boolean
   withNavBar?: boolean
   className?: string
+  stickyFooter?: boolean
 }
 
-const MainLayout: FC<Props> = ({ children, footer = true, withNavBar = true, className = "" }): React.ReactElement => {
+const MainLayout: FC<Props> = ({
+  children,
+  footer = true,
+  withNavBar = true,
+  className = '',
+  stickyFooter = false,
+}): React.ReactElement => {
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <Header withNavBar={withNavBar} />
       <main className={`${className}  w-full relative`}>{children}</main>
-      {footer && <Footer />}
+      {footer && <Footer sticky={stickyFooter} />}
     </div>
   )
 }
