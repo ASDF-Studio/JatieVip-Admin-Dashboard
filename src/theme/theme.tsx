@@ -195,7 +195,7 @@ export const MoveTheme = {
     },
     subheadBold: {
       fontSize: '14px',
-      lineHeight: '22px',
+
       fontWeight: 600,
       // '@media (max-width:900px)': {
       //   fontSize: '12px',

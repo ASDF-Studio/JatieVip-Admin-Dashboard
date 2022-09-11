@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
 
+
 export const useNavigate = () => {
-  const { push } = useRouter()
+  const { push, pathname } = useRouter()
 
   const navigateTo = async (path: string) => {
     await push(path)
@@ -9,5 +10,6 @@ export const useNavigate = () => {
 
   return {
     navigateTo,
+    pathname,
   }
 }

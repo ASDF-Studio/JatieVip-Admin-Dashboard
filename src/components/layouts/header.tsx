@@ -1,4 +1,4 @@
-import { Typography, Avatar } from '@mui/material'
+import {  Avatar } from '@mui/material'
 import { Button } from 'components/Button'
 import { useNavigate } from 'hooks/UseRouter'
 import React, { FC } from 'react'
@@ -9,7 +9,10 @@ type Props = {
 }
 
 export const Header: FC<Props> = ({ classNames = '', withNavBar = true }): React.ReactElement => {
-  const { navigateTo } = useNavigate()
+  const { navigateTo, pathname } = useNavigate()
+
+  const isDashBoard = pathname === '/dashboard'
+  const isAccount = pathname === '/account'
 
   return (
     <div
@@ -21,15 +24,35 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true }): React
 
       {withNavBar && (
         <div className="flex gap-[50px] items-center h-full hover:cursor-pointer">
-          <div className="flex flex-col border-b-[4px] h-full border-primary-brand justify-center">
-            <Button variant="text" textVariant="title3" disableRipple textClassName="text-primary-black">
+          <div
+            className={`${
+              isDashBoard ? 'border-primary-brand' : 'border-transparent'
+            } flex flex-col border-b-[4px] h-full  justify-center`}
+          >
+            <Button
+              onClick={() => navigateTo('/dashboard')}
+              variant="text"
+              textVariant="title3"
+              disableRipple
+              textClassName={isDashBoard ? 'text-primary-black' : 'text-primary-grey'}
+            >
               Dashboard
             </Button>
           </div>
 
           <div className="flex gap-[37px] h-full items-center hover:cursor-pointer">
-            <div className="flex flex-col border-b-[4px] h-full border-transparent justify-center">
-              <Button variant="text" textVariant="title3" disableRipple textClassName="text-primary-grey">
+            <div
+              className={`${
+                isAccount ? 'border-primary-brand' : 'border-transparent'
+              } flex flex-col border-b-[4px] h-full  justify-center`}
+            >
+              <Button
+                onClick={() => navigateTo('/account')}
+                variant="text"
+                textVariant="title3"
+                disableRipple
+                textClassName={isAccount ? 'text-primary-black' : 'text-primary-grey'}
+              >
                 Profile
               </Button>
             </div>

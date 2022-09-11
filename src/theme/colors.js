@@ -71,5 +71,6 @@ module.exports = {
     grey: '#7F7F7F',
     spice2: 'rgb(63, 116, 183)',
     lightBlue: 'rgb(245, 247, 249)',
+    lightBlue2: 'rgb(213, 236, 244)',
   },
 }

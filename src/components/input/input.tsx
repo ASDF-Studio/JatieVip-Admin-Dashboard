@@ -77,7 +77,9 @@ export const Input: React.FC<InputProperties> = (properties) => {
 
       {label && (
         <StyledFormHelperText>
-          <Typography variant="label1">{label}</Typography>
+          <Typography variant="subheadBold" className="text-primary-grey">
+            {label}
+          </Typography>
         </StyledFormHelperText>
       )}
 
@@ -117,7 +119,7 @@ export const Input: React.FC<InputProperties> = (properties) => {
           <Typography variant="label1">{helperText}</Typography>
 
           {/* Counter */}
-
+          
           {maxLength && withCounter && (
             <Typography variant="label1" classes={classes}>
               {typeof value === 'string' && `${value.length} / ${maxLength}`}

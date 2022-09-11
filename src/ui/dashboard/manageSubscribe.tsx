@@ -1,12 +1,17 @@
 import { Typography } from '@mui/material'
-import { AccountSubs, Billing, BoxSelect, Button } from 'components'
-import { FC, ReactElement } from 'react'
+import { AccountSubs, Billing, BoxSelect, Button, ConfirmationModal } from 'components'
+import { FC, ReactElement, useState } from 'react'
+import { BillingModal } from 'ui/modals'
 
 type Props = {
   className?: string
 }
 
 const ManageSubs: FC<Props> = ({ className }): ReactElement => {
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showAutoRenewalModal, setShowAutoRenewalModal] = useState(false)
+  const [showBillingModal, setShowBillingModal] = useState(false)
+
   return (
     <div className={`${className}`}>
       <div className="flex flex-col gap-[2.813rem]">
@@ -32,8 +37,8 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
           <Button
             className="w-full max-w-[29.063rem]"
             variant="fill"
-            textClassName='text-white'
-            // onClick={() => onChangeStep('step2')}
+            textClassName="text-white"
+            onClick={() => setShowModal(true)}
           >
             Upgrade
           </Button>
@@ -42,8 +47,19 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
           </Typography>
         </div>
       </div>
-      <AccountSubs classname="mt-[3.313rem] mb-[4.188rem]" />
-      <Billing />
+      <AccountSubs classname="mt-[3.313rem] mb-[4.188rem]" onCancel={() => setShowAutoRenewalModal(true)} />
+      <Billing setShowBillingModal={() => setShowBillingModal(true)} />
+      <ConfirmationModal
+        open={showModal}
+        setOpen={setShowModal}
+        contentText="Are you sure you want to downgrade your plan from 3 Months to monthly?"
+      />
+      <ConfirmationModal
+        open={showAutoRenewalModal}
+        setOpen={setShowAutoRenewalModal}
+        contentText="Are you sure you want to cancel Auto Renewal?"
+      />
+      <BillingModal open={showBillingModal} setOpen={setShowBillingModal} />
     </div>
   )
 }

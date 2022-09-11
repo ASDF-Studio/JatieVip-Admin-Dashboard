@@ -5,9 +5,10 @@ import { Tag } from './tag'
 
 type Props = {
   classname?: string
+  onCancel?: () => void
 }
 
-export const AccountSubs: FC<Props> = ({ classname }): React.ReactElement => {
+export const AccountSubs: FC<Props> = ({ classname, onCancel }): React.ReactElement => {
   return (
     <div className={`${classname} w-full bg-fill-blue pt-[1.688rem] rounded-[24px] pb-5`}>
       <div className="flex flex-col gap-2 px-[2.375rem]">
@@ -27,9 +28,9 @@ export const AccountSubs: FC<Props> = ({ classname }): React.ReactElement => {
       <div className="w-full h-px bg-border-blue mt-[1.531rem] mb-[0.969rem]" />
       <div className="flex flex-col px-[2.375rem] gap-[0.938rem]">
         <Typography variant="subhead" className="text-primary-grey">
-          After canceling, you'll be able to use Movefit until the end of the current billing period.
+          After canceling, you&apos;ll be able to use Movefit until the end of the current billing period.
         </Typography>
-        <Button className="w-full max-w-[12.5rem]" variant="ghost">
+        <Button className="w-full max-w-[12.5rem]" variant="ghost" onClick={onCancel}>
           Cancel Renewal
         </Button>
       </div>

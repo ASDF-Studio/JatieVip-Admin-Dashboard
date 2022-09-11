@@ -56,14 +56,15 @@ module.exports = {
           pink: colors.fill.pink,
           grey: colors.fill.grey,
           spice: colors.fill.spice2,
-          lightBlue: colors.fill.lightBlue
+          lightBlue: colors.fill.lightBlue,
+          lightBlue2: colors.fill.lightBlue2,
         },
         accent: {
           white: colors.accent.white,
         },
         border: {
           blue: colors.border.blue,
-          grey: colors.border.grey
+          grey: colors.border.grey,
         },
       },
       borderRadius: {

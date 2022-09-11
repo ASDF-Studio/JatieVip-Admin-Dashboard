@@ -27,7 +27,7 @@ export const BasicSelect = () => {
       }}
       IconComponent={sortIcon}
       className="w-[11.875rem] rounded-[22px] bg-border-grey border-[rgba(127,127,127, 0.1)] hover:cursor-pointer"
-      value={10}
+      value="10"
       onChange={handleChange}
       input={<Input className="py-[3px] px-3 bg-border-grey" />}
       MenuProps={{
@@ -39,3 +39,5 @@ export const BasicSelect = () => {
     </Select>
   )
 }
+
+export * from './auto-complete'
