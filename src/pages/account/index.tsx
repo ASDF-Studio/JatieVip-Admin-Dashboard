@@ -9,7 +9,7 @@ const Home: NextPage = () => {
 
   return (
     <MainLayout className="pt-[66px]" stickyFooter>
-      <div className="max-w-[400px] mx-auto mt-[1.875rem] flex flex-col">
+      <div className="max-w-[400px] mx-auto mt-[1.938rem] flex flex-col">
         <div className="text-center">
           <Typography variant="heading1">Your profile</Typography>
         </div>
