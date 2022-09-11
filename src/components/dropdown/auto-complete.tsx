@@ -15,6 +15,7 @@ const NoPaddingAutocomplete = withStyles({
       borderColor: 'rgba(127, 127, 127, 0.1)',
       borderRadius: '22px',
       backgroundColor: 'rgba(245,247,249, 1)',
+      paddingLeft: '22px',
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
       borderColor: 'rgba(127, 127, 127, 0.1)',
@@ -37,9 +38,7 @@ export const AutoComplete: React.FC<Props> = ({ data = [] }) => {
     <NoPaddingAutocomplete
       id="country-select"
       options={data}
-      popupIcon={
-        <img  src="/assets/svg/sort.svg" alt="calendar icon" className="w-[20px] h-[10px]" />
-      }
+      popupIcon={<img src="/assets/svg/sort.svg" alt="calendar icon" className="w-[20px] h-[10px]" />}
       getOptionLabel={(option) => option.label}
       renderOption={(props, option) => (
         <Box component="li" {...props}>
@@ -48,7 +47,6 @@ export const AutoComplete: React.FC<Props> = ({ data = [] }) => {
           </Typography>
         </Box>
       )}
-    
       renderInput={(params) => (
         <TextField
           {...params}
@@ -58,7 +56,7 @@ export const AutoComplete: React.FC<Props> = ({ data = [] }) => {
               fontSize: '14px',
               fontWeight: '500',
             },
-            className: 'py-[3px] px-3',
+            className: 'py-[3px] px-0',
             autoComplete: 'new-password', // disable autocomplete and autofill
           }}
         />
