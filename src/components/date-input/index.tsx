@@ -1,6 +1,5 @@
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import dayjs, { Dayjs } from 'dayjs'
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
@@ -10,17 +9,20 @@ const calendarIcon = forwardRef<HTMLImageElement, ImageProps>((props, ref) => (
   <img {...props} ref={ref} src="/assets/svg/calendar.svg" alt="calendar icon" className="w-[20px] h-[10px]" />
 ))
 
-export const CustomDatePicker = () => {
-  const [value, setValue] = useState<Dayjs | null>(null)
+type Props = {
+  date: string
+  onChange: (value: string) => void
+}
 
+export const CustomDatePicker: React.FC<Props> = ({ date = '', onChange }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         openTo="year"
         views={['year', 'month', 'day']}
-        value={value}
+        value={date}
         onChange={(newValue) => {
-          setValue(newValue)
+          onChange(newValue)
         }}
         components={{
           OpenPickerIcon: calendarIcon,

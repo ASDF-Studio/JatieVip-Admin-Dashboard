@@ -2,13 +2,37 @@ import { Button, VerifyCodeInput } from 'components'
 import React, { Dispatch, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps } from 'types'
+import { useAuth } from 'Contexts/Auth'
+import { setToken } from 'services/api'
+import { useNavigate } from 'hooks/UseRouter'
+import { AuthService } from 'services'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
+  phoneNumber: string
 }
 
-const Step2: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
+const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactElement => {
+  const { verifyCode, updateUser } = useAuth()
+  const { navigateTo } = useNavigate()
   const [code, setCode] = useState<string>('')
+  const [loading, setLoading] = useState(false)
+
+  const handleVerify = () => {
+    try {
+      setLoading(true)
+      verifyCode(phoneNumber, Number(code)).then(async ({ token }) => {
+        setToken(token)
+        const account = await AuthService.getAccount()
+        updateUser(account)
+        await navigateTo('/account')
+      })
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="flex justify-center pt-[203px]">
@@ -24,7 +48,7 @@ const Step2: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
             </Typography>
             <div className="flex">
               <Typography className="text-primary-grey" variant="body2">
-                that was sent to <span className="text-primary-black">&nbsp;{`${'+976 99032894'}`}</span>
+                that was sent to <span className="text-primary-black">&nbsp;{`${phoneNumber}`}</span>
               </Typography>
               <Button variant="text" className="p-0 transform-none" onClick={() => onChangeStep('step1')}>
                 <Typography variant="body2" className=" text-primary-brand">
@@ -33,10 +57,16 @@ const Step2: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
               </Button>
             </div>
           </div>
-          <VerifyCodeInput length={6} code={code} onChange={(cd) => setCode(cd)} />
+          <VerifyCodeInput length={5} code={code} onChange={(cd) => setCode(cd)} />
         </div>
         <div className="flex flex-col gap-4">
-          <Button className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow" variant="fill">
+          <Button
+            onClick={handleVerify}
+            disabled={code.length !== 5 || loading}
+            loading={loading}
+            className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow"
+            variant="fill"
+          >
             <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
               Verify
             </Typography>

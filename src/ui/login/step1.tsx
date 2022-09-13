@@ -1,15 +1,39 @@
 import { Button, Input } from 'components'
-import React, { Dispatch } from 'react'
+import React, { Dispatch, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps } from 'types'
 import { useNavigate } from 'hooks/UseRouter'
+import { useAuth } from 'Contexts/Auth'
+import { ApiErrorResponse } from 'services/api'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
+  handleChangeForm: (name: string, value:string) => void
+  phoneNumber: string
 }
 
-const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
+const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
   const { navigateTo } = useNavigate()
+  const { sendCode } = useAuth()
+
+  const [loading, setLoading] = useState<boolean>(false)
+  
+
+  const handleLogin = async () => {
+      try {
+        setLoading(true)
+
+        await sendCode(phoneNumber)
+        onChangeStep("step2")
+      } catch(e) {
+        if (e instanceof ApiErrorResponse) {
+            console.log(e)
+        }
+        
+      } finally {
+        setLoading(false)
+      }
+  }
 
   return (
     <div className="flex justify-center pt-[203px]">
@@ -18,12 +42,14 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
           Welcome!
         </Typography>
         <div className="flex flex-col gap-4">
-          <Input placeholder="Enter Phone Number" />
+          <Input placeholder="Enter Phone Number" value={phoneNumber} onChange={(e) => handleChangeForm("phoneNumber", e.target.value)} />
           <Button
             color="success"
             className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow"
             variant="fill"
-            onClick={() => onChangeStep('step2')}
+            onClick={handleLogin}
+            loading={loading}
+            disabled={loading}
           >
             <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
               Login

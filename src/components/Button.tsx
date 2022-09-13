@@ -1,6 +1,7 @@
 import {
   Button as MuiButton,
   ButtonProps as MuiButtonProperties,
+  CircularProgress,
   OverridableStringUnion,
   Theme,
   Typography,
@@ -16,6 +17,7 @@ export type ButtonProperties = Omit<MuiButtonProperties, 'variant'> & {
   children?: React.ReactNode | string
   textClassName?: string
   textVariant?: OverridableStringUnion<Variant | 'inherit', TypographyPropsVariantOverrides>
+  loading?: boolean
 }
 
 export const Button: React.FC<ButtonProperties> = (properties) => {
@@ -25,6 +27,7 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
     variant = 'fill',
     textVariant = 'bodyBold',
     textClassName = '',
+    loading = false,
     ...otherProperties
   } = properties
 
@@ -36,10 +39,14 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
   }
 
   return (
-    <MuiButton {...otherProperties} className={[styles.root, styles[variant], className].join(' ')}>
-      <Typography textTransform="capitalize" variant={textVariant} className={`border-border-blue ${textClassName}`}>
-        {children}
-      </Typography>
+    <MuiButton {...otherProperties} className={[className, styles.root, styles[variant]].join(' ')}>
+      {loading ? (
+        <CircularProgress className="text-white w-7 h-7" />
+      ) : (
+        <Typography textTransform="capitalize" variant={textVariant} className={`border-border-blue ${textClassName}`}>
+          {children}
+        </Typography>
+      )}
     </MuiButton>
   )
 }

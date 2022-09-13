@@ -26,9 +26,11 @@ export interface IOption {
   isLocal?: boolean
 }
 
-const getToken = () => localStorage.getItem('access_token')
+export const getToken = () => localStorage.getItem('jwt_token')
 
-export const setToken = (token: string) => localStorage.setItem('access_token',token)
+export const setToken = (token: string) => localStorage.setItem('jwt_token', token)
+
+export const remToken = () => localStorage.removeItem('jwt_token')
 
 const getAuth = (hasAuth = false) =>
   hasAuth && getToken()
@@ -54,37 +56,36 @@ export class ApiErrorResponse extends Error {
   }
 }
 
-const handleResponse = (options: AxiosRequestConfig, resp: AxiosResponse<BaseResponse<any>, any>, resolve, reject) => {
-  const statusCode = resp.data.code
-  const statusText = resp.data.status
+const handleResponse = (options: AxiosRequestConfig, resp: AxiosResponse<any>, resolve, reject) => {
+  const statusCode = resp.status
 
   if (statusCode === 401) {
     localStorage.removeItem('access_token')
   }
 
-  switch (statusText) {
-    case 'success':
+  switch (statusCode) {
+    case 200:
       resolve(resp.data)
       break
-    case 'unauthorized':
-      reject(new ApiErrorResponse(statusCode, statusText, resp.data.message))
-      break
-    case 'bad_request':
-      reject(new ApiErrorResponse(statusCode, statusText, resp.data.message))
-      break
-    case 'error':
-      reject(new ApiErrorResponse(statusCode, statusText, resp.data.message))
-      break
+    // case 'unauthorized':
+    //   reject(new ApiErrorResponse(statusCode, statusText, resp.data.message))
+    //   break
+    // case 'bad_request':
+    //   reject(new ApiErrorResponse(statusCode, statusText, resp.data.message))
+    //   break
+    // case 500:
+    //   reject(new ApiErrorResponse(statusCode, "", resp.data.message))
+    //   break
     default: {
-      reject(new ApiErrorResponse(statusCode, statusText, resp.data.message))
+      // reject(new ApiErrorResponse(statusCode, statusText, resp.data.message))
     }
   }
 }
 
 const request = async <T>(options: AxiosRequestConfig, isLocal = false) => {
-  return new Promise<BaseResponse<T>>((resolve, reject) => {
+  return new Promise<T>((resolve, reject) => {
     axios
-      .request<BaseResponse<T>>({
+      .request<T>({
         baseURL: isLocal ? baseLocalURL : baseURL,
         ...options,
       })
@@ -106,7 +107,7 @@ const http = {
         cancelToken: options?.cancelToken,
       },
       options?.isLocal || false,
-    ).then((data) => data.result)
+    ).then((data) => data)
   },
   post: async <T>(url: string, options?: IOption): Promise<T> => {
     return request<T>(
@@ -118,7 +119,7 @@ const http = {
         cancelToken: options?.cancelToken,
       },
       options?.isLocal || false,
-    ).then((data) => data.result)
+    ).then((data) => data)
   },
   put: async <T>(url: string, options?: IOption): Promise<T> => {
     return request<T>(
@@ -130,7 +131,7 @@ const http = {
         cancelToken: options?.cancelToken,
       },
       options?.isLocal || false,
-    ).then((data) => data.result)
+    ).then((data) => data)
   },
   del: async <T>(url: string, options?: IOption): Promise<T> => {
     return request<T>(

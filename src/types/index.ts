@@ -1,8 +1,4 @@
-export type IUser = {
-  firstName: string
-  lastName: string
-  phoneNumber: string
-}
+
 
 export interface BaseResponse<T> {
   message: string

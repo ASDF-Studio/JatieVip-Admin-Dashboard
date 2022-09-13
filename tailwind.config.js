@@ -75,6 +75,7 @@ module.exports = {
         secondaryShadow: '0px 5px 6px rgba(111,166,252, 0.3), 0px 0px 1px rgba(111,166,252, 0.1)',
         boxSelect: '0px 8px 8px rgba(0,0,0, 0.1)',
         buttonShadow: 'rgba(14, 208, 233, 0.1)',
+        singleSelct: '0px 8px 8px rgba(45,146,181, 0.2)',
       },
     },
   },

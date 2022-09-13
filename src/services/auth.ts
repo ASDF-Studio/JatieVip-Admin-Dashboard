@@ -1,26 +1,38 @@
+import { IUser } from './types'
 import rest from './api'
 
+
 export const authTokenKey = 'jwt_token'
-export const ardTokenKey = 'ard_token'
 
 export interface LoginParameter {
-  address: string
-  signature: string
+  phoneNumber: string
 }
 
-export interface AuthResponse {
+export interface LoginResponse {
   jwtToken: string
+}
+
+export interface VerifyLoginParams {
+  phoneNumber: string
+  token: number
+}
+
+export interface VerifyLoginResp {
+  token: string
 }
 
 const Service = {
   login: (body: LoginParameter) =>
-    rest.post<AuthResponse>('auth/login', {
+    rest.post('auth/login', {
       body,
     }),
-  checkAccount: () =>
-    rest.post<unknown>('auth/check', {
-      hasAuth: true,
+  verifyLogin:(body: VerifyLoginParams) =>
+    rest.post<VerifyLoginResp>('auth/verify-login', {
+      body
     }),
+  getAccount: () => rest.get<IUser>('auth/me', {
+    hasAuth: true
+  })
 }
 
 export default Service
