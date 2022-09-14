@@ -12,8 +12,8 @@ export const SingleSelect: FC<Props> = ({ text, icon, selected = false, onClick 
   return (
     <div
       onClick={onClick}
-      className={`hover:cursor-pointer max-w-[11.875rem] w-full rounded-[25px] bg-fill-blue flex items-center px-6 py-4 gap-2.5 ${
-        selected && 'border-2 border-border-blue shadow-singleSelct'
+      className={`hover:cursor-pointer hover:bg-fill-hover max-w-[11.875rem] w-full rounded-[25px] bg-fill-blue flex items-center px-6 py-4 gap-2.5 ${
+        selected && 'border-2 border-border-blue shadow-singleSelct hover:bg-fill-blue'
       }`}
     >
       {icon}

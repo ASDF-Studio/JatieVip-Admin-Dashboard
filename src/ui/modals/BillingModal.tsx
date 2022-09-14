@@ -1,8 +1,9 @@
-import axios from 'axios'
 import { Input, ModalBase, AutoComplete } from 'components'
-import { countries, CountryType } from '../../constants'
-import React from 'react'
 import { Typography } from '@mui/material'
+import React from 'react'
+import { countries } from '../../constants'
+
+
 
 type Props = {
   open: boolean

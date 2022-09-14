@@ -54,7 +54,7 @@ const Account: NextPage = () => {
     },
   })
 
-  const handleImageChange = async (e: React.FormEvent<HTMLInputElement>) => {
+  const handleImageChange = async () => {
     const files = inputRef.current?.files
 
     if (files) {
@@ -103,8 +103,9 @@ const Account: NextPage = () => {
                 onClick={() => {
                   inputRef.current.click()
                 }}
-                variant="fill"
-                className="bg-text-blue/20 shadow-none w-[9.375rem]"
+                variant="secondry"
+                disableRipple
+                className="w-[9.375rem]"
                 textClassName="text-border-blue"
               >
                 Upload Picture
@@ -186,6 +187,7 @@ const Account: NextPage = () => {
                 variant="fill"
                 onClick={formik.submitForm}
                 textClassName="text-white"
+                disableRipple
               >
                 Save
               </Button>

@@ -2,6 +2,8 @@ import * as React from 'react'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import { Input } from 'components/input'
+import { makeStyles } from '@mui/styles'
+import { Typography } from '@mui/material'
 
 type ImageProps = React.HTMLProps<ImageProps>
 
@@ -16,6 +18,22 @@ type Props = {
   name?: string
 }
 
+const useStyles = makeStyles({
+  '&.MuiPaper-root': {
+    borderRadius: '22px',
+  },
+  select: {
+    '& ul': {
+      backgroundColor: 'white',
+    },
+    '& li': {
+      fontSize: '16px',
+      fontWeight: '400',
+      fontFamily: 'Avenir Next',
+    },
+  },
+})
+
 export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name = null }) => {
   const [state, setState] = React.useState<string>(value || '')
 
@@ -24,26 +42,71 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
     onChange(event)
   }
 
+  const classes = useStyles()
+
   return (
     <Select
-      sx={{
-        fontSize: '14px',
-        fontWeight: 500,
-      }}
       name={name}
       IconComponent={sortIcon}
-      className="w-[11.875rem] rounded-[22px] bg-border-grey border-[rgba(127,127,127, 0.1)] hover:cursor-pointer"
+      className={`w-[11.875rem] rounded-[22px] bg-border-grey  hover:cursor-pointer ${
+        value !== '' && 'border-primary-brand'
+      }`}
+      style={{
+        fontSize: '14px',
+        fontWeight: '500',
+      }}
       value={state}
+      inputProps={{
+        sx: {
+          '&.MuiOutlinedInput-input': {
+            border: '2px solid green',
+          },
+        },
+      }}
       onChange={handleChange}
       input={<Input className="py-[3px] px-3 bg-border-grey" />}
+      renderValue={(value) => {
+        return (
+          <Typography variant="subhead" textTransform="capitalize">
+            {value}
+          </Typography>
+        )
+      }}
       MenuProps={{
-        className: 'mt-1',
+        PaperProps: {
+          sx: {
+            borderRadius: '12px',
+            width: '11.875rem',
+            marginTop: '8px',
+            marginLeft: '5px',
+            padding: '1.063rem 0',
+            '& .MuiMenuItem-root.Mui-selected': {
+              backgroundColor: 'transparent',
+            },
+            '& .MuiMenuItem-root:hover': {
+              backgroundColor: 'rgb(245, 247, 249)',
+            },
+            '& .MuiMenuItem-root.Mui-selected:hover': {
+              backgroundColor: 'rgb(245, 247, 249)',
+            },
+          },
+        },
+        classes: {
+          paper: classes.select,
+        },
       }}
     >
       {items.map(({ value, label }) => {
         return (
           <MenuItem key={value} value={value}>
-            {label}
+            <div className="flex items-center gap-2.5">
+              {state === value ? (
+                <img src="/assets/svg/check.svg" className="w-2.5 h-2.5" alt="" />
+              ) : (
+                <div className="w-2.5 h-2.5" />
+              )}
+              <Typography variant="body">{label}</Typography>
+            </div>
           </MenuItem>
         )
       })}

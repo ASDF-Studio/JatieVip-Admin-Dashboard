@@ -13,7 +13,7 @@ import React from 'react'
 export type ThemeProps = Theme
 
 export type ButtonProperties = Omit<MuiButtonProperties, 'variant'> & {
-  variant?: 'fill' | 'ghost' | 'text' | 'link' | 'success'
+  variant?: 'fill' | 'ghost' | 'text' | 'link' | 'success' | 'secondry'
   children?: React.ReactNode | string
   textClassName?: string
   textVariant?: OverridableStringUnion<Variant | 'inherit', TypographyPropsVariantOverrides>
@@ -33,9 +33,10 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
 
   const styles = {
     root: 'rounded-[22px] py-2 box-border',
-    ghost: 'border-border-blue border border-solid bg-white',
-    fill: 'bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow',
+    ghost: 'border-border-blue border border-solid bg-white hover:bg-text-blue/20',
+    fill: 'bg-secondary-light-blue rounded-[22px] hover:shadow-secondaryShadow',
     text: 'bg-transparent active:bg-white',
+    secondry: 'rounded-[22px] hover:bg-fill-hover bg-text-blue/20',
   }
 
   return (

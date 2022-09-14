@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import { AccountSubs, Billing, BoxSelect, Button, ConfirmationModal } from 'components'
+import { AccountSubs, Billing, BoxSelect, Button, ConfirmationModal, Hello } from 'components'
 import { FC, ReactElement, useState } from 'react'
 import { BillingModal } from 'ui/modals'
 
@@ -15,7 +15,7 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
   return (
     <div className={`${className}`}>
       <div className="flex flex-col gap-[2.813rem]">
-        <Typography variant="heading1">Hey Louis! Welcome to your profile.</Typography>
+        <Hello />
         <Typography variant="heading3">Manage Plan</Typography>
       </div>
       <div className="flex flex-col gap-[2.063rem] mt-[1.375rem]">

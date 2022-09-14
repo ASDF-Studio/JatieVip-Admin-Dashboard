@@ -72,5 +72,6 @@ module.exports = {
     spice2: 'rgb(63, 116, 183)',
     lightBlue: 'rgb(245, 247, 249)',
     lightBlue2: 'rgb(213, 236, 244)',
+    hover: '#D0F0FC',
   },
 }

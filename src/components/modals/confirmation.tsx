@@ -83,7 +83,7 @@ export const ConfirmationModal: React.FC<Props> = ({
         </DialogContent>
         <DialogActions className="gap-[9px]">
           <Button
-            variant="fill"
+            variant="secondry"
             textClassName="text-text-blue"
             className="w-full bg-fill-lightBlue2 shadow-none"
             onClick={onAccept}

@@ -33,6 +33,7 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
               <IconButton
                 aria-label="edit"
                 onClick={setShowBillingModal}
+                disableRipple
                 sx={{
                   '&.MuiButtonBase-root:hover': {
                     bgcolor: 'transparent',
@@ -42,7 +43,7 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
                   },
                 }}
               >
-                <div className="w-[34px] h-[34px] bg-fill-pink flex justify-center items-center rounded-md">
+                <div className="w-[34px] h-[34px] bg-primary-brand hover:bg-[#17AEDC] flex justify-center items-center rounded-md">
                   <img src="/assets/svg/pen.svg" alt="pen svg" className="w-[16px] h-[16px]" />
                 </div>
               </IconButton>

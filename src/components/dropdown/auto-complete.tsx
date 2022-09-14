@@ -5,8 +5,10 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { withStyles } from '@mui/styles'
 import { Typography } from '@mui/material'
 
+type keys = "label" | string
+
 type Props = {
-  data: { [key: string]: string }[]
+  data: Record<keys, any>[]
 }
 
 const NoPaddingAutocomplete = withStyles({
@@ -25,13 +27,16 @@ const NoPaddingAutocomplete = withStyles({
       borderColor: 'rgba(127, 127, 127, 0.1)',
       boxShadow: 'none',
     },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "rgba(127, 127, 127, 0.1)"
+    },
+  },
+  paper: {
+    borderRadius: "12px"
   },
   input: {},
 })(Autocomplete)
 
-const sortIcon = React.forwardRef<HTMLImageElement, ImageProps>((props, ref) => (
-  <img {...props} ref={ref} src="/assets/svg/sort.svg" alt="calendar icon" className="w-[20px] h-[10px]" />
-))
 
 export const AutoComplete: React.FC<Props> = ({ data = [] }) => {
   return (
@@ -47,6 +52,9 @@ export const AutoComplete: React.FC<Props> = ({ data = [] }) => {
           </Typography>
         </Box>
       )}
+      ListboxProps={{
+        className: "roudnded-[22px]"
+      }}
       renderInput={(params) => (
         <TextField
           {...params}

@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import { Button, Tag } from 'components'
+import { Button, Tag, Hello } from 'components'
 import { DownloadApp } from 'components/download-app'
 import { useNavigate } from 'hooks/UseRouter'
 import { FC, ReactElement } from 'react'
@@ -14,7 +14,7 @@ const CurrentSubs: FC<Props> = ({ className }): ReactElement => {
   return (
     <div className={`${className} gap-5`}>
       <div className="flex flex-col gap-[3.313rem]">
-        <Typography variant="heading1">Hey Louis! Welcome to your profile.</Typography>
+        <Hello />
         <Typography variant="heading3">Your Plan</Typography>
       </div>
       <div className="w-full bg-fill-blue pt-[2.438rem] pb-[1.688rem] px-[1.875rem] rounded-[27px] gap-8 flex flex-col">

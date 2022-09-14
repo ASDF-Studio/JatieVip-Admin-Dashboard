@@ -256,6 +256,7 @@ export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({ children })
       mode: 'light',
       ...colors,
     },
+    
     components: {
       MuiDatePicker: {
         styleOverrides: {

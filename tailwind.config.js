@@ -58,6 +58,7 @@ module.exports = {
           spice: colors.fill.spice2,
           lightBlue: colors.fill.lightBlue,
           lightBlue2: colors.fill.lightBlue2,
+          hover: colors.fill.hover,
         },
         accent: {
           white: colors.accent.white,
