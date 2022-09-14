@@ -39,6 +39,7 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
             variant="fill"
             textClassName="text-white"
             onClick={() => setShowModal(true)}
+            disableRipple
           >
             Upgrade
           </Button>

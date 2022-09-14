@@ -61,7 +61,6 @@ const Account: NextPage = () => {
       const file = await getBase64(files[0])
       setFieldValue('imageURL', file)
     }
-    // need to set something
   }
 
   const { setFieldTouched, touched, errors, setFieldValue } = formik
