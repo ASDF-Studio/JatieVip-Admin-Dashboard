@@ -46,14 +46,9 @@ input[type='number'] {
   font-family: 'Avenir Next';
   font-style: normal;
   font-weight: 400;
-  src: ;
+  src: url("../../fonts/AvenirNext/AvenirNext-Regular-08.ttf");
 }
-@font-face {
-  font-family: 'Avenir Next';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Avenir Next'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-Cn.woff') format('woff');
-}
+
 @font-face {
   font-family: 'Avenir Next';
   font-style: italic;
@@ -148,7 +143,7 @@ input[type='number'] {
   font-family: 'Avenir Next';
   font-style: normal;
   font-weight: 700;
-  src: local('Avenir Next'), url('https://fonts.cdnfonts.com/s/13217/AvenirNextLTPro-BoldCn.woff') format('woff');
+  src: url("../../fonts/AvenirNext/AvenirNext-Bold-01.ttf");
 }
 @font-face {
   font-family: 'Avenir Next';

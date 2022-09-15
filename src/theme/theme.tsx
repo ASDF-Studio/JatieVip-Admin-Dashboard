@@ -120,6 +120,26 @@ export const MoveTheme = {
       //   fontWeight: 600,
       // },
     },
+    title4: {
+      fontSize: '20px',
+      fontWeight: 600,
+      textTransform: 'capitalize',
+      // '@media (max-width:900px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '16px',
+      //   lineHeight: '24px',
+      //   fontWeight: 600,
+      // },
+    },
+    desc: {
+      fontSize: '15px',
+      fontWeight: 500,
+    },
+
     bodyBold: {
       fontSize: '16px',
       fontWeight: 600,
@@ -208,6 +228,21 @@ export const MoveTheme = {
       //   fontWeight: 600,
       // },
     },
+    subheadBold1: {
+      fontSize: '14px',
+
+      fontWeight: 700,
+      // '@media (max-width:900px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 600,
+      // },
+      // '@media (max-width:600px)': {
+      //   fontSize: '12px',
+      //   lineHeight: '18px',
+      //   fontWeight: 600,
+      // },
+    },
     label1: {
       fontSize: '14px',
       lineHeight: '22px',
@@ -256,7 +291,7 @@ export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({ children })
       mode: 'light',
       ...colors,
     },
-    
+
     components: {
       MuiDatePicker: {
         styleOverrides: {

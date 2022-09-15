@@ -16,6 +16,8 @@ module.exports = {
       },
       maxWidth: {
         'screen-move-fit': '1007px',
+        'screen-move-landing': '984px',
+        'left-bar': '272px',
         'screen-2xl': '1440px',
         'screen-3xl': '1792px',
         'scree[n-4xl': '2048px',
@@ -59,6 +61,7 @@ module.exports = {
           lightBlue: colors.fill.lightBlue,
           lightBlue2: colors.fill.lightBlue2,
           hover: colors.fill.hover,
+          landingBlack: colors.fill.landingBlack,
         },
         accent: {
           white: colors.accent.white,
@@ -77,6 +80,7 @@ module.exports = {
         boxSelect: '0px 8px 8px rgba(0,0,0, 0.1)',
         buttonShadow: 'rgba(14, 208, 233, 0.1)',
         singleSelct: '0px 8px 8px rgba(45,146,181, 0.2)',
+        logoShadow: '0px 10px 10px rgba(0,0,0, 0.2)',
       },
     },
   },

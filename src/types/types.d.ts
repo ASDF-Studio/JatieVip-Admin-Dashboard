@@ -88,12 +88,15 @@ declare module '@mui/material/Typography' {
     title1?: true
     title2?: true
     title3?: true
+    title4?: true
     bodyBold?: true
     body1?: true
     body2?: true
     body?: true
+    desc?: true
     subhead?: true
     subheadBold?: true
+    subheadBold1: true
     label1?: true
     label2?: true
 

@@ -73,5 +73,6 @@ module.exports = {
     lightBlue: 'rgb(245, 247, 249)',
     lightBlue2: 'rgb(213, 236, 244)',
     hover: '#D0F0FC',
+    landingBlack: 'rgba(25,27,28,1)',
   },
 }

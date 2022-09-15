@@ -14,3 +14,5 @@ export const Tag: FC<Props> = ({ text }): React.ReactElement => {
     </div>
   )
 }
+
+export * from './tag-image'
