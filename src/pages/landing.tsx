@@ -5,8 +5,10 @@ const Landing: NextPage = () => {
   return (
     <div className="flex flex-col py-[2.969rem] relative">
       <LeftBar />
-      <Hero />
-      <Hero2 />
+      <div className="flex flex-col w-full px-[310px]">
+        <Hero />
+        <Hero2 />
+      </div>
     </div>
   )
 }

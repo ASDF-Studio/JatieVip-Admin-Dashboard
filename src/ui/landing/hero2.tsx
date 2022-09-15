@@ -5,7 +5,7 @@ import React from 'react'
 const Hero2: React.FC = (): React.ReactElement => {
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="max-w-screen-move-landing mx-auto">
+      <div className="max-w-screen-move-landing mx-auto w-full">
         <div className="flex flex-col gap-[1.463rem]">
           <div className="flex flex-col items-start gap-[0.225rem] justify-center">
             <Typography
