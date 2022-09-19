@@ -19,10 +19,10 @@ const GetBg = () => {
 
   const getBgURL = () => {
     if (isDesktop20) {
-      return '/assets/landing/bg-1920.png'
+      return '/assets/landing/bg-2-1920.webp'
     }
     if (isDesktop40) {
-      return '/assets/landing/bg-1440.png'
+      return '/assets/landing/bg-2-1440.webp'
     }
     if (isTablet) {
       return '/assets/landing/bg-7201.png'
