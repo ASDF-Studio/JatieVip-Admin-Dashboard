@@ -4,19 +4,25 @@ type Props = {
   icon: any
   title: string
   desc: string
+  className: string
 }
 
-export const Card: React.FC<Props> = ({ icon, title, desc }) => {
+export const Card: React.FC<Props> = ({ icon, title, desc, className = '' }) => {
   return (
-    <div className="flex flex-col w-full gap-[7px] max-w-[17.5rem]">
-      <div className="flex flex-col gap-[16px]">
+    <div
+      className={`flex flex-col w-full gap-[7px] items-center sm:items-start max-w-[360px] sm:max-w-[200px] xl:max-w-[280px] x:max-w-[280px] ${className}`}
+    >
+      <div className="flex flex-col gap-[16px] items-center sm:items-start">
         {icon}
-        <Typography variant="title4" className="leading-[1.75rem]">
+        <Typography variant="title4" className="leading-[1.4]">
           {title}
         </Typography>
       </div>
 
-      <Typography variant="desc" className="leading-[22px] tracking-[0.25px] text-[rgba(25,27,28,1)] font-medium">
+      <Typography
+        variant="desc"
+        className="leading-[1.47] tracking-[0.25px] text-[#191b1c]/70 font-medium text-center sm:text-start"
+      >
         {desc}
       </Typography>
     </div>

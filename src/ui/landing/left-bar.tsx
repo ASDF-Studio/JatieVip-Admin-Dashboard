@@ -3,7 +3,7 @@ import { Button } from 'components'
 
 export const LeftBar = () => {
   return (
-    <div className="max-w-left-bar w-full flex flex-col fixed ml-[30px] h-screen overflow-y-auto">
+    <div className="max-w-left-bar w-full  flex-col fixed ml-[30px] h-screen overflow-y-auto hidden x:flex">
       <img src="/assets/logos/logo3x.webp" className="max-w-[171px]" alt="" />
       <div className="flex flex-col gap-[1.25rem] mt-[1.688rem]">
         <div className="flex flex-col gap-[5px]">

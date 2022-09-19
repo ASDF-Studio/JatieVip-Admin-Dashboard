@@ -1,59 +1,52 @@
-import { Typography } from '@mui/material'
-import { Card } from 'components'
-import React from 'react'
+import { Title, Heading, Button } from 'components'
 
-const Hero: React.FC = (): React.ReactElement => {
+export const HeroSection: React.FC = (): React.ReactElement => {
   return (
-    <div className="flex flex-col min-h-screen w-full">
-      <div className="max-w-screen-move-landing mx-auto w-full">
-        <div className="flex flex-col gap-[1.463rem]">
-          <div className="flex flex-col items-center gap-[0.225rem] justify-center">
-            <Typography
-              style={{ fontSize: '1.125rem' }}
-              textTransform="uppercase"
-              className="text-black/60 font-medium tracking-[0.141rem] leading-10 "
-            >
-              Why you will love Move
-            </Typography>
-            <Typography
-              style={{ fontSize: '2.531rem' }}
-              className="text-fill-landingBlack font-bold tracking-[0px] leading-[45px]"
-            >
-              Move 👊 with <span className="text-[#86949F]">Friends</span>
-            </Typography>
+    <div className="relative flex">
+      <video muted autoPlay loop  className="absolute left-0 top-0 -z-10 w-full h-[871px] object-cover">
+        <source src="/assets/videos/movefit-video.mp4" />
+      </video>
+      <div className="xl:max-w-[341px] 5xl:max-w-[620px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
+      <div className="max-w-[420px] px-5 w-full mx-auto mt-[92.5px] relative sm:max-w-[768px] sm:px-[41.5px] sm:mt-[81px] x:max-w-[1024px] x:px-[61.3px] x:mt-[81px] xl:px-0 xl:max-w-[900px] xl:mx-0 xl:mt-[80.5px] 2xl:max-w-[995px] min-h-[830px] sm:min-h-[726px] xl:min-h-[718px] 2xl:min-h-[840px] overflow-hidden">
+        <img
+          src="/assets/images/landing/phone.webp"
+          className="absolute max-w-[420px] left-1/2 -translate-x-1/2 transform sm:translate-x-0 top-[258px] sm:max-w-[515px] sm:top-0 sm:-left-[82px] x:-left-[12px] xl:-left-[74px]
+           2xl:max-w-[602px] 2xl:-left-[118px]"
+          alt="phone"
+        />
+        <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4 mt-0 sm:mt-[220px] sm:ml-[291px] x:ml-[382px] x:mt-[241px] xl:ml-[382px] xl:mt-[233px]">
+          <div className="flex flex-col">
+            <Title className="text-white/80">Move Your Way</Title>
+            <div className="relative w-full max-w-[380px] sm:max-w-[395px] x:max-w-[538px]">
+              <Heading className="text-white leading-[1.29] sm:leading-[1.25] x:leading-[1.2]">
+                See amazing fitness results in 3-months
+              </Heading>
+              <img
+                src="/assets/landing/path.svg"
+                className="w-[126px] absolute bottom-0 -z-10 -left-2 h-[49px] object-cover sm:w-[176px] sm:h-[50px] sm:-bottom-1 x:w-[176px] x:h-[49px] x:bottom-1"
+                alt=""
+              />
+            </div>
           </div>
-          <div className="flex justify-center">
-            <Typography
-              style={{ fontSize: '1.125rem' }}
-              className="w-[44.375rem] leading-[1.625rem] tracking-[0px] font-semibold text-fill-landingBlack"
-              textAlign="center"
+
+          <div className="flex gap-2.5">
+            <Button
+              variant="landingButton"
+              className="bg-primary-brand max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px]"
+              textClassName="text-white"
             >
-              Move with friends - allows you to add and connect with friends, follow along with their workouts and
-              progress, and share how you Move with others.
-            </Typography>
+              Get Started
+            </Button>
+            <Button
+              variant="landingButton"
+              className="bg-white max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px]"
+              textClassName="text-primary-brand"
+            >
+              Learn More
+            </Button>
           </div>
-        </div>
-        <div className="flex gap-[2.875rem] mt-[3.813rem]">
-          <Card
-            icon={<img src="/assets/svg/person-running.svg" alt='person running icon' className='w-[1.875rem] h-[1.875rem]'/>}
-            title="Workout with Friends"
-            desc="Send and receive messages to hype up your friends when they finish a workout "
-          />
-          <Card
-          icon={<img src="/assets/svg/group-arrows-rotate.svg" alt='person running icon' className='w-[1.875rem] h-[1.875rem]'/>}
-            title="Workout with Friends"
-            desc="Send and receive messages to hype up your friends when they finish a workout "
-          />
-          <Card
-          
-          icon={<img src="/assets/svg/share-nodes.svg" alt='person running icon' className='w-[1.875rem] h-[1.875rem]'/>}
-            title="Workout with Friends"
-            desc="Send and receive messages to hype up your friends when they finish a workout "
-          />
         </div>
       </div>
     </div>
   )
 }
-
-export default Hero

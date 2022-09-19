@@ -7,16 +7,27 @@ module.exports = {
   content: ['./src/**/**/*.{js,ts,jsx,tsx}'],
   important: true,
   theme: {
+    screens: {
+      xs: '420px',
+      ms: '430px',
+      sm: '767px',
+      x: '1024px',
+      xl: '1280px',
+      '2xl': '1440px',
+      '5xl': '1920px',
+      '7xl': '2880px',
+    },
     extend: {
       fontFamily: {
         sans: ['Brandon Grotesque', ...defaultTheme.fontFamily.sans],
       },
       width: {
         28: '445px',
+        'move-fit': '997px',
       },
       maxWidth: {
         'screen-move-fit': '1007px',
-        'screen-move-landing': '984px',
+        'screen-move-landing': '997px',
         'left-bar': '272px',
         'screen-2xl': '1440px',
         'screen-3xl': '1792px',
@@ -81,6 +92,7 @@ module.exports = {
         buttonShadow: 'rgba(14, 208, 233, 0.1)',
         singleSelct: '0px 8px 8px rgba(45,146,181, 0.2)',
         logoShadow: '0px 10px 10px rgba(0,0,0, 0.2)',
+        apple: '0 26px 26px 0 rgba(2, 32, 71, 0.12), 0 0 1px 0 rgba(2, 32, 71, 0.1)',
       },
     },
   },

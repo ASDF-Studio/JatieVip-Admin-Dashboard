@@ -85,6 +85,8 @@ declare module '@mui/material/Typography' {
     heading2?: true
     heading3?: true
     heading4?: true
+    heading5?: true
+    heading6?: true
     title1?: true
     title2?: true
     title3?: true
@@ -92,6 +94,7 @@ declare module '@mui/material/Typography' {
     bodyBold?: true
     body1?: true
     body2?: true
+    body3?: true
     body?: true
     desc?: true
     subhead?: true

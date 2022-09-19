@@ -75,6 +75,34 @@ export const MoveTheme = {
       //   fontWeight: 700,
       // },
     },
+    heading5: {
+      fontSize: '50px',
+      fontWeight: 700,
+      '@media (max-width:1023px)': {
+        fontSize: '40px',
+        // lineHeight: '30px',
+        fontWeight: 700,
+      },
+      '@media (max-width:767px)': {
+        fontSize: '35px',
+        // lineHeight: '30px',
+        fontWeight: 700,
+      },
+    },
+    heading6: {
+      fontSize: '40.5px',
+      fontWeight: 700,
+      // '@media (max-width:1023px)': {
+      //   fontSize: '40px',
+      //   // lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
+      '@media (max-width:767px)': {
+        fontSize: '29.5px',
+        // lineHeight: '30px',
+        fontWeight: 700,
+      },
+    },
     title1: {
       fontSize: '22px',
       lineHeight: '28px',
@@ -109,21 +137,18 @@ export const MoveTheme = {
       fontSize: '18px',
       fontWeight: 600,
       textTransform: 'capitalize',
-      // '@media (max-width:900px)': {
-      //   fontSize: '16px',
-      //   lineHeight: '24px',
-      //   fontWeight: 600,
-      // },
-      // '@media (max-width:600px)': {
-      //   fontSize: '16px',
-      //   lineHeight: '24px',
-      //   fontWeight: 600,
-      // },
+      '@media (max-width:1023px)': {
+        fontSize: '18px',
+        fontWeight: 600,
+      },
+      '@media (max-width:767px)': {
+        fontSize: '16px',
+        fontWeight: 600,
+      },
     },
     title4: {
       fontSize: '20px',
       fontWeight: 600,
-      textTransform: 'capitalize',
       // '@media (max-width:900px)': {
       //   fontSize: '16px',
       //   lineHeight: '24px',
@@ -197,6 +222,16 @@ export const MoveTheme = {
       //   lineHeight: '22px',
       //   fontWeight: 400,
       // },
+    },
+    body3: {
+      fontSize: '18px',
+      lineHeight: 1.44,
+      fontWeight: 600,
+      '@media (max-width:767px)': {
+        fontSize: '16px',
+        lineHeight: 1.63,
+        fontWeight: 600,
+      },
     },
     subhead: {
       fontSize: '14px',
