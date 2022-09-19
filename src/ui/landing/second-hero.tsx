@@ -24,7 +24,6 @@ const GetBg = () => {
     if (isDesktop40) {
       return '/assets/landing/bg-1440.png'
     }
-
     if (isTablet) {
       return '/assets/landing/bg-7201.png'
     }

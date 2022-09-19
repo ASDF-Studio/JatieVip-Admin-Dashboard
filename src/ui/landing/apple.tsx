@@ -4,7 +4,7 @@ import { useBreakPoint, useMediaQuery } from 'hooks'
 
 const Tag = ({ text, icon }) => {
   return (
-    <div className="flex px-[23px] rounded-[21px] bg-[#63eeff]/30 backdrop-blur-[14px] h-[42px] items-center justify-center gap-[10.9px]">
+    <div className="flex px-[23px] rounded-[21px] bg-[#63eeff]/30  h-[42px] items-center justify-center gap-[10.9px]">
       <img src={icon} className="w-[13px] h-[13px]" alt="svg" />
       <Typography textTransform="capitalize" className="font-semibold text-white" fontSize="12.6px">
         {text}

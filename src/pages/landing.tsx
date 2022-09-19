@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 import { HeroSection, SecondHero, ThirdHero, ForthHero, Apple } from 'ui/landing'
 
 const Landing: NextPage = () => {
