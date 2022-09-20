@@ -43,7 +43,7 @@ const GetBg = () => {
   return (
     <img
       src={getBgURL()}
-      alt="background"
+      alt=""
       className="max-w-full absolute -top-[115px] -z-10 w-full sm:-top-[145px] xl:-top-[160px] 2xl:-top-[275px] 5xl:-top-[110px]"
     />
   )
