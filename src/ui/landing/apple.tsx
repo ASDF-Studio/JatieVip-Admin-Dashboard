@@ -49,7 +49,7 @@ const GetPhone = () => {
     <img
       src={`${!isTablet ? '/assets/landing/watch-1440.webp' : '/assets/landing/group-32@3x.png'}`}
       alt="apple watch"
-      className="max-w-[330px] sm:w-[276px] x:w-[330px]  x:h-[440px] x:bottom-[95px] x:ml-[14px]  sm:h-[368px] relative sm:bottom-[22px] shrink-0"
+      className="max-w-[330px]  sm:w-[276px] x:w-[330px]  x:h-[440px] x:bottom-[140px] x:ml-[14px]  sm:h-[368px] relative sm:bottom-[22px] shrink-0"
     />
   )
 }
@@ -60,9 +60,18 @@ export const Apple: React.FC = (): React.ReactElement => {
       <GetBg />
 
       <div className="xl:max-w-[341px] 5xl:max-w-[620px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
-      <div className="max-w-[420px] px-[30px] sm:px-[40px] mt-[128px] sm:mt-[128px] x:mt-[75px] 2xl:mt-[165px] w-full mx-auto relative sm:max-w-[768px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] xl:mx-0 2xl:max-w-[995px] ">
-        <div className="max-w-full h-[690px] sm:h-[347px] shadow-apple rounded-[18px] border-[#e9ebec] border-[1px] border-solid bg-primary-brand w-full flex-col-reverse items-center flex sm:flex-row sm:pr-[8px] sm:items-start px-5 sm:pl-0 x:pr-[39px] x:gap-[17px]">
-          <GetPhone />
+      <div className="max-w-[420px] px-[30px] sm:px-[40px] mt-[128px] sm:mt-[128px] x:mt-[164px] 2xl:mt-[165px] w-full mx-auto relative sm:max-w-[768px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] xl:mx-0 2xl:max-w-[995px] ">
+        <div
+          style={{
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '100%',
+          }}
+          className="bg-cover sm:bg-contain bg-[url('/assets/landing/group-44@3x.webp')] sm:bg-[url('/assets/landing/gradient@3x.webp')] max-w-full min-h-[690px] sm:min-h-[347px] x:min-h-[300px] shadow-apple rounded-[18px] border-[#e9ebec] border-[1px] border-solid bg-primary-brand w-full flex-col-reverse items-center flex sm:flex-row sm:pr-[8px] sm:items-start px-5 sm:pl-0 x:pr-[39px] x:gap-[17px]"
+        >
+          <div className="sm:h-[346px] x:h-[300px]">
+            <GetPhone />
+          </div>
+
           <div className="flex flex-col gap-[15px] sm:gap-[17px] x:gap-[24px] mt-[32px] items-center sm:items-start">
             <div className="flex flex-col gap-2.5">
               <AppleTypo className="text-white text-center sm:text-left">Connect with Apple Health</AppleTypo>
@@ -102,11 +111,14 @@ export const Apple: React.FC = (): React.ReactElement => {
             className="leading-[1.47] tracking-[0.25px] text-[#191b1c]/70 font-medium text-center mt-[20px]  sm:mt-[12px] sm:w-[650px] x:w-[800px]"
           >
             The idea for Move started when a young Katie and Josh met at a boxing gym. The love for fitness, health, and
-            finding new ways to push ourselves to be better each day inspired us along this journey. <br /><br /> Launching
-            our fitness app is just the beginning of our overall goal of helping others become more health conscious,
-            create positive life habits, and discover their full capabilities with how you Move!
+            finding new ways to push ourselves to be better each day inspired us along this journey. <br />
+            <br /> Launching our fitness app is just the beginning of our overall goal of helping others become more
+            health conscious, create positive life habits, and discover their full capabilities with how you Move!
           </Typography>
         </div>
+        <img src="/assets/landing/group-11@3x.png" alt="" className='absolute max-w-[225px] -top-[200px] left-[35vw] sm:max-w-[344px]
+         sm:-top-[310px] sm:left-[280px] x:max-w-[428px] x:left-[370px] x:-top-[390px] xl:left-[310px] xl:-top-[370px] 2xl:left-[295px] 
+         2xl:-top-[400px] 5xl:left-[410px]' />
       </div>
     </div>
   )

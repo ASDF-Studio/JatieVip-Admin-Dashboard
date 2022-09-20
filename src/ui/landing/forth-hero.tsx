@@ -13,7 +13,7 @@ const GetBg = () => {
       return '/assets/landing/bg-4-720.svg'
     }
     if (isBigTablet) {
-      return '/assets/landing/bg-4-720.svg'
+      return '/assets/landing/group-16@3x.png'
     }
     if (isTablet) {
       return '/assets/landing/bg-4-720.svg'
@@ -26,7 +26,7 @@ const GetBg = () => {
     <img
       src={getBgURL()}
       alt="background"
-      className="max-w-full absolute -top-[40px] z-0 w-full ms:-top-[35px] sm:-top-[35px] xl:-top-[35px] 2xl:-top-[30px]"
+      className="max-w-full absolute -top-[40px] z-0 w-full ms:-top-[35px] sm:-top-[25px] x:-top-[35px] xl:-top-[38px] 2xl:-top-[30px]"
     />
   )
 }

@@ -27,6 +27,7 @@ export const useMediaQuery = (width) => {
 }
 
 export const useBreakPoint = () => {
+  const isReady = useMediaQuery(1)
   const isTablet = useMediaQuery(767)
   const isBigTablet = useMediaQuery(1024)
   const isDesktop = useMediaQuery(1280)
@@ -39,5 +40,6 @@ export const useBreakPoint = () => {
     isDesktop,
     isDesktop40,
     isDesktop20,
+    isReady
   }
 }
