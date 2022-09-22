@@ -102,6 +102,7 @@ declare module '@mui/material/Typography' {
     subheadBold1: true
     label1?: true
     label2?: true
+    titleSemiBold?: true
 
     h3?: false
     h4?: false

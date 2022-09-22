@@ -28,7 +28,7 @@ module.exports = {
       maxWidth: {
         'screen-move-fit': '1007px',
         'screen-move-landing': '997px',
-        'left-bar': '272px',
+        'left-bar': '302px',
         'screen-2xl': '1440px',
         'screen-3xl': '1792px',
         'scree[n-4xl': '2048px',
@@ -93,6 +93,7 @@ module.exports = {
         singleSelct: '0px 8px 8px rgba(45,146,181, 0.2)',
         logoShadow: '0px 10px 10px rgba(0,0,0, 0.2)',
         apple: '0 26px 26px 0 rgba(2, 32, 71, 0.12), 0 0 1px 0 rgba(2, 32, 71, 0.1)',
+        glassShadow: '0 3px 4px 0 rgba(2, 32, 71, 0.1), 0 0 1px 0 rgba(2, 32, 71, 0.08)',
       },
     },
   },

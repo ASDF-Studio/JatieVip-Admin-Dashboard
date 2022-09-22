@@ -4,7 +4,7 @@ export const HeroSection: React.FC = (): React.ReactElement => {
 
   return (
     <div className="relative flex">
-      <video muted autoPlay loop className="absolute left-0 top-0 -z-10 w-full h-[871px] object-cover">
+      <video muted  loop playsInline className="absolute left-0 top-0 -z-10 w-full h-[871px] object-cover">
         <source src="/assets/videos/movefit-video.mp4" />
       </video>
       <div className="xl:max-w-[341px] 5xl:max-w-[620px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
@@ -12,7 +12,7 @@ export const HeroSection: React.FC = (): React.ReactElement => {
         <img
           src="/assets/images/landing/phone.webp"
           className="absolute max-w-[420px] left-1/2 -translate-x-1/2 transform sm:translate-x-0 top-[258px] sm:max-w-[515px] sm:top-0 sm:-left-[82px] x:-left-[12px] xl:-left-[74px]
-           2xl:max-w-[602px] 2xl:-left-[118px]"
+           2xl:max-w-[602px] 2xl:-left-[118px] z-10"
           alt="phone"
         />
         <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4 mt-0 sm:mt-[220px] sm:ml-[291px] x:ml-[382px] x:mt-[241px] xl:ml-[382px] xl:mt-[233px]">

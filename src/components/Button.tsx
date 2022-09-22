@@ -33,7 +33,7 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
 
   const styles = {
     root: 'rounded-[22px] py-2 box-border',
-    ghost: 'border-border-blue border border-solid bg-white hover:bg-text-blue/20',
+    ghost: 'border-border-blue border border-solid bg-white',
     fill: 'bg-secondary-light-blue rounded-[22px] hover:shadow-secondaryShadow active:bg-primary-brand',
     text: 'bg-transparent active:bg-white',
     secondry: 'rounded-[22px] hover:bg-fill-hover bg-text-blue/20 active:bg-text-blue/20',

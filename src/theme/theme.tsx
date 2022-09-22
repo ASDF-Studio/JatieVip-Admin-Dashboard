@@ -164,6 +164,15 @@ export const MoveTheme = {
       fontSize: '15px',
       fontWeight: 500,
     },
+    titleSemiBold: {
+      fontSize: '45px',
+      lineHeight: 1.11,
+      fontWeight: 600,
+      '@media (max-width:1023px)': {
+        fontSize: '30px',
+        lineHeight: 1.33,
+      },
+    },
 
     bodyBold: {
       fontSize: '16px',
