@@ -25,6 +25,7 @@
     "next-auth": "^4.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-intersection-observer": "^9.4.0",
     "rxfire": "^6.0.3",
     "rxjs": "^7.5.6"
   },

@@ -1,12 +1,13 @@
 import { IconButton, Typography } from '@mui/material'
 import { Button, FacebookIcon, InstagramIcon, TikTokIcon, TwitterIcon } from 'components'
 import Link from 'next/link'
+import React from 'react'
 
-export const LandingFooter = () => {
+export const LandingFooter = React.forwardRef((props, ref) => {
   return (
-    <div className="h-[300px]">
+    <div className="h-[300px]" ref={ref}>
       <div
-        className="flex flex-col relative bg-[url('/assets/landing/footer-bg@3x.webp')] bg-cover bg-no-repeat
+        className="flex flex-col relative bg-[url('/assets/landing/footer-bg@3x.webp')] bg-cover bg-no-repeat z-40
        sm:bg-[url('/assets/landing/footer-bg-copy@3x.webp')] x:bg-[url('/assets/landing/footer-bg_1024.webp')] pt-[102px] sm:-top-[125px] -top-[100px] sm:pt-[181px] pb-[40px] x:pt-[243px] x:pb-[69px] 2xl:bg-[url('/assets/landing/footer-bg-1920.webp')]"
       >
         <div className="flex flex-col sm:gap-2.5 order-1">
@@ -59,7 +60,7 @@ export const LandingFooter = () => {
           </Typography>
         </div>
         <div className="flex gap-[30px] justify-center mt-[70px] order-5 x:mt-[38px]">
-          <IconButton  className="p-0" disableRipple>
+          <IconButton className="p-0" disableRipple>
             <FacebookIcon className="w-[25px]" fill="white" />
           </IconButton>
           <IconButton className="p-0" disableRipple>
@@ -78,7 +79,7 @@ export const LandingFooter = () => {
             © Move, Inc. All rights reserved.
           </Typography>
           <div className="flex items-center gap-3 x:mt-[10px]">
-            <Link href="/">
+            <Link href="/landing/terms">
               <a>
                 <Typography className="leading-[2] text-white" variant="body2">
                   Terms of service
@@ -88,7 +89,7 @@ export const LandingFooter = () => {
             <Typography className="leading-[2] text-white" variant="body2">
               •
             </Typography>
-            <Link href="/">
+            <Link href="/landing/terms">
               <a>
                 <Typography className="leading-[2] text-white" variant="body2">
                   Privacy Policy
@@ -100,4 +101,4 @@ export const LandingFooter = () => {
       </div>
     </div>
   )
-}
+})
