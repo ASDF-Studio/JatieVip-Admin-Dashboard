@@ -4,7 +4,7 @@ import { LandingLayout, LeftBar } from 'ui/landing'
 
 const Terms: NextPage = () => {
   return (
-    <LandingLayout>
+    <LandingLayout dark>
       <LeftBar inView />
       <div className="flex">
         <div className="xl:max-w-[341px] 5xl:max-w-[420px] 7xl:max-w-[40vw] w-full hidden xl:flex" />

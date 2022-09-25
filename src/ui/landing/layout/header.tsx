@@ -3,7 +3,7 @@ import { Button, BarIcon, FacebookIcon, TikTokIcon, SnapChat, YoutubeIcon, Insta
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
-export const LandingHeader = ({ inView }) => {
+export const LandingHeader = ({ inView, dark }) => {
   const [showMenu, setShowMenu] = useState(false)
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const LandingHeader = ({ inView }) => {
           </Button>
         )}
         <IconButton onClick={() => setShowMenu(!showMenu)} disableRipple className="p-0">
-          {showMenu ? <Xicon className="w-[24px]" /> : <BarIcon className="w-[22px]" fill="white" />}
+          {showMenu ? <Xicon className="w-[24px]" /> : <BarIcon className="w-[22px]" fill={dark ? 'black' : 'white'} />}
         </IconButton>
       </div>
       <div

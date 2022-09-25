@@ -9,7 +9,7 @@ const Privacy: NextPage = () => {
       <div className="flex">
         <div className="xl:max-w-[341px] 5xl:max-w-[420px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
         <div className="flex flex-col max-w-[1200px] w-full gap-[31px] xl:gap-[41px] mt-[98px] px-[30px] pb-[152px] xl:px-0 xl:mt-[62px] xl:mb-[199px]">
-          <Typography variant="heading6">Terms of Service</Typography>
+          <Typography variant="heading6">Privacy and Policy </Typography>
           <Typography variant="body" className="leading-normal">
             Effective: January 14, 2022
             <br />

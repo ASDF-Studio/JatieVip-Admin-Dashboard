@@ -7,12 +7,13 @@ type Props = {
   children: React.ReactNode
   ref?: any
   inView?: boolean
+  dark?: boolean
 }
 
-export const LandingLayout: FC<Props> = React.forwardRef(({ children, inView }, ref) => {
+export const LandingLayout: FC<Props> = React.forwardRef(({ children, inView, dark = false }, ref) => {
   return (
     <div className="flex flex-col relative">
-      <LandingHeader inView={inView} />
+      <LandingHeader inView={inView} dark={dark} />
       {children}
       <LandingFooter ref={ref} />
     </div>
