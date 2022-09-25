@@ -14,7 +14,7 @@ export const LoginSideBar = ({ className }: Props) => {
         backgroundPositionX: '100%',
         backgroundRepeat: 'no-repeat',
       }}
-      className={`bg-[url('/assets/images/bg@3x.webp')] h-screen pt-[22px] pl-[28px] relative ${className}`}
+      className={`bg-[url('/assets/images/bg@3x.webp')] min-h-screen pt-[22px] pl-[28px] relative ${className}`}
     >
       <img src="/assets/logos/move-white.svg" className="max-w-[184px]" alt="logo" />
       <div className="flex flex-col">
@@ -30,11 +30,11 @@ export const LoginSideBar = ({ className }: Props) => {
               alt=""
             />
           </div>
-          <div className="relative  xl:-top-[40px]">
+          <div className="relative  xl:-top-[40px] xl:h-[600px] 5xl:h-[710px]">
             <img
               src="/assets/images/group-15@3x.webp"
               className="x:max-w-[500px] xl:max-w-[760px] 5xl:max-w-[900px]"
-              alt="phone "
+              alt="phone"
             />
           </div>
         </div>
