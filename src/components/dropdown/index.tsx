@@ -48,7 +48,7 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
     <Select
       name={name}
       IconComponent={sortIcon}
-      className={`w-[11.875rem] rounded-[22px] bg-border-grey  hover:cursor-pointer ${
+      className={`w-full rounded-[22px] bg-border-grey  hover:cursor-pointer ${
         value !== '' && 'border-primary-brand'
       }`}
       style={{

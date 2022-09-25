@@ -8,6 +8,7 @@ type Props = {
   withNavBar?: boolean
   className?: string
   stickyFooter?: boolean
+  hiddenDesktop?: boolean
 }
 
 const MainLayout: FC<Props> = ({
@@ -16,12 +17,14 @@ const MainLayout: FC<Props> = ({
   withNavBar = true,
   className = '',
   stickyFooter = false,
+  hiddenDesktop = false,
 }): React.ReactElement => {
   return (
     <div className="flex flex-col">
-      <Header withNavBar={withNavBar} />
+      <Header hidden={hiddenDesktop} withNavBar={withNavBar} />
+
       <main className={`${className}  w-full relative`}>{children}</main>
-      {footer && <Footer sticky={stickyFooter} />}
+      {footer && <Footer sticky={stickyFooter} hidden={hiddenDesktop} />}
     </div>
   )
 }

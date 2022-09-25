@@ -40,10 +40,13 @@ export const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactEleme
               key={index}
               name="verifyCode"
               type="number"
-              className="w-[52px] h-10"
+              className="w-[56px] h-[44px] rounded-[22px] bg-[#f5f7f9] border"
               value={value || ''}
               focus={isActive}
               onKeyUp={handleKeyUp}
+              inputProps={{
+                className: 'text-center'
+              }}
               onChange={(e) => handleInputChange(e, index)}
             />
           )

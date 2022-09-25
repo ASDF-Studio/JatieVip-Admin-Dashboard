@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { LandingLayout, LeftBar } from 'ui/landing'
 
-const Terms: NextPage = () => {
+const Privacy: NextPage = () => {
   return (
     <LandingLayout>
       <LeftBar inView />
@@ -270,4 +270,4 @@ const Terms: NextPage = () => {
   )
 }
 
-export default Terms
+export default Privacy

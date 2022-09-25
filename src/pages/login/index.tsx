@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
-import { MainLayout } from 'components'
 import React, { useState } from 'react'
 import { Step1, Step2 } from 'ui/login'
 import { LoginSteps } from 'types'
 import { useAuth } from 'Contexts/Auth'
 import { useNavigate } from 'hooks/UseRouter'
+import { LoginSideBar } from 'components/loginSideBar'
+import { MainLayout } from 'components'
 
 type FormValues = {
   phoneNumber: string
@@ -46,8 +47,12 @@ const Home: NextPage = (): React.ReactElement => {
   }
 
   return (
-    <MainLayout withNavBar={false} footer={false}>
-      {getStepsUI(step)}
+    <MainLayout hiddenDesktop stickyFooter withNavBar={false}>
+      <div className="flex justify-between mt-[66px] x:mt-0">
+        <LoginSideBar className="w-[72%] hidden x:block" />
+
+        {getStepsUI(step)}
+      </div>
     </MainLayout>
   )
 }

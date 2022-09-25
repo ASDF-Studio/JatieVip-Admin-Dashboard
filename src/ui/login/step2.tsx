@@ -6,6 +6,7 @@ import { useAuth } from 'Contexts/Auth'
 import { setToken } from 'services/api'
 import { useNavigate } from 'hooks/UseRouter'
 import { AuthService } from 'services'
+import Link from 'next/link'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
@@ -35,43 +36,70 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactEleme
   }
 
   return (
-    <div className="flex justify-center pt-[203px]">
-      <div className="w-[400px] flex flex-col justify-center gap-[43px]">
-        <Typography className="text-center" variant="heading1">
+    <div className="flex max-w-[520px] mx-auto px-[26px] x:px-[28px] w-full flex-col justify-center relative">
+      <div className="w-full x:w-[447px] mx-auto flex-col mt-[36px] x:mt-0">
+        <Typography variant="heading7" className="text-center x:text-left">
           Verify Login
         </Typography>
-        <div className="flex flex-col gap-4">
-          <Typography variant="body2">Verification Code</Typography>
-          <div className="flex flex-col">
-            <Typography className="text-primary-grey" variant="body2">
-              Please enter the verification code
+        <div className="flex flex-col mt-[44px] gap-5">
+          <div className="flex flex-col gap-[9px]">
+            <Typography variant="body2" className="font-semibold">
+              Verification Code
             </Typography>
-            <div className="flex">
-              <Typography className="text-primary-grey" variant="body2">
-                that was sent to <span className="text-primary-black">&nbsp;{`${phoneNumber}`}</span>
+            <div className="flex flex-col">
+              <Typography className="text-[#86949f] font-semibold" variant="body2">
+                Please enter the verification code
               </Typography>
-              <Button variant="text" className="p-0 transform-none" onClick={() => onChangeStep('step1')}>
-                <Typography variant="body2" className=" text-primary-brand">
-                  Edit
+              <div className="flex">
+                <Typography className="text-[#86949f] font-semibold" variant="body2">
+                  that was sent to {`${phoneNumber}`}&nbsp;&nbsp;
                 </Typography>
-              </Button>
+                <span onClick={() => onChangeStep('step1')} className="hover:cursor-pointer">
+                  <Typography variant="body2" className=" text-primary-brand font-semibold">
+                    Edit
+                  </Typography>
+                </span>
+              </div>
             </div>
           </div>
-          <VerifyCodeInput length={5} code={code} onChange={(cd) => setCode(cd)} />
+          <VerifyCodeInput length={6} code={code} onChange={(cd) => setCode(cd)} />
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col mt-5">
           <Button
-            onClick={handleVerify}
-            disabled={code.length !== 5 || loading}
+            // onClick={handleVerify}
+            disabled={code.length !== 6 || loading}
             loading={loading}
             className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow"
             variant="fill"
+            textClassName="text-white"
           >
-            <Typography className="text-white" variant="label1" fontFamily="Brown Bold">
-              Verify
-            </Typography>
+            Verify & Login
           </Button>
         </div>
+      </div>
+      <div className="flex-col items-center hidden x:flex absolute right-0 bottom-0 px-[28px] pb-[29px]">
+        <div className="flex items-center gap-3">
+          <Link href="/landing/terms">
+            <a>
+              <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
+                Terms of service
+              </Typography>
+            </a>
+          </Link>
+          <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
+            •
+          </Typography>
+          <Link href="/landing/terms">
+            <a>
+              <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
+                Privacy Policy
+              </Typography>
+            </a>
+          </Link>
+        </div>
+        <Typography className="leading-[2] text-black" variant="body2">
+          © Move, Inc. All rights reserved.
+        </Typography>
       </div>
     </div>
   )

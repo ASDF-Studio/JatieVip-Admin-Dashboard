@@ -1,4 +1,4 @@
-import {  Avatar } from '@mui/material'
+import { Avatar } from '@mui/material'
 import { Button } from 'components/Button'
 import { useNavigate } from 'hooks/UseRouter'
 import React, { FC } from 'react'
@@ -6,9 +6,10 @@ import React, { FC } from 'react'
 type Props = {
   classNames?: string
   withNavBar?: boolean
+  hidden?: boolean
 }
 
-export const Header: FC<Props> = ({ classNames = '', withNavBar = true }): React.ReactElement => {
+export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }): React.ReactElement => {
   const { navigateTo, pathname } = useNavigate()
 
   const isDashBoard = pathname === '/dashboard'
@@ -16,10 +17,12 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true }): React
 
   return (
     <div
-      className={`h-[66px] flex z-10 fixed w-full bg-white justify-between px-5 items-center border-b border-accent-white ${classNames}`}
+      className={`h-[66px] flex z-10 fixed w-full bg-white ${
+        withNavBar ? 'justify-between' : 'justify-center'
+      }  px-5 items-center border-b border-accent-white ${classNames} ${hidden && 'x:hidden'}`}
     >
       <div className="hover:cursor-pointer" onClick={() => navigateTo('/')}>
-        <img className="h-[28px] w-[104px]" src="/assets/logos/logo.svg" alt="move logo" />
+        <img className="h-[35px] w-[121px]" src="/assets/logos/logo.svg" alt="move logo" />
       </div>
 
       {withNavBar && (

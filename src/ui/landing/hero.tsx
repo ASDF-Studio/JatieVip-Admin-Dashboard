@@ -1,20 +1,23 @@
 import { Title, Heading, Button } from 'components'
+import Image from 'next/image'
+import phoneImage from '../../../public/assets/landing/phone1920.webp'
 
 export const HeroSection: React.FC = (): React.ReactElement => {
-
   return (
     <div className="relative flex">
-      <video muted  loop playsInline autoPlay className="absolute left-0 top-0 -z-10 w-full h-[871px] object-cover">
+      <video muted loop playsInline autoPlay className="absolute left-0 top-0 -z-10 w-full h-[871px] object-cover">
         <source src="/assets/videos/movefit-video.mp4" />
       </video>
       <div className="xl:max-w-[341px] 5xl:max-w-[620px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
       <div className="max-w-[420px] px-5 w-full mx-auto mt-[92.5px] relative sm:max-w-[768px] sm:px-[41.5px] sm:mt-[81px] x:max-w-[1024px] x:px-[61.3px] x:mt-[81px] xl:px-0 xl:max-w-[900px] xl:mx-0 xl:mt-[80.5px] 2xl:max-w-[995px] min-h-[830px] sm:min-h-[726px] xl:min-h-[718px] 2xl:min-h-[840px] overflow-hidden">
-        <img
-          src="/assets/images/landing/phone.webp"
+        <div
           className="absolute max-w-[420px] left-1/2 -translate-x-1/2 transform sm:translate-x-0 top-[258px] sm:max-w-[515px] sm:top-0 sm:-left-[82px] x:-left-[12px] xl:-left-[74px]
-           2xl:max-w-[602px] 2xl:-left-[118px] z-10"
-          alt="phone"
-        />
+           2xl:w-[602px] 2xl:transform-none 2xl:-left-[118px] z-10 2xl:h-[840px]"
+        >
+          <Image src={phoneImage} layout='fill' objectFit='contain' />
+          
+        </div>
+
         <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4 mt-0 sm:mt-[220px] sm:ml-[291px] x:ml-[382px] x:mt-[241px] xl:ml-[382px] xl:mt-[233px]">
           <div className="flex flex-col">
             <Title className="text-white/80">Move Your Way</Title>

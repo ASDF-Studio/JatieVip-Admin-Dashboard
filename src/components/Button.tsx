@@ -35,9 +35,9 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
     root: 'rounded-[22px] py-2 box-border',
     ghost: 'border-border-blue border border-solid bg-white',
     fill: 'bg-secondary-light-blue rounded-[22px] hover:shadow-secondaryShadow active:bg-primary-brand',
-    text: 'bg-transparent active:bg-white',
+    text: 'bg-transparent active:bg-white w-fit py-0 px-0',
     secondry: 'rounded-[22px] hover:bg-fill-hover bg-text-blue/20 active:bg-text-blue/20',
-    landingButton: '',
+    landingButton: 'rounded-[22px]',
   }
 
   return (

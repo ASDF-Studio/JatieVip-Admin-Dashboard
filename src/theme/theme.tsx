@@ -103,6 +103,22 @@ export const MoveTheme = {
         fontWeight: 700,
       },
     },
+    heading7: {
+      fontSize: '40.5px',
+      fontWeight: 700,
+      lineHeight: 1.11,
+      // '@media (max-width:1023px)': {
+      //   fontSize: '40px',
+      //   // lineHeight: '30px',
+      //   fontWeight: 700,
+      // },
+      '@media (max-width:1024px)': {
+        fontSize: '35px',
+        lineHeight: 1.57,
+        // lineHeight: '30px',
+        fontWeight: 700,
+      },
+    },
     title1: {
       fontSize: '22px',
       lineHeight: '28px',
@@ -226,11 +242,11 @@ export const MoveTheme = {
       //   lineHeight: '22px',
       //   fontWeight: 400,
       // },
-      // '@media (max-width:600px)': {
-      //   fontSize: '14px',
-      //   lineHeight: '22px',
-      //   fontWeight: 400,
-      // },
+      '@media (max-width:768px)': {
+        fontSize: '14px',
+        lineHeight: 'normal',
+        fontWeight: 'normal',
+      },
     },
     body3: {
       fontSize: '18px',
