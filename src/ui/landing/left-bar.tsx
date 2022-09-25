@@ -8,7 +8,7 @@ type Props = {
 
 export const LeftBar: React.FC<Props> = ({ inView }) => {
   return (
-    <div className="max-w-left-bar pt-[30px] pl-[30px] fixed  flex-col overflow-y-auto hidden xl:flex z-30 ">
+    <div className="max-w-left-bar pt-[30px] pl-[30px] fixed flex-col hidden xl:flex z-30 overflow-y-auto min-h-screen">
       <img src={inView ? "/assets/logos/logo.svg" : "/assets/logos/move-white.svg"} className="max-w-[171px]" alt="" />
       <div className="flex flex-col gap-5 mt-[25px]">
         <div className="flex flex-col gap-2.5">

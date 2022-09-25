@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer'
 
 const Landing: NextPage = () => {
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold:  [0.1],
   })
   const { ref: footerRef, inView: inViewFooter } = useInView({
     threshold: 0,
