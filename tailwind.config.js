@@ -95,7 +95,7 @@ module.exports = {
         apple: '0 26px 26px 0 rgba(2, 32, 71, 0.12), 0 0 1px 0 rgba(2, 32, 71, 0.1)',
         glassShadow: '0 3px 4px 0 rgba(2, 32, 71, 0.1), 0 0 1px 0 rgba(2, 32, 71, 0.08)',
         buttonShadow2: '0 8px 10px 0 rgba(2, 32, 71, 0.1), 0 0 1px 0 rgba(2, 32, 71, 0.08)',
-        buttonShadow3: '0 5px 4px 0 rgba(14, 208, 233, 0.1);',
+        buttonShadow3: '0 5px 4px 0 rgba(14, 208, 233, 0.1)',
       },
     },
   },
