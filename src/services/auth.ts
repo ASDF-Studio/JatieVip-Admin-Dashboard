@@ -1,7 +1,6 @@
 import { IUser } from './types'
 import rest from './api'
 
-
 export const authTokenKey = 'jwt_token'
 
 export interface LoginParameter {
@@ -23,16 +22,17 @@ export interface VerifyLoginResp {
 
 const Service = {
   login: (body: LoginParameter) =>
-    rest.post('/api/auth/login', {
+    rest.post('auth/login', {
       body,
     }),
-  verifyLogin:(body: VerifyLoginParams) =>
-    rest.post<VerifyLoginResp>('/api/auth/verify-login', {
-      body
+  verifyLogin: (body: VerifyLoginParams) =>
+    rest.post<VerifyLoginResp>('auth/verify-login', {
+      body,
     }),
-  getAccount: () => rest.get<IUser>('/api/auth/me', {
-    hasAuth: true
-  })
+  getAccount: () =>
+    rest.get<IUser>('auth/me', {
+      hasAuth: true,
+    }),
 }
 
 export default Service
