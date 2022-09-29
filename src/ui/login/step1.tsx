@@ -23,7 +23,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
     try {
       setLoading(true)
 
-      // await sendCode(phoneNumber)
+      await sendCode(phoneNumber)
       onChangeStep('step2')
     } catch (e) {
       if (e instanceof ApiErrorResponse) {

@@ -23,14 +23,14 @@ export interface VerifyLoginResp {
 
 const Service = {
   login: (body: LoginParameter) =>
-    rest.post('auth/login', {
+    rest.post('/api/auth/login', {
       body,
     }),
   verifyLogin:(body: VerifyLoginParams) =>
-    rest.post<VerifyLoginResp>('auth/verify-login', {
+    rest.post<VerifyLoginResp>('/api/auth/verify-login', {
       body
     }),
-  getAccount: () => rest.get<IUser>('auth/me', {
+  getAccount: () => rest.get<IUser>('/api/auth/me', {
     hasAuth: true
   })
 }

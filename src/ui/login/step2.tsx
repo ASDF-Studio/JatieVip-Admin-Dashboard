@@ -62,12 +62,12 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactEleme
               </div>
             </div>
           </div>
-          <VerifyCodeInput length={6} code={code} onChange={(cd) => setCode(cd)} />
+          <VerifyCodeInput length={5} code={code} onChange={(cd) => setCode(cd)} />
         </div>
         <div className="flex flex-col mt-5">
           <Button
-            // onClick={handleVerify}
-            disabled={code.length !== 6 || loading}
+            onClick={handleVerify}
+            disabled={code.length !== 5 || loading}
             loading={loading}
             className="bg-secondary-light-blue rounded-[22px] shadow-secondaryShadow"
             variant="fill"

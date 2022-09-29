@@ -63,14 +63,14 @@ export const LoginSideBar = ({ className }: Props) => {
             <img
               src="/assets/logos/google-play.png"
               alt="google play logo"
-              className="max-w-[149px] h-[44px] shadow-logoShadow"
+              className="max-w-[149px] h-[44px]"
             />
           </div>
           <div className="hover:cursor-pointer w-fit">
             <img
               src="/assets/logos/app-store.png"
               alt="app store logo"
-              className="max-w-[133px] h-[44px] shadow-logoShadow"
+              className="max-w-[133px] h-[44px]"
             />
           </div>
         </div>
@@ -78,3 +78,4 @@ export const LoginSideBar = ({ className }: Props) => {
     </div>
   )
 }
+
