@@ -147,7 +147,7 @@ const Account: NextPage = () => {
                 <div className="max-w-[11.875rem]">
                   <CustomDatePicker date={birthDay} onChange={(value) => setFieldValue('birthDay', value)} />
                 </div>
-                <div className="max-w-[11.875rem]">
+                <div className="max-w-[48%] w-full">
                   <BasicSelect value={gender} name="gender" items={items} onChange={(e) => handleInputChange(e)} />
                 </div>
               </div>
