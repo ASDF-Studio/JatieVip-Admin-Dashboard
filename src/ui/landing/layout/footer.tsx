@@ -1,5 +1,5 @@
 import { IconButton, Typography } from '@mui/material'
-import { Button, FacebookIcon, InstagramIcon, TikTokIcon, TwitterIcon } from 'components'
+import { Button, FacebookIcon, InstagramIcon, SnapChat, TikTokIcon, TwitterIcon, YoutubeIcon } from 'components'
 import Link from 'next/link'
 import React from 'react'
 
@@ -59,18 +59,39 @@ export const LandingFooter = React.forwardRef((props, ref) => {
             Our Vision
           </Typography>
         </div>
-        <div className="flex gap-[30px] justify-center mt-[70px] order-5 x:mt-[38px]">
+        <div className="flex gap-[36px] x:gap-[50px] justify-center mt-[58px] order-5 x:mt-[43px]">
           <IconButton className="p-0" disableRipple>
-            <FacebookIcon className="w-[25px]" fill="white" />
+            <FacebookIcon className="w-[25px] hover:opacity-80" fill="white" />
+          </IconButton>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.tiktok.com/@joshxkatiefit', '_blank')
+            }}
+          >
+            <TikTokIcon className="w-[22px] hover:opacity-80" fill="white" />
           </IconButton>
           <IconButton className="p-0" disableRipple>
-            <TikTokIcon className="w-[22px]" fill="white" />
+            <SnapChat
+              className="w-[31px] hover:opacity-80"
+              fill="white"
+              onClick={() => {
+                window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+              }}
+            />
           </IconButton>
           <IconButton className="p-0" disableRipple>
-            <TwitterIcon className="w-[31px]" fill="white" />
+            <YoutubeIcon className="w-[31px] hover:opacity-80" fill="white" />
           </IconButton>
           <IconButton className="p-0" disableRipple>
-            <InstagramIcon className="w-[23px]" fill="white" />
+            <InstagramIcon
+              className="w-[23px] hover:opacity-80"
+              fill="white"
+              onClick={() => {
+                window.open('https://www.instagram.com/moveapp/', '_blank')
+              }}
+            />
           </IconButton>
         </div>
         <div className="flex flex-col items-center gap-5 x:gap-0 mt-[50px] order-6 x:mt-[116px]">
@@ -81,7 +102,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
           <div className="flex items-center gap-3 x:mt-[10px]">
             <Link href="/landing/terms">
               <a>
-                <Typography className="leading-[2] text-white" variant="body2">
+                <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
                   Terms of service
                 </Typography>
               </a>
@@ -91,7 +112,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
             </Typography>
             <Link href="/landing/terms">
               <a>
-                <Typography className="leading-[2] text-white" variant="body2">
+                <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
                   Privacy Policy
                 </Typography>
               </a>

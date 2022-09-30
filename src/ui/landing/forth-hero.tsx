@@ -48,8 +48,8 @@ export const ForthHero: React.FC = (): React.ReactElement => {
     <div className="relative flex bg-white">
       <GetBg />
 
-      <div className="xl:max-w-[341px] 5xl:max-w-[620px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
-      <div className="max-w-[420px] mt-[52px] sm:mt-[115px] x:mt-[84px] w-full mx-auto relative sm:max-w-[768px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] xl:mx-0 2xl:max-w-[995px] ">
+      <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
+      <div className="max-w-[420px] mt-[52px] sm:mt-[115px] x:mt-[84px] w-full mx-auto relative sm:max-w-[768px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px]  2xl:max-w-[995px] ">
         <div className="flex flex-col px-[30px] sm:pl-[41.5px] sm:pr-[39px] x:pr-0 x:pl-0 w-full x:mx-auto">
           <div className="flex flex-col gap-[2px]">
             <Title className="text-center sm:text-left text-[#191b1c]/60">Why you will love Move</Title>
@@ -90,7 +90,11 @@ export const ForthHero: React.FC = (): React.ReactElement => {
             desc="See how long you can keep the streak by hitting your goals and checking them off daily"
           />
         </div>
-        <img src="/assets/landing/group-9@3x.png" alt="" className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[375px]" />
+        <img
+          src="/assets/landing/group-9@3x.png"
+          alt=""
+          className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[375px]"
+        />
         {GetPhone()}
       </div>
     </div>

@@ -9,37 +9,55 @@ type Props = {
 export const LeftBar: React.FC<Props> = ({ inView }) => {
   return (
     <div className="max-w-left-bar pt-[30px] pl-[30px] fixed flex-col hidden xl:flex z-30 overflow-y-auto min-h-screen">
-      <img src={inView ? "/assets/logos/logo.svg" : "/assets/logos/move-white.svg"} className="max-w-[171px]" alt="" />
+      <img src={inView ? '/assets/logos/logo.svg' : '/assets/logos/move-white.svg'} className="max-w-[171px]" alt="" />
       <div className="flex flex-col gap-5 mt-[25px]">
         <div className="flex flex-col gap-2.5">
           <div className="hover:cursor-pointer  w-fit">
-            <Typography variant="title3" className={`${inView ? 'text-black' : 'text-white'}`}>
+            <Typography
+              variant="title3"
+              className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
+            >
               Features
             </Typography>
           </div>
           <div className="hover:cursor-pointer w-fit">
-            <Typography variant="body" className={`${inView ? 'text-black/60' : 'text-white/60'}`}>
+            <Typography
+              variant="body"
+              className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
+            >
               Videos
             </Typography>
           </div>
           <div className="hover:cursor-pointer w-fit">
-            <Typography variant="body" className={`${inView ? 'text-black/60' : 'text-white/60'}`}>
+            <Typography
+              variant="body"
+              className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
+            >
               Move with Friends
             </Typography>
           </div>
           <div className="hover:cursor-pointer w-fit">
-            <Typography variant="body" className={`${inView ? 'text-black/60' : 'text-white/60'}`}>
+            <Typography
+              variant="body"
+              className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
+            >
               Move with Friends
             </Typography>
           </div>
         </div>
         <div className="hover:cursor-pointer w-fit">
-          <Typography variant="title3" className={`${inView ? 'text-black' : 'text-white'}`}>
+          <Typography
+            variant="title3"
+            className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
+          >
             Our Vision
           </Typography>
         </div>
         <div className="hover:cursor-pointer w-fit">
-          <Typography variant="title3" className={`${inView ? 'text-black' : 'text-white'}`}>
+          <Typography
+            variant="title3"
+            className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
+          >
             Brand Story
           </Typography>
         </div>
@@ -58,20 +76,38 @@ export const LeftBar: React.FC<Props> = ({ inView }) => {
         <div className={`h-[1px] w-full ${inView ? 'bg-black opacity-[0.15]' : 'bg-white/50'}`} />
         <div className="flex justify-between">
           <IconButton className="p-0" disableRipple>
-            <FacebookIcon className="w-[20px]" fill={`${inView ? 'black' : 'white'}`} />
+            <FacebookIcon className="w-[20px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
+          </IconButton>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.tiktok.com/@joshxkatiefit', '_blank')
+            }}
+          >
+            <TikTokIcon className="w-[18px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
+          </IconButton>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+            }}
+          >
+            <SnapChat className="w-[21px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
           </IconButton>
           <IconButton className="p-0" disableRipple>
-            <TikTokIcon className="w-[18px]" fill={`${inView ? 'black' : 'white'}`} />
-          </IconButton>
-          <IconButton className="p-0" disableRipple>
-            <SnapChat className="w-[21px]" fill={`${inView ? 'black' : 'white'}`} />
-          </IconButton>
-          <IconButton className="p-0" disableRipple>
-            <YoutubeIcon className="w-[25px]" fill={`${inView ? 'black' : 'white'}`} />
+            <YoutubeIcon className="w-[25px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
           </IconButton>
 
-          <IconButton className="p-0" disableRipple>
-            <InstagramIcon className="w-[20px]" fill={`${inView ? 'black' : 'white'}`} />
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.instagram.com/moveapp/', '_blank')
+            }}
+          >
+            <InstagramIcon className="w-[20px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
           </IconButton>
         </div>
         <div className={`h-[1px] w-full ${inView ? 'bg-black opacity-[0.15]' : 'bg-white/50'}`} />
@@ -79,7 +115,7 @@ export const LeftBar: React.FC<Props> = ({ inView }) => {
       <div className="flex flex-col  mt-[17px]">
         <Typography
           variant="subheadBold"
-          className={`tracking-[3px] leading-[1.71] mb-[5px] text-white ${inView ? 'text-black' : 'text-white'}`}
+          className={`tracking-[3px] leading-[1.71] mb-[5px]  ${inView ? 'text-black' : 'text-white'}`}
         >
           DOWNLOAD
         </Typography>
@@ -102,13 +138,35 @@ export const LeftBar: React.FC<Props> = ({ inView }) => {
         <div className={`h-[1px] w-full mt-5 ${inView ? 'bg-black opacity-[0.15]' : 'bg-white/50'}`} />
       </div>
       <div className="mt-[6px] flex flex-col leading-[32px]">
-        <Link href="/landing/terms">
-          <a>
-            <Typography variant="body2" className={`${inView ? 'leading-[2] text-black' : 'leading-[2] text-white'}`}>
-              Terms of Service • Privacy Policy
-            </Typography>
-          </a>
-        </Link>
+        <div className="flex gap-2 items-center">
+          <Link href="/landing/terms">
+            <a>
+              <Typography
+                variant="body2"
+                className={`${
+                  inView ? 'leading-[2] text-black' : 'leading-[2] text-white'
+                } underline-offset-1 hover:underline`}
+              >
+                Terms of Service
+              </Typography>
+            </a>
+          </Link>
+          <Typography variant="body2" className={`${inView ? 'leading-[2] text-black' : 'leading-[2] text-white'}`}>
+            •
+          </Typography>
+          <Link href="/landing/terms">
+            <a>
+              <Typography
+                variant="body2"
+                className={`${
+                  inView ? 'leading-[2] text-black' : 'leading-[2] text-white'
+                } underline-offset-1 hover:underline`}
+              >
+                Privacy Policy
+              </Typography>
+            </a>
+          </Link>
+        </div>
 
         <Typography variant="body2" className={`${inView ? 'leading-[2] text-black' : 'leading-[2] text-white'}`}>
           © Move, Inc. All rights reserved.

@@ -8,6 +8,7 @@ class MyDocument extends Document {
         <Head>
           <style type="text/css" dangerouslySetInnerHTML={{ __html: mediaStyles }} />
           <link href="http://fonts.cdnfonts.com/css/avenir-next-lt-pro" rel="stylesheet" />
+          <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
         <body>
           <Main />

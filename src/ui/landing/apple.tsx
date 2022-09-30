@@ -30,8 +30,8 @@ export const Apple: React.FC = (): React.ReactElement => {
     <div
       className={`relative -top-[35px] flex bg-[url('/assets/landing/her-5-mobile-bg.webp')] sm:bg-[url('/assets/landing/apple-bg-720.webp')] x:bg-[url('/assets/landing/background-story@3x.webp')] 2xl:bg-[url('/assets/landing/bg-5-1280.webp')] bg-cover bg-no-repeat sm:-top-[40px] x:-top-[60px] pb-[66px] x:pb-[119px]`}
     >
-      <div className="xl:max-w-[341px] 5xl:max-w-[620px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
-      <div className="max-w-[420px] px-[30px] sm:px-[40px] mt-[128px] sm:mt-[128px] x:mt-[205px] 2xl:mt-[165px] w-full mx-auto relative sm:max-w-[768px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] xl:mx-0 2xl:max-w-[995px] ">
+      <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
+      <div className="max-w-[420px] px-[30px] sm:px-[40px] mt-[128px] sm:mt-[128px] x:mt-[205px] 2xl:mt-[200px] w-full mx-auto relative sm:max-w-[768px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] 2xl:max-w-[995px] ">
         <div
           style={{
             backgroundRepeat: 'no-repeat',
@@ -39,7 +39,7 @@ export const Apple: React.FC = (): React.ReactElement => {
           }}
           className="bg-cover sm:bg-contain bg-[url('/assets/landing/group-44@3x.webp')] sm:bg-[url('/assets/landing/gradient@3x.webp')] max-w-full min-h-[690px] sm:min-h-[347px] x:min-h-[300px] shadow-apple rounded-[18px] border-[#e9ebec] border-[1px] border-solid bg-primary-brand w-full flex-col-reverse items-center flex sm:flex-row sm:pr-[8px] sm:items-start px-5 sm:pl-0 x:pr-[39px] x:gap-[17px]"
         >
-          <div className="sm:h-[346px] x:h-[300px]">
+          <div className="sm:h-[346px] x:h-[300px] 2xl:ml-[30px]">
             <GetPhone />
           </div>
 
@@ -48,7 +48,7 @@ export const Apple: React.FC = (): React.ReactElement => {
               <AppleTypo className="text-white text-center sm:text-left">Connect with Apple Health</AppleTypo>
               <Typography
                 variant="desc"
-                className="leading-[1.47] tracking-[0.25px] text-[#fff]/70 font-medium text-center sm:text-start"
+                className="leading-[1.47] 2xl:max-w-[500px] tracking-[0.25px] text-[#fff]/70 font-medium text-center sm:text-start"
               >
                 Health is the health informatics mobile app announced on June 2, 2014 by Apple Inc. at its Worldwide
                 Developers Conference.
@@ -116,8 +116,8 @@ export const Apple: React.FC = (): React.ReactElement => {
           src="/assets/landing/group-11@3x.png"
           alt=""
           className="absolute max-w-[225px] -top-[160px] left-[35vw] sm:max-w-[344px]
-         sm:-top-[265px] sm:left-[280px] x:max-w-[428px] x:left-[370px] x:-top-[355px] xl:left-[310px] xl:-top-[360px] 2xl:left-[380px] 
-         2xl:-top-[320px] 5xl:left-[410px]"
+         sm:-top-[285px] sm:left-[375px] x:max-w-[428px] x:left-[370px] x:-top-[360px] xl:left-[310px] xl:-top-[360px] 2xl:left-[380px] 
+         2xl:-top-[365px] 5xl:left-[410px]"
         />
       </div>
     </div>

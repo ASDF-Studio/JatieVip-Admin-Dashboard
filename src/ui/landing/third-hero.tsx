@@ -33,9 +33,9 @@ export const ThirdHero = React.forwardRef((props, ref) => {
       <div className="relative bg-[url('/assets/landing/bg-2-phone.png')] sm:bg-[url('/assets/landing/bg-2-720.png')] -top-[22px] sm:-top-[75px] x:-top-[55px] xl:-top-[65px] 2xl:-top-[70px]  x:bg-[url('/assets/landing/bg-2-1024.webp')] 2xl:bg-[url('/assets/landing/bg-2-1440.png')] 5xl:bg-[url('/assets/landing/bg-2-1920.png')]  flex sm:h-[931px] x:h-[992px] xl:h-[993px] 2xl:h-[995px] bg-no-repeat bg-cover">
         {/* <GetBg /> */}
 
-        <div className="xl:max-w-[341px] 5xl:max-w-[620px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
+        <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
         <div className="flex-col w-full">
-          <div className="max-w-[420px] mt-[70px] sm:mt-[105px] x:mt-[133px] 2xl:mt-[124px] px-5 w-full mx-auto relative sm:max-w-[768px] sm:pl-[41.5px] sm:pr-[39px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] xl:mx-0 2xl:max-w-[995px]">
+          <div className="max-w-[420px] mt-[70px] sm:mt-[105px] x:mt-[133px] 2xl:mt-[124px] px-5 w-full mx-auto relative sm:max-w-[768px] sm:pl-[41.5px] sm:pr-[39px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px]  2xl:max-w-[995px]">
             <div className="flex flex-col px-2.5 sm:px-0 w-full x:max-w-[710px] x:mx-auto">
               <div className="flex flex-col gap-[2px] sm:gap-[4px]">
                 <Title className="text-center text-[#191b1c]/60">Why you will love Move</Title>
@@ -103,7 +103,7 @@ export const ThirdHero = React.forwardRef((props, ref) => {
               />
             </div>
           </div>
-          <div className="w-full mx-auto sm:px-[20px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] xl:mx-0 2xl:max-w-[995px]">
+          <div className="w-full mx-auto sm:px-[20px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] 2xl:max-w-[995px]">
             {GetPhone()}
           </div>
         </div>
