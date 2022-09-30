@@ -172,3 +172,8 @@ input[type='number'] {
 a {
   text-decoration: none !important;
 }
+
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+  }

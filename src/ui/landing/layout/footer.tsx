@@ -1,9 +1,12 @@
 import { IconButton, Typography } from '@mui/material'
 import { Button, FacebookIcon, InstagramIcon, SnapChat, TikTokIcon, TwitterIcon, YoutubeIcon } from 'components'
+import { useNavigate } from 'hooks/UseRouter'
 import Link from 'next/link'
 import React from 'react'
 
 export const LandingFooter = React.forwardRef((props, ref) => {
+  const { navigateTo } = useNavigate()
+
   return (
     <div className="h-[300px]" ref={ref}>
       <div
@@ -36,10 +39,14 @@ export const LandingFooter = React.forwardRef((props, ref) => {
         </div>
         <div className="flex flex-col gap-5 mt-[67px] items-center order-3 x:order-4 x:flex-row x:justify-center x:mt-[39px]">
           <Button variant="ghost" className="w-[300px] shadow-glassShadow x:w-[180px]">
-            <Typography variant="bodyBold">Login</Typography>
+            <Typography variant="bodyBold" onClick={() => navigateTo('/login')}>
+              Login
+            </Typography>
           </Button>
           <Button variant="ghost" className="w-[300px] shadow-glassShadow x:w-[180px]">
-            <Typography variant="bodyBold">Sign Up</Typography>
+            <Typography onClick={() => navigateTo('/signup')} variant="bodyBold">
+              Sign Up
+            </Typography>
           </Button>
         </div>
         <div className="flex flex-col mt-[51px] gap-[15px] items-center order-4 x:order-3 x:flex-row x:justify-center x:gap-[47px] x:mt-[90px]">
@@ -110,7 +117,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
             <Typography className="leading-[2] text-white" variant="body2">
               •
             </Typography>
-            <Link href="/landing/terms">
+            <Link href="/landing/privacy">
               <a>
                 <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
                   Privacy Policy

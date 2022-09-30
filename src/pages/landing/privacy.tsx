@@ -4,265 +4,807 @@ import { LandingLayout, LeftBar } from 'ui/landing'
 
 const Privacy: NextPage = () => {
   return (
-    <LandingLayout>
-      <LeftBar inView />
+    <LandingLayout dark inView>
+      <LeftBar isBlue={false} inView />
       <div className="flex">
-        <div className="xl:max-w-[341px] 5xl:max-w-[420px] 7xl:max-w-[40vw] w-full hidden xl:flex" />
-        <div className="flex flex-col max-w-[1200px] w-full gap-[31px] xl:gap-[41px] mt-[98px] px-[30px] pb-[152px] xl:px-0 xl:mt-[62px] xl:mb-[199px]">
-          <Typography variant="heading6">Privacy and Policy </Typography>
+        <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
+        <div className="flex flex-col x:max-w-[1000px] xl:max-w-[800px] 2xl:max-w-[1000px] 5xl:max-w-[1200px] w-full gap-[31px] xl:gap-[41px] mt-[98px] px-[30px] pb-[152px] xl:px-0 xl:mt-[62px] xl:mb-[199px] mx-auto">
+          <Typography variant="heading6">Privacy Policy</Typography>
           <Typography variant="body" className="leading-normal">
-            Effective: January 14, 2022
-            <br />
-            <br />
-            You can see the previous Privacy Policy here.
-            <br />
-            <br />
-            Thanks for using Dropbox! Here we describe how we collect, use, and handle your personal data when you use
-            our websites, software, and services (“Services”). For more information and details, please see our
-            Frequently Asked Questions page.
-            <br />
-            <br />
-            What & Why
-            <br />
-            <br />
-            We collect and use the following information to provide, improve, protect, and promote our Services.
-            <br />
-            <br />
-            Account information. We collect, and associate with your account, the information you provide to us when you
-            do things such as sign up for your account, upgrade to a paid plan, and set up two-factor authentication
-            (like your name, email address, phone number, payment info, and physical address).
-            <br />
-            <br />
-            Your Stuff. Our Services are designed as a simple and personalized way for you to store your files,
-            documents, photos, comments, messages, and so on (“Your Stuff”), collaborate with others, and work across
-            multiple devices and services. To make that possible, we store, process, and transmit Your Stuff as well as
-            information related to it. This related information includes your profile information that makes it easier
-            to collaborate and share Your Stuff with others, as well as things like the size of the file, the time it
-            was uploaded, collaborators, and usage activity.
-            <br />
-            <br />
-            Contacts. You may choose to give us access to your contacts to make it easy for you, and your Dropbox
-            Business team (collectively, “Dropbox Business Team”), if you’re a Dropbox Business Team user, to do things
-            like share and collaborate on Your Stuff, send messages, and invite others to use the Services. If you do,
-            we’ll store those contacts on our servers.
-            <br />
-            <br />
-            Usage information. We collect information related to how you use the Services, including actions you take in
-            your account (like sharing, editing, viewing, creating and moving files or folders). We use this information
-            to provide, improve, and promote our Services, and protect Dropbox users. Please refer to our FAQ for more
-            information about how we use this usage information.
-            <br />
-            <br />
-            Device information. We also collect information from and about the devices you use to access the Services.
-            This includes things like IP addresses, the type of browser and device you use, the web page you visited
-            before coming to our sites, and identifiers associated with your devices. Your devices (depending on their
-            settings) may also transmit location information to the Services. For example, we use device information to
-            detect abuse and identify and troubleshoot bugs.
-            <br />
-            <br />
-            Cookies and other technologies. We use technologies like cookies and pixel tags to provide, improve,
-            protect, and promote our Services. For example, cookies help us with things like remembering your username
-            for your next visit, understanding how you are interacting with our Services, and improving them based on
-            that information. You can set your browser to not accept cookies, but this may limit your ability to use the
-            Services. If our systems receive a DNT:1 signal from your browser, we’ll respond to that signal as outlined
-            here. We may also use third-party service providers that set cookies and similar technologies to promote
-            Dropbox services. You can learn more about how cookies and similar technologies work, as well as how to opt
-            out of the use of them for advertising purposes, here.
-            <br />
-            <br />
-            Marketing. We give users the option to use some of our Services free of charge. These free Services are made
-            possible by the fact that some users upgrade to one of our paid Services. If you register for our Services,
-            we will, from time to time, send you information about upgrades when permissible. Users who receive these
-            marketing materials can opt out at any time. If you don’t want to receive a particular type of marketing
-            material from us, click the ‘unsubscribe’ link in the corresponding emails, or update your preferences in
-            the Notifications section of your personal account.
-            <br />
-            <br />
-            We sometimes contact people who don’t have a Dropbox account. For recipients in the EU, we or a third party
-            will obtain consent before reaching out. If you receive an email and no longer wish to be contacted by
-            Dropbox, you can unsubscribe and remove yourself from our contact list via the message itself.
-            <br />
-            <br />
-            Bases for processing your data. We collect and use the personal data described above in order to provide you
-            with the Services in a reliable and secure manner. We also collect and use personal data for our legitimate
-            business needs. To the extent we process your personal data for other purposes, we ask for your consent in
-            advance or require that our partners obtain such consent. For more information on the lawful bases for
-            processing your data, please see our FAQ.
-            <br />
-            <br />
-            For more details on the categories of personal information that are included in the information above,
-            please see our FAQ.
-            <br />
-            <br />
-            With Whom
-            <br />
-            <br />
-            We may share information as discussed below, but we won’t sell it to advertisers or other third parties.
-            <br />
-            <br />
-            Others working for and with Dropbox. Dropbox uses certain trusted third parties (for example, providers of
-            customer support and IT services) for the business purposes of helping us provide, improve, protect, and
-            promote our Services. These third parties will access your information to perform tasks on our behalf, and
-            we’ll remain responsible for their handling of your information per our instructions. For a list of trusted
-            third parties that we use to process your personal data and more details on the categories of personal
-            information that we’ve disclosed, please see our FAQ.
-            <br />
-            <br />
-            Other Dropbox Companies. Dropbox shares infrastructure, systems, and technology with other Dropbox Companies
-            to provide, improve, protect, and promote Dropbox Company Services. We process your information across the
-            Dropbox Companies for these purposes, as permitted by applicable law and in accordance with their terms and
-            policies. For more information on Dropbox Companies, Dropbox Company Services, and how your data is used,
-            please see our FAQ.
-            <br />
-            <br />
-            Other users. Our Services are designed to help you collaborate with others. If you register your Dropbox
-            account with an email address on a domain owned by your employer or organization, join a Dropbox Business
-            Team, or collaborate with other Dropbox users, we may suggest you or your team as a potential collaborator
-            to other users or teams. For example, if you interact with a person at a company, and that person frequently
-            works with one of their coworkers, we may suggest you as a potential collaborator for that coworker.
-            Collaborators and potential collaborators may see some of your basic information, like your name, Dropbox
-            Business Team name, profile picture, device, email address, and usage information. This helps you sync up
-            with teams you can join and helps other users share files and folders with you.
-            <br />
-            <br />
-            Certain features let you make additional information available to others.
-            <br />
-            <br />
-            Other applications. You can choose to connect your Dropbox account with third-party services––for example,
-            via Dropbox APIs. By doing so, you’re enabling Dropbox and those third parties to exchange information about
-            you and data in your account so that Dropbox and those third parties can provide, improve, protect, and
-            promote their services. Please remember that third parties’ use of your information will be governed by
-            their own privacy policies and terms of service.
-            <br />
-            <br />
-            Business Team Admins. If you are a user of a Dropbox Business Team, your administrator may have the ability
-            to access and control your Dropbox Business Team account. Please refer to your organization’s internal
-            policies if you have questions about this. If you aren’t a Dropbox Business Team user but interact with a
-            Dropbox Business Team user (for example, by joining a shared folder or accessing stuff shared by that user),
-            members of that organization may be able to view information about you (such as your name, email address,
-            and profile picture) and your interaction with the Dropbox Business Team user (such as your IP address). If
-            you share Your Stuff with a Dropbox Business Team user, the administrator of the team account may have the
-            ability to access and edit what you share.
-            <br />
-            <br />
-            Law & Order and the Public Interest. We may disclose your information to third parties if we determine that
-            such disclosure is reasonably necessary to: (a) comply with any applicable law, regulation, legal process,
-            or appropriate government request; (b) protect any person from death or serious bodily injury; (c) prevent
-            fraud or abuse of Dropbox or our users; (d) protect Dropbox’s rights, property, safety, or interest; or (e)
-            perform a task carried out in the public interest.
-            <br />
-            <br />
-            Stewardship of your data is critical to us and a responsibility that we embrace. We believe that your data
-            should receive the same legal protections regardless of whether it’s stored on our Services or on your home
-            computer’s hard drive. We’ll abide by the following Government Request Principles when receiving,
-            scrutinizing, and responding to government requests (including national security requests) for your data:
-            <br />
-            <br />
-            Be transparent Fight blanket requests Protect all users, and Provide trusted services. We publish a
-            Transparency Report as part of our commitment to informing you about when and how governments ask us for
-            information. This report details the types and numbers of requests we receive from law enforcement. We
-            encourage you to review our Government Request Principles and Transparency Report for more detailed
-            information on our approach and response to government requests.
-            <br />
-            <br />
-            How
-            <br />
-            <br />
-            Security. We have a team dedicated to keeping your information secure and testing for vulnerabilities. We
-            continue to work on features to keep your information safe in addition to things like two-factor
-            authentication, encryption of files at rest, and alerts when new devices and apps are linked to your
-            account. We deploy automated technologies to detect abusive behavior and content that may harm our Services,
-            you, or other users.
-            <br />
-            <br />
-            User Controls. You can access, amend, download, and delete your personal information by logging into your
-            Dropbox account and going to your account settings page. Learn more here about managing your account
-            information generally, or click here to learn how to change your profile information.
-            <br />
-            <br />
-            Retention. When you sign up for an account with us, we’ll retain information you store on our Services for
-            as long as your account exists or as long as we need it to provide you the Services. If you delete your
-            account, we’ll initiate deletion of this information after 30 days. Learn more here. But please note: (1)
-            there might be some latency in deleting this information from our servers and back-up storage; and (2) we
-            may retain this information if necessary to comply with our legal obligations, resolve disputes, or enforce
-            our agreements.
-            <br />
-            <br />
-            Where
-            <br />
-            <br />
-            Around the world. To provide you with the Services, we may store, process, and transmit data in the United
-            States and locations around the world—including those outside your country. Data may also be stored locally
-            on the devices you use to access the Services.
-            <br />
-            <br />
-            Data Transfers. When transferring data from the European Union, the European Economic Area, the United
-            Kingdom, and Switzerland, Dropbox relies upon a variety of legal mechanisms, such as contracts with our
-            customers and affiliates, Standard Contractual Clauses, and the European Commission's adequacy decisions
-            about certain countries, as applicable.
-            <br />
-            <br />
-            EU-U.S. Privacy Shield and Swiss-U.S. Privacy Shield. Dropbox complies with the EU-U.S. and Swiss–U.S.
-            Privacy Shield Frameworks as set forth by the U.S. Department of Commerce regarding the collection, use, and
-            retention of personal data transferred from the European Union, the European Economic Area, the United
-            Kingdom, and Switzerland to the United States, although Dropbox does not rely on the EU-U.S. Privacy Shield
-            or Swiss-U.S. Privacy Shield Frameworks as a legal basis for transfers of personal data. Dropbox has
-            certified to the Department of Commerce that it, and its subsidiary JN Projects Inc. d/b/a HelloSign,
-            adheres to the Privacy Shield Principles with respect to such data. You can also learn more about Privacy
-            Shield at https://www.privacyshield.gov.
-            <br />
-            <br />
-            Dropbox is subject to oversight by the U.S. Federal Trade Commission. JAMS is the US-based independent
-            organization responsible for reviewing and resolving complaints about our Privacy Shield compliance—free of
-            charge to you. We ask that you first submit any such complaints directly to us via privacy@dropbox.com. If
-            you aren’t satisfied with our response, please contact JAMS at https://www.jamsadr.com/eu-us-privacy-shield.
-            In the event your concern still isn’t addressed by JAMS, you may be entitled to a binding arbitration under
-            Privacy Shield and its principles.
-            <br />
-            <br />
-            Your Control and Access of Your Data
-            <br />
-            <br />
-            You have control over your personal data and how it’s collected, used, and shared. For example, you can:
-            <br />
-            <br />
-            Delete Your Stuff in your Dropbox account. You can learn more about how to delete files saved on Dropbox
-            here. Change or correct personal data. You can manage your account and the content contained in it, as well
-            as edit some of your personal data, through your account settings page. Access and take your data elsewhere.
-            You can access your personal data from your Dropbox account and you can download a copy of Your Stuff in a
-            machine readable format as outlined here. You can also ask us for a copy of personal data you provided to us
-            or that we’ve collected, the business or commercial purpose for collecting it, the types of sources we got
-            it from, and types of third parties we’ve shared it with. Object to the processing of your personal data.
-            Depending on the processing activity, you can request that we stop or limit processing of your personal
-            data. If you would like to submit a data access request or object to the processing of your personal data,
-            please email us at privacy@dropbox.com. To request that your personal data be deleted, please fill out this
-            form. For more information on how to control and access your personal data, please see our FAQ.
-            <br />
-            <br />
-            Dropbox as controller or processor. If you reside in North America (the United States, Canada, and Mexico),
-            Dropbox, Inc. acts as your service provider. For all other users, Dropbox International Unlimited Company
-            acts as a controller of your personal data. If you are a Dropbox Business or Education customer outside of
-            North America, Dropbox acts as a processor of your data.
-            <br />
-            <br />
-            Changes
-            <br />
-            <br />
-            If we’re involved in a reorganization, merger, acquisition, or sale of our assets, your data may be
-            transferred as part of that deal. We’ll notify you (for example, via a message to the email address
-            associated with your account) of any such deal and outline your choices in that event.
-            <br />
-            <br />
-            We may revise this Privacy Policy from time to time, and will post the most current version on our website.
-            If a revision meaningfully reduces your rights, we will notify you.
-            <br />
-            <br />
-            Contact
-            <br />
-            <br />
-            Have questions or concerns about Dropbox, our Services, and privacy? Contact our Data Protection Officer at
-            privacy@dropbox.com. If they can’t answer your question, you have the right to contact your local data
-            protection supervisory authority.
+            <p>PRIVACY POLICY FOR WEB/MOBILE SERVICES</p>
+            <p>
+              <br />
+            </p>
+            <p>Last modified: September 22, 2022</p>
+            <p>INTRODUCTION</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              Teddy B LLC (&ldquo;Company&rdquo; or &ldquo;We&rdquo;) respect your privacy and are committed to
+              protecting it through our compliance
+            </p>
+            <p>with this policy. This policy describes:</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; The types of information we may collect or that you may provide when you download, install, access,
+              create a user
+            </p>
+            <p>
+              account with, or use the Move Fit web-based and/or mobile application and services (the
+              &ldquo;App&rdquo;); and
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Our practices for collecting, using, maintaining, protecting and disclosing that information.</p>
+            <p>
+              This policy applies only to information we collect within the App, on our website, and in email, text, and
+              other
+            </p>
+            <p>electronic communications sent using or in connection with this App.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>This policy DOES NOT apply to information that:</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; We collect offline or on any other Company apps or websites, including websites you may access
+              through this
+            </p>
+            <p>App; or</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; You provide to or is collected by any third party (see &ldquo;THIRD-PARTY INFORMATION
+              COLLECTION&rdquo;).
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              Other websites and apps and these third parties have their own privacy policies, which we encourage you to
+              read
+            </p>
+            <p>before providing information on or through them.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              Please read this policy carefully to understand our policies and practices regarding your information and
+              how we
+            </p>
+            <p>
+              will treat it. If you do not agree with our policies and practices, do not download, register with or use
+              this App. By
+            </p>
+            <p>downloading, registering with or using this App, you agree to this privacy policy.</p>
+            <p>
+              This policy may change from time-to-time (see &ldquo;CHANGES TO OUR PRIVACY POLICY&rdquo;). Your continued
+              use of
+            </p>
+            <p>
+              this App after we make changes is deemed to be acceptance of those changes, so please check the policy
+            </p>
+            <p>periodically for updates.</p>
+            <p>
+              <br />
+            </p>
+            <p>CHILDREN UNDER THE AGE OF 13</p>
+            <p>
+              The App is not intended for children under 13 years of age, and we do not knowingly collect personal
+              information
+            </p>
+            <p>
+              from children under 13. If we learn we have collected or received personal information from a child under
+              13
+            </p>
+            <p>
+              without verification of parental consent, we will delete that information. If you believe we might have
+              any
+            </p>
+            <p>
+              information from or about a child under 13, please contact us at{' '}
+              <a data-fr-linked="true" href="mailto:customerservice@movefit.com">
+                customerservice@movefit.com
+              </a>
+              .
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>INFORMATION WE COLLECT AND HOW WE COLLECT IT</p>
+            <p>
+              <br />
+            </p>
+            <p>We collect information from and about users of our App:</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Directly from you when you provide it to us.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Automatically when you use the App.</p>
+            <p>
+              <br />
+            </p>
+            <p>INFORMATION YOU PROVIDE TO US.</p>
+            <p>
+              <br />
+            </p>
+            <p>When you download, register with or use this App, we may ask you provide information:</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; By which you may be personally identified, such as name, postal address, email address or telephone
+              number
+            </p>
+            <p>(&ldquo;personal information&rdquo;); or</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; That is about you but individually does not identify you, such as your current location, physical
+              characteristics, or
+            </p>
+            <p>personal preferences for products, services, etc.</p>
+            <p>This information includes:</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Information that you provide by filling in forms in the App. This includes information provided at
+              the time of
+            </p>
+            <p>
+              registering to use the App, subscribing to our services, sharing or posting material, submitting search
+              queries, sending
+            </p>
+            <p>
+              communications to us or to other subscribers or vendors that use the App, etc. We may also ask you for
+              information
+            </p>
+            <p>
+              when you enter a contest or promotion sponsored by us, when you complete optional surveys, and when you
+              report a
+            </p>
+            <p>problem with the App.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Records and copies of your correspondence (including email addresses and phone numbers), if you
+              contact us.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Details of transactions you carry out through the App and of the fulfillment of your orders. You
+              may be required
+            </p>
+            <p>to provide financial information before placing an order through the App.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Other personal information you choose to provide or to authorize us to access, in connection with
+              providing the
+            </p>
+            <p>
+              App and our services. This includes biometric information such as height and weight, dietary and exercise
+              regimens,
+            </p>
+            <p>health and wellness goals, etc.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              You may provide information to be published or displayed (&ldquo;Posted&rdquo;) on public areas of
+              websites and social media
+            </p>
+            <p>
+              networks you access through the App (collectively, &ldquo;User Contributions&rdquo;). Your User
+              Contributions are Posted and
+            </p>
+            <p>
+              transmitted to others at your own risk. Although we use industry-standard security protocols to protect
+              data, please
+            </p>
+            <p>
+              be aware that no security measures are perfect or impenetrable. Additionally, we cannot control the
+              actions of third
+            </p>
+            <p>
+              parties with whom you may choose to share your User Contributions. Therefore, we cannot and do not
+              guarantee
+            </p>
+            <p>that your User Contributions will not be viewed by unauthorized persons.</p>
+            <p>
+              <br />
+            </p>
+            <p>AUTOMATIC INFORMATION COLLECTION AND TRACKING.</p>
+            <p>
+              <br />
+            </p>
+            <p>When you download, access and use the App, it may use technology to automatically collect:</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Usage Details. When you access and use the App, we may automatically collect certain details of
+              your access to
+            </p>
+            <p>
+              and use of the App, including App traffic data, location of data storage, logs, data shared with the App
+              when you are
+            </p>
+            <p>
+              not using it, and other communication data and the resources that you access and use on or through the
+              App.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Device Information. We may collect information about your mobile device and internet connection,
+              including the
+            </p>
+            <p>
+              device&rsquo;s unique device identifier, IP address, operating system, browser type, mobile network
+              information and the
+            </p>
+            <p>device&rsquo;s telephone number.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Stored Information and Files. The App also may access metadata and other information associated
+              with other files
+            </p>
+            <p>
+              stored on your device. This may include, for example, photographs, audio and video clips, personal
+              contacts and
+            </p>
+            <p>address book information.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Location Information. This App collects real-time information about the location of your device.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              We do not collect personal information automatically, but we may tie this information to personal
+              information about
+            </p>
+            <p>you that we collect from other sources or from you.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              Your device may prompt you to allow or deny the App access to data and/or to data-capture device
+              components, such as a
+            </p>
+            <p>
+              smartphone camera. Some features of the App may not function properly until you allow access when
+              prompted. If you do
+            </p>
+            <p>
+              not want us to collect any of the above information, do not download the App or delete it from your
+              device. For more
+            </p>
+            <p>information, see &ldquo;CHOICES ABOUT HOW WE USE AND DISCLOSE YOUR INFORMATION&rdquo;.</p>
+            <p>
+              <br />
+            </p>
+            <p>INFORMATION COLLECTION AND TRACKING TECHNOLOGIES.</p>
+            <p>
+              <br />
+            </p>
+            <p>The technologies we use for automatic information collection may include:</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Cookies (or mobile cookies). A cookie is a small file placed on your device. It may be possible to
+              refuse to accept
+            </p>
+            <p>
+              cookies by activating the appropriate setting on your device. However, if you select this setting you may
+              be unable
+            </p>
+            <p>to access certain parts of our App.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Web Beacons. Pages of the App and our emails may contain small electronic files known as web
+              beacons (also
+            </p>
+            <p>
+              referred to as clear gifs, pixel tags and single-pixel gifs) that permit the Company, for example, to
+              count users who
+            </p>
+            <p>
+              have visited those pages or opened an email and for other related app statistics (for example, recording
+              the
+            </p>
+            <p>popularity of certain app content and verifying system and server integrity).</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Hardware and Software APIs. An application programming interface (API) is a piece of software that
+              access or
+            </p>
+            <p>
+              obtains information from other programs or device components. For example, our App uses an API to request
+              the
+            </p>
+            <p>
+              current coordinates from your device&rsquo;s GPS unit. In some cases, you must provide authorization
+              before the App can
+            </p>
+            <p>use certain APIs.</p>
+            <p>
+              <br />
+            </p>
+            <p>THIRD-PARTY INFORMATION COLLECTION</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              When you use the App or its content, certain third parties may use automatic information collection
+              technologies to
+            </p>
+            <p>collect information about you or your device. These third parties may include:</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Advertisers, ad networks and ad servers.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Analytics companies.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Your mobile device manufacturer.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Your mobile service provider.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Others.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              These third parties may use tracking technologies to collect information about our users. This may include
+            </p>
+            <p>
+              information about users&rsquo; use of this App and other apps and websites to serve them interest-based
+              (behavioral)
+            </p>
+            <p>
+              advertising. We do not control these third parties&rsquo; tracking technologies or how they may be used.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              If you have any questions about an advertisement, you should contact the responsible advertiser directly.
+              For
+            </p>
+            <p>
+              information about how you can opt out of receiving targeted advertising from many providers, see
+              &ldquo;CHOICES
+            </p>
+            <p>ABOUT HOW WE USE AND DISCLOSE YOUR INFORMATION&rdquo;.</p>
+            <p>
+              <br />
+            </p>
+            <p>HOW WE USE YOUR INFORMATION</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              We use information that we collect about you or that you provide to us, including any personal
+              information, to:
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Provide you with the App and its contents, and any other information, products or services that you
+              request from us.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Fulfill any other purpose for which you provide it.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Give you notices about your account/subscription, including expiration and renewal notices.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Carry out our obligations and enforce our rights arising from any contracts entered into between
+              you and us,
+            </p>
+            <p>including for billing and collection.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Notify you when App updates are available, and of changes to any products/services we offer or
+              provide though it.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              The usage information we collect helps us to improve our App and to deliver a better and more personalized
+            </p>
+            <p>experience by enabling us to:</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Estimate our audience size and usage patterns.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Store information about your preferences, allowing us to customize our App according to your
+              individual interests.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Speed up your searches.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; Recognize you when you use the App.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              We may also use your information to contact you about our own and third parties&rsquo; goods and services
+              that may be of
+            </p>
+            <p>
+              interest to you. If you do not want us to use your information in this way, please check the relevant box
+              located on
+            </p>
+            <p>
+              the form on which we collect your data (the registration form) or adjust your user preferences in your
+              account
+            </p>
+            <p>
+              profile. For more information, see &ldquo;CHOICES ABOUT HOW WE USE AND DISCLOSE YOUR INFORMATION&rdquo;.
+            </p>
+            <p>
+              We may use the information we collect to display advertisements to our advertisers&rsquo; target
+              audiences. Even though
+            </p>
+            <p>
+              we do not disclose your personal information for these purposes without your consent, if you click on or
+              otherwise
+            </p>
+            <p>interact with an advertisement, the advertiser may assume that you meet its target criteria.</p>
+            <p>
+              <br />
+            </p>
+            <p>DISCLOSURE OF YOUR INFORMATION</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              We may disclose aggregated information about our users and information that does not identify any
+              individual or
+            </p>
+            <p>device, without restriction.</p>
+            <p>
+              <br />
+            </p>
+            <p>In addition, we may disclose personal information that we collect or you provide:</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; To our subsidiaries and affiliates.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; To contractors, service providers and other third parties we use to support our business and who
+              are bound by
+            </p>
+            <p>
+              contractual obligations to keep personal information confidential and use it only for the purposes for
+              which we
+            </p>
+            <p>disclose it to them.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; To a buyer or other successor in the event of a merger, divestiture, restructuring, reorganization,
+              dissolution or
+            </p>
+            <p>
+              other sale or transfer of some or all of [Teddy B LLC]&rsquo;s assets, whether as a going concern or as
+              part of bankruptcy,
+            </p>
+            <p>
+              liquidation or similar proceeding, in which personal information held by [c] about our App users is among
+              the assets
+            </p>
+            <p>transferred.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; To fulfill the purpose for which you provide it.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; For any other purpose disclosed by us when you provide the information.</p>
+            <p>
+              <br />
+            </p>
+            <p>&bull; With your consent.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; To comply with any court order, law or legal process, including to respond to any government or
+              regulatory request.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; To enforce our rights arising from any contracts entered into between you and us, including the App
+              EULA and
+            </p>
+            <p>terms of sale and services, and for billing and collection.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; If we believe disclosure is necessary or appropriate to protect the rights, property, or safety of
+              [Teddy B LLC], our
+            </p>
+            <p>
+              customers or others. This includes exchanging information with other companies and organizations for the
+              purposes
+            </p>
+            <p>of fraud protection and credit risk reduction.</p>
+            <p>
+              <br />
+            </p>
+            <p>YOUR CHOICES ABOUT OUR COLLECTION, USE AND DISCLOSURE OF YOUR INFORMATION</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              We strive to provide you with choices regarding the personal information you provide to us. This section
+              describes
+            </p>
+            <p>mechanisms we provide for you to control certain uses and disclosures of over your information.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Tracking Technologies. You can set your device to refuse all or some cookies, or to alert you when
+              cookies are
+            </p>
+            <p>
+              being sent. You can choose whether or not to allow the App to collect information through other tracking
+            </p>
+            <p>
+              technologies when your device prompts you to do so. If you disable or refuse cookies or block the use of
+              other
+            </p>
+            <p>tracking technologies, some parts of the App may then be inaccessible or not function properly.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Promotion by the Company. If you do not want us to use your contact information to promote our own
+              or third
+            </p>
+            <p>
+              parties&rsquo; products or services, you can opt-out by logging into the App and adjusting your user
+              preferences in your
+            </p>
+            <p>
+              account profile by checking or unchecking the relevant boxes or by sending us an email stating your
+              request to
+            </p>
+            <p>
+              [
+              <a data-fr-linked="true" href="mailto:customerservice@movefit.com]">
+                customerservice@movefit.com]
+              </a>
+              .
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              &bull; Data Retention and Deletion. We retain data collected in connection with your use of the App for as
+              long as you
+            </p>
+            <p>
+              have an active user account with us, and for a period of two years after your account is deleted or
+              inactivated.
+            </p>
+            <p>
+              Retained data of inactive user accounts is used only for the purposes of bookkeeping and audits,
+              reactivating an
+            </p>
+            <p>
+              account upon request, or data analytics. Personal information will be de-identified before it is
+              aggregated for data
+            </p>
+            <p>
+              analytics. We will stop collecting any data for which you withdraw your consent to collect, but will
+              retain data
+            </p>
+            <p>
+              collected before such withdrawal in accordance with this policy. You can at any time request that we
+              delete retained
+            </p>
+            <p>
+              data by sending us an email stating your request to [
+              <a data-fr-linked="true" href="mailto:customerservice@movefit.com">
+                customerservice@movefit.com
+              </a>
+              ]. Be advised that in some cases,
+            </p>
+            <p>we cannot delete your personal information except by also deleting/deactivating your user account.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              We do not control third parties&rsquo; collection or use of your information to serve interest-based
+              advertising. However
+            </p>
+            <p>
+              these third parties may provide you with ways to choose not to have your information collected or used in
+              this way.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              You can opt out of receiving targeted ads from members of the Network Advertising Initiative
+              (&ldquo;NAI&rdquo;) on the
+            </p>
+            <p>NAI&rsquo;s website.</p>
+            <p>
+              <br />
+            </p>
+            <p>ACCESSING AND CORRECTING YOUR PERSONAL INFORMATION</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              You can review and change your personal information by logging into the App and visiting your account
+              profile page.
+            </p>
+            <p>This includes the ability for you to delete your user account from within the App.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              You may also send us an email at [
+              <a data-fr-linked="true" href="mailto:customerservice@movefit.com">
+                customerservice@movefit.com
+              </a>
+              ] to request access to, correct or delete any
+            </p>
+            <p>
+              personal information that you have provided to us. We may not accommodate a request to change information
+              if we
+            </p>
+            <p>
+              believe the change would violate any law or legal requirement or cause the information to be incorrect.
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              If you delete your User Contributions from the App, copies of your User Contributions may remain viewable
+              in
+            </p>
+            <p>
+              cached and archived pages or might have been copied or stored by other App users. Proper access and use of
+            </p>
+            <p>information provided on the App, including User Contributions, is governed by our terms of use.</p>
+            <p>
+              <br />
+            </p>
+            <p>YOUR CALIFORNIA PRIVACY RIGHTS</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              California Civil Code Section 1798.83 permits users of our App that are California residents to request
+              certain
+            </p>
+            <p>
+              information regarding our disclosure of personal information to third parties for their direct marketing
+              purposes. To
+            </p>
+            <p>
+              make such a request, please send an email to [
+              <a data-fr-linked="true" href="mailto:customerservice@movefit.com">
+                customerservice@movefit.com
+              </a>
+              ].
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>CHANGES TO OUR PRIVACY POLICY</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              We may update our privacy policy from time-to-time. If we make material changes to how we treat our
+              users&rsquo;
+            </p>
+            <p>
+              personal information, we will post the new privacy policy on this page and provide our users with a notice
+              that the
+            </p>
+            <p>privacy policy has been updated.</p>
+            <p>
+              <br />
+            </p>
+            <p>
+              The date the privacy policy was last revised is identified at the top of the page. You are responsible for
+              ensuring we
+            </p>
+            <p>
+              have an up-to-date active and deliverable email address and/or phone number for you and for periodically
+              visiting
+            </p>
+            <p>this privacy policy to check for any changes.</p>
+            <p>
+              <br />
+            </p>
+            <p>CONTACT INFORMATION</p>
+            <p>
+              <br />
+            </p>
+            <p>To ask questions or comment about this privacy policy and our privacy practices, contact us at:</p>
+            <p>
+              [
+              <a data-fr-linked="true" href="mailto:customerservice@movefit.com">
+                customerservice@movefit.com
+              </a>
+              ]
+            </p>
           </Typography>
         </div>
       </div>

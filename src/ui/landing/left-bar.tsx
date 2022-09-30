@@ -1,12 +1,16 @@
 import { IconButton, Typography } from '@mui/material'
 import { Button, FacebookIcon, InstagramIcon, SnapChat, TikTokIcon, YoutubeIcon } from 'components'
+import { useNavigate } from 'hooks/UseRouter'
 import Link from 'next/link'
 
 type Props = {
   inView: boolean
+  isBlue: boolean
 }
 
-export const LeftBar: React.FC<Props> = ({ inView }) => {
+export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
+  const { navigateTo } = useNavigate()
+
   return (
     <div className="max-w-left-bar pt-[30px] pl-[30px] fixed flex-col hidden xl:flex z-30 overflow-y-auto min-h-screen">
       <img src={inView ? '/assets/logos/logo.svg' : '/assets/logos/move-white.svg'} className="max-w-[171px]" alt="" />
@@ -20,30 +24,36 @@ export const LeftBar: React.FC<Props> = ({ inView }) => {
               Features
             </Typography>
           </div>
-          <div className="hover:cursor-pointer w-fit">
-            <Typography
-              variant="body"
-              className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
-            >
-              Videos
-            </Typography>
-          </div>
-          <div className="hover:cursor-pointer w-fit">
-            <Typography
-              variant="body"
-              className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
-            >
-              Move with Friends
-            </Typography>
-          </div>
-          <div className="hover:cursor-pointer w-fit">
-            <Typography
-              variant="body"
-              className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
-            >
-              Move with Friends
-            </Typography>
-          </div>
+          <Link href="/landing#video">
+            <a>
+              <Typography
+                variant="body"
+                className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
+              >
+                Videos
+              </Typography>
+            </a>
+          </Link>
+          <Link href="/landing#mwf">
+            <a>
+              <Typography
+                variant="body"
+                className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
+              >
+                Move with Friends
+              </Typography>
+            </a>
+          </Link>
+          <Link href="/landing#habit-tracking">
+            <a>
+              <Typography
+                variant="body"
+                className={`${inView ? 'text-black/60' : 'text-white/60'} hover:underline underline-offset-1`}
+              >
+                Habit Tracking
+              </Typography>
+            </a>
+          </Link>
         </div>
         <div className="hover:cursor-pointer w-fit">
           <Typography
@@ -53,21 +63,33 @@ export const LeftBar: React.FC<Props> = ({ inView }) => {
             Our Vision
           </Typography>
         </div>
-        <div className="hover:cursor-pointer w-fit">
-          <Typography
-            variant="title3"
-            className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
-          >
-            Brand Story
-          </Typography>
-        </div>
+        <Link href="/landing#brand-story">
+          <a>
+            <Typography
+              variant="title3"
+              className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
+            >
+              Brand Story
+            </Typography>
+          </a>
+        </Link>
       </div>
 
       <div className="flex flex-col gap-5 5xl:mt[220px] mt-[113px]">
-        <Button className="w-[272px] shadow-buttonShadow2" textClassName="text-white" variant="fill">
+        <Button
+          className={` w-[272px] ${isBlue ? 'shadow-glassShadow' : 'shadow-buttonShadow2'}`}
+          textClassName={isBlue ? 'text-primary-brand' : 'text-white'}
+          variant={isBlue ? 'ghost' : 'fill'}
+          onClick={() => navigateTo('/login')}
+        >
           Login
         </Button>
-        <Button className="w-[272px] shadow-buttonShadow2" variant="fill" textClassName="text-white">
+        <Button
+          className="w-[272px] shadow-glassShadow "
+          variant="ghost"
+          textClassName="text-primary-brand"
+          onClick={() => navigateTo('/signup')}
+        >
           Sign Up
         </Button>
       </div>
@@ -154,7 +176,7 @@ export const LeftBar: React.FC<Props> = ({ inView }) => {
           <Typography variant="body2" className={`${inView ? 'leading-[2] text-black' : 'leading-[2] text-white'}`}>
             •
           </Typography>
-          <Link href="/landing/terms">
+          <Link href="/landing/privacy">
             <a>
               <Typography
                 variant="body2"

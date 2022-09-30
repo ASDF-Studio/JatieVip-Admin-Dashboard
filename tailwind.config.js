@@ -80,6 +80,7 @@ module.exports = {
         border: {
           blue: colors.border.blue,
           grey: colors.border.grey,
+          lightBlue: colors.border.lightBlue,
         },
       },
       borderRadius: {

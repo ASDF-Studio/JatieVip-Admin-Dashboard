@@ -29,7 +29,7 @@ const GetPhone = () => {
 
 export const ThirdHero = React.forwardRef((props, ref) => {
   return (
-    <div ref={ref} className="w-full sm:h-[855px] x:h-[936px]  xl:h-[927px] 2xl:h-[927px]">
+    <div id='mwf' ref={ref} className="w-full sm:h-[855px] x:h-[936px]  xl:h-[927px] 2xl:h-[927px]">
       <div className="relative bg-[url('/assets/landing/bg-2-phone.png')] sm:bg-[url('/assets/landing/bg-2-720.png')] -top-[22px] sm:-top-[75px] x:-top-[55px] xl:-top-[65px] 2xl:-top-[70px]  x:bg-[url('/assets/landing/bg-2-1024.webp')] 2xl:bg-[url('/assets/landing/bg-2-1440.png')] 5xl:bg-[url('/assets/landing/bg-2-1920.png')]  flex sm:h-[931px] x:h-[992px] xl:h-[993px] 2xl:h-[995px] bg-no-repeat bg-cover">
         {/* <GetBg /> */}
 

@@ -70,7 +70,7 @@ export const Apple: React.FC = (): React.ReactElement => {
           </div>
         </div>
         {/* <img src="/assets/landing/group-9@3x.png" alt="" className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[375px]" /> */}
-        <div className="flex flex-col mt-[74px] sm:mt-[59.5px] items-center">
+        <div id='brand-story' className="flex flex-col mt-[74px] sm:mt-[59.5px] items-center">
           <div className="flex flex-col gap-2.5 sm:gap-0">
             <Title className="text-[#191b1c]/60 text-center">Why We Move</Title>
             <Heading1 className="text-[#191b1c] text-center">

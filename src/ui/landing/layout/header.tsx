@@ -1,9 +1,11 @@
 import { IconButton, Typography } from '@mui/material'
 import { Button, BarIcon, FacebookIcon, TikTokIcon, SnapChat, YoutubeIcon, InstagramIcon, Xicon } from 'components'
+import { useNavigate } from 'hooks/UseRouter'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 export const LandingHeader = ({ inView, dark }) => {
+  const { navigateTo } = useNavigate()
   const [showMenu, setShowMenu] = useState(false)
 
   useEffect(() => {
@@ -16,24 +18,35 @@ export const LandingHeader = ({ inView, dark }) => {
 
   return (
     <div
-      className={`fixed h-[60px] w-full border-b border-white/30 z-20 flex items-center justify-between pl-5 pr-[26px] xl:hidden  backdrop-blur-[22px] ${
-        showMenu && 'bg-white'
+      className={`fixed h-[60px] w-full border-b ${
+        showMenu ? 'border-white/30' : inView ? 'border-[#19a3d1]/30' : 'border-white/30'
+      } z-20 flex items-center justify-between pl-5 pr-[26px] xl:hidden  backdrop-blur-[22px] ${
+        showMenu ? 'bg-white' : inView ? 'bg-[#64edff]/20' : ''
       }`}
     >
       <Link href="/">
         <a>
-          <img src="/assets/logos/logo.svg" alt="move logo" className="max-w-[122px]" />
+          <img
+            src={
+              showMenu ? '/assets/logos/logo.svg' : inView ? '/assets/logos/logo.svg' : '/assets/logos/move-white.svg'
+            }
+            alt="move logo"
+            className="max-w-[122px]"
+          />
         </a>
       </Link>
 
       <div className="flex gap-5">
-        {!showMenu && (
-          <Button variant="fill" textClassName="text-white" className="px-[30px]">
-            Get Started
-          </Button>
-        )}
+        <Button variant="fill" textClassName="text-white" className="px-[30px]">
+          Get Started
+        </Button>
+
         <IconButton onClick={() => setShowMenu(!showMenu)} disableRipple className="p-0">
-          {showMenu ? <Xicon className="w-[24px]" /> : <BarIcon className="w-[22px]" fill={dark ? 'black' : 'white'} />}
+          {showMenu ? (
+            <Xicon className="w-[24px]" />
+          ) : (
+            <BarIcon className="w-[22px]" fill={dark || inView ? 'black' : 'white'} />
+          )}
         </IconButton>
       </div>
       <div
@@ -53,39 +66,74 @@ export const LandingHeader = ({ inView, dark }) => {
                   Features
                 </Typography>
               </div>
-              <div className="hover:cursor-pointer w-fit">
-                <Typography variant="body" className="text-black/60">
-                  Videos
-                </Typography>
-              </div>
-              <div className="hover:cursor-pointer w-fit">
-                <Typography variant="body" className="text-black/60">
-                  Move with Friends
-                </Typography>
-              </div>
-              <div className="hover:cursor-pointer w-fit">
-                <Typography variant="body" className="text-black/60">
-                  Habit Tracking
-                </Typography>
-              </div>
+              <Link href="/landing#video">
+                <a
+                  onClick={() => {
+                    setShowMenu(false)
+                  }}
+                >
+                  <Typography variant="body" className="text-black/60">
+                    Videos
+                  </Typography>
+                </a>
+              </Link>
+
+              <Link href="/landing#mwf">
+                <a
+                  onClick={() => {
+                    setShowMenu(false)
+                  }}
+                >
+                  <Typography variant="body" className="text-black/60">
+                    Move with Friends
+                  </Typography>
+                </a>
+              </Link>
+              <Link href="/landing#habit-tracking">
+                <a
+                  onClick={() => {
+                    setShowMenu(false)
+                  }}
+                >
+                  <Typography variant="body" className="text-black/60">
+                    Habit Tracking
+                  </Typography>
+                </a>
+              </Link>
             </div>
             <div className="hover:cursor-pointer w-fit">
               <Typography variant="title3" className="text-black">
                 Our Vision
               </Typography>
             </div>
-            <div className="hover:cursor-pointer w-fit">
-              <Typography variant="title3" className="text-black">
-                Brand Story
-              </Typography>
-            </div>
+            <Link href="/landing#brand-story">
+              <a
+                onClick={() => {
+                  setShowMenu(false)
+                }}
+              >
+                <Typography variant="title3" className="text-black">
+                  Brand Story
+                </Typography>
+              </a>
+            </Link>
           </div>
 
           <div className="flex flex-col gap-5 5xl:mt[220px] mt-[113px]">
-            <Button className="max-w-[360px] shadow-buttonShadow2" textClassName="text-white" variant="fill">
+            <Button
+              onClick={() => navigateTo('/login')}
+              className="max-w-[360px] shadow-buttonShadow2"
+              textClassName="text-white"
+              variant="fill"
+            >
               Login
             </Button>
-            <Button className="max-w-[360px] w-full shadow-buttonShadow2" variant="fill" textClassName="text-white">
+            <Button
+              onClick={() => navigateTo('/signup')}
+              className="max-w-[360px] w-full shadow-buttonShadow2"
+              variant="fill"
+              textClassName="text-white"
+            >
               Sign Up
             </Button>
           </div>
@@ -96,24 +144,45 @@ export const LandingHeader = ({ inView, dark }) => {
               <IconButton className="p-0" disableRipple>
                 <FacebookIcon className="w-[30px]" fill="black" />
               </IconButton>
-              <IconButton className="p-0" disableRipple>
+              <IconButton
+                className="p-0"
+                disableRipple
+                onClick={() => {
+                  window.open('https://www.tiktok.com/@joshxkatiefit', '_blank')
+                }}
+              >
                 <TikTokIcon className="w-[26px]" fill="black" />
               </IconButton>
-              <IconButton className="p-0" disableRipple>
+              <IconButton
+                className="p-0"
+                disableRipple
+                onClick={() => {
+                  window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+                }}
+              >
                 <SnapChat className="w-[32px]" fill="black" />
               </IconButton>
               <IconButton className="p-0" disableRipple>
                 <YoutubeIcon className="w-[38px]" fill="black" />
               </IconButton>
 
-              <IconButton className="p-0" disableRipple>
+              <IconButton
+                className="p-0"
+                disableRipple
+                onClick={() => {
+                  window.open('https://www.instagram.com/moveapp/', '_blank')
+                }}
+              >
                 <InstagramIcon className="w-[30px]" fill="black" />
               </IconButton>
             </div>
             <div className="h-[1px] w-full bg-black opacity-[0.15]" />
           </div>
           <div className="flex flex-col  mt-[17px]">
-            <Typography variant="subheadBold" className="tracking-[3px] leading-[1.71] mb-[5px] text-white">
+            <Typography
+              variant="subheadBold"
+              className="tracking-[3px] leading-[1.71] mb-[5px]  text-black text-center"
+            >
               DOWNLOAD
             </Typography>
             <div className="flex justify-between">
@@ -135,13 +204,25 @@ export const LandingHeader = ({ inView, dark }) => {
             <div className="h-[1px] w-full bg-black opacity-[0.15] mt-5" />
           </div>
           <div className="mt-[30px] flex flex-col leading-[32px]">
-            <Link href="/">
-              <a>
-                <Typography variant="body2" className="leading-[2] text-black text-center">
-                  Terms of Service • Privacy Policy
-                </Typography>
-              </a>
-            </Link>
+            <div className="flex gap-2 justify-center items-center">
+              <Link href="/landing/terms">
+                <a>
+                  <Typography variant="body2" className="leading-[2] text-black text-center">
+                    Terms of Service
+                  </Typography>
+                </a>
+              </Link>
+              <Typography variant="body2" className="leading-[2] text-black text-center">
+                •
+              </Typography>
+              <Link href="/landing/privacy">
+                <a>
+                  <Typography variant="body2" className="leading-[2] text-black text-center">
+                    Privacy Policy
+                  </Typography>
+                </a>
+              </Link>
+            </div>
 
             <Typography variant="body2" className=" text-black leading-[2] text-center">
               © Move, Inc. All rights reserved.

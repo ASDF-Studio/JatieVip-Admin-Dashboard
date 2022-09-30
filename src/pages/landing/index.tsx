@@ -4,17 +4,22 @@ import { useInView } from 'react-intersection-observer'
 
 const Landing: NextPage = () => {
   const { ref, inView } = useInView({
-    threshold:  [0.1],
+    threshold: [0.1],
   })
   const { ref: footerRef, inView: inViewFooter } = useInView({
     threshold: 0,
   })
 
+  const { ref: heroRef, inView: inViewSecondHero } = useInView({
+    threshold: [0.3],
+  })
+
+
   return (
-    <LandingLayout inView={inView} ref={footerRef}>
-      <LeftBar inView={inView || inViewFooter} />
+    <LandingLayout inView={inView || inViewFooter} ref={footerRef}>
+      <LeftBar isBlue={inViewSecondHero} inView={inView || inViewFooter} />
       <HeroSection />
-      <SecondHero />
+      <SecondHero ref={heroRef} />
       <div ref={ref}>
         <ThirdHero />
         <ForthHero />

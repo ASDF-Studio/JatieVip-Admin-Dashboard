@@ -1,5 +1,6 @@
 import { Title, Heading1 } from 'components'
 import { useMediaQuery, useBreakPoint } from 'hooks'
+import React from 'react'
 
 const PhoneImage = () => {
   const isTablet = useMediaQuery(768)
@@ -15,9 +16,9 @@ const PhoneImage = () => {
   )
 }
 
-export const SecondHero: React.FC = (): React.ReactElement => {
+export const SecondHero: React.FC<{ ref: any }> = React.forwardRef((props, ref): React.ReactElement => {
   return (
-    <div className="w-full h-[570px] sm:h-[615px] x:h-[702px] 2xl:h-[780px]">
+    <div id="video" ref={ref} className="w-full h-[570px] sm:h-[615px] x:h-[702px] 2xl:h-[780px]">
       <div className="relative -top-[115px] bg-[url('/assets/landing/hero-2-phone.webp')] sm:bg-[url('/assets/landing/bg-7201.png')]  sm:-top-[145px] bg-cover x:-top-[155px] x:bg-[url('/assets/landing/background-real-video@3x.webp')] bg-no-repeat flex sm:h-[761px] x:h-[858px] 2xl:h-[931px]">
         <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
         <div className="flex-col w-full mt-[117px] sm:mt-[130px] x:mt-[140px] 2xl:mt-[145px]">
@@ -39,4 +40,4 @@ export const SecondHero: React.FC = (): React.ReactElement => {
       </div>
     </div>
   )
-}
+})

@@ -38,6 +38,7 @@ module.exports = {
   border: {
     blue: 'rgba(50,161,199, 1)',
     grey: 'rgba(245,247,249, 1)',
+    lightBlue: 'rgba(25, 163, 209, 0.2)',
   },
   accent: {
     white: '#F5F7F9',
