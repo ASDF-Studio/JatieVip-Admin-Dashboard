@@ -33,7 +33,7 @@ export const LoginSideBar = ({ className }: Props) => {
           <div className="relative">
             <img
               src="/assets/images/phone.webp"
-              className="h760:max-w-[500px] h860:max-w-[700px] max-w-[400px] x:max-w-[400px] xl:max-w-[500px]"
+              className="h760:max-w-[450px] hidden h660:inline h660:max-w-[400px] h860:max-w-[700px] max-w-[400px] x:max-w-[400px] xl:max-w-[500px]"
               alt="phone"
             />
           </div>
@@ -42,20 +42,38 @@ export const LoginSideBar = ({ className }: Props) => {
       <div className="flex flex-col xl:flex-row gap-4 x:justify-between absolute bottom-0 w-full pr-[108px] mb-[29px]">
         <div className="flex gap-[30px] xl:gap-[40px]">
           <IconButton className="p-0" disableRipple>
-            <FacebookIcon className="w-[20px] xl:w-[30px]" fill="white" />
+            <FacebookIcon className="w-[20px] xl:w-[30px] hover:opacity-80 " fill="white" />
+          </IconButton>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.tiktok.com/@joshxkatiefit', '_blank')
+            }}
+          >
+            <TikTokIcon className="w-[18px] xl:w-[26px] hover:opacity-80" fill="white" />
+          </IconButton>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+            }}
+          >
+            <SnapChat className="w-[21px] xl:w-[32px] hover:opacity-80" fill="white" />
           </IconButton>
           <IconButton className="p-0" disableRipple>
-            <TikTokIcon className="w-[18px] xl:w-[26px]" fill="white" />
-          </IconButton>
-          <IconButton className="p-0" disableRipple>
-            <SnapChat className="w-[21px] xl:w-[32px]" fill="white" />
-          </IconButton>
-          <IconButton className="p-0" disableRipple>
-            <YoutubeIcon className="w-[25px] xl:w-[38px]" fill="white" />
+            <YoutubeIcon className="w-[25px] xl:w-[38px] hover:opacity-80" fill="white" />
           </IconButton>
 
-          <IconButton className="p-0" disableRipple>
-            <InstagramIcon className="w-[20px] xl:w-[30px]" fill="white" />
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.instagram.com/moveapp/', '_blank')
+            }}
+          >
+            <InstagramIcon className="w-[20px] xl:w-[30px] hover:opacity-80" fill="white" />
           </IconButton>
         </div>
         <div className="flex gap-2.5 items-center">
