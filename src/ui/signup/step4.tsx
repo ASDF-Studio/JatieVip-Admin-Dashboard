@@ -1,4 +1,4 @@
-import { BasicSelect, Button, CustomDatePicker, Input, SingleSelect } from 'components'
+import { BasicSelect, Button, CustomDatePicker, Input, PlaceholderIcon, ProfilePicture, SingleSelect } from 'components'
 import React, { Dispatch, useRef, useState } from 'react'
 import { Avatar, Typography } from '@mui/material'
 import { LoginSteps } from 'types'
@@ -104,17 +104,17 @@ const Step4: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
   ]
 
   return (
-    <div className="flex max-w-[520px] mx-auto px-[26px] x:px-[28px] w-full flex-col justify-center relative">
+    <div className="flex max-w-[520px] h-screen overflow-y-auto mx-auto px-[26px] x:px-[28px] w-full flex-col gap-[107px] justify-between pb-[28px] relative">
       <div className="w-full x:w-[447px] mx-auto flex-col">
-        <div className="flex mt-[28px] x:mt-0 flex-col gap-[12px] mb-[28px] x:mb-[50.5px]">
+        <div className="flex mt-[28px] x:mt-[110px] flex-col gap-[12px] mb-[28px] x:mb-[50.5px]">
           <Typography variant="heading7" className="text-center x:text-left">
             Tell us more about yourself
           </Typography>
         </div>
-        <form  onSubmit={formik.submitForm}>
+        <form onSubmit={formik.submitForm}>
           <div className="w-full mx-auto  flex flex-col">
             <div className="flex gap-[19px] items-center">
-              <Avatar src={imageURL} className="w-[88px] h-[88px]" />
+              <ProfilePicture url={imageURL} />
               <div className="flex flex-col gap-1.5">
                 <Typography variant="bodyBold">Profile Picture</Typography>
                 <input
@@ -216,7 +216,7 @@ const Step4: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
         </form>
       </div>
 
-      <div className=" flex-col items-center absolute right-0 bottom-0 px-[28px] pb-[29px] hidden x:flex">
+      <div className=" flex-col items-center self-end justify-start hidden x:flex">
         <div className="flex items-center gap-3">
           <Link href="/landing/terms">
             <a>

@@ -16,6 +16,15 @@ module.exports = {
       '2xl': '1440px',
       '5xl': '1920px',
       '7xl': '2880px',
+      h660: {
+        raw: '(min-height: 660px)',
+      },
+      h760: {
+        raw: '(min-height: 760px)',
+      },
+      h860: {
+        raw: '(min-height: 860px)',
+      },
     },
     extend: {
       fontFamily: {

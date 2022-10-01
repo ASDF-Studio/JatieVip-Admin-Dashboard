@@ -14,7 +14,7 @@ export const LoginSideBar = ({ className }: Props) => {
         backgroundPositionX: '100%',
         backgroundRepeat: 'no-repeat',
       }}
-      className={`bg-[url('/assets/images/bg@3x.webp')] min-h-screen pt-[22px] pl-[28px] relative ${className}`}
+      className={`bg-[url('/assets/images/bg@3x.webp')] h-screen pt-[22px] pl-[28px] relative ${className}`}
     >
       <img src="/assets/logos/move-white.svg" className="max-w-[184px]" alt="logo" />
       <div className="flex flex-col">
@@ -30,10 +30,10 @@ export const LoginSideBar = ({ className }: Props) => {
               alt=""
             />
           </div>
-          <div className="relative  xl:-top-[40px] xl:h-[600px] 5xl:h-[710px]">
+          <div className="relative">
             <img
-              src="/assets/images/group-15@3x.webp"
-              className="x:max-w-[500px] xl:max-w-[760px] 5xl:max-w-[900px]"
+              src="/assets/images/phone.webp"
+              className="h760:max-w-[500px] h860:max-w-[700px] max-w-[400px] x:max-w-[400px] xl:max-w-[500px]"
               alt="phone"
             />
           </div>
@@ -60,22 +60,13 @@ export const LoginSideBar = ({ className }: Props) => {
         </div>
         <div className="flex gap-2.5 items-center">
           <div className="hover:cursor-pointer w-fit">
-            <img
-              src="/assets/logos/google-play.png"
-              alt="google play logo"
-              className="max-w-[149px] h-[44px]"
-            />
+            <img src="/assets/logos/google-play.png" alt="google play logo" className="max-w-[149px] h-[44px]" />
           </div>
           <div className="hover:cursor-pointer w-fit">
-            <img
-              src="/assets/logos/app-store.png"
-              alt="app store logo"
-              className="max-w-[133px] h-[44px]"
-            />
+            <img src="/assets/logos/app-store.png" alt="app store logo" className="max-w-[133px] h-[44px]" />
           </div>
         </div>
       </div>
     </div>
   )
 }
-
