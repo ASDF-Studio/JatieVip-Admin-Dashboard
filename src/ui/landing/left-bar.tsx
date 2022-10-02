@@ -13,17 +13,28 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
 
   return (
     <div className="max-w-left-bar pt-[30px] pl-[30px] fixed flex-col hidden xl:flex z-30 overflow-y-auto min-h-screen">
-      <img src={inView ? '/assets/logos/logo.svg' : '/assets/logos/move-white.svg'} className="max-w-[171px]" alt="" />
+      <Link href="/landing">
+        <a>
+          <img
+            src={inView ? '/assets/logos/logo.svg' : '/assets/logos/move-white.svg'}
+            className="max-w-[171px]"
+            alt=""
+          />
+        </a>
+      </Link>
+
       <div className="flex flex-col gap-5 mt-[25px]">
         <div className="flex flex-col gap-2.5">
-          <div className="hover:cursor-pointer  w-fit">
-            <Typography
-              variant="title3"
-              className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
-            >
-              Features
-            </Typography>
-          </div>
+          <Link href="/landing">
+            <a>
+              <Typography
+                variant="title3"
+                className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
+              >
+                Features
+              </Typography>
+            </a>
+          </Link>
           <Link href="/landing#video">
             <a>
               <Typography
@@ -55,14 +66,16 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
             </a>
           </Link>
         </div>
-        <div className="hover:cursor-pointer w-fit">
-          <Typography
-            variant="title3"
-            className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
-          >
-            Our Vision
-          </Typography>
-        </div>
+        <Link href="/landing#our-vision">
+          <a>
+            <Typography
+              variant="title3"
+              className={`${inView ? 'text-black' : 'text-white'} hover:underline underline-offset-1`}
+            >
+              Our Vision
+            </Typography>
+          </a>
+        </Link>
         <Link href="/landing#brand-story">
           <a>
             <Typography

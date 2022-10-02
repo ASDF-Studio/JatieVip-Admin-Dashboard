@@ -70,7 +70,7 @@ export const Apple: React.FC = (): React.ReactElement => {
           </div>
         </div>
         {/* <img src="/assets/landing/group-9@3x.png" alt="" className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[375px]" /> */}
-        <div id='brand-story' className="flex flex-col mt-[74px] sm:mt-[59.5px] items-center">
+        <div id="our-vision" className="flex flex-col mt-[74px] sm:mt-[59.5px] items-center">
           <div className="flex flex-col gap-2.5 sm:gap-0">
             <Title className="text-[#191b1c]/60 text-center">Why We Move</Title>
             <Heading1 className="text-[#191b1c] text-center">
@@ -91,7 +91,10 @@ export const Apple: React.FC = (): React.ReactElement => {
             src="/assets/landing/assets1.webp"
             alt="katie and josh pic"
           />
-          <div className="relative bg-[url('/assets/landing/group-16-copy@3x.webp')] flex flex-col bg-cover pt-[29px] pb-[34px] bottom-[40px] sm:pt-[50px] sm:pb-[42px] sm:bottom-[50px] x:bottom-[30px] ">
+          <div
+            id="brand-story"
+            className="relative bg-[url('/assets/landing/group-16-copy@3x.webp')] flex flex-col bg-cover pt-[29px] pb-[34px] bottom-[40px] sm:pt-[50px] sm:pb-[42px] sm:bottom-[50px] x:bottom-[30px] "
+          >
             <div className="flex flex-col  px-5 gap-5 sm:gap-[17px] sm:px-[40px] x:px-[100px] 2xl:px-[142px]">
               <Typography variant="title1" className="leading-[1.27]">
                 A note from the founders

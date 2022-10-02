@@ -17,20 +17,38 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
     >
       <div className="flex justify-between   max-w-[344px]  w-full">
         <IconButton className="p-0" disableRipple>
-          <FacebookIcon className="w-[20px]" fill="black" />
+          <FacebookIcon className="w-[20px] hover:opacity-80" fill="black" />
+        </IconButton>
+        <IconButton
+          className="p-0"
+          disableRipple
+          onClick={() => {
+            window.open('https://www.tiktok.com/@joshxkatiefit', '_blank')
+          }}
+        >
+          <TikTokIcon className="w-[18px] hover:opacity-80" fill="black" />
+        </IconButton>
+        <IconButton
+          className="p-0"
+          disableRipple
+          onClick={() => {
+            window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+          }}
+        >
+          <SnapChat className="w-[21px] hover:opacity-80" fill="black" />
         </IconButton>
         <IconButton className="p-0" disableRipple>
-          <TikTokIcon className="w-[18px]" fill="black" />
-        </IconButton>
-        <IconButton className="p-0" disableRipple>
-          <SnapChat className="w-[21px]" fill="black" />
-        </IconButton>
-        <IconButton className="p-0" disableRipple>
-          <YoutubeIcon className="w-[25px]" fill="black" />
+          <YoutubeIcon className="w-[25px] hover:opacity-80" fill="black" />
         </IconButton>
 
-        <IconButton className="p-0" disableRipple>
-          <InstagramIcon className="w-[20px]" fill="black" />
+        <IconButton
+          className="p-0"
+          disableRipple
+          onClick={() => {
+            window.open('https://www.instagram.com/moveapp/', '_blank')
+          }}
+        >
+          <InstagramIcon className="w-[20px] hover:opacity-80" fill="black" />
         </IconButton>
       </div>
       <div className="flex gap-2.5 x:gap-10 flex-col x:flex-row mt-[22px] x:mt-0">

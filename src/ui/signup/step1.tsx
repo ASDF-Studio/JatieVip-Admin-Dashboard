@@ -21,7 +21,6 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
     try {
       setLoading(true)
 
-      // await sendCode(phoneNumber)
       onChangeStep('step2')
     } catch (e) {
       if (e instanceof ApiErrorResponse) {
@@ -33,7 +32,8 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
   }
 
   return (
-    <div className="flex max-w-[520px] mx-auto px-[26px] x:px-[28px] w-full flex-col justify-center relative">
+    <div className="flex max-w-[520px] mx-auto px-[26px] x:h-screen overflow-y-auto x:gap-[222px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
+      <div />
       <div className="w-full x:w-[447px] mx-auto flex-col">
         <div className="flex mt-[28px] x:mt-0 flex-col gap-[12px] mb-[28px] x:mb-[51px]">
           <Typography variant="heading7" className="text-center x:text-left">
@@ -79,21 +79,30 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
         </div>
       </div>
 
-      <div className=" flex-col items-center absolute right-0 bottom-0 px-[28px] pb-[29px] hidden x:flex">
+      <div className=" flex-col items-center  hidden x:flex self-end justify-start">
         <div className="flex items-center gap-3">
           <Link href="/landing/terms">
             <a>
-              <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
+              <Typography
+                className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"
+                variant="body2"
+              >
                 Terms of service
               </Typography>
             </a>
           </Link>
-          <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
+          <Typography
+            className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"
+            variant="body2"
+          >
             •
           </Typography>
           <Link href="/landing/terms">
             <a>
-              <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
+              <Typography
+                className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"
+                variant="body2"
+              >
                 Privacy Policy
               </Typography>
             </a>

@@ -24,8 +24,8 @@ export const LandingHeader = ({ inView, dark }) => {
         showMenu ? 'bg-white' : inView ? 'bg-[#64edff]/20' : ''
       }`}
     >
-      <Link href="/">
-        <a>
+      <Link href="/landing">
+        <a onClick={() => setShowMenu(false)}>
           <img
             src={
               showMenu ? '/assets/logos/logo.svg' : inView ? '/assets/logos/logo.svg' : '/assets/logos/move-white.svg'
@@ -61,11 +61,17 @@ export const LandingHeader = ({ inView, dark }) => {
         <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[24px]">
           <div className="flex flex-col gap-5 mt-[25px] items-center">
             <div className="flex flex-col gap-2.5 items-center">
-              <div className="hover:cursor-pointer w-fit">
-                <Typography variant="title3" className="text-black">
-                  Features
-                </Typography>
-              </div>
+              <Link href="/landing">
+                <a
+                  onClick={() => {
+                    setShowMenu(false)
+                  }}
+                >
+                  <Typography variant="title3" className="text-black">
+                    Features
+                  </Typography>
+                </a>
+              </Link>
               <Link href="/landing#video">
                 <a
                   onClick={() => {
@@ -101,11 +107,17 @@ export const LandingHeader = ({ inView, dark }) => {
                 </a>
               </Link>
             </div>
-            <div className="hover:cursor-pointer w-fit">
-              <Typography variant="title3" className="text-black">
-                Our Vision
-              </Typography>
-            </div>
+            <Link href="/landing#our-vision">
+              <a
+                onClick={() => {
+                  setShowMenu(false)
+                }}
+              >
+                <Typography variant="title3" className="text-black">
+                  Our Vision
+                </Typography>
+              </a>
+            </Link>
             <Link href="/landing#brand-story">
               <a
                 onClick={() => {

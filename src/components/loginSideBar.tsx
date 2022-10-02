@@ -31,11 +31,7 @@ export const LoginSideBar = ({ className }: Props) => {
             />
           </div>
           <div className="relative">
-            <img
-              src="/assets/images/phone.webp"
-              className="h760:max-w-[450px] hidden h660:inline h660:max-w-[400px] h860:max-w-[700px] max-w-[400px] x:max-w-[400px] xl:max-w-[500px]"
-              alt="phone"
-            />
+            <img src="/assets/images/phone.webp" className="w40h100:max-w-[700px] w40h80:max-w-[600px] w40h70:max-w-[500px] w24h100:max-w-[700px] w24h80:max-w-[500px] w24h70:max-w-[350px] w1024h100:max-w-[450px] w1024h80:max-w-[450px] w1024h70:max-w-[400px] wmaxhmax:max-w-[800px]" alt="phone" />
           </div>
         </div>
       </div>

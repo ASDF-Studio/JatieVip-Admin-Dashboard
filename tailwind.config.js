@@ -25,6 +25,36 @@ module.exports = {
       h860: {
         raw: '(min-height: 860px)',
       },
+      wmaxhmax: {
+        raw: '(min-height: 1080px) and (min-width:1920px)',
+      },
+      w40h100: {
+        raw: '(max-height: 1080px) and (max-width:1920px)',
+      },
+      w40h80: {
+        raw: '(max-height: 900px) and (max-width:1920px)',
+      },
+      w40h70: {
+        raw: '(max-height: 780px) and (max-width:1920px)',
+      },
+      w24h100: {
+        raw: '(max-height: 1080px) and (max-width:1280px)',
+      },
+      w24h80: {
+        raw: '(max-height: 900px) and (max-width:1280px)',
+      },
+      w24h70: {
+        raw: '(max-height: 780px) and (max-width:1280px)',
+      },
+      w1024h100: {
+        raw: '(max-height: 1080px) and (max-width:1024px)',
+      },
+      w1024h80: {
+        raw: '(max-height: 900px) and (max-width:1024px)',
+      },
+      w1024h70: {
+        raw: '(max-height: 780px) and (max-width:1024px)',
+      },
     },
     extend: {
       fontFamily: {
