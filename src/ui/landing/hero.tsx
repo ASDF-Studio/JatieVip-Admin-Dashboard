@@ -2,13 +2,13 @@ import { Title, Heading, Button } from 'components'
 
 export const HeroSection: React.FC = (): React.ReactElement => {
   return (
-    <div className="relative flex h-screen sm:h-auto">
+    <div className="relative flex h-screen sm:h-auto overflow-hidden">
       <video
         muted
         loop
         playsInline
         autoPlay
-        className="absolute left-0 top-0 -z-10 w-full h-screen sm:h-[871px] object-cover"
+        className="absolute left-0 top-0 -z-10 w-full h-screen sm:h-[871px] object-cover scale-110 sm:scale-100"
       >
         <source src="/assets/videos/movefit-video.mp4" />
       </video>
