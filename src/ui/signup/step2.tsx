@@ -37,7 +37,7 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber = '99032894' }): Rea
   }
 
   return (
-    <div className="flex max-w-[520px] mx-auto px-[26px] x:h-screen overflow-y-auto x:gap-[222px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
+    <div className="flex max-w-[520px] mx-auto px-[26px] x:h-screen overflow-y-auto x:gap-[100px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
       <div />
       <div className="w-full x:w-[447px] mx-auto flex-col mt-[36px] x:mt-0">
         <div className="flex justify-center x:justify-start">

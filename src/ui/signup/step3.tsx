@@ -33,7 +33,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
   }
 
   return (
-    <div className="flex max-w-[520px] mx-auto px-[26px] x:h-screen overflow-y-auto x:gap-[222px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
+    <div className="flex max-w-[520px] mx-auto px-[26px] x:h-screen overflow-y-auto x:gap-[100px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
       <div />
       <div className="w-full x:w-[447px] mx-auto flex-col">
         <div className="flex mt-[28px] x:mt-0 flex-col gap-[12px] mb-[28px] x:mb-[94px]">
