@@ -21,7 +21,7 @@ export const HeroSection: React.FC = (): React.ReactElement => {
           alt="phone"
         />
 
-        <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4 mt-0 sm:mt-[220px] sm:ml-[291px] x:ml-[382px] x:mt-[241px] xl:ml-[382px] xl:mt-[233px] sm:mb-0">
+        <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4 mt-0 sm:mt-[220px] sm:ml-[291px] x:ml-[382px] x:mt-[241px] xl:ml-[382px] xl:mt-[233px] sm:mb-0 z-20 relative">
           <div className="flex flex-col">
             <Title className="text-white/80">Move Your Way</Title>
             <div className="relative w-full max-w-[380px] sm:max-w-[395px] x:max-w-[538px]">
@@ -39,14 +39,14 @@ export const HeroSection: React.FC = (): React.ReactElement => {
           <div className="flex gap-2.5 flex-col sm:flex-row gap-y-[17px]">
             <Button
               variant="landingButton"
-              className="bg-primary-brand max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px]"
+              className="bg-primary-brand max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px] shadow-buttonShadow2 hover:shadow-hoverShadow active:bg-primary-brand"
               textClassName="text-white"
             >
               Get Started
             </Button>
             <Button
               variant="landingButton"
-              className="bg-white max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px]"
+              className="bg-white max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px] shadow-glassShadow hover:hoverShadow hover:border-[#19a3d1] border border-solid border-border-lightBlue"
               textClassName="text-primary-brand"
             >
               Learn More
