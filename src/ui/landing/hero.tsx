@@ -8,10 +8,20 @@ export const HeroSection: React.FC = (): React.ReactElement => {
         loop
         playsInline
         autoPlay
-        className="absolute left-0 top-0 -z-10 w-full h-screen sm:h-[871px] object-cover scale-110 sm:scale-100"
+        className="absolute left-0 top-0 -z-10 w-full h-screen sm:h-[871px] object-cover sm:hidden"
       >
-        <source src="/assets/videos/movefit-video.mp4" />
+        <source src="/assets/videos/move-fit-phone.mp4" type="video/mp4" />
       </video>
+      <video
+        muted
+        loop
+        playsInline
+        autoPlay
+        className="absolute left-0 top-0 -z-10 w-full h-screen sm:h-[871px] object-cover hidden sm:block"
+      >
+        <source src="/assets/videos/movefit-video.mp4" type="video/mp4" />
+      </video>
+
       <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
       <div className="max-w-[420px] px-5 flex flex-col justify-end pb-[150px] sm:pb-0 sm:block w-full mx-auto mt-[92.5px] relative sm:max-w-[768px] sm:px-[41.5px] sm:mt-[81px] x:max-w-[1024px] x:px-[61.3px] x:mt-[81px] xl:px-0 xl:max-w-[900px] xl:mt-[80.5px] 2xl:max-w-[995px]  sm:min-h-[726px] xl:min-h-[718px] 2xl:min-h-[840px] overflow-hidden ">
         <img
