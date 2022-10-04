@@ -1,12 +1,12 @@
 import { Button, VerifyCodeInput } from 'components'
-import React, { Dispatch, useState } from 'react'
+import React, { Dispatch, FormEvent, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps } from 'types'
 import { useAuth } from 'Contexts/Auth'
-import { setToken } from 'services/api'
 import { useNavigate } from 'hooks/UseRouter'
 import { AuthService } from 'services'
 import Link from 'next/link'
+import { AxiosError } from 'axios'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
@@ -14,24 +14,35 @@ type Props = {
 }
 
 const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactElement => {
-  const { verifyCode, updateUser } = useAuth()
+  const { verifyCode, sendCode } = useAuth()
   const { navigateTo } = useNavigate()
   const [code, setCode] = useState<string>('')
   const [loading, setLoading] = useState(false)
+  const [showError, setShowError] = useState(false)
 
-  const handleVerify = () => {
+  const handleVerify = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     try {
       setLoading(true)
-      verifyCode(phoneNumber, Number(code)).then(async ({ token }) => {
-        setToken(token)
-        const account = await AuthService.getAccount()
-        updateUser(account)
-        await navigateTo('/account')
-      })
+      const res = await verifyCode(phoneNumber, Number(code))
+      console.log(res)
+      navigateTo('/')
     } catch (e) {
-      console.log(e)
+      if (e instanceof AxiosError) {
+        setShowError(true)
+      }
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleResendCode = async () => {
+    try {
+      await sendCode(phoneNumber)
+      setShowError(false)
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -66,7 +77,17 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactEleme
               </div>
             </div>
           </div>
-          <VerifyCodeInput length={5} code={code} onChange={(cd) => setCode(cd)} />
+          <div className="flex flex-col gap-4">
+            <VerifyCodeInput length={5} code={code} onChange={(cd) => setCode(cd)} />
+            {showError && (
+              <Typography className="text-text-error font-medium" variant="body2">
+                Sorry, the code didn’t match.{` `}
+                <span onClick={handleResendCode} className="underline hover:cursor-pointer">
+                  Resend
+                </span>
+              </Typography>
+            )}
+          </div>
         </div>
         <div className="flex flex-col mt-5">
           <Button

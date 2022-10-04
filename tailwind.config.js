@@ -101,6 +101,7 @@ module.exports = {
         },
         text: {
           blue: colors.text.blue,
+          error: colors.text.erorr,
         },
         fill: {
           orange: colors.fill.orange,

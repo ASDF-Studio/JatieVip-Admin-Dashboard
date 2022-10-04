@@ -34,6 +34,7 @@ module.exports = {
     hop: '#FF9500',
     blue: '#32A1C7',
     purple: '#9272FD',
+    erorr: '#e92346',
   },
   border: {
     blue: 'rgba(50,161,199, 1)',

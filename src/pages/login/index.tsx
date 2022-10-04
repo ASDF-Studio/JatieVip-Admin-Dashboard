@@ -6,6 +6,8 @@ import { useAuth } from 'Contexts/Auth'
 import { useNavigate } from 'hooks/UseRouter'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
+import { withIronSessionSsr } from 'iron-session/next'
+import { sessionOptions } from 'lib/session'
 
 type FormValues = {
   phoneNumber: string
@@ -58,3 +60,19 @@ const Home: NextPage = (): React.ReactElement => {
 }
 
 export default Home
+
+export const getServerSideProps = withIronSessionSsr(({ req }) => {
+  if (req.session.token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+      props: {},
+    }
+  }
+
+  return {
+    props: {},
+  }
+}, sessionOptions)

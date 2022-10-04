@@ -1,17 +1,33 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
+import { AuthService } from 'services'
+import { ApiErrorResponse } from 'services/api'
 
 const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { username } = await req.body
+  const { phoneNumber, token } = req.body
+
+  if (typeof phoneNumber !== 'string' || typeof token !== 'number') {
+    res.status(401).json({ message: 'validation error' })
+  }
 
   try {
-    const user = { isLoggedIn: true, login, avatarUrl: avatar_url } as User
-    req.session.user = user
+    const data = await AuthService.verifyLogin({
+      phoneNumber,
+      token,
+    })
+
+    req.session.token = data.token
     await req.session.save()
-    res.json(user)
+    res.status(200).json({})
   } catch (error) {
-    res.status(500).json({ message: (error as Error).message })
+    if (error instanceof ApiErrorResponse) {
+      res.status(400).json({
+        message: error.message,
+      })
+    } else {
+      res.status(500).json({ message: (error as Error).message })
+    }
   }
 }
 

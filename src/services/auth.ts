@@ -18,6 +18,7 @@ export interface VerifyLoginParams {
 
 export interface VerifyLoginResp {
   token: string
+  isLoggedIn: boolean
 }
 
 const Service = {
@@ -29,9 +30,9 @@ const Service = {
     rest.post<VerifyLoginResp>('auth/verify-login', {
       body,
     }),
-  getAccount: () =>
+  getAccount: ({ token }: { token: string }) =>
     rest.get<IUser>('auth/me', {
-      hasAuth: true,
+      jwttoken: token,
     }),
 }
 
