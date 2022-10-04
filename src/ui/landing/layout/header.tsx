@@ -56,7 +56,7 @@ export const LandingHeader = ({ inView, dark }) => {
           left: showMenu ? '0%' : '100%',
           height: 'calc(100vh - 60px)',
         }}
-        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto"
+        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
       >
         <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[24px]">
           <div className="flex flex-col gap-5 mt-[25px] items-center">

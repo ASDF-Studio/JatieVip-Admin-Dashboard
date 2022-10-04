@@ -21,7 +21,7 @@ export const HeroSection: React.FC = (): React.ReactElement => {
           alt="phone"
         />
 
-        <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4 mt-0 sm:mt-[220px] sm:ml-[291px] x:ml-[382px] x:mt-[241px] xl:ml-[382px] xl:mt-[233px] sm:mb-0 z-20 relative">
+        <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4 mt-0 sm:mt-[220px] sm:ml-[291px] x:ml-[382px] x:mt-[241px] xl:ml-[382px] xl:mt-[233px] sm:mb-0 z-10 relative">
           <div className="flex flex-col">
             <Title className="text-white/80">Move Your Way</Title>
             <div className="relative w-full max-w-[380px] sm:max-w-[395px] x:max-w-[538px]">
