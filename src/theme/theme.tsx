@@ -21,11 +21,11 @@ export const MoveTheme = {
     heading1: {
       fontSize: '45px',
       fontWeight: '600',
-      // '@media (max-width:900px)': {
-      //   fontSize: '32px',
-      //   lineHeight: '40px',
-      //   fontWeight: 800,
-      // },
+      '@media (max-width:768px)': {
+        fontSize: '30px',
+        lineHeight: 1.33,
+        fontWeight: 600,
+      },
       // '@media (max-width:600px)': {
       //   fontSize: '32px',
       //   lineHeight: '40px',
@@ -48,13 +48,13 @@ export const MoveTheme = {
       // },
     },
     heading3: {
-      fontSize: '26px',
+      fontSize: '22px',
       fontWeight: 600,
-      // '@media (max-width:900px)': {
-      //   fontSize: '24px',
-      //   lineHeight: '30px',
-      //   fontWeight: 700,
-      // },
+      '@media (max-width:768px)': {
+        fontSize: '22px',
+        lineHeight: 'normal',
+        fontWeight: 600,
+      },
       // '@media (max-width:600px)': {
       //   fontSize: '24px',
       //   lineHeight: '30px',
@@ -62,13 +62,13 @@ export const MoveTheme = {
       // },
     },
     heading4: {
-      fontSize: '30px',
+      fontSize: '22px',
       fontWeight: 600,
-      // '@media (max-width:900px)': {
-      //   fontSize: '24px',
-      //   lineHeight: '30px',
-      //   fontWeight: 700,
-      // },
+      '@media (max-width:1023px)': {
+        fontSize: '22px',
+        lineHeight: 'normal',
+        fontWeight: 600,
+      },
       // '@media (max-width:600px)': {
       //   fontSize: '24px',
       //   lineHeight: '30px',
@@ -257,6 +257,11 @@ export const MoveTheme = {
         lineHeight: 1.63,
         fontWeight: 600,
       },
+    },
+    body4: {
+      fontSize: '18px',
+      fontWeight: 600,
+      lineHeight: 'normal',
     },
     subhead: {
       fontSize: '14px',

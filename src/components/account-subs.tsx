@@ -10,27 +10,25 @@ type Props = {
 
 export const AccountSubs: FC<Props> = ({ classname, onCancel }): React.ReactElement => {
   return (
-    <div className={`${classname} w-full bg-fill-blue pt-[1.688rem] rounded-[24px] pb-5`}>
-      <div className="flex flex-col gap-2 px-[2.375rem]">
-        <div className="flex justify-between items-center">
+    <div className={`${classname} w-full bg-fill-blue pt-[23px] x:pt-[26px] rounded-[24px] pb-[25px] x:pb-5 max-w-[380px] mx-auto sm:max-w-full x:mx-0`}>
+      <div className="flex flex-col sm:flex-row gap-y-[15px] gap-2 px-5 sm:px-[38px] justify-between">
+        <div className="flex flex-col">
           <Typography variant="heading3">You are subscribed to</Typography>
-          <Tag text="Next Payement: July 12, 2023 | $38.99" />
+          <Typography variant="heading3">3-Months Commitment Plan</Typography>
         </div>
-        <div className="flex justify-between items-center">
-          <Typography variant="heading3" className="text-border-blue">
-            3-Months Commitment Plan
-          </Typography>
-          <Typography align="right" variant="subheadBold" className="w-[15.625rem] text-primary-grey">
-            Your payment will be automatically renewed every 3 months
+        <div className="flex flex-col gap-[15px] max-w-[300px] sm:max-w-full">
+          <Tag text="Next Payement: July 12, 2023 | $38.99" />
+          <Typography  variant="subheadBold" className="w-[15.625rem] text-primary-grey text-left sm:text-right">
+            Your payment will be automatically renewed every 3-months
           </Typography>
         </div>
       </div>
-      <div className="w-full h-px bg-border-blue mt-[1.531rem] mb-[0.969rem]" />
-      <div className="flex flex-col px-[2.375rem] gap-[0.938rem]">
-        <Typography variant="subhead" className="text-primary-grey">
+      <div className="w-full h-[2px] bg-primary-brand mt-[27px] mb-[28px] sm:mt-[25px] sm:mb-[15px]" />
+      <div className="flex flex-col px-5 sm:px-[38px] gap-[15px]">
+        <Typography variant="subhead" className="text-primary-grey sm:order-1 order-2 text-center sm:text-left">
           After canceling, you&apos;ll be able to use Movefit until the end of the current billing period.
         </Typography>
-        <Button className="w-full max-w-[12.5rem]" variant="ghost" onClick={onCancel}>
+        <Button className="w-full sm:max-w-[12.5rem] sm:order-2 order-1" variant="ghost" onClick={onCancel}>
           Cancel Renewal
         </Button>
       </div>

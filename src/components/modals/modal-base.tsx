@@ -13,7 +13,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     maxWidth: '440px',
     padding: '1.438rem 1.25rem 1.625rem 1.25rem',
     borderRadius: '18px',
-    margin: 0,
+    margin: '0 15px',
     boxSizing: 'border-box',
     width: '100%',
   },
@@ -74,7 +74,7 @@ export const ModalBase: React.FC<Props> = ({
 
   return (
     <div>
-      <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title"  open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {title}
         </BootstrapDialogTitle>

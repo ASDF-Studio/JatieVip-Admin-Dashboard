@@ -1,5 +1,6 @@
 import { IconButton, Typography } from '@mui/material'
 import { FacebookIcon, TikTokIcon, YoutubeIcon, InstagramIcon, SnapChat } from 'components/icons'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 type Props = {
@@ -52,9 +53,26 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
         </IconButton>
       </div>
       <div className="flex gap-2.5 x:gap-10 flex-col x:flex-row mt-[22px] x:mt-0">
-        <Typography variant="body2" className="leading-[2]">
-          Terms of Service • Privacy Policy
-        </Typography>
+        <div className="flex gap-2">
+          <Link href="/landing/terms">
+            <a>
+              <Typography variant="body2" className="leading-[2]  underline-offset-1 hover:underline">
+                Terms of Service
+              </Typography>
+            </a>
+          </Link>
+          <Typography variant="body2" className="leading-[2]  underline-offset-1 hover:underline">
+            •
+          </Typography>
+          <Link href="/landing/terms">
+            <a>
+              <Typography variant="body2" className="leading-[2]   underline-offset-1 hover:underline">
+                Privacy Policy
+              </Typography>
+            </a>
+          </Link>
+        </div>
+
         <Typography variant="body2" className="leading-[2]">
           © Move, Inc. All rights reserved.
         </Typography>

@@ -96,6 +96,7 @@ declare module '@mui/material/Typography' {
     body1?: true
     body2?: true
     body3?: true
+    body4?: true
     body?: true
     desc?: true
     subhead?: true

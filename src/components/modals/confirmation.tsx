@@ -17,7 +17,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     maxWidth: '440px',
     padding: '1.438rem 1.25rem 1.625rem 1.25rem',
     borderRadius: '18px',
-    margin: 0,
+    margin: "0 15px",
     boxSizing: 'border-box',
     width: '100%',
   },

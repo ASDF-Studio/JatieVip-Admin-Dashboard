@@ -1,5 +1,7 @@
 import { Avatar } from '@mui/material'
 import { Button } from 'components/Button'
+import { Dashboard, UserIcon } from 'components/icons'
+import { useBreakPoint } from 'hooks'
 import { useNavigate } from 'hooks/UseRouter'
 import React, { FC } from 'react'
 
@@ -11,6 +13,7 @@ type Props = {
 
 export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }): React.ReactElement => {
   const { navigateTo, pathname } = useNavigate()
+  const { isTablet } = useBreakPoint()
 
   const isDashBoard = pathname === '/dashboard'
   const isAccount = pathname === '/account'
@@ -26,40 +29,48 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
       </div>
 
       {withNavBar && (
-        <div className="flex gap-[50px] items-center h-full hover:cursor-pointer">
+        <div className="flex gap-[23px] sm:gap-[50px] items-center h-full hover:cursor-pointer">
           <div
             className={`${
               isDashBoard ? 'border-primary-brand' : 'border-transparent'
-            } flex flex-col border-b-[4px] h-full  justify-center`}
+            } flex flex-col border-b-[4px] h-full  justify-center items-center w-[30px] sm:w-full`}
           >
-            <Button
-              onClick={() => navigateTo('/dashboard')}
-              variant="text"
-              textVariant="title3"
-              disableRipple
-              textClassName={isDashBoard ? 'text-primary-black' : 'text-primary-grey'}
-            >
-              Dashboard
-            </Button>
-          </div>
-
-          <div className="flex gap-[37px] h-full items-center hover:cursor-pointer">
-            <div
-              className={`${
-                isAccount ? 'border-primary-brand' : 'border-transparent'
-              } flex flex-col border-b-[4px] h-full  justify-center`}
-            >
+            {!isTablet ? (
+              <Dashboard className="w-[18px]" />
+            ) : (
               <Button
-                onClick={() => navigateTo('/account')}
+                onClick={() => navigateTo('/dashboard')}
                 variant="text"
                 textVariant="title3"
                 disableRipple
-                textClassName={isAccount ? 'text-primary-black' : 'text-primary-grey'}
+                textClassName={isDashBoard ? 'text-primary-black' : 'text-primary-grey'}
               >
-                Profile
+                Dashboard
               </Button>
+            )}
+          </div>
+
+          <div className="flex gap-[23px] sm:gap-[37px] h-full items-center hover:cursor-pointer">
+            <div
+              className={`${
+                isAccount ? 'border-primary-brand' : 'border-transparent'
+              } flex flex-col border-b-[4px] h-full  justify-center items-center w-[30px] sm:w-full`}
+            >
+              {!isTablet ? (
+                <UserIcon className="w-[16px] fill-[#86949f]" />
+              ) : (
+                <Button
+                  onClick={() => navigateTo('/account')}
+                  variant="text"
+                  textVariant="title3"
+                  disableRipple
+                  textClassName={isAccount ? 'text-primary-black' : 'text-primary-grey'}
+                >
+                  Profile
+                </Button>
+              )}
             </div>
-            <Avatar className="w-10 h-10" />
+            <Avatar className="w-[35px] h-[35px] sm:w-10 sm:h-10" />
           </div>
         </div>
       )}

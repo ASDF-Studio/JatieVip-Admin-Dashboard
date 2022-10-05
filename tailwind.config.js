@@ -138,6 +138,7 @@ module.exports = {
         buttonShadow2: '0 8px 10px 0 rgba(2, 32, 71, 0.1), 0 0 1px 0 rgba(2, 32, 71, 0.08)',
         buttonShadow3: '0 5px 4px 0 rgba(14, 208, 233, 0.1)',
         hoverShadow: '0 5px 10px 0 rgba(14, 208, 233, 0.3)',
+        logoShadow2: '0 10px 10px -5px rgba(0, 0, 0, 0.2)',
       },
     },
   },

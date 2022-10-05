@@ -7,8 +7,8 @@ type Props = {
 
 export const Tag: FC<Props> = ({ text }): React.ReactElement => {
   return (
-    <div className="rounded-[14px] px-4 pt-1.5 pb-1 bg-fill-spice/10">
-      <Typography className="text-fill-spice" variant="label2">
+    <div className="rounded-[14px] px-4 pt-1.5 pb-1 bg-primary-brand/10">
+      <Typography className="text-primary-brand" variant="label2">
         {text}
       </Typography>
     </div>

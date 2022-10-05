@@ -1,4 +1,5 @@
 import { IconButton, Typography } from '@mui/material'
+import { LinkSlashIcon } from 'components/icons'
 import { History } from './history'
 
 type Props = {
@@ -7,56 +8,83 @@ type Props = {
 
 export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactElement => {
   return (
-    <div className="w-full flex justify-between gap-[3.938rem]">
-      <div className="w-1/2 flex flex-col gap-[1.313rem]">
+    <div className="w-full  sm:w-full flex flex-col items-center sm:items-start sm:flex-row sm:justify-between gap-[40px]  sm:gap-[3.938rem]">
+      <div className="max-w-[380px] w-full sm:max-w-[490px] flex flex-col gap-[15px] order-3 sm:order-1">
         <Typography variant="heading3">Billing History</Typography>
         <div className="flex flex-col gap-2.5">
-          <Typography variant="bodyBold" className="text-primary-grey">
+          <Typography className="text-primary-grey text-[16px] font-medium">
             You can view and download all your previous invoices here. If you’ve just made a payment, it may take a few
             hours for it to appear.
           </Typography>
-          <div className="flex flex-col gap-[3.906rem]">
+          <div className="flex flex-col gap-[30px] mt-[23px]">
             <History />
+            <div className="h-px w-full bg-[#f5f7f9]" />
             <History />
+            <div className="h-px w-full bg-[#f5f7f9]" />
             <History />
           </div>
         </div>
       </div>
-      <div className="w-1/2 flex flex-col gap-[1.313rem]">
-        <Typography variant="heading3">Billing Address</Typography>
-        <div className="pt-[1.563rem] pr-[1.063rem] pl-[1.813rem] pb-[1.688rem] rounded-[18px] bg-fill-lightBlue flex justify-between">
-          <div className="flex flex-col w-full">
-            <div className="flex justify-between">
-              <Typography className="text-primary-grey" variant="bodyBold">
-                Louis Griffin
-              </Typography>
-              <IconButton
-                aria-label="edit"
-                onClick={setShowBillingModal}
-                disableRipple
-                sx={{
-                  '&.MuiButtonBase-root:hover': {
-                    bgcolor: 'transparent',
-                  },
-                  '&.MuiButtonBase-root:active': {
-                    bgcolor: 'transparent',
-                  },
-                }}
-              >
-                <div className="w-[34px] h-[34px] bg-primary-brand hover:bg-[#17AEDC] flex justify-center items-center rounded-md">
-                  <img src="/assets/svg/pen.svg" alt="pen svg" className="w-[16px] h-[16px]" />
-                </div>
-              </IconButton>
-            </div>
+      <div className="max-w-[380px] sm:max-w-[490px] w-full order-1 flex flex-col sm:order-2">
+        <div className="w-full flex flex-col gap-[12px]">
+          <Typography variant="heading3">Linked Card</Typography>
+          <div className="rounded-[18px] bg-fill-lightBlue h-[67px] flex justify-between items-center pl-[29px] pr-[17px] ">
+            <Typography className="text-primary-grey text-[16px] font-medium">
+              Louis Griffin
+            </Typography>
+            <IconButton
+              aria-label="edit"
+              // onClick={setShowBillingModal}
+              disableRipple
+              sx={{
+                '&.MuiButtonBase-root:hover': {
+                  bgcolor: 'transparent',
+                },
+                '&.MuiButtonBase-root:active': {
+                  bgcolor: 'transparent',
+                },
+              }}
+            >
+              <div className="w-[34px] h-[34px] bg-[#86949f] hover:bg-[#17AEDC] flex justify-center items-center rounded-md">
+                <LinkSlashIcon className="w-[16px] h-[16px] fill-white" />
+              </div>
+            </IconButton>
+          </div>
+        </div>
+        <div className="w-full flex flex-col gap-[12px] mt-[40px] sm:mt-[44px] order-2 sm:order-3">
+          <Typography variant="heading3">Billing Address</Typography>
+          <div className="pl-[29px] pr-[17px] py-[17px] rounded-[18px] bg-fill-lightBlue flex justify-between">
+            <div className="flex flex-col w-full">
+              <div className="flex justify-between items-center">
+                <Typography className="text-primary-grey text-[16px] font-medium">Louis Griffin</Typography>
+                <IconButton
+                  aria-label="edit"
+                  onClick={setShowBillingModal}
+                  disableRipple
+                  sx={{
+                    '&.MuiButtonBase-root:hover': {
+                      bgcolor: 'transparent',
+                    },
+                    '&.MuiButtonBase-root:active': {
+                      bgcolor: 'transparent',
+                    },
+                  }}
+                >
+                  <div className="w-[34px] h-[34px] bg-primary-brand hover:bg-[#17AEDC] flex justify-center items-center rounded-md">
+                    <img src="/assets/svg/pen.svg" alt="pen svg" className="w-[16px] h-[16px]" />
+                  </div>
+                </IconButton>
+              </div>
 
-            <br />
-            <Typography className="text-primary-grey" variant="bodyBold" maxWidth="15.063rem">
-              louisgriffin@gmail.com +01 029 2992
-            </Typography>
-            <br />
-            <Typography className="text-primary-grey" variant="bodyBold" maxWidth="15.063rem">
-              6634 N Minnehaha Ave Lincolnwood, Illinois 60712 United States
-            </Typography>
+              <br />
+              <Typography className="text-primary-grey text-[16px] font-medium" maxWidth="15.063rem">
+                louisgriffin@gmail.com +01 029 2992
+              </Typography>
+              <br />
+              <Typography className="text-primary-grey text-[16px] font-medium" maxWidth="15.063rem">
+                6634 N Minnehaha Ave Lincolnwood, Illinois 60712 United States
+              </Typography>
+            </div>
           </div>
         </div>
       </div>

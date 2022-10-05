@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Button, Input, MainLayout, CustomDatePicker, SingleSelect, BasicSelect } from 'components'
+import { Button, Input, MainLayout, CustomDatePicker, SingleSelect, BasicSelect, ProfilePicture } from 'components'
 import { Avatar, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { useAuth } from 'Contexts/Auth'
@@ -81,119 +81,120 @@ const Account: NextPage = () => {
   ]
 
   return (
-    <MainLayout className="pt-[66px]">
-      <SecurePage>
-        <div className="max-w-[400px] mx-auto mt-[1.938rem] mb-[3.25rem] flex flex-col">
-          <div className="text-center">
-            <Typography variant="heading1">Your profile</Typography>
-          </div>
-          <div className="flex gap-[19px] items-center mt-[1.875rem]">
-            <Avatar src={imageURL} className="w-[88px] h-[88px]" />
-            <div className="flex flex-col gap-1.5">
-              <Typography variant="bodyBold">Profile Picture</Typography>
-              <input
-                className="hidden"
-                type="file"
-                accept="image/*"
-                ref={inputRef}
-                onChange={(e) => handleImageChange(e)}
-              />
-              <Button
-                onClick={() => {
-                  inputRef.current.click()
-                }}
-                variant="secondry"
-                disableRipple
-                className="w-[9.375rem]"
-                textClassName="text-border-blue"
-              >
-                Upload Picture
-              </Button>
-            </div>
-          </div>
+    <MainLayout className="pt-[66px] px-5">
+      {/* <SecurePage> */}
+      <div className="max-w-[400px] mx-auto mt-[1.938rem] mb-[3.25rem] flex flex-col">
+        <div className="text-center">
+          <Typography variant="heading1">Your profile</Typography>
+        </div>
+        <div className="flex gap-[19px] items-center mt-[1.875rem]">
+          <ProfilePicture url={imageURL} />
 
-          <div className="flex flex-col gap-[2.625rem] mt-[2.5rem]">
-            <div className="flex flex-col gap-2">
-              <Input
-                placeholder={phoneNumber}
-                name="phoneNumber"
-                readOnly
-                label="Phone"
-                className="rounded-[22px] py-[2px] px-3 bg-border-grey"
-              />
-              <Typography className="text-primary-grey" variant="body2">
-                You use this phone number to login to your account
-              </Typography>
-            </div>
-            <div className="flex flex-col gap-5">
-              <Typography variant="subheadBold" className="text-primary-grey">
-                Basics
-              </Typography>
-              <Input
-                placeholder="First Name"
-                name="firstName"
-                value={firstName}
-                onChange={handleInputChange}
-                className="rounded-[22px] py-[2px] px-3 bg-border-grey"
-              />
-              <Input
-                value={lastName}
-                name="lastName"
-                placeholder="Last Name"
-                onChange={handleInputChange}
-                className="rounded-[22px] py-[2px] px-3 bg-border-grey"
-              />
-              <div className="flex gap-5 justify-between">
-                <div className="max-w-[11.875rem]">
-                  <CustomDatePicker date={birthDay} onChange={(value) => setFieldValue('birthDay', value)} />
-                </div>
-                <div className="max-w-[48%] w-full">
-                  <BasicSelect value={gender} name="gender" items={items} onChange={(e) => handleInputChange(e)} />
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-5 mt-[3.75rem]">
-              <Typography variant="subheadBold" className="text-primary-grey">
-                Profile Type
-              </Typography>
-              <div className="flex gap-5 justify-between">
-                <SingleSelect
-                  selected={isPublic}
-                  icon={
-                    <div className="flex justify-center items-center w-[20px] h-[20px]  bg-border-blue rounded-full">
-                      <div className="bg-white w-[10px] h-[10px] rounded-full">
-                        <img src="/assets/svg/earth-americas.svg" className="w-[10px] h-[10px]" alt="world icon" />
-                      </div>
-                    </div>
-                  }
-                  text="Public"
-                  onClick={() => setFieldValue('isPublic', true)}
-                />
-                <SingleSelect
-                  selected={!isPublic}
-                  icon={
-                    <div className="flex justify-center items-center w-[20px] h-[20px]  bg-border-blue rounded-full">
-                      <img src="/assets/svg/lock.svg" className="w-2.5 h-2.5" alt="lock icon" />
-                    </div>
-                  }
-                  text="Private"
-                  onClick={() => setFieldValue('isPublic', false)}
-                />
-              </div>
-              <Button
-                loading={loading}
-                disabled={loading}
-                variant="fill"
-                onClick={formik.submitForm}
-                textClassName="text-white"
-                disableRipple
-              >
-                Save
-              </Button>
-            </div>
+          <div className="flex flex-col gap-1.5">
+            <Typography variant="bodyBold">Profile Picture</Typography>
+            <input
+              className="hidden"
+              type="file"
+              accept="image/*"
+              ref={inputRef}
+              onChange={(e) => handleImageChange(e)}
+            />
+            <Button
+              onClick={() => {
+                inputRef.current.click()
+              }}
+              variant="secondry"
+              disableRipple
+              className="w-[9.375rem]"
+              textClassName="text-border-blue"
+            >
+              Upload Picture
+            </Button>
           </div>
         </div>
-      </SecurePage>
+
+        <div className="flex flex-col gap-[2.625rem] mt-[2.5rem]">
+          <div className="flex flex-col gap-2">
+            <Input
+              placeholder={phoneNumber}
+              name="phoneNumber"
+              readOnly
+              label="Phone"
+              className="rounded-[22px] py-[2px] px-3 bg-border-grey"
+            />
+            <Typography className="text-primary-grey" variant="body2">
+              You use this phone number to login to your account
+            </Typography>
+          </div>
+          <div className="flex flex-col gap-5">
+            <Typography variant="subheadBold" className="text-primary-grey">
+              Basics
+            </Typography>
+            <Input
+              placeholder="First Name"
+              name="firstName"
+              value={firstName}
+              onChange={handleInputChange}
+              className="rounded-[22px] py-[2px] px-3 bg-border-grey"
+            />
+            <Input
+              value={lastName}
+              name="lastName"
+              placeholder="Last Name"
+              onChange={handleInputChange}
+              className="rounded-[22px] py-[2px] px-3 bg-border-grey"
+            />
+            <div className="flex gap-5 justify-between">
+              <div className="max-w-[11.875rem]">
+                <CustomDatePicker date={birthDay} onChange={(value) => setFieldValue('birthDay', value)} />
+              </div>
+              <div className="max-w-[48%] w-full">
+                <BasicSelect value={gender} name="gender" items={items} onChange={(e) => handleInputChange(e)} />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-5 mt-[60px]">
+            <Typography variant="subheadBold" className="text-primary-grey">
+              Profile Type
+            </Typography>
+            <div className="flex gap-5 justify-between">
+              <SingleSelect
+                selected={isPublic}
+                icon={
+                  <div className="flex justify-center items-center w-[20px] h-[20px]  bg-border-blue rounded-full">
+                    <div className="bg-white w-[10px] h-[10px] rounded-full">
+                      <img src="/assets/svg/earth-americas.svg" className="w-[10px] h-[10px]" alt="world icon" />
+                    </div>
+                  </div>
+                }
+                text="Public"
+                onClick={() => setFieldValue('isPublic', true)}
+              />
+              <SingleSelect
+                selected={!isPublic}
+                icon={
+                  <div className="flex justify-center items-center w-[20px] h-[20px]  bg-border-blue rounded-full">
+                    <img src="/assets/svg/lock.svg" className="w-2.5 h-2.5" alt="lock icon" />
+                  </div>
+                }
+                text="Private"
+                onClick={() => setFieldValue('isPublic', false)}
+              />
+            </div>
+            <Button
+              loading={loading}
+              disabled={loading}
+              variant="fill"
+              onClick={formik.submitForm}
+              textClassName="text-white"
+              disableRipple
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+      </div>
+      {/* </SecurePage> */}
     </MainLayout>
   )
 }

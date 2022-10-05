@@ -14,11 +14,13 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
 
   return (
     <div className={`${className}`}>
-      <div className="flex flex-col gap-[2.813rem]">
+      <div className="flex flex-col gap-[29px] sm:gap-[63px]">
         <Hello />
-        <Typography variant="heading3">Manage Plan</Typography>
+        <Typography variant="heading3" className="text-center sm:text-left">
+          Manage Plan
+        </Typography>
       </div>
-      <div className="flex flex-col gap-[2.063rem] mt-[1.375rem]">
+      <div className="flex flex-col gap-[15px] sm:gap-[37px] mt-[15px] sm:mt-5">
         <BoxSelect
           data={[
             {
@@ -30,12 +32,18 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
               value: '$12.99/mo',
               discountValue: '$95.88',
             },
+            {
+              title: '1 Year',
+              value: '$12.99/mo',
+              discountValue: '$95.88',
+            },
           ]}
-          classname="bg-fill-blue w-1/2"
+          gap="sm:gap-[25px] gap-[15px]"
+          classname="bg-fill-blue max-w-[360px] sm:max-w-[320px]"
         />
-        <div className="flex flex-col gap-2.5 items-center">
+        <div className="flex flex-col gap-[15px] sm:gap-[13px] items-center">
           <Button
-            className="w-full max-w-[29.063rem]"
+            className="w-full max-w-[360px] sm:max-w-[29.063rem]"
             variant="fill"
             textClassName="text-white"
             onClick={() => setShowModal(true)}
@@ -43,12 +51,20 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
           >
             Upgrade
           </Button>
-          <Typography variant="bodyBold" className="text-fill-grey">
-            All transactions are secure and encrypted by <span className="text-border-blue">Stripe</span>
+          <Typography variant="bodyBold" className="text-fill-grey text-center max-w-[290px] sm:max-w-full">
+            All transactions are secure and encrypted by{' '}
+            <span
+              className="text-border-blue hover:cursor-pointer"
+              onClick={() => {
+                window.open('https://stripe.com/', '_blank')
+              }}
+            >
+              Stripe
+            </span>
           </Typography>
         </div>
       </div>
-      <AccountSubs classname="mt-[3.313rem] mb-[4.188rem]" onCancel={() => setShowAutoRenewalModal(true)} />
+      <AccountSubs classname="my-[30px] sm:mt-[53px] mb-[4.188rem]" onCancel={() => setShowAutoRenewalModal(true)} />
       <Billing setShowBillingModal={() => setShowBillingModal(true)} />
       <ConfirmationModal
         open={showModal}

@@ -4,8 +4,8 @@ import { ManageSub } from 'ui/dashboard/'
 
 const Home: NextPage = () => {
   return (
-    <MainLayout className="pt-[66px]">
-      <ManageSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[3.375rem] mb-[3.094rem]" />
+    <MainLayout className="pt-[66px] px-5">
+      <ManageSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] sm:mt-[53px] mb-[50px] " />
     </MainLayout>
   )
 }
