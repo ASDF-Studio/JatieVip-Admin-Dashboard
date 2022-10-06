@@ -54,10 +54,11 @@ export const LandingHeader = ({ inView, dark }) => {
           transition: '0.3s',
           opacity: showMenu ? 1 : 0,
           left: showMenu ? '0%' : '100%',
-          height: 'calc(100vh - 60px)',
+          top: '0px',
+          minHeight: 'calc(100vh - 60px)',
           paddingBottom: 'env(safe-area-inset-bottom)',
         }}
-        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
+        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50 ios-menu"
       >
         <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[24px]">
           <div className="flex flex-col gap-5 mt-[25px] items-center">
@@ -154,7 +155,13 @@ export const LandingHeader = ({ inView, dark }) => {
           <div className="flex flex-col mt-5 gap-[16px]">
             <div className="h-[1px] w-full bg-black opacity-[0.15]" />
             <div className="flex justify-between">
-              <IconButton className="p-0" disableRipple>
+              <IconButton
+                className="p-0"
+                disableRipple
+                onClick={() => {
+                  window.open('https://www.facebook.com/movefitapp', '_blank')
+                }}
+              >
                 <FacebookIcon className="w-[30px]" fill="black" />
               </IconButton>
               <IconButton
@@ -175,7 +182,13 @@ export const LandingHeader = ({ inView, dark }) => {
               >
                 <SnapChat className="w-[32px]" fill="black" />
               </IconButton>
-              <IconButton className="p-0" disableRipple>
+              <IconButton
+                className="p-0"
+                disableRipple
+                onClick={() => {
+                  window.open('https://youtube.com/channel/UCHtMq7sjroEvqdWIjFne7NA', '_blank')
+                }}
+              >
                 <YoutubeIcon className="w-[38px]" fill="black" />
               </IconButton>
 

@@ -173,7 +173,12 @@ a {
   text-decoration: none !important;
 }
 
-html{
+html {
   scroll-behavior: smooth;
   scroll-padding-top: 50px;
-  }
+}
+
+.ios-menu {
+  height: -webkit-fill-available;
+  -webkit-overflow-scrolling: touch;
+}
