@@ -55,6 +55,7 @@ export const LandingHeader = ({ inView, dark }) => {
           opacity: showMenu ? 1 : 0,
           left: showMenu ? '0%' : '100%',
           height: 'calc(100vh - 60px)',
+          paddingBottom: 'env(safe-area-inset-bottom)',
         }}
         className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
       >
