@@ -66,9 +66,9 @@ export const LandingHeader = ({ inView, dark }) => {
           bottom: '0px',
           paddingBottom: isSafari && '40px',
         }}
-        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
+        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-scroll z-50"
       >
-        <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[1000px]">
+        <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[24px]">
           <div className="flex flex-col gap-5 mt-[25px] items-center">
             <div className="flex flex-col gap-2.5 items-center">
               <Link href="/landing">
@@ -142,6 +142,11 @@ export const LandingHeader = ({ inView, dark }) => {
           </div>
 
           <div className="flex flex-col gap-5 5xl:mt[220px] mt-[113px]">
+            <Link href="/login">
+            <a>
+                pzda
+            </a>
+            </Link>
             <Button
               onClick={() => navigateTo('/login')}
               className="max-w-[360px] shadow-buttonShadow2"
