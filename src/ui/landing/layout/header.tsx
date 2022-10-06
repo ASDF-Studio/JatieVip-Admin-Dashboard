@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 
 export const LandingHeader = ({ inView, dark }) => {
   const { navigateTo } = useNavigate()
+
   const [showMenu, setShowMenu] = useState(false)
   const [isSafari, setIsSafari] = useState(false)
 
@@ -143,18 +144,16 @@ export const LandingHeader = ({ inView, dark }) => {
 
           <div className="flex flex-col gap-5 5xl:mt[220px] mt-[113px]">
             <Link href="/login">
-            <a>
-                pzda
-            </a>
+              <a>
+                <Button
+                  className="max-w-[360px] w-full shadow-buttonShadow2"
+                  textClassName="text-white"
+                  variant="fill"
+                >
+                  Login
+                </Button>
+              </a>
             </Link>
-            <Button
-              onClick={() => navigateTo('/login')}
-              className="max-w-[360px] shadow-buttonShadow2"
-              textClassName="text-white"
-              variant="fill"
-            >
-              Login
-            </Button>
             <Button
               onClick={() => navigateTo('/signup')}
               className="max-w-[360px] w-full shadow-buttonShadow2"
