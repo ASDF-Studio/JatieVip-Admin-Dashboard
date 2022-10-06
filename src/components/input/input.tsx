@@ -88,6 +88,7 @@ export const Input: React.FC<InputProperties> = (properties) => {
       <StyledInputBase
         className={className}
         {...otherProperties}
+      
         type={hidden !== undefined ? (hidden ? 'password' : 'text') : type}
         background={background}
         inputRef={inputRef}

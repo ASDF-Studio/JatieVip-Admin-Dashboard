@@ -16,18 +16,20 @@ type Props = {
 const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
   const { navigateTo } = useNavigate()
   const { sendCode } = useAuth()
+  const [error, setError] = useState<string>(null)
 
   const [loading, setLoading] = useState<boolean>(false)
 
   const handleLogin = async () => {
     try {
       setLoading(true)
-
       await sendCode(phoneNumber)
       onChangeStep('step2')
-    } catch (e) {
-      if (e instanceof ApiErrorResponse) {
-        console.log(e)
+    } catch (err) {
+      if (err instanceof ApiErrorResponse) {
+        if (err.message.includes('is not a valid')) {
+          setError(err.message)
+        }
       }
     } finally {
       setLoading(false)
@@ -57,6 +59,11 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
                 onChange={(e) => handleChangeForm('phoneNumber', e.target.value)}
                 className="rounded-[22px] py-[2px] px-3 bg-border-grey"
               />
+              {error && (
+                <Typography className="text-text-error font-medium" variant="body2">
+                  {error}
+                </Typography>
+              )}
 
               <Button
                 color="success"

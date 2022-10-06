@@ -17,7 +17,7 @@ module.exports = {
   },
   error: {
     light: '#FEAE9A',
-    main: '#DF3617',
+    main: '#e92346',
     dark: '#BF0A12',
   },
   warning: {

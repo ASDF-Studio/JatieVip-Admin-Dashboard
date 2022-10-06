@@ -7,6 +7,7 @@ import { useNavigate } from 'hooks/UseRouter'
 import { AuthService } from 'services'
 import Link from 'next/link'
 import { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
@@ -15,7 +16,7 @@ type Props = {
 
 const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactElement => {
   const { verifyCode, sendCode } = useAuth()
-  const { navigateTo } = useNavigate()
+  const router = useRouter()
   const [code, setCode] = useState<string>('')
   const [loading, setLoading] = useState(false)
   const [showError, setShowError] = useState(false)
@@ -26,7 +27,7 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactEleme
     try {
       setLoading(true)
       await verifyCode(phoneNumber, Number(code))
-      navigateTo('/')
+      router.replace('/')
     } catch (e) {
       if (e instanceof AxiosError) {
         setShowError(true)

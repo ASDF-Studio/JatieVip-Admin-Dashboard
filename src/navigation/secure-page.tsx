@@ -7,6 +7,7 @@ export const SecurePage = ({ children, className = '' }) => {
   const router = useRouter()
 
   useEffect(() => {
+    if (!user) return
     if (user?.first_name === 'test') {
       router.push('/signup')
     }

@@ -28,7 +28,6 @@ declare global {
 export const AuthProvider: FC<{ children: React.ReactNode; userContext: IUser }> = ({ children, userContext }) => {
   const [user, setUser] = useState<IUser>(userContext)
   const [ready, setReady] = useState<boolean>(false)
-  
 
   const updateUser = (arg: IUser) => {
     setUser(arg)
