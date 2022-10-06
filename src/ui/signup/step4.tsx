@@ -8,10 +8,10 @@ import Link from 'next/link'
 import { useFormik } from 'formik'
 import { AccountService } from 'services'
 import { getBase64 } from 'utils/helper'
+import { useUser } from 'hooks/useUser'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
-  handleChangeForm: (name: string, value: string) => void
   phoneNumber: string
 }
 
@@ -25,8 +25,7 @@ type FormValues = {
   imageURL: string
 }
 
-const Step4: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
-  const { navigateTo } = useNavigate()
+const Step4: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -52,7 +51,7 @@ const Step4: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
       lastName: '',
       phoneNumber: '',
       birthDay: '',
-      gender: 'male',
+      gender: '',
       isPublic: false,
       imageURL: '',
     },
@@ -77,7 +76,7 @@ const Step4: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
     },
   })
 
-  const { setFieldTouched, touched, errors, setFieldValue } = formik
+  const { setFieldTouched, setFieldValue } = formik
 
   const { firstName, lastName, birthDay, gender, isPublic, imageURL } = formik.values
 

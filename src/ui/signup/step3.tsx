@@ -5,27 +5,31 @@ import { LoginSteps, SignUpSteps } from 'types'
 import { useNavigate } from 'hooks/UseRouter'
 import { ApiErrorResponse } from 'services/api'
 import Link from 'next/link'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
 type Props = {
   onChangeStep: Dispatch<SignUpSteps>
-  handleChangeForm: (name: string, value: string) => void
-  phoneNumber: string
 }
 
-const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
+const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
+  const [username, setUsername] = useState('')
   const { navigateTo } = useNavigate()
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const handleLogin = async () => {
+  const handleUpdate = async () => {
     try {
       setLoading(true)
-
-      // await sendCode(phoneNumber)
-      onChangeStep('step4')
+      await axios.post('/api/user/update', {
+        username,
+      })
+      onChangeStep('step2')
     } catch (e) {
       if (e instanceof ApiErrorResponse) {
-        console.log(e)
+        if (e.statusCode === 401) {
+          navigateTo('/login')
+        }
       }
     } finally {
       setLoading(false)
@@ -42,14 +46,14 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleUpdate}>
             <div className="flex flex-col gap-4">
               <Input
                 focus
                 placeholder="@Username"
-                name="firstName"
-                value={phoneNumber}
-                // onChange={(e) => handleChangeForm('phoneNumber', e.target.value)}
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="rounded-[22px] py-[2px] px-3 bg-border-grey"
               />
               <div className="max-w-[380px]">
@@ -67,10 +71,10 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
               <Button
                 color="success"
-                className="bg-secondary-light-blue shadow-buttonShadow3"
+                clahandleLoginssName="bg-secondary-light-blue shadow-buttonShadow3"
                 textClassName="text-white"
                 variant="fill"
-                onClick={handleLogin}
+                onClick={handleUpdate}
                 loading={loading}
                 disabled={loading}
               >

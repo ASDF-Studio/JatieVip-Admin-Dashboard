@@ -25,8 +25,7 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactEleme
 
     try {
       setLoading(true)
-      const res = await verifyCode(phoneNumber, Number(code))
-      console.log(res)
+      await verifyCode(phoneNumber, Number(code))
       navigateTo('/')
     } catch (e) {
       if (e instanceof AxiosError) {

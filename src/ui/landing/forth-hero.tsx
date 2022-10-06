@@ -45,7 +45,8 @@ const GetPhone = () => {
 
 export const ForthHero: React.FC = (): React.ReactElement => {
   return (
-    <div id="habit-tracking" className="relative flex bg-white">
+    <div id="
+    " className="relative flex bg-white">
       <GetBg />
 
       <div className="xl:max-w-[302px]  w-full hidden xl:flex" />

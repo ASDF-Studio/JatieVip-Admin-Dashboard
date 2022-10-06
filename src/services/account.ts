@@ -1,13 +1,13 @@
 import { IUser } from './types'
 import rest from './api'
 
-type UpdateUserParams = Partial<IUser>
+type UpdateUserParams = Partial<IUser> & { jwttoken: string }
 
 const Service = {
   updateAccount: (body: UpdateUserParams) =>
     rest.put<IUser>('auth/me', {
       body,
-      hasAuth: true,
+      jwttoken: body.jwttoken,
     }),
 }
 

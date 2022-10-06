@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Step1, Step2 } from 'ui/login'
 import { LoginSteps } from 'types'
-import { useAuth } from 'Contexts/Auth'
-import { useNavigate } from 'hooks/UseRouter'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
+import { useAuth } from 'Contexts/Auth'
+import { useRouter } from 'next/router'
 
 type FormValues = {
   phoneNumber: string
@@ -14,16 +14,12 @@ type FormValues = {
 
 const Home: NextPage = (): React.ReactElement => {
   const { user } = useAuth()
-  const { navigateTo } = useNavigate()
+  const router = useRouter()
   const [step, setStep] = useState<LoginSteps>('step1')
   const [formValues, setFormValues] = useState<FormValues>({
     phoneNumber: '',
     code: '',
   })
-
-  if (user) {
-    navigateTo('/account')
-  }
 
   const handleChangeForm = (name: string, value: string) => {
     setFormValues({ ...formValues, [name]: value })
@@ -44,6 +40,16 @@ const Home: NextPage = (): React.ReactElement => {
       default:
         return <Step2 phoneNumber={formValues.phoneNumber} onChangeStep={handleChangeStep} />
     }
+  }
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user])
+
+  if (user) {
+    return <div>Loading</div>
   }
 
   return (

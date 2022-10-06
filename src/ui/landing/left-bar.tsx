@@ -110,7 +110,13 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
       <div className="flex flex-col mt-5 gap-[16px]">
         <div className={`h-[1px] w-full ${inView ? 'bg-black opacity-[0.15]' : 'bg-white/50'}`} />
         <div className="flex justify-between">
-          <IconButton className="p-0" disableRipple>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.facebook.com/movefitapp', '_blank')
+            }}
+          >
             <FacebookIcon className="w-[20px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
           </IconButton>
           <IconButton
@@ -131,7 +137,13 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
           >
             <SnapChat className="w-[21px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
           </IconButton>
-          <IconButton className="p-0" disableRipple>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://youtube.com/channel/UCHtMq7sjroEvqdWIjFne7NA', '_blank')
+            }}
+          >
             <YoutubeIcon className="w-[25px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
           </IconButton>
 

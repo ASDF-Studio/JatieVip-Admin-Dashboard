@@ -1,5 +1,6 @@
 /* eslint-disable */
 import axios, { AxiosResponse } from 'axios'
+import { useNavigate } from 'hooks/UseRouter'
 import React, { createContext, FC, useContext, useEffect, useState } from 'react'
 import { AuthService } from 'services'
 import { getToken, remToken } from 'services/api'
@@ -24,9 +25,10 @@ declare global {
   }
 }
 
-export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<IUser>(null)
+export const AuthProvider: FC<{ children: React.ReactNode; userContext: IUser }> = ({ children, userContext }) => {
+  const [user, setUser] = useState<IUser>(userContext)
   const [ready, setReady] = useState<boolean>(false)
+  
 
   const updateUser = (arg: IUser) => {
     setUser(arg)
