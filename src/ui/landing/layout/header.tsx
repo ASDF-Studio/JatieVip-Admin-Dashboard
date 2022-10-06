@@ -16,6 +16,8 @@ export const LandingHeader = ({ inView, dark }) => {
     }
   }, [showMenu])
 
+  const isSafari = () => navigator.vendor === 'Apple Computer, Inc.'
+
   return (
     <div
       className={`fixed h-[60px] w-full border-b ${
@@ -57,7 +59,7 @@ export const LandingHeader = ({ inView, dark }) => {
           height: 'calc(100vh - 60px)',
           minHeight: ' -webkit-fill-available',
           bottom: '0px',
-          paddingBottom: 'env(safe-area-inset-bottom, 20px)',
+          paddingBottom: isSafari() && '20px',
         }}
         className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
       >
