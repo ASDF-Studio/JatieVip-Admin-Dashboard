@@ -68,7 +68,7 @@ export const LandingHeader = ({ inView, dark }) => {
         }}
         className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
       >
-        <div className="max-w-[420px] mx-auto w-full h-[800px] px-[30px] pb-[24px]">
+        <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[1000px]">
           <div className="flex flex-col gap-5 mt-[25px] items-center">
             <div className="flex flex-col gap-2.5 items-center">
               <Link href="/landing">
