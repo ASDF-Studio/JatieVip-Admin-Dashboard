@@ -10,11 +10,11 @@ export const LandingHeader = ({ inView, dark }) => {
   const [isSafari, setIsSafari] = useState(false)
 
   useEffect(() => {
-    if (showMenu) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'scroll'
-    }
+    // if (showMenu) {
+    //   document.body.style.overflow = 'hidden'
+    // } else {
+    //   document.body.style.overflow = 'scroll'
+    // }
   }, [showMenu])
 
   useEffect(() => {
