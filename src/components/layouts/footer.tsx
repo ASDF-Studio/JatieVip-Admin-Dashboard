@@ -17,7 +17,13 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
       } ${hidden && 'x:hidden'} flex-col x:flex-row`}
     >
       <div className="flex justify-between   max-w-[344px]  w-full">
-        <IconButton className="p-0" disableRipple>
+        <IconButton
+          className="p-0"
+          disableRipple
+          onClick={() => {
+            window.open('https://www.facebook.com/movefitapp', '_blank')
+          }}
+        >
           <FacebookIcon className="w-[20px] hover:opacity-80" fill="black" />
         </IconButton>
         <IconButton
@@ -38,7 +44,13 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
         >
           <SnapChat className="w-[21px] hover:opacity-80" fill="black" />
         </IconButton>
-        <IconButton className="p-0" disableRipple>
+        <IconButton
+          className="p-0"
+          disableRipple
+          onClick={() => {
+            window.open('https://youtube.com/channel/UCHtMq7sjroEvqdWIjFne7NA', '_blank')
+          }}
+        >
           <YoutubeIcon className="w-[25px] hover:opacity-80" fill="black" />
         </IconButton>
 

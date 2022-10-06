@@ -31,13 +31,23 @@ export const LoginSideBar = ({ className }: Props) => {
             />
           </div>
           <div className="relative">
-            <img src="/assets/images/phone.webp" className="w40h100:max-w-[700px] w40h80:max-w-[600px] w40h70:max-w-[500px] w24h100:max-w-[700px] w24h80:max-w-[500px] w24h70:max-w-[350px] w1024h100:max-w-[450px] w1024h80:max-w-[450px] w1024h70:max-w-[400px] wmaxhmax:max-w-[800px]" alt="phone" />
+            <img
+              src="/assets/images/phone.webp"
+              className="w40h100:max-w-[700px] w40h80:max-w-[600px] w40h70:max-w-[500px] w24h100:max-w-[700px] w24h80:max-w-[500px] w24h70:max-w-[350px] w1024h100:max-w-[450px] w1024h80:max-w-[450px] w1024h70:max-w-[400px] wmaxhmax:max-w-[800px]"
+              alt="phone"
+            />
           </div>
         </div>
       </div>
       <div className="flex flex-col xl:flex-row gap-4 x:justify-between absolute bottom-0 w-full pr-[108px] mb-[29px]">
         <div className="flex gap-[30px] xl:gap-[40px]">
-          <IconButton className="p-0" disableRipple>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.facebook.com/movefitapp', '_blank')
+            }}
+          >
             <FacebookIcon className="w-[20px] xl:w-[30px] hover:opacity-80 " fill="white" />
           </IconButton>
           <IconButton
@@ -58,7 +68,13 @@ export const LoginSideBar = ({ className }: Props) => {
           >
             <SnapChat className="w-[21px] xl:w-[32px] hover:opacity-80" fill="white" />
           </IconButton>
-          <IconButton className="p-0" disableRipple>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://youtube.com/channel/UCHtMq7sjroEvqdWIjFne7NA', '_blank')
+            }}
+          >
             <YoutubeIcon className="w-[25px] xl:w-[38px] hover:opacity-80" fill="white" />
           </IconButton>
 

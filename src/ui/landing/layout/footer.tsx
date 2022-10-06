@@ -67,7 +67,13 @@ export const LandingFooter = React.forwardRef((props, ref) => {
           </Typography>
         </div>
         <div className="flex gap-[36px] x:gap-[50px] justify-center mt-[58px] order-5 x:mt-[43px]">
-          <IconButton className="p-0" disableRipple>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://www.facebook.com/movefitapp', '_blank')
+            }}
+          >
             <FacebookIcon className="w-[25px] hover:opacity-80" fill="white" />
           </IconButton>
           <IconButton
@@ -88,7 +94,13 @@ export const LandingFooter = React.forwardRef((props, ref) => {
               }}
             />
           </IconButton>
-          <IconButton className="p-0" disableRipple>
+          <IconButton
+            className="p-0"
+            disableRipple
+            onClick={() => {
+              window.open('https://youtube.com/channel/UCHtMq7sjroEvqdWIjFne7NA', '_blank')
+            }}
+          >
             <YoutubeIcon className="w-[31px] hover:opacity-80" fill="white" />
           </IconButton>
           <IconButton className="p-0" disableRipple>
