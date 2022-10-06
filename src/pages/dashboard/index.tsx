@@ -10,4 +10,12 @@ const Home: NextPage = () => {
   )
 }
 
+export const getServerSideProps = async (ctx) => {
+  console.log('pzda')
+
+  return {
+    props: {},
+  }
+}
+
 export default Home

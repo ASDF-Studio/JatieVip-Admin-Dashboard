@@ -1,3 +1,4 @@
+@import '~nprogress/nprogress.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -188,4 +189,14 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
+}
+
+#nprogress .bar {
+  height: 3px;
+  @apply bg-primary-brand;
+}
+
+#nprogress .spinner-icon {
+  width: 0px;
+  height: 0px;
 }

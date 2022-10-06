@@ -3,12 +3,22 @@ import type { AppContext, AppProps } from 'next/app'
 import { AuthProvider } from 'Contexts/Auth'
 import { ThemeProvider } from 'theme'
 import App from 'next/app'
+import NProgress from 'nprogress'
 import { IUser } from 'services/types'
 import { getIronSession } from 'iron-session'
 import { sessionOptions } from 'lib/session'
 import { AuthService } from 'services'
+import { useEffect, useState } from 'react'
+import { Router } from 'next/router'
 
 const MyApp = ({ Component, pageProps, user }: AppProps & { user: IUser }) => {
+  useEffect(() => {
+    NProgress.configure({ showSpinner: false })
+    Router.events.on('routeChangeStart', () => NProgress.start())
+    Router.events.on('routeChangeComplete', () => NProgress.done())
+    Router.events.on('routeChangeError', () => NProgress.done())
+  }, [])
+
   return (
     <AuthProvider userContext={user}>
       <ThemeProvider>
