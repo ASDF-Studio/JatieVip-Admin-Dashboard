@@ -54,8 +54,9 @@ export const LandingHeader = ({ inView, dark }) => {
           transition: '0.3s',
           opacity: showMenu ? 1 : 0,
           left: showMenu ? '0%' : '100%',
-          top: '0px',
           height: 'calc(100vh - 60px)',
+          minHeight: ' -webkit-fill-available',
+          bottom: '0px',
           paddingBottom: 'env(safe-area-inset-bottom, 20px)',
         }}
         className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
