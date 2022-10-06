@@ -64,7 +64,7 @@ export const LandingHeader = ({ inView, dark }) => {
           height: 'calc(100vh - 60px)',
           minHeight: ' -webkit-fill-available',
           bottom: '0px',
-          paddingBottom: isSafari && '20px',
+          paddingBottom: isSafari && '40px',
         }}
         className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
       >
