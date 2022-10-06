@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 export const LandingHeader = ({ inView, dark }) => {
   const { navigateTo } = useNavigate()
   const [showMenu, setShowMenu] = useState(false)
+  const [isSafari, setIsSafari] = useState(false)
 
   useEffect(() => {
     if (showMenu) {
@@ -16,7 +17,11 @@ export const LandingHeader = ({ inView, dark }) => {
     }
   }, [showMenu])
 
-  const isSafari = () => navigator.vendor === 'Apple Computer, Inc.'
+  useEffect(() => {
+    if (navigator !== undefined) {
+      setIsSafari(navigator.vendor === 'Apple Computer, Inc.')
+    }
+  }, [])
 
   return (
     <div
@@ -59,7 +64,7 @@ export const LandingHeader = ({ inView, dark }) => {
           height: 'calc(100vh - 60px)',
           minHeight: ' -webkit-fill-available',
           bottom: '0px',
-          paddingBottom: isSafari() && '20px',
+          paddingBottom: isSafari && '20px',
         }}
         className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50"
       >
