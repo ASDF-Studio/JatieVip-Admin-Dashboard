@@ -55,10 +55,10 @@ export const LandingHeader = ({ inView, dark }) => {
           opacity: showMenu ? 1 : 0,
           left: showMenu ? '0%' : '100%',
           top: '0px',
-          minHeight: 'calc(100vh - 60px)',
+          height: 'calc(100vh - 60px)',
           paddingBottom: 'env(safe-area-inset-bottom)',
         }}
-        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-auto z-50 ios-menu"
+        className="w-full fixed flex flex-col  bg-white  top-[60px]  overflow-y-scroll z-50 ios-menu"
       >
         <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[24px]">
           <div className="flex flex-col gap-5 mt-[25px] items-center">
