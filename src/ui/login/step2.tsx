@@ -27,7 +27,7 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactEleme
     try {
       setLoading(true)
       await verifyCode(phoneNumber, Number(code))
-      router.replace('/')
+      router.push('/')
     } catch (e) {
       if (e instanceof AxiosError) {
         setShowError(true)

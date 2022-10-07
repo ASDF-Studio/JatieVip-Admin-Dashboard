@@ -13,14 +13,14 @@ const Home: NextPage = (): React.ReactElement => {
   const [state, setState] = useState<SignUpSteps>('step1')
 
   useEffect(() => {
-    if (user?.username && user?.last_name && user?.first_name) {
-      router.push('/')
-    }
     if (!user?.username) {
       setState('step1')
     }
     if (!user?.last_name || !user?.first_name) {
       setState('step2')
+    }
+    if (user?.username && user?.last_name && user?.first_name) {
+      router.push('/')
     }
   }, [user])
 
