@@ -15,9 +15,13 @@ const Home: NextPage = (): React.ReactElement => {
   useEffect(() => {
     if (!user?.username) {
       setState('step1')
+
+      return
     }
     if (!user?.last_name || !user?.first_name) {
       setState('step2')
+
+      return
     }
     if (user?.username && user?.last_name && user?.first_name) {
       router.push('/')
