@@ -78,7 +78,7 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber }): React.ReactEleme
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <VerifyCodeInput length={5} code={code} onChange={(cd) => setCode(cd)} />
+            <VerifyCodeInput error={showError} length={5} code={code} onChange={(cd) => setCode(cd)} />
             {showError && (
               <Typography className="text-text-error font-medium" variant="body2">
                 Sorry, the code didn’t match.{` `}

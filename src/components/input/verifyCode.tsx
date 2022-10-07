@@ -7,10 +7,11 @@ interface Props {
   errorMessage?: string
   onChange: (input: string) => void
   onFinish?: (input: string) => void
+  error?: boolean
 }
 
 export const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactElement => {
-  const { onChange, code, onFinish, errorMessage, length } = props
+  const { onChange, code, onFinish, errorMessage, length, error } = props
 
   const handleKeyUp = (e: React.KeyboardEvent) => {
     if (code.length === 0) return
@@ -40,12 +41,13 @@ export const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactEleme
               key={index}
               name="verifyCode"
               type="number"
+              status={error ? 'error' : null}
               className="w-[56px] h-[44px] rounded-[22px] bg-[#f5f7f9] border"
               value={value || ''}
               focus={isActive}
               onKeyUp={handleKeyUp}
               inputProps={{
-                className: 'text-center'
+                className: 'text-center',
               }}
               onChange={(e) => handleInputChange(e, index)}
             />
@@ -53,8 +55,8 @@ export const VerifyCodeInput: React.FC<Props> = (props: Props): React.ReactEleme
         })}
       </div>
       {errorMessage && (
-        <div className="pt-2">
-          <Typography variant="caption" className="text-red-600">
+        <div className="pt-4">
+          <Typography className="text-text-error font-medium" variant="body2">
             {errorMessage}
           </Typography>
         </div>

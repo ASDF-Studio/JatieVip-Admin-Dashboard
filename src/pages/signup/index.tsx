@@ -4,17 +4,22 @@ import React, { useEffect, useState } from 'react'
 import { Step3, Step4 } from 'ui/signup'
 import { SignUpSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
-import { useAuth } from 'Contexts/Auth'
+import { useUser } from 'hooks/useUser'
+import { useRouter } from 'next/router'
 
 const Home: NextPage = (): React.ReactElement => {
-  const { user } = useAuth()
+  const { user } = useUser({ redirectTo: 'login' })
+  const router = useRouter()
   const [state, setState] = useState<SignUpSteps>('step1')
 
   useEffect(() => {
-    if (user?.username === 'test') {
+    if (user?.username && user?.last_name && user?.first_name) {
+      router.push('/')
+    }
+    if (!user?.username) {
       setState('step1')
     }
-    if (user?.last_name === 'Test Last Name') {
+    if (!user?.last_name || !user?.first_name) {
       setState('step2')
     }
   }, [user])
@@ -26,10 +31,14 @@ const Home: NextPage = (): React.ReactElement => {
       case 'step1':
         return <Step3 onChangeStep={handleChangeStep} />
       case 'step2':
-        return <Step4 onChangeStep={handleChangeStep} />
+        return <Step4 />
       default:
         return <div>Loading</div>
     }
+  }
+
+  if (!user) {
+    return <div>Loading</div>
   }
 
   return (

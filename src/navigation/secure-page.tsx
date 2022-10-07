@@ -16,12 +16,7 @@ export const SecurePage = ({ children, className = '' }) => {
   //   }
   // }, [user])
 
-  // if (user?.first_name === 'test') {
-  //   return <div>Loading</div>
-  // }
-  // if (user?.last_name === 'Test Last Name') {
-  //   return <div>Loading</div>
-  // }
+  
 
   return <div className={className}>{children}</div>
 }

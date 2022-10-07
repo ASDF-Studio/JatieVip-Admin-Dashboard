@@ -1,75 +1,59 @@
-import { BasicSelect, Button, CustomDatePicker, Input, PlaceholderIcon, ProfilePicture, SingleSelect } from 'components'
-import React, { Dispatch, useRef, useState } from 'react'
-import { Avatar, Typography } from '@mui/material'
-import { LoginSteps } from 'types'
-import { useNavigate } from 'hooks/UseRouter'
-import { ApiErrorResponse } from 'services/api'
+import { BasicSelect, Button, CustomDatePicker, Input, ProfilePicture, SingleSelect } from 'components'
+import React, { useRef, useState } from 'react'
+import { Typography } from '@mui/material'
 import Link from 'next/link'
 import { useFormik } from 'formik'
-import { AccountService } from 'services'
 import { getBase64 } from 'utils/helper'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import { ApiErrorResponse } from 'services/api'
 import { useUser } from 'hooks/useUser'
-
-type Props = {
-  onChangeStep: Dispatch<LoginSteps>
-  phoneNumber: string
-}
 
 type FormValues = {
   firstName: string
   lastName: string
-  phoneNumber: string
   birthDay: string
   gender: string
   isPublic: boolean
   imageURL: string
 }
 
-const Step4: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
+const Step4: React.FC = (): React.ReactElement => {
+  const { user } = useUser()
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const handleLogin = async () => {
-    try {
-      setLoading(true)
-
-      // await sendCode(phoneNumber)
-      onChangeStep('step2')
-    } catch (e) {
-      if (e instanceof ApiErrorResponse) {
-        console.log(e)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
   const formik = useFormik<FormValues>({
     enableReinitialize: true,
     initialValues: {
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      birthDay: '',
-      gender: '',
-      isPublic: false,
-      imageURL: '',
+      firstName: user?.first_name || '',
+      lastName: user?.last_name || '',
+      birthDay: user?.date_of_birth || '',
+      gender: user?.gender || '',
+      isPublic: user?.public || false,
+      imageURL: user?.photo || '',
     },
     // validationSchema: createCollectionSchema,
-    onSubmit: async ({ firstName, lastName, birthDay, gender, isPublic, imageURL }) => {
+    onSubmit: async ({ lastName, firstName, birthDay, isPublic, imageURL, gender }) => {
       setLoading(true)
       try {
-        const res = await AccountService.updateAccount({
-          first_name: firstName,
+        await axios.post('/api/user/update', {
           last_name: lastName,
-          date_of_birth: birthDay,
+          first_name: firstName,
+          date_of_brith: birthDay,
           public: isPublic,
           photo: imageURL,
           gender,
         })
-        // updateUser(res)
+        router.push('/')
       } catch (e) {
-        console.log(e)
+        if (e instanceof ApiErrorResponse) {
+          if (e.statusCode === 401) {
+            // navigateTo('/login')
+          }
+        }
       } finally {
         setLoading(false)
       }
@@ -121,7 +105,7 @@ const Step4: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
                   type="file"
                   accept="image/*"
                   ref={inputRef}
-                  onChange={(e) => handleImageChange(e)}
+                  onChange={() => handleImageChange()}
                 />
                 <Button
                   onClick={() => {
