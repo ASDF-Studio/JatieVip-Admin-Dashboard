@@ -72,7 +72,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
                 </Button>
               )}
             </div>
-            <Avatar src={user.photo} className="w-[35px] h-[35px] sm:w-10 sm:h-10" />
+            <Avatar src={user?.photo} className="w-[35px] h-[35px] sm:w-10 sm:h-10" />
           </div>
         </div>
       )}
