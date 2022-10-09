@@ -1,19 +1,19 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import React, { useState } from 'react'
 import { Step1, Step2 } from 'ui/login'
 import { LoginSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
-import { useUser } from 'hooks/useUser'
+
 import { useFormik } from 'formik'
 import { AuthProvider } from 'Contexts/Auth'
 import { useRouter } from 'next/router'
 import axios, { AxiosError } from 'axios'
 import { loginSchema } from 'utils/schema'
+import { sessionOptions } from 'lib/session'
+import { withIronSessionSsr } from 'iron-session/next'
 
 const Home: NextPage = (): React.ReactElement => {
-  useUser({ redirectTo: '/dashboard', redirectIfFound: true })
-
   const router = useRouter()
   const [step, setStep] = useState<LoginSteps>('step1')
   const [showError, setShowError] = useState(false)
@@ -86,5 +86,23 @@ const Home: NextPage = (): React.ReactElement => {
     </AuthProvider>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
+  const { token } = req.session
+
+  if (token) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/dashboard',
+        permanent: true,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
+}, sessionOptions)
 
 export default Home
