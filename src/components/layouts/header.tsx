@@ -1,6 +1,7 @@
 import { Avatar } from '@mui/material'
 import { Button } from 'components/Button'
 import { Dashboard, UserIcon } from 'components/icons'
+import { useAuth } from 'Contexts/Auth'
 import { useBreakPoint } from 'hooks'
 import { useNavigate } from 'hooks/UseRouter'
 import React, { FC } from 'react'
@@ -12,6 +13,7 @@ type Props = {
 }
 
 export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }): React.ReactElement => {
+  const { user } = useAuth()
   const { navigateTo, pathname } = useNavigate()
   const { isTablet } = useBreakPoint()
 
@@ -70,7 +72,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
                 </Button>
               )}
             </div>
-            <Avatar className="w-[35px] h-[35px] sm:w-10 sm:h-10" />
+            <Avatar src={user.photo} className="w-[35px] h-[35px] sm:w-10 sm:h-10" />
           </div>
         </div>
       )}

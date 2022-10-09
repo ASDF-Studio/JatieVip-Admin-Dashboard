@@ -25,7 +25,7 @@ declare global {
   }
 }
 
-export const AuthProvider: FC<{ children: React.ReactNode; userContext: IUser }> = ({ children, userContext }) => {
+export const AuthProvider: FC<{ children: React.ReactNode; userContext?: IUser }> = ({ children, userContext }) => {
   const [user, setUser] = useState<IUser>(userContext)
   const [ready, setReady] = useState<boolean>(false)
 
@@ -38,15 +38,8 @@ export const AuthProvider: FC<{ children: React.ReactNode; userContext: IUser }>
       phoneNumber,
     })
 
-  const verifyCode = async (phoneNumber: string, token: number) => {
-    await axios.post('/api/login', {
-      phoneNumber,
-      token,
-    })
-  }
-
   return (
-    <AuthContext.Provider value={{ sendCode, ready, verifyCode, user, updateUser }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ sendCode, ready, user, updateUser }}>{children}</AuthContext.Provider>
   )
 }
 

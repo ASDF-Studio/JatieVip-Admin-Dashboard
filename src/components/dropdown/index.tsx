@@ -43,14 +43,12 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
   }
 
   const classes = useStyles()
-
+  
   return (
     <Select
       name={name}
       IconComponent={sortIcon}
-      className={`w-full rounded-[22px] bg-border-grey  hover:cursor-pointer ${
-        value !== '' && 'border-primary-brand'
-      }`}
+      className={`w-full rounded-[22px] bg-border-grey  hover:cursor-pointer ${value !== '' && 'border-primary-brand'}`}
       style={{
         fontSize: '14px',
         fontWeight: '500',
@@ -96,11 +94,11 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
         },
       }}
     >
-      {items.map(({ value, label }) => {
+      {items.map(({ value: val, label }) => {
         return (
-          <MenuItem key={value} value={value}>
+          <MenuItem key={val} value={val}>
             <div className="flex items-center gap-2.5">
-              {state === value ? (
+              {state === val ? (
                 <img src="/assets/svg/check.svg" className="w-2.5 h-2.5" alt="" />
               ) : (
                 <div className="w-2.5 h-2.5" />

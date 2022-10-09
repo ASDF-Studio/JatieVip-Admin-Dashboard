@@ -8,6 +8,7 @@ export type IUser = {
   date_of_birth: string
   gender: string
   photo: string
+  subscribed: boolean
 }
 
 // {

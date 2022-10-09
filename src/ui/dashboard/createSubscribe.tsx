@@ -1,12 +1,13 @@
 import { Typography } from '@mui/material'
 import { BoxSelect, Button, Hello } from 'components'
 import { FC, ReactElement } from 'react'
+import { IUser } from 'services/types'
 
 type Props = {
   className?: string
 }
 
-const CreateSubs: FC<Props> = ({ className }): ReactElement => {
+const CreateSubs: FC<Props> = ({ className, user }): ReactElement => {
   return (
     <div className={`${className}`}>
       <div className="flex flex-col gap-[29px] sm:gap-[63px]">

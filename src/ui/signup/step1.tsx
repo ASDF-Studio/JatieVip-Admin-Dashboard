@@ -46,7 +46,6 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
               <Input
                 focus
                 placeholder="Enter Phone Number"
-                name="firstName"
                 value={phoneNumber}
                 // onChange={(e) => handleChangeForm('phoneNumber', e.target.value)}
                 className="rounded-[22px] py-[2px] px-3 bg-border-grey"

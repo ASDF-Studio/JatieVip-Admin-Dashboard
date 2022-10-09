@@ -7,7 +7,8 @@ import { getBase64 } from 'utils/helper'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { ApiErrorResponse } from 'services/api'
-import { useUser } from 'hooks/useUser'
+import { updateProfileSchema } from 'utils/schema'
+import { useAuth } from 'Contexts/Auth'
 
 type FormValues = {
   firstName: string
@@ -19,23 +20,22 @@ type FormValues = {
 }
 
 const Step4: React.FC = (): React.ReactElement => {
-  const { user } = useUser()
+  const { user } = useAuth()
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   const [loading, setLoading] = useState<boolean>(false)
 
   const formik = useFormik<FormValues>({
-    enableReinitialize: true,
     initialValues: {
       firstName: user?.first_name || '',
       lastName: user?.last_name || '',
       birthDay: user?.date_of_birth || '',
-      gender: user?.gender || '',
+      gender: user?.gender,
       isPublic: user?.public || false,
       imageURL: user?.photo || '',
     },
-    // validationSchema: createCollectionSchema,
+    validationSchema: updateProfileSchema,
     onSubmit: async ({ lastName, firstName, birthDay, isPublic, imageURL, gender }) => {
       setLoading(true)
       try {
@@ -47,7 +47,7 @@ const Step4: React.FC = (): React.ReactElement => {
           photo: imageURL,
           gender,
         })
-        router.push('/')
+        router.push('/dashboard')
       } catch (e) {
         if (e instanceof ApiErrorResponse) {
           if (e.statusCode === 401) {
@@ -60,14 +60,14 @@ const Step4: React.FC = (): React.ReactElement => {
     },
   })
 
-  const { setFieldTouched, setFieldValue } = formik
+  const { setFieldTouched, setFieldValue, errors, touched } = formik
 
   const { firstName, lastName, birthDay, gender, isPublic, imageURL } = formik.values
 
   const handleImageChange = async () => {
     const files = inputRef.current?.files
 
-    if (files) {
+    if (files.length > 0) {
       const file = await getBase64(files[0])
       setFieldValue('imageURL', file)
     }
@@ -94,7 +94,12 @@ const Step4: React.FC = (): React.ReactElement => {
             Tell us more about yourself
           </Typography>
         </div>
-        <form onSubmit={formik.submitForm}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            formik.submitForm()
+          }}
+        >
           <div className="w-full mx-auto  flex flex-col">
             <div className="flex gap-[19px] items-center">
               <ProfilePicture url={imageURL} />
@@ -132,6 +137,8 @@ const Step4: React.FC = (): React.ReactElement => {
                   type="text"
                   name="firstName"
                   value={firstName}
+                  helperText={touched.firstName && errors.firstName}
+                  status={touched.firstName && errors.firstName ? 'error' : 'primary'}
                   onChange={handleInputChange}
                   className="rounded-[22px] py-[2px] px-3 bg-border-grey"
                 />
@@ -140,6 +147,8 @@ const Step4: React.FC = (): React.ReactElement => {
                   name="lastName"
                   placeholder="Last Name"
                   type="text"
+                  helperText={touched.lastName && errors.lastName}
+                  status={touched.lastName && errors.lastName ? 'error' : 'primary'}
                   onChange={handleInputChange}
                   className="rounded-[22px] py-[2px] px-3 bg-border-grey"
                 />

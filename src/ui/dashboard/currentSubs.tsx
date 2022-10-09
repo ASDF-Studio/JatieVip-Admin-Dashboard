@@ -14,7 +14,7 @@ const CurrentSubs: FC<Props> = ({ className }): ReactElement => {
   return (
     <div className={`${className}`}>
       <div className="flex flex-col gap-[29px] sm:gap-[63px]">
-        <Hello />
+        <Hello  />
         <Typography variant="heading3" className="text-center sm:text-left">
           Your Plan
         </Typography>

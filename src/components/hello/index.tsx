@@ -1,5 +1,8 @@
-import { Typography } from "@mui/material"
+import { Typography } from '@mui/material'
+import { useAuth } from 'Contexts/Auth'
 
 export const Hello = () => {
-    return <Typography variant="heading1">Hey Louis! Welcome to your profile.</Typography>
+  const { user } = useAuth()
+
+  return <Typography variant="heading1">Hey {`${user?.username}`}! Welcome to your profile.</Typography>
 }

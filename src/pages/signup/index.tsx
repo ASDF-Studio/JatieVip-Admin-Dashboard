@@ -1,32 +1,28 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import { MainLayout } from 'components'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Step3, Step4 } from 'ui/signup'
 import { SignUpSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
-import { useUser } from 'hooks/useUser'
-import { useRouter } from 'next/router'
+import { sessionOptions } from 'lib/session'
+import { AuthService } from 'services'
+import { withIronSessionSsr } from 'iron-session/next'
+import { IUser } from 'services/types'
+import { AuthProvider } from 'Contexts/Auth'
 
-const Home: NextPage = (): React.ReactElement => {
-  const { user } = useUser({ redirectTo: 'login' })
-  const router = useRouter()
-  const [state, setState] = useState<SignUpSteps>('step1')
-
-  useEffect(() => {
+const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
+  const getStateDefault = (): SignUpSteps => {
     if (!user?.username) {
-      setState('step1')
-
-      return
+      return 'step1'
     }
     if (!user?.last_name || !user?.first_name) {
-      setState('step2')
+      return 'step2'
+    }
 
-      return
-    }
-    if (user?.username && user?.last_name && user?.first_name) {
-      router.push('/')
-    }
-  }, [user])
+    return 'step2'
+  }
+
+  const [state, setState] = useState<SignUpSteps>(getStateDefault())
 
   const handleChangeStep = (step: SignUpSteps) => setState(step)
 
@@ -41,19 +37,57 @@ const Home: NextPage = (): React.ReactElement => {
     }
   }
 
-  if (!user) {
-    return <div>Loading</div>
-  }
-
   return (
-    <MainLayout hiddenDesktop stickyFooter={state !== 'step2'} withNavBar={false}>
-      <div className="flex justify-between mt-[66px] x:mt-0">
-        <LoginSideBar className="w-[72%] hidden x:block" />
+    <AuthProvider userContext={user}>
+      <MainLayout hiddenDesktop stickyFooter={state !== 'step2'} withNavBar={false}>
+        <div className="flex justify-between mt-[66px] x:mt-0">
+          <LoginSideBar className="w-[72%] hidden x:block" />
 
-        {getStepsUI(state)}
-      </div>
-    </MainLayout>
+          {getStepsUI(state)}
+        </div>
+      </MainLayout>
+    </AuthProvider>
   )
 }
 
-export default Home
+export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
+  const { token, destroy } = req.session
+
+  if (!token) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/login',
+        permanent: true,
+      },
+    }
+  }
+
+  try {
+    const user = await AuthService.getAccount({ token })
+
+    // if (user?.username && user?.last_name && user?.first_name) {
+    //   return {
+    //     props: {},
+    //     redirect: {
+    //       destination: '/dashboard',
+    //       permanent: true,
+    //     },
+    //   }
+    // }
+
+    return {
+      props: {
+        user,
+      },
+    }
+  } catch (e) {
+    destroy()
+  }
+
+  return {
+    props: {},
+  }
+}, sessionOptions)
+
+export default SignUp

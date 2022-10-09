@@ -2,30 +2,30 @@ import { Button, Input } from 'components'
 import React, { Dispatch, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps } from 'types'
-import { useNavigate } from 'hooks/UseRouter'
 import { useAuth } from 'Contexts/Auth'
 import { ApiErrorResponse } from 'services/api'
 import Link from 'next/link'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
-  handleChangeForm: (name: string, value: string) => void
+  handleChangeForm: (event: React.ChangeEvent<HTMLInputElement>) => void
   phoneNumber: string
 }
 
 const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
-  const { navigateTo } = useNavigate()
   const { sendCode } = useAuth()
   const [error, setError] = useState<string>(null)
-
   const [loading, setLoading] = useState<boolean>(false)
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    
     try {
       setLoading(true)
       await sendCode(phoneNumber)
       onChangeStep('step2')
     } catch (err) {
+      
       if (err instanceof ApiErrorResponse) {
         if (err.message.includes('is not a valid')) {
           setError(err.message)
@@ -49,14 +49,14 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
-          <form onSubmit={handleLogin}>
+          <form onSubmit={(e) => handleLogin(e)}>
             <div className="flex flex-col gap-4">
               <Input
                 focus
                 placeholder="Enter Phone Number"
-                name="firstName"
                 value={phoneNumber}
-                onChange={(e) => handleChangeForm('phoneNumber', e.target.value)}
+                name="phoneNumber"
+                onChange={(e) => handleChangeForm(e)}
                 className="rounded-[22px] py-[2px] px-3 bg-border-grey"
               />
               {error && (
@@ -78,17 +78,17 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
               </Button>
             </div>
           </form>
-          <div className="flex justify-between items-center">
+          {/* <div className="flex justify-between items-center">
             <div className="w-[40%] h-[1px] bg-[#f5f7f9]" />
             <Typography className="text-primary-grey">or</Typography>
             <div className="w-[40%] h-[1px] bg-[#f5f7f9]" />
-          </div>
-          <div className="flex flex-col gap-2.5 x:gap-4">
+          </div> */}
+          {/* <div className="flex flex-col gap-2.5 x:gap-4">
             <Typography className="ml-[7px] text-[16px] font-semibold">Don’t have an account?</Typography>
             <Button onClick={() => navigateTo('/signup')} className="bg-[#e3f2f7]" variant="landingButton">
               Sign Up
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
 

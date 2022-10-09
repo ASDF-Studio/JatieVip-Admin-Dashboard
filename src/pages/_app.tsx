@@ -1,13 +1,11 @@
 import '../styles/globals.css'
 import type { AppContext, AppProps } from 'next/app'
-import { AuthProvider } from 'Contexts/Auth'
 import { ThemeProvider } from 'theme'
 import NProgress from 'nprogress'
-import { IUser } from 'services/types'
 import { useEffect, useState } from 'react'
 import { Router } from 'next/router'
 
-const MyApp = ({ Component, pageProps, user }: AppProps & { user: IUser }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     NProgress.configure({ showSpinner: false })
     Router.events.on('routeChangeStart', () => NProgress.start())
@@ -16,11 +14,9 @@ const MyApp = ({ Component, pageProps, user }: AppProps & { user: IUser }) => {
   }, [])
 
   return (
-    <AuthProvider userContext={user}>
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
   )
 }
 

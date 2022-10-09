@@ -12,9 +12,10 @@ const calendarIcon = forwardRef<HTMLImageElement, ImageProps>((props, ref) => (
 type Props = {
   date: string
   onChange: (value: string) => void
+  error?: boolean
 }
 
-export const CustomDatePicker: React.FC<Props> = ({ date = '', onChange }) => {
+export const CustomDatePicker: React.FC<Props> = ({ date = '', onChange, error = false }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
@@ -29,7 +30,11 @@ export const CustomDatePicker: React.FC<Props> = ({ date = '', onChange }) => {
         }}
         disableFuture
         renderInput={({ inputRef, inputProps, InputProps }) => (
-          <div className="rounded-[22px] bg-border-grey flex items-center px-6 w-full justify-between relative border border-[rgba(127,127,127, 0.1)]">
+          <div
+            className={`rounded-[22px] bg-border-grey flex items-center px-6 w-full justify-between relative border ${
+              error ? 'border-[#e92346]' : date !== '' ? 'border-primary-brand' : ' border-[rgba(127,127,127, 0.1)]'
+            }`}
+          >
             <input
               ref={inputRef}
               {...inputProps}

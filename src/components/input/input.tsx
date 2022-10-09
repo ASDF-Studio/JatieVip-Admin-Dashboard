@@ -88,7 +88,6 @@ export const Input: React.FC<InputProperties> = (properties) => {
       <StyledInputBase
         className={className}
         {...otherProperties}
-      
         type={hidden !== undefined ? (hidden ? 'password' : 'text') : type}
         background={background}
         inputRef={inputRef}
@@ -117,10 +116,10 @@ export const Input: React.FC<InputProperties> = (properties) => {
 
       {(helperText || withCounter) && (
         <StyledFormLabel>
-          <Typography variant="label1">{helperText}</Typography>
+          <Typography variant="body2">{helperText}</Typography>
 
           {/* Counter */}
-          
+
           {maxLength && withCounter && (
             <Typography variant="label1" classes={classes}>
               {typeof value === 'string' && `${value.length} / ${maxLength}`}

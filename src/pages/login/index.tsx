@@ -1,28 +1,57 @@
 import type { NextPage } from 'next'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Step1, Step2 } from 'ui/login'
 import { LoginSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
-import { useAuth } from 'Contexts/Auth'
+import { useUser } from 'hooks/useUser'
+import { useFormik } from 'formik'
+import { AuthProvider } from 'Contexts/Auth'
 import { useRouter } from 'next/router'
-
-type FormValues = {
-  phoneNumber: string
-  code: string
-}
+import axios, { AxiosError } from 'axios'
+import { loginSchema } from 'utils/schema'
 
 const Home: NextPage = (): React.ReactElement => {
-  const { user } = useAuth()
+  useUser({ redirectTo: '/dashboard', redirectIfFound: true })
+
   const router = useRouter()
   const [step, setStep] = useState<LoginSteps>('step1')
-  const [formValues, setFormValues] = useState<FormValues>({
-    phoneNumber: '',
-    code: '',
+  const [showError, setShowError] = useState(false)
+
+  const verifyCode = async (phoneNumber: string, token: number) => {
+    await axios.post('/api/login', {
+      phoneNumber,
+      token,
+    })
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      phoneNumber: '',
+      code: '',
+    },
+    validationSchema: loginSchema,
+    onSubmit: async ({ phoneNumber, code }) => {
+      setShowError(false)
+      try {
+        await verifyCode(phoneNumber, Number(code))
+        router.replace('/dashboard')
+      } catch (e) {
+        if (e instanceof AxiosError) {
+          setShowError(true)
+        }
+      }
+    },
   })
 
-  const handleChangeForm = (name: string, value: string) => {
-    setFormValues({ ...formValues, [name]: value })
+  const { setFieldTouched, setFieldValue } = formik
+
+  const { phoneNumber, code } = formik.values
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFieldTouched(name, true, true)
+    formik.setFieldValue(name, value)
   }
 
   const handleChangeStep = (step: LoginSteps) => setStep(step)
@@ -30,36 +59,31 @@ const Home: NextPage = (): React.ReactElement => {
   const getStepsUI = (step: LoginSteps) => {
     switch (step) {
       case 'step1':
+        return <Step1 phoneNumber={phoneNumber} handleChangeForm={handleInputChange} onChangeStep={handleChangeStep} />
+      default:
         return (
-          <Step1
-            phoneNumber={formValues.phoneNumber}
-            handleChangeForm={handleChangeForm}
+          <Step2
+            error={showError}
+            sumbitForm={formik.submitForm}
+            handleChangeForm={setFieldValue}
+            code={code}
+            phoneNumber={phoneNumber}
             onChangeStep={handleChangeStep}
           />
         )
-      default:
-        return <Step2 phoneNumber={formValues.phoneNumber} onChangeStep={handleChangeStep} />
     }
-  }
-
-  useEffect(() => {
-    if (user) {
-      router.push('/')
-    }
-  }, [user])
-
-  if (user) {
-    return <div>Loading</div>
   }
 
   return (
-    <MainLayout hiddenDesktop stickyFooter withNavBar={false}>
-      <div className="flex justify-between mt-[66px] x:mt-0">
-        <LoginSideBar className="w-[72%] hidden x:block" />
+    <AuthProvider>
+      <MainLayout hiddenDesktop stickyFooter withNavBar={false}>
+        <div className="flex justify-between mt-[66px] x:mt-0">
+          <LoginSideBar className="w-[72%] hidden x:block" />
 
-        {getStepsUI(step)}
-      </div>
-    </MainLayout>
+          {getStepsUI(step)}
+        </div>
+      </MainLayout>
+    </AuthProvider>
   )
 }
 
