@@ -42,7 +42,7 @@ const Step4: React.FC = (): React.ReactElement => {
         await axios.post('/api/user/update', {
           last_name: lastName,
           first_name: firstName,
-          date_of_brith: birthDay,
+          date_of_birth: birthDay,
           public: isPublic,
           photo: imageURL,
           gender,
@@ -154,7 +154,14 @@ const Step4: React.FC = (): React.ReactElement => {
                 />
                 <div className="flex gap-5  justify-between">
                   <div className="max-w-[48%] w-full">
-                    <CustomDatePicker date={birthDay} onChange={(value) => setFieldValue('birthDay', value)} />
+                    <CustomDatePicker
+                      error={touched.birthDay && errors.birthDay}
+                      date={birthDay}
+                      onChange={(value) => {
+                        setFieldValue('birthDay', dayjs(value).format('YYYY-MM-DD'))
+                        setFieldTouched('birthDay', true)
+                      }}
+                    />
                   </div>
                   <div className="max-w-[48%] w-full">
                     <BasicSelect value={gender} name="gender" items={items} onChange={(e) => handleInputChange(e)} />

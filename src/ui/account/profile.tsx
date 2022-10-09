@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import { getBase64 } from 'utils/helper'
 import axios from 'axios'
 import { updateProfileSchema } from 'utils/schema'
+import dayjs from 'dayjs'
 
 type FormValues = {
   firstName: string
@@ -39,7 +40,7 @@ export const Profile = () => {
         const res = await axios.post('/api/user/update', {
           last_name: lastName,
           first_name: firstName,
-          date_of_brith: birthDay,
+          date_of_birth: birthDay,
           public: isPublic,
           photo: imageURL,
           gender,
@@ -152,7 +153,7 @@ export const Profile = () => {
                 date={birthDay}
                 error={touched.birthDay && errors.birthDay}
                 onChange={(value) => {
-                  setFieldValue('birthDay', value)
+                  setFieldValue('birthDay', dayjs(value).format('YYYY-MM-DD'))
                   setFieldTouched('birthDay', true)
                 }}
               />

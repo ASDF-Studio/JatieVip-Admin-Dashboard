@@ -19,7 +19,7 @@ const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
       return 'step2'
     }
 
-    return 'step2'
+    return 'step1'
   }
 
   const [state, setState] = useState<SignUpSteps>(getStateDefault())
@@ -66,15 +66,15 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
   try {
     const user = await AuthService.getAccount({ token })
 
-    // if (user?.username && user?.last_name && user?.first_name) {
-    //   return {
-    //     props: {},
-    //     redirect: {
-    //       destination: '/dashboard',
-    //       permanent: true,
-    //     },
-    //   }
-    // }
+    if (user?.username && user?.last_name && user?.first_name) {
+      return {
+        props: {},
+        redirect: {
+          destination: '/dashboard',
+          permanent: true,
+        },
+      }
+    }
 
     return {
       props: {
