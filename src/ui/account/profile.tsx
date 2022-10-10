@@ -47,12 +47,10 @@ export const Profile = () => {
           photo: imageURL,
           gender,
         })
-
         updateUser(res.data)
       } catch (e) {
         if (e instanceof AxiosError) {
           if (e.response.status === 401) {
-            console.log(e)
             router.push('/login')
           } else if (e.response.status === 500) {
             router.push('/500')

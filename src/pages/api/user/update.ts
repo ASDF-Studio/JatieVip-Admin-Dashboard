@@ -13,8 +13,11 @@ const userRoute = async (
     try {
       const acc = await AccountService.updateAccount({
         ...req.body,
-        jwttoken: 'dadaa',
+        jwttoken: req.session.token,
       })
+
+      req.session.user = acc
+      await req.session.save()
 
       res.status(200).json({
         ...acc,
