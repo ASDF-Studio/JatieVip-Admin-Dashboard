@@ -77,7 +77,7 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
             width: '11.875rem',
             marginTop: '8px',
             marginLeft: '5px',
-            padding: '1.063rem 0',
+            padding: '8px 0',
             '& .MuiMenuItem-root.Mui-selected': {
               backgroundColor: 'transparent',
             },

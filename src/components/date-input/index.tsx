@@ -9,6 +9,10 @@ const calendarIcon = forwardRef<HTMLImageElement, ImageProps>((props, ref) => (
   <img {...props} ref={ref} src="/assets/svg/calendar.svg" alt="calendar icon" className="w-[20px] h-[10px]" />
 ))
 
+const switchPickerIcon = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
+  return <img {...props} ref={ref} src="/assets/svg/sort.svg" alt="calendar icon" className="w-[20px] h-[10px]" />
+})
+
 type Props = {
   date: string
   onChange: (value: string) => void
@@ -26,7 +30,22 @@ export const CustomDatePicker: React.FC<Props> = ({ date = '', onChange, error =
           onChange(newValue)
         }}
         components={{
+          SwitchViewIcon: switchPickerIcon,
           OpenPickerIcon: calendarIcon,
+        }}
+        PaperProps={{
+          sx: {
+            '&& .Mui-selected': {
+              backgroundColor: '#19A3D1',
+              color: 'white',
+            },
+            '&& .Mui-selected:focus': {
+              backgroundColor: '#19A3D1',
+            },
+            '&& .Mui-selected:hover': {
+              backgroundColor: '#19A3D1',
+            },
+          },
         }}
         disableFuture
         renderInput={({ inputRef, inputProps, InputProps }) => (

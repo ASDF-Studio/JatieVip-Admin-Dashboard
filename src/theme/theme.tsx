@@ -347,8 +347,6 @@ interface ThemeContextInterface {
   isDark?: boolean
 }
 
-const ThemeContext = createContext<ThemeContextInterface>({})
-
 export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const theme = createTheme({
     ...MoveTheme,
@@ -356,17 +354,7 @@ export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({ children })
       mode: 'light',
       ...colors,
     },
-
     components: {
-      MuiDatePicker: {
-        styleOverrides: {
-          root: {
-            'Mui-selected': {
-              backgroundColor: 'red',
-            },
-          },
-        },
-      },
       MuiCircularProgress: {
         styleOverrides: {
           circle: {
@@ -379,16 +367,12 @@ export const ThemeProvider: React.FC<{ children: JSX.Element }> = ({ children })
   })
 
   return (
-    <ThemeContext.Provider value={{}}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </MuiThemeProvider>
-    </ThemeContext.Provider>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
   )
 }
-
-export const useColorMode: () => ThemeContextInterface = () => useContext(ThemeContext)
 
 export const useTheme = (): typeof MoveTheme => {
   return muiUseTheme<typeof MoveTheme>()

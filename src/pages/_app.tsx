@@ -5,6 +5,8 @@ import NProgress from 'nprogress'
 import { useEffect, useState } from 'react'
 import { Router } from 'next/router'
 
+
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     NProgress.configure({ showSpinner: false })
