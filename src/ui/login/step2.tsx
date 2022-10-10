@@ -12,6 +12,7 @@ type Props = {
   handleChangeForm: any
   sumbitForm: any
   error: boolean
+  setError: () => void
 }
 
 const Step2: React.FC<Props> = ({
@@ -21,10 +22,10 @@ const Step2: React.FC<Props> = ({
   handleChangeForm,
   sumbitForm,
   error = false,
+  setError,
 }): React.ReactElement => {
   const { sendCode } = useAuth()
   const [loading, setLoading] = useState(false)
-  const [showError, setShowError] = useState(false)
 
   const handleSumbitForm = async () => {
     if (code.length !== 5) {
@@ -35,7 +36,7 @@ const Step2: React.FC<Props> = ({
       setLoading(true)
       await sumbitForm()
     } catch (err) {
-      console.log()
+      console.log(err)
     } finally {
       setLoading(false)
     }
@@ -44,7 +45,7 @@ const Step2: React.FC<Props> = ({
   const handleResendCode = async () => {
     try {
       await sendCode(phoneNumber)
-      setShowError(false)
+      setError(false)
     } catch (e) {
       console.log(e)
     }
@@ -83,12 +84,7 @@ const Step2: React.FC<Props> = ({
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <VerifyCodeInput
-                error={showError}
-                length={5}
-                code={code}
-                onChange={(cd) => handleChangeForm('code', cd)}
-              />
+              <VerifyCodeInput error={error} length={5} code={code} onChange={(cd) => handleChangeForm('code', cd)} />
               {error && (
                 <Typography className="text-text-error font-medium" variant="body2">
                   Sorry, the code didn’t match.{` `}

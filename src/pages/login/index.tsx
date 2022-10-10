@@ -68,6 +68,7 @@ const Home: NextPage = (): React.ReactElement => {
             handleChangeForm={setFieldValue}
             code={code}
             phoneNumber={phoneNumber}
+            setError={setShowError}
             onChangeStep={handleChangeStep}
           />
         )

@@ -1,10 +1,13 @@
-import { Avatar } from '@mui/material'
+import { Avatar, IconButton, Typography } from '@mui/material'
+import axios from 'axios'
 import { Button } from 'components/Button'
 import { Dashboard, UserIcon } from 'components/icons'
 import { useAuth } from 'Contexts/Auth'
 import { useBreakPoint } from 'hooks'
 import { useNavigate } from 'hooks/UseRouter'
+import { useRouter } from 'next/router'
 import React, { FC } from 'react'
+import { useState } from 'react'
 
 type Props = {
   classNames?: string
@@ -16,9 +19,20 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
   const { user } = useAuth()
   const { navigateTo, pathname } = useNavigate()
   const { isTablet } = useBreakPoint()
+  const [showProfileMenu, setShowProfileMenu] = useState(false)
+  const router = useRouter()
 
   const isDashBoard = pathname === '/dashboard'
   const isAccount = pathname === '/account'
+
+  const handleLogOut = async () => {
+    try {
+      await axios.post('/api/logout')
+      await router.push('/login')
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <div
@@ -72,7 +86,30 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
                 </Button>
               )}
             </div>
-            <Avatar src={user?.photo} className="w-[35px] h-[35px] sm:w-10 sm:h-10" />
+            <div className="relative">
+              <IconButton className="p-0" disableRipple onClick={() => setShowProfileMenu(!showProfileMenu)}>
+                <Avatar
+                  src={user?.photo}
+                  className={`w-[35px] h-[35px] sm:w-10 sm:h-10  ${
+                    showProfileMenu && ' border-[2px] border-primary-brand'
+                  }`}
+                />
+              </IconButton>
+
+              {showProfileMenu && (
+                <div className="absolute w-[174px] py-[17px] -right-[20px] sm:right-0 bg-white shadow-selectShadow border border-[#e5e7ec] rounded-[12px] top-[40px]  sm:top-[45px]">
+                  <div
+                    onClick={() => {
+                      handleLogOut()
+                      setShowProfileMenu(false)
+                    }}
+                    className="px-[21px] hover:bg-[#f5f7f9] py-[7px]"
+                  >
+                    <Typography className="font-[16px] text-black font-normal">Logout</Typography>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
