@@ -36,7 +36,7 @@ const getAuth = (hasAuth = null) =>
 const genHeader = (hasAuth = null, headers = {}) => Object.assign(headers, getAuth(hasAuth))
 
 const handleError = (err: AxiosError<{ message: string }>, reject: any) => {
-  console.log(err.response)
+
   reject(
     new ApiErrorResponse(
       err.response.status,

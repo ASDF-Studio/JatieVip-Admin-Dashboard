@@ -10,11 +10,10 @@ const userRoute = async (
   res: NextApiResponse<(Partial<IUser> & { isLoggedIn: boolean }) | { message: string }>,
 ) => {
   if (req.session.token) {
-    
     try {
       const acc = await AccountService.updateAccount({
         ...req.body,
-        jwttoken: req.session.token,
+        jwttoken: 'dadaa',
       })
 
       res.status(200).json({
