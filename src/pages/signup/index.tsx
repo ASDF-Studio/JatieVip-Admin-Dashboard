@@ -63,15 +63,15 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
   }
 
   try {
-    // if (user?.username && user?.last_name && user?.first_name) {
-    //   return {
-    //     props: {},
-    //     redirect: {
-    //       destination: '/dashboard',
-    //       permanent: true,
-    //     },
-    //   }
-    // }
+    if (user?.username && user?.last_name && user?.first_name) {
+      return {
+        props: {},
+        redirect: {
+          destination: '/dashboard',
+          permanent: true,
+        },
+      }
+    }
 
     return {
       props: {
