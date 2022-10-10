@@ -5,7 +5,6 @@ import { Step3, Step4 } from 'ui/signup'
 import { SignUpSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
 import { sessionOptions } from 'lib/session'
-import { AuthService } from 'services'
 import { withIronSessionSsr } from 'iron-session/next'
 import { IUser } from 'services/types'
 import { AuthProvider } from 'Contexts/Auth'
@@ -51,9 +50,9 @@ const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
 }
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
-  const { token, destroy } = req.session
+  const { token, destroy, user } = req.session
 
-  if (!token) {
+  if (!token || !user) {
     return {
       props: {},
       redirect: {
@@ -64,8 +63,6 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
   }
 
   try {
-    const user = await AuthService.getAccount({ token })
-
     if (user?.username && user?.last_name && user?.first_name) {
       return {
         props: {},
