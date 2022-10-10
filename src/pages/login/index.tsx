@@ -88,9 +88,9 @@ const Home: NextPage = (): React.ReactElement => {
 }
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
-  const { token } = req.session
+  const { token, user } = req.session
 
-  if (token) {
+  if (token && user) {
     return {
       props: {},
       redirect: {

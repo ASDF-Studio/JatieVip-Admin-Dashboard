@@ -26,9 +26,9 @@ const Home: NextPage = ({ user }: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
-  const { token, destroy } = req.session
+  const { token, destroy, user } = req.session
 
-  if (!token) {
+  if (!token || !user) {
     return {
       props: {},
       redirect: {
@@ -39,8 +39,7 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
   }
 
   try {
-    const user = await AuthService.getAccount({ token })
-
+    
     if (!user?.first_name || !user?.last_name || !user?.username) {
       return {
         redirect: {

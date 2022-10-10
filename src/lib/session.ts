@@ -1,15 +1,19 @@
 import type { IronSessionOptions } from 'iron-session'
+import { IUser } from 'services/types'
 
 export const sessionOptions: IronSessionOptions = {
   password: process.env.NEXT_COOKIE_PASSWORD,
-  cookieName: 'iron-session/examples/next.js',
+  cookieName: 'move-cookie',
+  ttl: 24 * 3600,
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 3600,
   },
 }
 
 declare module 'iron-session' {
   interface IronSessionData {
     token: string
+    user: IUser
   }
 }

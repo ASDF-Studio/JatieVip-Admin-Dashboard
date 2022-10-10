@@ -16,15 +16,23 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
       phoneNumber,
       token,
     })
-
+    const user = await AuthService.getAccount({ token: data.token })
     req.session.token = data.token
+    req.session.user = user
     await req.session.save()
     res.status(200).json({})
   } catch (error) {
     if (error instanceof ApiErrorResponse) {
-      res.status(400).json({
-        message: error.message,
-      })
+      if (error.statusCode === 401) {
+        req.session.destroy()
+        res.status(401).json({
+          message: error.message,
+        })
+      } else {
+        res.status(400).json({
+          message: error.message,
+        })
+      }
     } else {
       res.status(500).json({ message: (error as Error).message })
     }
