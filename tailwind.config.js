@@ -16,6 +16,9 @@ module.exports = {
       '2xl': '1440px',
       '5xl': '1920px',
       '7xl': '2880px',
+      h700: {
+        raw: '(min-height: 700px)',
+      },
       h660: {
         raw: '(min-height: 660px)',
       },

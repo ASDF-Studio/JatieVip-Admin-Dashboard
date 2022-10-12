@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import { Dispatch, FC, ReactElement, SetStateAction, useState } from 'react'
+import { IProductNames } from 'services/types'
 import { Circle } from '../circle'
 
 type BoxSelect = {
@@ -9,7 +10,7 @@ type BoxSelect = {
 }
 
 type Props = {
-  onChange?: Dispatch<SetStateAction<number>>
+  onChange?: Dispatch<SetStateAction<IProductNames>>
   data: BoxSelect[]
   classname?: string
   gap?: string
@@ -20,7 +21,7 @@ export const BoxSelect: FC<Props> = ({ onChange = undefined, data, classname = '
 
   const handleOnChange = (index: number) => {
     if (onChange !== undefined) {
-      onChange(index)
+      onChange(data[index].title)
     }
     setState(index)
   }
@@ -45,7 +46,9 @@ export const BoxSelect: FC<Props> = ({ onChange = undefined, data, classname = '
                   <Typography className="text-fill-grey" variant="body4">
                     {value}
                   </Typography>
-                  {discountValue && <Typography className="text-fill-grey/70 text-[13px]">{discountValue}</Typography>}
+                  {discountValue && (
+                    <Typography className="text-fill-grey/70 text-[13px] font-normal">{discountValue}</Typography>
+                  )}
                 </div>
               </div>
             </div>

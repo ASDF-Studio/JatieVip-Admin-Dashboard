@@ -57,6 +57,7 @@ export const ForthHero: React.FC = (): React.ReactElement => {
               <span className="text-[#86949F]">Stay on track with </span>
               Habit ✌️ Tracker
             </Heading1>
+            
           </div>
           <Typography
             variant="body3"

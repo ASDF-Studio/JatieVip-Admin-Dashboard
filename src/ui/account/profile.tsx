@@ -120,23 +120,25 @@ export const Profile = () => {
             >
               Replace
             </Button>
-            <Button
-              onClick={async () => {
-                setRemLoading(true)
-                const res = await axios.post('/api/user/update', {
-                  photo: '',
-                })
-                updateUser(res.data)
-                setRemLoading(false)
-              }}
-              variant="ghost"
-              disableRipple
-              loading={remLoading}
-              className="max-w-[120px] w-full"
-              textClassName="text-border-blue"
-            >
-              Remove
-            </Button>
+            {user.photo && (
+              <Button
+                onClick={async () => {
+                  setRemLoading(true)
+                  const res = await axios.post('/api/user/update', {
+                    photo: '',
+                  })
+                  updateUser(res.data)
+                  setRemLoading(false)
+                }}
+                variant="ghost"
+                disableRipple
+                loading={remLoading}
+                className="max-w-[120px] w-full"
+                textClassName="text-border-blue"
+              >
+                Remove
+              </Button>
+            )}
           </div>
         </div>
       </div>
