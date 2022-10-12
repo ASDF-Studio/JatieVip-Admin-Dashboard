@@ -25,7 +25,7 @@ const ManageSubs: FC<Props> = ({ className }): ReactElement => {
           data={[
             {
               title: 'Monthly',
-              value: '$14.99',
+              value: '$17.99',
             },
             {
               title: '1 Year',

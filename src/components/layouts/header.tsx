@@ -52,7 +52,9 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
             } flex flex-col border-b-[4px] h-full  justify-center items-center w-[30px] sm:w-full`}
           >
             {!isTablet ? (
-              <Dashboard className="w-[18px]" />
+              <IconButton className="p-0" disableRipple onClick={() => navigateTo('/dashboard')}>
+                <Dashboard className="w-[18px]" />
+              </IconButton>
             ) : (
               <Button
                 onClick={() => navigateTo('/dashboard')}
@@ -73,7 +75,9 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
               } flex flex-col border-b-[4px] h-full  justify-center items-center w-[30px] sm:w-full`}
             >
               {!isTablet ? (
-                <UserIcon className="w-[16px] fill-[#86949f]" />
+                <IconButton className="p-0" disableRipple onClick={() => navigateTo('/account')}>
+                  <UserIcon className="w-[16px] fill-[#86949f]" />
+                </IconButton>
               ) : (
                 <Button
                   onClick={() => navigateTo('/account')}

@@ -43,7 +43,7 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
   return (
     <MuiButton disableRipple {...otherProperties} className={[className, styles.root, styles[variant]].join(' ')}>
       {loading ? (
-        <CircularProgress className="text-white w-7 h-7" />
+        <CircularProgress className={`w-7 h-7 ${variant === 'ghost' ? 'text-primary-brand' : 'text-white'}`} />
       ) : (
         <Typography textTransform="capitalize" variant={textVariant} className={`border-border-blue ${textClassName}`}>
           {children}

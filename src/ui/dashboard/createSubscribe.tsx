@@ -7,7 +7,7 @@ type Props = {
   className?: string
 }
 
-const CreateSubs: FC<Props> = ({ className, user }): ReactElement => {
+const CreateSubs: FC<Props> = ({ className }): ReactElement => {
   return (
     <div className={`${className}`}>
       <div className="flex flex-col gap-[29px] sm:gap-[63px]">
@@ -21,22 +21,22 @@ const CreateSubs: FC<Props> = ({ className, user }): ReactElement => {
           data={[
             {
               title: 'Monthly',
-              value: '$14.99',
+              value: '$17.99',
             },
             {
               title: '3-Months',
-              value: '$12.99/mo',
-              discountValue: '$38.97',
+              value: '$14.99/mo',
+              discountValue: '$9',
             },
             {
               title: '6-Months',
-              value: '$9.99/mo',
-              discountValue: '$59.95',
+              value: '$12.99/mo',
+              discountValue: '$30',
             },
             {
               title: '1 Year',
-              value: '$7.99/mo',
-              discountValue: '$95.88',
+              value: '$9.99/mo',
+              discountValue: '$96',
             },
           ]}
           gap="gap-[15px]"
@@ -51,7 +51,7 @@ const CreateSubs: FC<Props> = ({ className, user }): ReactElement => {
           >
             Subscribe Now
           </Button>
-          <Typography variant="bodyBold" className="text-[#86949f]">
+          <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
             7-Day Free trial included with every plan
           </Typography>
         </div>

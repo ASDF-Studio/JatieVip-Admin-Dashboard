@@ -24,6 +24,7 @@ export const Profile = () => {
   const [loading, setLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
+  const [remLoading, setRemLoading] = useState(false)
   const formik = useFormik<FormValues>({
     enableReinitialize: true,
     initialValues: {
@@ -98,7 +99,7 @@ export const Profile = () => {
       <div className="flex gap-[19px] items-center mt-[1.875rem]">
         <ProfilePicture url={imageURL} />
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 w-full">
           <Typography variant="bodyBold">Profile Picture</Typography>
           <input
             className="hidden"
@@ -107,17 +108,36 @@ export const Profile = () => {
             ref={inputRef}
             onChange={(e) => handleImageChange(e)}
           />
-          <Button
-            onClick={() => {
-              inputRef.current.click()
-            }}
-            variant="secondry"
-            disableRipple
-            className="w-[9.375rem]"
-            textClassName="text-border-blue"
-          >
-            Upload Picture
-          </Button>
+          <div className="flex gap-2.5 w-full">
+            <Button
+              onClick={() => {
+                inputRef.current.click()
+              }}
+              variant="secondry"
+              disableRipple
+              className="max-w-[120px] w-full"
+              textClassName="text-border-blue"
+            >
+              Replace
+            </Button>
+            <Button
+              onClick={async () => {
+                setRemLoading(true)
+                const res = await axios.post('/api/user/update', {
+                  photo: '',
+                })
+                updateUser(res.data)
+                setRemLoading(false)
+              }}
+              variant="ghost"
+              disableRipple
+              loading={remLoading}
+              className="max-w-[120px] w-full"
+              textClassName="text-border-blue"
+            >
+              Remove
+            </Button>
+          </div>
         </div>
       </div>
 

@@ -3,6 +3,22 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
+import admin from 'lib/firebase'
+import { isEmpty } from 'lodash'
+import { IUser } from 'services/types'
+
+const createFirebaseAndStripeAccount = async (user: IUser) => {
+  const auth = admin.auth()
+
+  const record = await auth.getUserByPhoneNumber(phoneNumber)
+
+  if (isEmpty(record)) {
+    const firebaseUser = await auth.createUser({
+      phoneNumber: user.phone_number,
+      disabled: false,
+    })
+  }
+}
 
 const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   const { phoneNumber, token } = req.body
