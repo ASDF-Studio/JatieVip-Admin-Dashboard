@@ -7,14 +7,16 @@ import { AuthProvider } from 'Contexts/Auth'
 import { IUser } from 'services/types'
 import { useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
+import { useRouter } from 'next/router'
 
 type Props = {
   user: IUser
 }
 
 const Home: NextPage<Props> = ({ user }) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [userSubs, setUserSubs] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     fetch()
@@ -31,6 +33,12 @@ const Home: NextPage<Props> = ({ user }) => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    if (!loading && !userSubs) {
+      router.push('/dashboard')
+    }
+  }, [loading, userSubs])
 
   return (
     <AuthProvider userContext={user}>

@@ -19,6 +19,9 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const handleUpdate = async () => {
+    if (username === '') {
+      return
+    }
     try {
       setLoading(true)
       await axios.post('/api/user/update', {
@@ -55,6 +58,8 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="rounded-[22px] py-[2px] px-3 bg-border-grey"
+                // status={username === '' ? 'error' : ''}
+                // helperText={username === '' && 'Required field'}
               />
               <div className="max-w-[380px]">
                 <Typography className="text-[#86949f] font-semibold" variant="body2">
@@ -71,7 +76,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
 
               <Button
                 color="success"
-                clahandleLoginssName="bg-secondary-light-blue shadow-buttonShadow3"
+                className="bg-secondary-light-blue shadow-buttonShadow3"
                 textClassName="text-white"
                 variant="fill"
                 onClick={handleUpdate}
