@@ -5,17 +5,45 @@ import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
 import { IUser } from 'services/types'
 import { AuthProvider } from 'Contexts/Auth'
+import { useEffect, useState } from 'react'
+import { StripeService } from 'services/stripe'
 
 type Props = {
   user: IUser
 }
 
 const Home: NextPage = ({ user }: Props) => {
+  
+  const [loading, setLoading] = useState(false)
+  const [userSubs, setUserSubs] = useState(null)
+
+  useEffect(() => {
+    fetch()
+  }, [])
+
+  const fetch = async () => {
+    console.log('pdaadaada', user)
+    try {
+      setLoading(true)
+      const res = await StripeService.getUserSubs()
+      setUserSubs(res)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <AuthProvider userContext={user}>
       <MainLayout className="pt-[66px] px-5">
-        {user.subscribed ? (
-          <CurrentSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] sm:mt-[53px] min-h-[calc(100vh-209px)]" />
+        {loading ? (
+          <div>Loading</div>
+        ) : userSubs ? (
+          <CurrentSub
+            subs={userSubs}
+            className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] sm:mt-[53px] min-h-[calc(100vh-209px)]"
+          />
         ) : (
           <CreateSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] x:mt-[53px] min-h-[calc(100vh-209px)]" />
         )}

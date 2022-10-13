@@ -3,6 +3,8 @@ import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {})
 
+export const subscriptionPlans: IProductNames[] = ['Monthly', '3-Months', '6-Months', '1 Year']
+
 export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> => {
   if (!user) {
     throw new Error('user required')
@@ -11,7 +13,7 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
   try {
     const newCustomer = await stripe.customers.create({
       phone: user.phone_number,
-      name: user.username,
+      name: user?.username || '',
       metadata: {
         moveUserId: user.id,
       },
@@ -69,13 +71,17 @@ type GetSubsParams = {
   stripeCustomerId: string
 }
 
-// export const getSubscription = async ({ stripeCustomerId }: GetSubsParams) => {
-//   try {
-//     await stripe.subscriptions.search({
-//       query: `status:\'active\' AND metadata[\'order_id\']:\'6735\'`,
-//       limit: 1,
-//     })
-//   } catch (e) {
-//     console.log(e)
-//   }
-// }
+export const getStripeUserSubs = async ({ stripeCustomerId }: GetSubsParams): Promise<Stripe.Subscription> => {
+  try {
+    const stripeSub = await stripe.subscriptions.list({ customer: stripeCustomerId, status: 'active' })
+
+    if (stripeSub.data.length === 1) {
+      return stripeSub.data[0]
+    }
+
+    return null
+  } catch (e) {
+    console.log(e)
+    throw new Error(e)
+  }
+}

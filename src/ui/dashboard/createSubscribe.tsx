@@ -19,9 +19,8 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
 
       window.location.href = stripeSesion.url
     } catch (e) {
-      console.log(e)
+      console.log(e.message)
     }
-
     setLoading(false)
   }
 

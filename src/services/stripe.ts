@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { IProductNames } from './types'
 
 const AxiosInstance = axios.create({
@@ -7,10 +7,6 @@ const AxiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 })
-
-type CreateSessionParams = {
-  selectedProduct: IProductNames
-}
 
 export const StripeService = {
   createSession: async (body: CreateSessionParams): Promise<any> => {
@@ -21,7 +17,25 @@ export const StripeService = {
 
       return stripeSesion.data.session
     } catch (e) {
-      throw new Error(e)
+      if (e instanceof AxiosError) {
+        throw new Error(e.response.data.message)
+      } else {
+        throw new Error(e.message)
+      }
+    }
+  },
+
+  getUserSubs: async (): Promise<any> => {
+    try {
+      const stripeSesion = await AxiosInstance.post('/api/stripe/getUserSub', {})
+
+      return stripeSesion.data.subs
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new Error(e.response.data.message)
+      } else {
+        throw new Error(e.message)
+      }
     }
   },
 }

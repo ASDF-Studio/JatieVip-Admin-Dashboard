@@ -14,6 +14,19 @@ export type IUser = {
 
 export type IProductNames = 'Monthly' | '3-Months' | '6-Months' | '1 Year'
 
+export type IPlan = {
+  interval_count: number
+  interval: 'year' | 'month'
+  amount: number
+}
+
+export type ISub = {
+  plan: IPlan
+  id: string
+  current_period_end: number
+  status: 'active' | 'canceled'
+}
+
 // {
 //     "id": 4,
 //     "username": "test",

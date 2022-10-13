@@ -3,18 +3,24 @@ import { Button, Tag, Hello } from 'components'
 import { DownloadApp } from 'components/download-app'
 import { useNavigate } from 'hooks/UseRouter'
 import { FC, ReactElement } from 'react'
+import { ISub } from 'services/types'
+import { getSubsName } from 'utils/helper'
 
 type Props = {
   className?: string
+  subs: ISub
 }
 
-const CurrentSubs: FC<Props> = ({ className }): ReactElement => {
+const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
+  const { plan } = subs
   const { navigateTo } = useNavigate()
+
+  console.log(subs.plan)
 
   return (
     <div className={`${className}`}>
       <div className="flex flex-col gap-[29px] sm:gap-[63px]">
-        <Hello  />
+        <Hello />
         <Typography variant="heading3" className="text-center sm:text-left">
           Your Plan
         </Typography>
@@ -25,14 +31,14 @@ const CurrentSubs: FC<Props> = ({ className }): ReactElement => {
             <Typography variant="heading4">You are subscribed to</Typography>
 
             <Typography className="text-primary-brand" variant="heading4">
-              3-Months Commitment Plan
+              {`${getSubsName(plan)} Commitment Plan`}
             </Typography>
           </div>
           <div className="flex items-center  flex-col gap-y-[15px] sm:flex-row gap-x-[9px]">
             <Typography variant="subhead" className="text-fill-grey text-center sm:text-left">
-              Your payment will be automatically renewed every 3-month
+              {`Your payment will be automatically renewed every ${plan?.interval_count}-${plan?.interval}`}
             </Typography>
-            <Tag text="Next Payement: July 12, 2023 | $38.99" />
+            <Tag date={subs?.current_period_end} price={plan.amount} />
           </div>
         </div>
         <Button

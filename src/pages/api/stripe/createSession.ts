@@ -1,8 +1,9 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { createStripeSession, createStripeUser } from 'lib/stripe'
-import { AccountService } from 'services'
+import { createStripeSession, createStripeUser, getStripeUserSubs, subscriptionPlans } from 'lib/stripe'
+import { AccountService, AuthService } from 'services'
+import { ApiErrorResponse } from 'services/api'
 
 const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
@@ -13,8 +14,37 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     return
   }
 
-  if (!req.session.token || !req.session.user) {
+  if (!req.session.token) {
     res.status(401).send('unauthorized')
+
+    return
+  }
+  const { token } = req.session
+
+  try {
+    const user = await AuthService.getAccount({
+      token,
+    })
+
+    req.session.user = user
+    await req.session.save()
+  } catch (e) {
+    if (e instanceof ApiErrorResponse) {
+      if (e.statusText === 'Unauthorized') {
+        req.session.destroy()
+        res.status(401).json({
+          message: 'unauthorized',
+        })
+      } else {
+        res.status(400).json({
+          message: e.message,
+        })
+      }
+    } else {
+      res.status(500).json({
+        message: 'cannot connect to server',
+      })
+    }
 
     return
   }
@@ -22,18 +52,24 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
   const { selectedProduct } = req.body
 
   if (!selectedProduct) {
-    res.status(401).json({
+    res.status(400).json({
       message: 'product name required',
     })
 
     return
   }
 
-  const { user, token } = req.session
+  if (subscriptionPlans.findIndex((prods) => prods === selectedProduct) === -1) {
+    res.status(400).json({
+      message: 'please inculed valid product name',
+    })
 
-  if (!user.stripe_customer_id) {
+    return
+  }
+
+  if (!req.session.user.stripe_customer_id) {
     try {
-      const stripeUser = await createStripeUser(user)
+      const stripeUser = await createStripeUser(req.session.user)
       const updatedUser = await AccountService.updateAccount({
         stripe_customer_id: stripeUser.id,
         jwttoken: token,
@@ -49,8 +85,20 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     }
   }
 
+  const stripeCustomerId = req.session.user.stripe_customer_id
+
+  const stripeSub = await getStripeUserSubs({
+    stripeCustomerId,
+  })
+
+  if (stripeSub) {
+    res.status(400).json({
+      message: 'user already has subs',
+    })
+  }
+
   try {
-    const session = await createStripeSession({ stripeUserId: user.stripe_customer_id, productName: selectedProduct })
+    const session = await createStripeSession({ stripeUserId: stripeCustomerId, productName: selectedProduct })
 
     res.status(200).json({
       session,
