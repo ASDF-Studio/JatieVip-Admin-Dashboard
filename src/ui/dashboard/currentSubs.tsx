@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import { Button, Tag, Hello } from 'components'
 import { DownloadApp } from 'components/download-app'
 import { useNavigate } from 'hooks/UseRouter'
-import { FC, ReactElement } from 'react'
+import { FC, ReactElement, useCallback } from 'react'
 import { ISub } from 'services/types'
 import { getSubsName } from 'utils/helper'
 
@@ -15,7 +15,9 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
   const { plan } = subs
   const { navigateTo } = useNavigate()
 
-  console.log(subs.plan)
+  const subsTitle = useCallback(() => {
+    return getSubsName(plan)
+  }, [plan])
 
   return (
     <div className={`${className}`}>
@@ -31,12 +33,12 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
             <Typography variant="heading4">You are subscribed to</Typography>
 
             <Typography className="text-primary-brand" variant="heading4">
-              {`${getSubsName(plan)} Commitment Plan`}
+              {`${subsTitle().title} Commitment Plan`}
             </Typography>
           </div>
           <div className="flex items-center  flex-col gap-y-[15px] sm:flex-row gap-x-[9px]">
             <Typography variant="subhead" className="text-fill-grey text-center sm:text-left">
-              {`Your payment will be automatically renewed every ${plan?.interval_count}-${plan?.interval}`}
+              {`Your payment will be automatically renewed every ${subsTitle().title}`}
             </Typography>
             <Tag date={subs?.current_period_end} price={plan.amount} />
           </div>

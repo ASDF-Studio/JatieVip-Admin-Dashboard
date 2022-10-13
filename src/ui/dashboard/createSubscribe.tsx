@@ -1,8 +1,10 @@
 import { Typography } from '@mui/material'
 import { BoxSelect, Button, Hello } from 'components'
+import { StripeError } from 'lib/error'
+import { useRouter } from 'next/router'
 import { FC, ReactElement, useState } from 'react'
 import { StripeService } from 'services/stripe'
-import { IProductNames } from 'services/types'
+import { ISelectedProduct } from 'services/types'
 
 type Props = {
   className?: string
@@ -10,16 +12,21 @@ type Props = {
 
 const CreateSubs: FC<Props> = ({ className }): ReactElement => {
   const [loading, setLoading] = useState(false)
-  const [selected, setSelected] = useState<IProductNames>(null)
+  const [selected, setSelected] = useState<ISelectedProduct>(null)
+  const router = useRouter()
 
   const handleSubscribe = async () => {
     setLoading(true)
     try {
-      const stripeSesion = await StripeService.createSession({ selectedProduct: selected })
+      const stripeSesion = await StripeService.createSession({ selectedProduct: selected.title })
 
       window.location.href = stripeSesion.url
     } catch (e) {
-      console.log(e.message)
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
     }
     setLoading(false)
   }
@@ -62,7 +69,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
         <div className="flex flex-col gap-2.5 items-center">
           <Button
             loading={loading}
-            disabled={loading}
+            disabled={loading || !selected}
             className="w-full sm:w-[25rem]"
             variant="fill"
             textClassName="text-white"

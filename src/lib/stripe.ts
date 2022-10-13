@@ -1,5 +1,7 @@
+/* eslint-disable no-useless-escape */
 import { IProductNames, IUser } from 'services/types'
 import Stripe from 'stripe'
+import { StripeError } from './error'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {})
 
@@ -7,7 +9,9 @@ export const subscriptionPlans: IProductNames[] = ['Monthly', '3-Months', '6-Mon
 
 export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> => {
   if (!user) {
-    throw new Error('user required')
+    throw new StripeError('please fill required values', {
+      statusCode: 400,
+    })
   }
 
   try {
@@ -21,7 +25,15 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
 
     return newCustomer
   } catch (e) {
-    throw new Error(e)
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
   }
 }
 
@@ -35,7 +47,9 @@ export const createStripeSession = async ({
   productName,
 }: CreateSessionType): Promise<Stripe.Checkout.Session> => {
   if (!stripeUserId || !productName) {
-    throw new Error('stripeUserId required')
+    throw new StripeError('please fill required values', {
+      statusCode: 400,
+    })
   }
 
   try {
@@ -45,7 +59,9 @@ export const createStripeSession = async ({
     })
 
     if (data.length === 0) {
-      throw new Error('product not found')
+      throw new StripeError('product not found', {
+        statusCode: 400,
+      })
     }
 
     const stripeSession = await stripe.checkout.sessions.create({
@@ -63,7 +79,15 @@ export const createStripeSession = async ({
 
     return stripeSession
   } catch (e) {
-    throw new Error(e)
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
   }
 }
 
@@ -71,7 +95,9 @@ type GetSubsParams = {
   stripeCustomerId: string
 }
 
-export const getStripeUserSubs = async ({ stripeCustomerId }: GetSubsParams): Promise<Stripe.Subscription> => {
+export const getStripeUserSubs = async ({
+  stripeCustomerId,
+}: GetSubsParams): Promise<Stripe.Subscription | null | StripeError> => {
   try {
     const stripeSub = await stripe.subscriptions.list({ customer: stripeCustomerId, status: 'active' })
 
@@ -81,7 +107,57 @@ export const getStripeUserSubs = async ({ stripeCustomerId }: GetSubsParams): Pr
 
     return null
   } catch (e) {
-    console.log(e)
-    throw new Error(e)
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type UpdateStripeSubParams = {
+  currentSub: Stripe.Subscription
+  productName: string
+  cancelAtPeriod: boolean
+}
+
+export const updateStripeSub = async ({ currentSub, productName, cancelAtPeriod }: UpdateStripeSubParams) => {
+  try {
+    const { data } = await stripe.products.search({
+      query: `active:\'true\' AND name:\'${productName}\'`,
+      limit: 1,
+    })
+
+    if (data.length === 0) {
+      throw new StripeError('product not found', {
+        statusCode: 400,
+      })
+    }
+
+    const stripeSub = await stripe.subscriptions.update(currentSub.id, {
+      cancel_at_period_end: cancelAtPeriod,
+      items: [
+        {
+          id: currentSub.items.data[0].id,
+          price: data[0].default_price as string,
+        },
+      ],
+    })
+
+    return null
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
   }
 }

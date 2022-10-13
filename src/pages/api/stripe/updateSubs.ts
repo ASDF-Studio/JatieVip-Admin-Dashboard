@@ -4,9 +4,9 @@ import { withIronSessionApiRoute } from 'iron-session/next'
 import { getStripeUserSubs } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
-import { StripeError } from 'lib/error'
+import Stripe from 'stripe'
 
-const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
+const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.session.token) {
     res.status(401).send('unauthorized')
 
@@ -42,29 +42,26 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (!req.session.user.stripe_customer_id) {
-    res.status(200).json({
-      subs: null,
+    res.status(400).json({
+      message: 'please subscribe first',
     })
 
     return
   }
 
+  let stripeSub: Stripe.Subscription
+
   try {
-    const stripeSub = await getStripeUserSubs({
+    stripeSub = await getStripeUserSubs({
       stripeCustomerId: req.session.user.stripe_customer_id,
     })
-
-    res.status(200).json({
-      subs: stripeSub,
-    })
   } catch (e) {
-    if (e instanceof StripeError) {
-      res.status(e.statusCode).json({
-        message: e.message,
-      })
-    }
-    res.status(500).send('')
+    res.status(400).json({
+      message: e.message,
+    })
   }
+
+  
 }
 
-export default withIronSessionApiRoute(loginRoute, sessionOptions)
+export default withIronSessionApiRoute(UpdateSubsRoute, sessionOptions)

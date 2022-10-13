@@ -7,28 +7,33 @@ import { IUser } from 'services/types'
 import { AuthProvider } from 'Contexts/Auth'
 import { useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
+import { StripeError } from 'lib/error'
+import { useRouter } from 'next/router'
 
 type Props = {
   user: IUser
 }
 
 const Home: NextPage = ({ user }: Props) => {
-  
   const [loading, setLoading] = useState(false)
   const [userSubs, setUserSubs] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     fetch()
   }, [])
 
   const fetch = async () => {
-    console.log('pdaadaada', user)
     try {
       setLoading(true)
       const res = await StripeService.getUserSubs()
       setUserSubs(res)
     } catch (e) {
-      console.log(e)
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
     } finally {
       setLoading(false)
     }

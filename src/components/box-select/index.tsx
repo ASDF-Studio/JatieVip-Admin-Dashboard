@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
-import { Dispatch, FC, ReactElement, SetStateAction, useState } from 'react'
-import { IProductNames } from 'services/types'
+import { Dispatch, FC, ReactElement, SetStateAction, useEffect, useState } from 'react'
+import { IProductNames, ISelectedProduct } from 'services/types'
 import { Circle } from '../circle'
 
 type BoxSelect = {
@@ -10,21 +10,34 @@ type BoxSelect = {
 }
 
 type Props = {
-  onChange?: Dispatch<SetStateAction<IProductNames>>
+  onChange?: Dispatch<SetStateAction<ISelectedProduct>>
   data: BoxSelect[]
   classname?: string
   gap?: string
+  defaultValue?: number
 }
 
-export const BoxSelect: FC<Props> = ({ onChange = undefined, data, classname = '', gap }): ReactElement => {
-  const [state, setState] = useState<number>(null)
+export const BoxSelect: FC<Props> = ({
+  onChange = undefined,
+  data,
+  classname = '',
+  gap,
+  defaultValue = null,
+}): ReactElement => {
+  const [state, setState] = useState<number>(defaultValue)
 
   const handleOnChange = (index: number) => {
     if (onChange !== undefined) {
-      onChange(data[index].title)
+      onChange(data[index])
     }
     setState(index)
   }
+
+  useEffect(() => {
+    if (defaultValue) {
+      onChange(data[state])
+    }
+  }, [defaultValue])
 
   return (
     <div className={`flex flex-col sm:flex-row w-full items-center ${gap}`}>

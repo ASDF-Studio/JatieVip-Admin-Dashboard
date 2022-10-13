@@ -14,6 +14,12 @@ export type IUser = {
 
 export type IProductNames = 'Monthly' | '3-Months' | '6-Months' | '1 Year'
 
+export type ISelectedProduct = {
+  title: IProductNames
+  weight: number
+  value: string
+}
+
 export type IPlan = {
   interval_count: number
   interval: 'year' | 'month'

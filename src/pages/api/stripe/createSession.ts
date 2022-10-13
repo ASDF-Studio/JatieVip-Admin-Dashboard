@@ -101,7 +101,7 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     const session = await createStripeSession({ stripeUserId: stripeCustomerId, productName: selectedProduct })
 
     res.status(200).json({
-      session,
+      data: session,
     })
   } catch (e) {
     if (e instanceof Error) {

@@ -11,14 +11,35 @@ export const getBase64 = (file): Promise<string | ArrayBuffer> => {
   })
 }
 
-export const getSubsName = (plan: IPlan) => {
+type ReturnSubsName = {
+  title: string
+  weight: number
+}
+
+export const getSubsName = (plan: IPlan): ReturnSubsName => {
   if (plan?.interval === 'year') {
-    return `${plan?.interval_count} ${plan?.interval}`
+    if (plan.interval_count === 1) {
+      return {
+        title: '1 Year',
+        weight: 12,
+      }
+    }
+
+    return {
+      title: '',
+      weight: 0,
+    }
   }
 
   if (plan?.interval_count === 1) {
-    return plan?.interval
+    return {
+      title: 'Monthly',
+      weight: 1,
+    }
   }
 
-  return `${plan?.interval_count}-${plan?.interval}`
+  return {
+    title: `${plan?.interval_count}-Months`,
+    weight: plan?.interval_count,
+  }
 }

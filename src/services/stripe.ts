@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { IProductNames } from './types'
+import { StripeError } from 'lib/error'
 
 const AxiosInstance = axios.create({
   baseURL: '',
@@ -9,16 +9,16 @@ const AxiosInstance = axios.create({
 })
 
 export const StripeService = {
-  createSession: async (body: CreateSessionParams): Promise<any> => {
+  createSession: async (body): Promise<any> => {
     try {
       const stripeSesion = await AxiosInstance.post('/api/stripe/createSession', {
         ...body,
       })
 
-      return stripeSesion.data.session
+      return stripeSesion.data.data
     } catch (e) {
       if (e instanceof AxiosError) {
-        throw new Error(e.response.data.message)
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
       } else {
         throw new Error(e.message)
       }
@@ -32,7 +32,7 @@ export const StripeService = {
       return stripeSesion.data.subs
     } catch (e) {
       if (e instanceof AxiosError) {
-        throw new Error(e.response.data.message)
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
       } else {
         throw new Error(e.message)
       }
