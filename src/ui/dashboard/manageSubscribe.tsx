@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material'
-import { AccountSubs, Billing, BoxSelect, Button, ConfirmationModal, Hello } from 'components'
+import { AccountSubs, Billing, BoxSelect, Button, ConfirmationModal, Hello, ReActiveSub } from 'components'
 import { FC, ReactElement, useCallback, useState } from 'react'
+import { StripeService } from 'services/stripe'
 import { ISelectedProduct, ISub } from 'services/types'
 import { BillingModal } from 'ui/modals'
 import { getSubsName } from 'utils/helper'
@@ -15,7 +16,9 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
   const [showAutoRenewalModal, setShowAutoRenewalModal] = useState(false)
   const [showBillingModal, setShowBillingModal] = useState(false)
   const [selected, setSelected] = useState<ISelectedProduct>(null)
-  const { plan } = sub
+  const [currentSubs, setCurrentSubs] = useState<ISub>(sub)
+  const [showReactiveModal, setShowReactiveModal] = useState(false)
+  const { plan } = currentSubs
 
   const currentPlan = useCallback(() => {
     return getSubsName(plan)
@@ -49,13 +52,38 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
     },
   ]
 
-  // const downgradeSub = () => {
+  const createScheduleSub = useCallback(async () => {
+    try {
+      const res = await StripeService.createScheduleSub({
+        selectedProduct: selected.title,
+      })
+      console.log(res)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [selected])
 
-  // }
+  const cancelAutoRenewal = useCallback(async () => {
+    try {
+      const res = await StripeService.updateCurrentSub({
+        endAtThePeriod: true,
+      })
+      setCurrentSubs(res)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
 
-  // const upgradeSub = () => {
-
-  // }
+  const reActiveSubs = useCallback(async () => {
+    try {
+      const res = await StripeService.updateCurrentSub({
+        endAtThePeriod: false,
+      })
+      setCurrentSubs(res)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
 
   return (
     <div className={`${className}`}>
@@ -80,10 +108,16 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
             className="w-full max-w-[360px] sm:max-w-[29.063rem]"
             variant="fill"
             textClassName="text-white"
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              if (currentSubs.cancel_at_period_end) {
+                setShowReactiveModal(true)
+              } else {
+                setShowModal(true)
+              }
+            }}
             disableRipple
           >
-            {isUpgrade ? 'Upgrade' : 'Downgrade'}
+            {currentSubs.cancel_at_period_end ? 'Reactive' : isUpgrade ? 'Upgrade' : 'Downgrade'}
           </Button>
           <Typography variant="bodyBold" className="text-fill-grey text-center max-w-[290px] sm:max-w-full">
             All transactions are secure and encrypted by{' '}
@@ -98,17 +132,24 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
           </Typography>
         </div>
       </div>
-      <AccountSubs
-        userSubs={sub}
-        classname="my-[30px] sm:mt-[53px] mb-[4.188rem]"
-        onCancel={() => setShowAutoRenewalModal(true)}
-      />
+      {currentSubs.cancel_at_period_end ? (
+        <ReActiveSub
+          userSubs={currentSubs}
+          classname="my-[30px] sm:mt-[53px] mb-[4.188rem]"
+          onCancel={() => setShowReactiveModal(true)}
+        />
+      ) : (
+        <AccountSubs
+          userSubs={currentSubs}
+          classname="my-[30px] sm:mt-[53px] mb-[4.188rem]"
+          onCancel={() => setShowAutoRenewalModal(true)}
+        />
+      )}
+
       <Billing setShowBillingModal={() => setShowBillingModal(true)} />
       <ConfirmationModal
         open={showModal}
-        onAccept={() => {
-          console.log('pzda')
-        }}
+        onAccept={createScheduleSub}
         setOpen={setShowModal}
         contentText={`Are you sure you want to ${
           isUpgrade ? 'upgrade' : 'downgrade'
@@ -117,7 +158,14 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       <ConfirmationModal
         open={showAutoRenewalModal}
         setOpen={setShowAutoRenewalModal}
+        onAccept={cancelAutoRenewal}
         contentText="Are you sure you want to cancel Auto Renewal?"
+      />
+      <ConfirmationModal
+        open={showReactiveModal}
+        setOpen={setShowReactiveModal}
+        onAccept={reActiveSubs}
+        contentText="Are you sure you want to activate Auto Renewal?"
       />
       <BillingModal open={showBillingModal} setOpen={setShowBillingModal} />
     </div>

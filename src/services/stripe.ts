@@ -29,7 +29,37 @@ export const StripeService = {
     try {
       const stripeSesion = await AxiosInstance.post('/api/stripe/getUserSub', {})
 
-      return stripeSesion.data.subs
+      return stripeSesion.data.data
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
+      } else {
+        throw new Error(e.message)
+      }
+    }
+  },
+  createScheduleSub: async (body: { selectedProduct: string }): Promise<any> => {
+    try {
+      const stripeSesion = await AxiosInstance.post('/api/stripe/createSchedules', {
+        ...body,
+      })
+
+      return stripeSesion.data.data
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
+      } else {
+        throw new Error(e.message)
+      }
+    }
+  },
+  updateCurrentSub: async (body: { endAtThePeriod: boolean }): Promise<any> => {
+    try {
+      const stripeSesion = await AxiosInstance.post('/api/stripe/updateSubs', {
+        ...body,
+      })
+
+      return stripeSesion.data.data
     } catch (e) {
       if (e instanceof AxiosError) {
         throw new StripeError(e.response.data.message, { statusCode: e.response.status })

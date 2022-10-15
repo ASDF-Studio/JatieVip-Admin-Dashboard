@@ -55,7 +55,7 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     })
 
     res.status(200).json({
-      subs: stripeSub,
+      data: stripeSub,
     })
   } catch (e) {
     if (e instanceof StripeError) {

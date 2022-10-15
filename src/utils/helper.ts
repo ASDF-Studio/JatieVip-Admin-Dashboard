@@ -14,6 +14,7 @@ export const getBase64 = (file): Promise<string | ArrayBuffer> => {
 type ReturnSubsName = {
   title: string
   weight: number
+  nickName: string
 }
 
 export const getSubsName = (plan: IPlan): ReturnSubsName => {
@@ -22,12 +23,14 @@ export const getSubsName = (plan: IPlan): ReturnSubsName => {
       return {
         title: '1 Year',
         weight: 12,
+        nickName: '1 Year',
       }
     }
 
     return {
       title: '',
       weight: 0,
+      nickName: '',
     }
   }
 
@@ -35,11 +38,13 @@ export const getSubsName = (plan: IPlan): ReturnSubsName => {
     return {
       title: 'Monthly',
       weight: 1,
+      nickName: 'month',
     }
   }
 
   return {
     title: `${plan?.interval_count}-Months`,
     weight: plan?.interval_count,
+    nickName: `${plan?.interval_count}-months`,
   }
 }

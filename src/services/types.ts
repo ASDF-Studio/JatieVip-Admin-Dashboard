@@ -24,11 +24,14 @@ export type IPlan = {
   interval_count: number
   interval: 'year' | 'month'
   amount: number
+  nickName: string
 }
 
 export type ISub = {
   plan: IPlan
   id: string
+  cancel_at_period_end: boolean
+  cancel_at: number
   current_period_end: number
   status: 'active' | 'canceled'
 }

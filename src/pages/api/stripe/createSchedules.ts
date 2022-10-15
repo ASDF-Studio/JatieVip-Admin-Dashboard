@@ -1,13 +1,13 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs, updateStripeScheduleSub, updateStripeSub } from 'lib/stripe'
+import { createSubSchedules, getStripeUserSubs, subscriptionPlans } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
-import Stripe from 'stripe'
 import { StripeError } from 'lib/error'
+import Stripe from 'stripe'
 
-const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
+const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.session.token) {
     res.status(401).send('unauthorized')
 
@@ -50,57 +50,60 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  const { endAtThePeriod = undefined } = req.body
+  const { selectedProduct } = req.body
 
-  if (endAtThePeriod === undefined) {
+  if (!selectedProduct) {
     res.status(400).json({
-      message: 'please include endoftheperiod',
+      message: 'product name required',
     })
 
     return
   }
 
-  let stripeSub: Stripe.Subscription
-
-  try {
-    stripeSub = (await getStripeUserSubs({
-      stripeCustomerId: req.session.user.stripe_customer_id,
-    })) as Stripe.Subscription
-  } catch (e) {
+  if (subscriptionPlans.findIndex((prods) => prods === selectedProduct) === -1) {
     res.status(400).json({
-      message: e.message,
+      message: 'please inculed valid product name',
     })
+
+    return
+  }
+
+  const stripeSub = (await getStripeUserSubs({
+    stripeCustomerId: req.session.user.stripe_customer_id,
+  })) as Stripe.Subscription
+
+  if (!stripeSub) {
+    res.status(400).json({
+      message: 'please subscribe first',
+    })
+
+    return
+  }
+
+  if (stripeSub.cancel_at_period_end) {
+    res.status(400).json({
+      message: 'please reactive subs first',
+    })
+
+    return
   }
 
   if (stripeSub.schedule) {
-    try {
-      const updateSub = await updateStripeScheduleSub({
-        scheduleId: stripeSub.schedule as string,
-        endBehavior: 'cancel',
-      })
+    res.status(400).json({
+      message: 'you already have active schedule',
+    })
 
-      res.status(200).json({
-        data: updateSub,
-      })
-    } catch (e) {
-      if (e instanceof StripeError) {
-        res.status(e.statusCode).json({
-          message: e.message,
-        })
-
-        return
-      }
-    }
+    return
   }
 
   try {
-    const updateSub = await updateStripeSub({
-      currentSub: stripeSub,
-      cancelAtPeriod: endAtThePeriod,
+    const scheduleSub = await createSubSchedules({
+      subscription: stripeSub,
+      productName: selectedProduct,
     })
 
     res.status(200).json({
-      data: updateSub,
+      data: scheduleSub,
     })
   } catch (e) {
     if (e instanceof StripeError) {
@@ -114,4 +117,4 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default withIronSessionApiRoute(UpdateSubsRoute, sessionOptions)
+export default withIronSessionApiRoute(createScheduleSub, sessionOptions)

@@ -12,6 +12,7 @@ type Props = {
 }
 
 export const AccountSubs: FC<Props> = ({ classname, onCancel, userSubs }): React.ReactElement => {
+  
   const { plan } = userSubs
 
   return (
@@ -23,10 +24,10 @@ export const AccountSubs: FC<Props> = ({ classname, onCancel, userSubs }): React
           <Typography variant="heading3">You are subscribed to</Typography>
           <Typography variant="heading3">{`${getSubsName(plan).title} Commitment Plan`}</Typography>
         </div>
-        <div className="flex flex-col gap-[15px] max-w-[300px] sm:max-w-full">
+        <div className="flex flex-col gap-[15px] max-w-[300px] sm:max-w-full sm:items-end">
           <Tag date={userSubs?.current_period_end} price={plan.amount} />
           <Typography variant="subheadBold" className="w-[15.625rem] text-primary-grey text-left sm:text-right">
-            {`Your payment will be automatically renewed every ${getSubsName(plan).title}`}
+            {`Your payment will be automatically renewed every ${getSubsName(plan).nickName}`}
           </Typography>
         </div>
       </div>

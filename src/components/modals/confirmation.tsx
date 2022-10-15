@@ -17,7 +17,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     maxWidth: '440px',
     padding: '1.438rem 1.25rem 1.625rem 1.25rem',
     borderRadius: '18px',
-    margin: "0 15px",
+    margin: '0 15px',
     boxSizing: 'border-box',
     width: '100%',
   },
@@ -56,18 +56,19 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 }
 
 type Props = {
-  onAccept?: () => void
+  onAccept?: () => Promise<void>
   contentText: string
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const ConfirmationModal: React.FC<Props> = ({
-  onAccept = () => console.log('123'),
+  onAccept,
   contentText = '',
   open = false,
   setOpen,
 }): React.ReactElement => {
+  const [loading, setLoading] = React.useState(false)
   const handleClose = () => {
     setOpen(false)
   }
@@ -85,8 +86,15 @@ export const ConfirmationModal: React.FC<Props> = ({
           <Button
             variant="secondry"
             textClassName="text-text-blue"
+            loading={loading}
+            disabled={loading}
             className="w-full bg-fill-lightBlue2 shadow-none"
-            onClick={onAccept}
+            onClick={async () => {
+              setLoading(true)
+              await onAccept()
+              setLoading(false)
+              setOpen(false)
+            }}
           >
             Yes
           </Button>

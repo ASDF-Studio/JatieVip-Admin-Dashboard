@@ -1,7 +1,7 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs, updateStripeScheduleSub, updateStripeSub } from 'lib/stripe'
+import { getStripeUserSubs, updateStripeSub } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import Stripe from 'stripe'
@@ -50,16 +50,6 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  const { endAtThePeriod = undefined } = req.body
-
-  if (endAtThePeriod === undefined) {
-    res.status(400).json({
-      message: 'please include endoftheperiod',
-    })
-
-    return
-  }
-
   let stripeSub: Stripe.Subscription
 
   try {
@@ -72,31 +62,11 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     })
   }
 
-  if (stripeSub.schedule) {
-    try {
-      const updateSub = await updateStripeScheduleSub({
-        scheduleId: stripeSub.schedule as string,
-        endBehavior: 'cancel',
-      })
-
-      res.status(200).json({
-        data: updateSub,
-      })
-    } catch (e) {
-      if (e instanceof StripeError) {
-        res.status(e.statusCode).json({
-          message: e.message,
-        })
-
-        return
-      }
-    }
-  }
 
   try {
     const updateSub = await updateStripeSub({
       currentSub: stripeSub,
-      cancelAtPeriod: endAtThePeriod,
+      cancelAtPeriod: true,
     })
 
     res.status(200).json({

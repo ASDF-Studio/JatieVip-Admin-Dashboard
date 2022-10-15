@@ -56,7 +56,7 @@ export const BoxSelect: FC<Props> = ({
                 <Typography variant="body4">{title}</Typography>
 
                 <div className="flex flex-col">
-                  <Typography className="text-fill-grey" variant="body4">
+                  <Typography className="text-fill-grey leading-normal" variant="body4">
                     {value}
                   </Typography>
                   {discountValue && (

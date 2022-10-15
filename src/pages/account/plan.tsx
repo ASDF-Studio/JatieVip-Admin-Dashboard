@@ -17,7 +17,7 @@ const Home: NextPage<Props> = ({ user }) => {
   const [loading, setLoading] = useState(true)
   const [userSubs, setUserSubs] = useState(null)
   const router = useRouter()
-  console.log("adada")
+
   useEffect(() => {
     fetch()
   }, [])
