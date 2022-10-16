@@ -70,7 +70,7 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const stripeSub = (await getStripeUserSubs({
     stripeCustomerId: req.session.user.stripe_customer_id,
-  })) as Stripe.Subscription
+  })) as Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
 
   if (!stripeSub) {
     res.status(400).json({
@@ -80,17 +80,9 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  if (stripeSub.cancel_at_period_end) {
+  if (stripeSub.cancel_at) {
     res.status(400).json({
       message: 'please reactive subs first',
-    })
-
-    return
-  }
-
-  if (stripeSub.schedule) {
-    res.status(400).json({
-      message: 'you already have active schedule',
     })
 
     return

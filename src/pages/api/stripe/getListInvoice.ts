@@ -1,13 +1,13 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs, getUpcomingSubsInvoice } from 'lib/stripe'
+import { getStripeUserSubs, ListAllCustomerInvoices } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { StripeError } from 'lib/error'
 import Stripe from 'stripe'
 
-const getUserInvoice = async (req: NextApiRequest, res: NextApiResponse) => {
+const getListInvoice = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.session.token) {
     res.status(401).send('unauthorized')
 
@@ -62,15 +62,13 @@ const getUserInvoice = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  let stripeUpComingInvoice
-
   try {
-    stripeUpComingInvoice = await getUpcomingSubsInvoice({
-      subsId: stripeSub.id,
+    const listInvoice = await ListAllCustomerInvoices({
+      subscriptionId: stripeSub.id,
     })
 
     res.status(200).json({
-      data: stripeUpComingInvoice,
+      data: listInvoice,
     })
   } catch (e) {
     if (e instanceof StripeError) {
@@ -82,4 +80,4 @@ const getUserInvoice = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default withIronSessionApiRoute(getUserInvoice, sessionOptions)
+export default withIronSessionApiRoute(getListInvoice, sessionOptions)

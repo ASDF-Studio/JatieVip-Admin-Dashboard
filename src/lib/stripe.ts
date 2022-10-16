@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-escape */
+import { isEmpty } from 'lodash'
 import { release } from 'process'
 import { IProductNames, IUser } from 'services/types'
 import Stripe from 'stripe'
@@ -70,12 +71,16 @@ export const createStripeSession = async ({
       cancel_url: process.env.STRIPE_CANCEL_URL,
       mode: 'subscription',
       customer: stripeUserId,
+      billing_address_collection: 'required',
       line_items: [
         {
           price: data[0].default_price as string,
           quantity: 1,
         },
       ],
+      // subscription_data: {
+      //   trial_period_days: 7,
+      // },
     })
 
     return stripeSession
@@ -100,7 +105,11 @@ export const getStripeUserSubs = async ({
   stripeCustomerId,
 }: GetSubsParams): Promise<Stripe.Subscription | null | StripeError> => {
   try {
-    const stripeSub = await stripe.subscriptions.list({ customer: stripeCustomerId, status: 'active' })
+    const stripeSub = await stripe.subscriptions.list({
+      customer: stripeCustomerId,
+      status: 'active',
+      expand: ['data.schedule.phases.plans'],
+    })
 
     if (stripeSub.data.length === 1) {
       return stripeSub.data[0]
@@ -147,13 +156,13 @@ export const updateStripeSub = async ({ currentSub, cancelAtPeriod }: UpdateStri
 
 type SchedulesType = {
   productName: string
-  subscription: Stripe.Subscription
+  subscription: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
 }
 
 export const createSubSchedules = async ({
   productName,
   subscription,
-}: SchedulesType): Promise<Stripe.SubscriptionSchedule> => {
+}: SchedulesType): Promise<Stripe.Subscription> => {
   try {
     const { data } = await stripe.products.search({
       query: `active:\'true\' AND name:\'${productName}\'`,
@@ -166,11 +175,15 @@ export const createSubSchedules = async ({
       })
     }
 
-    const schedulesSub = await stripe.subscriptionSchedules.create({
-      from_subscription: subscription.id,
-    })
+    let { schedule } = subscription
 
-    const updatedSchedulesSub = await stripe.subscriptionSchedules.update(schedulesSub.id, {
+    if (isEmpty(schedule)) {
+      schedule = await stripe.subscriptionSchedules.create({
+        from_subscription: subscription.id,
+      })
+    }
+
+    const updatedSchedulesSub = await stripe.subscriptionSchedules.update(schedule.id, {
       phases: [
         {
           start_date: subscription.current_period_start,
@@ -190,9 +203,10 @@ export const createSubSchedules = async ({
           ],
         },
       ],
+      expand: ['subscription.schedule'],
     })
 
-    return updatedSchedulesSub
+    return updatedSchedulesSub.subscription as Stripe.Subscription
   } catch (e) {
     if (e instanceof Stripe.errors.StripeError) {
       console.log(e)
@@ -233,16 +247,167 @@ export const getUserInvoices = async ({ subsId }: GetUserInvoiceType): Promise<S
 
 type UpdateSubScheduleParams = {
   endBehavior: Stripe.SubscriptionScheduleUpdateParams.EndBehavior
+  subscription: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
+}
+
+export const updateStripeScheduleSub = async ({ endBehavior, subscription }: UpdateSubScheduleParams) => {
+  let updatedSchedule: Stripe.SubscriptionSchedule
+  try {
+    if (endBehavior === 'cancel') {
+      updatedSchedule = await stripe.subscriptionSchedules.update(subscription.schedule.id, {
+        end_behavior: 'cancel',
+        phases: [
+          {
+            end_date: subscription.current_period_end,
+            start_date: subscription.current_period_start,
+            items: [
+              {
+                quantity: 1,
+                plan: subscription.items.data[0].price.id,
+              },
+            ],
+          },
+        ],
+        expand: ['subscription.schedule'],
+      })
+    } else {
+      updatedSchedule = await stripe.subscriptionSchedules.update(subscription.schedule.id, {
+        end_behavior: endBehavior,
+        expand: ['subscription.schedule'],
+      })
+    }
+
+    return updatedSchedule.subscription
+  } catch (e) {
+    console.log(e)
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type GetUpcomingSubsParams = {
+  subsId: string
+}
+
+export const getUpcomingSubsInvoice = async ({ subsId }: GetUpcomingSubsParams) => {
+  try {
+    const upComingInvoice = await stripe.invoices.retrieveUpcoming({
+      subscription: subsId,
+    })
+
+    return upComingInvoice
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type GetSubsScheduleParams = {
   scheduleId: string
 }
 
-export const updateStripeScheduleSub = async ({ endBehavior, scheduleId }: UpdateSubScheduleParams) => {
+export const getStripeSubsSchedule = async ({ scheduleId }: GetSubsScheduleParams) => {
   try {
-    const updatedSchedule = await stripe.subscriptionSchedules.update(scheduleId, {
-      end_behavior: endBehavior,
+    const subSchedule = await stripe.subscriptionSchedules.retrieve(scheduleId)
+
+    return subSchedule
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type AddNewPhaseToSubs = {
+  currentSubs: Stripe.Subscription
+  productName: string
+}
+
+export const addNewPhaseToSubs = async ({
+  productName,
+  currentSubs,
+}: AddNewPhaseToSubs): Promise<Stripe.SubscriptionSchedule> => {
+  try {
+    const { data } = await stripe.products.search({
+      query: `active:\'true\' AND name:\'${productName}\'`,
+      limit: 1,
     })
 
-    return updatedSchedule
+    if (data.length === 0) {
+      throw new StripeError('product not found', {
+        statusCode: 400,
+      })
+    }
+
+    const updatedSchedulesSub = await stripe.subscriptionSchedules.update(schedule.id, {
+      phases: [
+        {
+          start_date: currentSubs.current_period_start,
+          end_date: currentSubs.current_period_end,
+          items: [
+            {
+              price: currentSubs.items.data[0].price.id,
+            },
+          ],
+        },
+        {
+          start_date: currentSubs.current_period_end,
+          items: [
+            {
+              price: data[0].default_price as string,
+            },
+          ],
+        },
+      ],
+    })
+
+    return updatedSchedulesSub
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      console.log(e)
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type ListAllCustomerInvoieParams = {
+  subscriptionId: string
+}
+
+export const ListAllCustomerInvoices = async ({ subscriptionId }: ListAllCustomerInvoieParams) => {
+  try {
+    const userInvpois = await stripe.invoices.list({
+      subscription: subscriptionId,
+      limit: 3,
+    })
+
+    return userInvpois.data
   } catch (e) {
     if (e instanceof Stripe.errors.StripeError) {
       throw new StripeError(e.code, {

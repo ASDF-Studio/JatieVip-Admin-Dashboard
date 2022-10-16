@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { StripeError } from 'lib/error'
+import { IInvoice } from './types'
 
 const AxiosInstance = axios.create({
   baseURL: '',
@@ -58,6 +59,45 @@ export const StripeService = {
       const stripeSesion = await AxiosInstance.post('/api/stripe/updateSubs', {
         ...body,
       })
+
+      return stripeSesion.data.data
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
+      } else {
+        throw new Error(e.message)
+      }
+    }
+  },
+  getUpcomingInvoice: async (): Promise<IInvoice> => {
+    try {
+      const stripeSesion = await AxiosInstance.post('/api/stripe/getInvoice')
+
+      return stripeSesion.data.data
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
+      } else {
+        throw new Error(e.message)
+      }
+    }
+  },
+  getSubsSchedule: async (): Promise<any> => {
+    try {
+      const stripeSesion = await AxiosInstance.post('/api/stripe/getSubsSchedule')
+
+      return stripeSesion.data.data
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
+      } else {
+        throw new Error(e.message)
+      }
+    }
+  },
+  listUserInvoice: async (): Promise<any> => {
+    try {
+      const stripeSesion = await AxiosInstance.post('/api/stripe/getListInvoice')
 
       return stripeSesion.data.data
     } catch (e) {

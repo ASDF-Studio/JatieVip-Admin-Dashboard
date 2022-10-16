@@ -22,6 +22,8 @@ const Home: NextPage<Props> = ({ user }) => {
     fetch()
   }, [])
 
+  console.log(userSubs)
+
   const fetch = async () => {
     try {
       setLoading(true)

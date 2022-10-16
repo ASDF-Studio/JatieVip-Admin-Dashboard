@@ -1,13 +1,13 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs, updateStripeSub } from 'lib/stripe'
+import { getStripeSubsSchedule, getStripeUserSubs } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
-import Stripe from 'stripe'
 import { StripeError } from 'lib/error'
+import Stripe from 'stripe'
 
-const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
+const getSubsSchedule = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.session.token) {
     res.status(401).send('unauthorized')
 
@@ -50,38 +50,42 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  let stripeSub: Stripe.Subscription
+  const stripeSub = (await getStripeUserSubs({
+    stripeCustomerId: req.session.user.stripe_customer_id,
+  })) as Stripe.Subscription
 
-  try {
-    stripeSub = (await getStripeUserSubs({
-      stripeCustomerId: req.session.user.stripe_customer_id,
-    })) as Stripe.Subscription
-  } catch (e) {
+  if (!stripeSub) {
     res.status(400).json({
-      message: e.message,
+      message: 'please subscribe first',
     })
+
+    return
   }
 
+  if (!stripeSub.schedule) {
+    res.status(400).json({
+      message: "you don't have any schedule",
+    })
+
+    return
+  }
 
   try {
-    const updateSub = await updateStripeSub({
-      currentSub: stripeSub,
-      cancelAtPeriod: true,
+    const subsSchedule = await getStripeSubsSchedule({
+      scheduleId: stripeSub.schedule as string,
     })
 
     res.status(200).json({
-      data: updateSub,
+      data: subsSchedule,
     })
   } catch (e) {
     if (e instanceof StripeError) {
       res.status(e.statusCode).json({
         message: e.message,
       })
-
-      return
     }
     res.status(500).send('')
   }
 }
 
-export default withIronSessionApiRoute(UpdateSubsRoute, sessionOptions)
+export default withIronSessionApiRoute(getSubsSchedule, sessionOptions)

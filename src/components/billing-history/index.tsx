@@ -1,5 +1,9 @@
+/* eslint-disable camelcase */
 import { IconButton, Typography } from '@mui/material'
 import { LinkSlashIcon } from 'components/icons'
+import { useEffect, useState } from 'react'
+import { StripeService } from 'services/stripe'
+import { IInvoice } from 'services/types'
 import { History } from './history'
 
 type Props = {
@@ -7,6 +11,21 @@ type Props = {
 }
 
 export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactElement => {
+  const [invoices, setInvoices] = useState<IInvoice[]>(null)
+
+  useEffect(() => {
+    fetcher()
+  }, [])
+
+  const fetcher = async () => {
+    try {
+      const data = await StripeService.listUserInvoice()
+      setInvoices(data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <div className="w-full  sm:w-full flex flex-col items-center sm:items-start sm:flex-row sm:justify-between gap-[40px]  sm:gap-[3.938rem]">
       <div className="max-w-[380px] w-full sm:max-w-[490px] flex flex-col gap-[15px] order-3 sm:order-1">
@@ -17,11 +36,12 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
             hours for it to appear.
           </Typography>
           <div className="flex flex-col gap-[30px] mt-[23px]">
-            <History />
+            {invoices &&
+              invoices.map(({ hosted_invoice_url, amount_paid, status_transitions }) => {
+                return <History amount={amount_paid} date={status_transitions.paid_at} url={hosted_invoice_url} />
+              })}
+
             <div className="h-px w-full bg-[#f5f7f9]" />
-            <History />
-            <div className="h-px w-full bg-[#f5f7f9]" />
-            <History />
           </div>
         </div>
       </div>
@@ -29,9 +49,7 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
         <div className="w-full flex flex-col gap-[12px]">
           <Typography variant="heading3">Linked Card</Typography>
           <div className="rounded-[18px] bg-fill-lightBlue h-[67px] flex justify-between items-center pl-[29px] pr-[17px] ">
-            <Typography className="text-primary-grey text-[16px] font-medium">
-              Louis Griffin
-            </Typography>
+            <Typography className="text-primary-grey text-[16px] font-medium">Louis Griffin</Typography>
             <IconButton
               aria-label="edit"
               // onClick={setShowBillingModal}

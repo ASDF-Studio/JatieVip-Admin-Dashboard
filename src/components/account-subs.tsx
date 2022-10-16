@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material'
-import React, { FC } from 'react'
-import { ISub } from 'services/types'
+import React, { FC, useEffect, useState } from 'react'
+import { StripeService } from 'services/stripe'
+import { IInvoice, ISub } from 'services/types'
 import { getSubsName } from 'utils/helper'
 import { Button } from './Button'
 import { Tag } from './tag'
@@ -12,8 +13,27 @@ type Props = {
 }
 
 export const AccountSubs: FC<Props> = ({ classname, onCancel, userSubs }): React.ReactElement => {
-  
   const { plan } = userSubs
+  const [upcomingInvoice, setUpcomingInvoice] = useState<IInvoice>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (userSubs) {
+      fetcher()
+    }
+  }, [userSubs])
+
+  const fetcher = async () => {
+    try {
+      setLoading(true)
+      const res = await StripeService.getUpcomingInvoice()
+      setUpcomingInvoice(res)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div
@@ -25,7 +45,7 @@ export const AccountSubs: FC<Props> = ({ classname, onCancel, userSubs }): React
           <Typography variant="heading3">{`${getSubsName(plan).title} Commitment Plan`}</Typography>
         </div>
         <div className="flex flex-col gap-[15px] max-w-[300px] sm:max-w-full sm:items-end">
-          <Tag date={userSubs?.current_period_end} price={plan.amount} />
+          <Tag loading={loading} date={upcomingInvoice?.created} price={upcomingInvoice?.amount_due} />
           <Typography variant="subheadBold" className="w-[15.625rem] text-primary-grey text-left sm:text-right">
             {`Your payment will be automatically renewed every ${getSubsName(plan).nickName}`}
           </Typography>

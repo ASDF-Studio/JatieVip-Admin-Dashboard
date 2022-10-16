@@ -6,6 +6,7 @@ import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import Stripe from 'stripe'
 import { StripeError } from 'lib/error'
+import { isEmpty } from 'lodash'
 
 const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.session.token) {
@@ -60,28 +61,30 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  let stripeSub: Stripe.Subscription
+  let stripeSub: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
 
   try {
     stripeSub = (await getStripeUserSubs({
       stripeCustomerId: req.session.user.stripe_customer_id,
-    })) as Stripe.Subscription
+    })) as Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
   } catch (e) {
     res.status(400).json({
       message: e.message,
     })
   }
 
-  if (stripeSub.schedule) {
+  if (!isEmpty(stripeSub.schedule)) {
     try {
       const updateSub = await updateStripeScheduleSub({
-        scheduleId: stripeSub.schedule as string,
-        endBehavior: 'cancel',
+        subscription: stripeSub,
+        endBehavior: endAtThePeriod ? 'cancel' : 'release',
       })
 
       res.status(200).json({
         data: updateSub,
       })
+
+      return
     } catch (e) {
       if (e instanceof StripeError) {
         res.status(e.statusCode).json({

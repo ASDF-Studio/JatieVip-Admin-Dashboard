@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { MainLayout } from 'components'
+import { MainLayout, Warning } from 'components'
 import { CreateSub, CurrentSub } from 'ui/dashboard/'
 import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
@@ -41,16 +41,21 @@ const Home: NextPage = ({ user }: Props) => {
 
   return (
     <AuthProvider userContext={user}>
-      <MainLayout className="pt-[66px] px-5">
+      <MainLayout className="pt-[66px]">
         {loading ? (
-          <div>Loading</div>
-        ) : userSubs ? (
-          <CurrentSub
-            subs={userSubs}
-            className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] sm:mt-[53px] min-h-[calc(100vh-209px)]"
-          />
+          <div className="px-5">Loading</div>
         ) : (
-          <CreateSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] x:mt-[53px] min-h-[calc(100vh-209px)]" />
+          <div>
+            {/* {userSubs?.schedule && <Warning />} */}
+            {userSubs ? (
+              <CurrentSub
+                subs={userSubs}
+                className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] sm:mt-[53px] min-h-[calc(100vh-209px)] px-5"
+              />
+            ) : (
+              <CreateSub className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] x:mt-[53px] min-h-[calc(100vh-209px)] px-5" />
+            )}
+          </div>
         )}
       </MainLayout>
     </AuthProvider>

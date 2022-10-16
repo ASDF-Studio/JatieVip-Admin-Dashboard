@@ -57,6 +57,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       const res = await StripeService.createScheduleSub({
         selectedProduct: selected.title,
       })
+      setCurrentSubs(res)
       console.log(res)
     } catch (e) {
       console.log(e)
@@ -68,6 +69,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       const res = await StripeService.updateCurrentSub({
         endAtThePeriod: true,
       })
+      console.log(res)
       setCurrentSubs(res)
     } catch (e) {
       console.log(e)
@@ -109,7 +111,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
             variant="fill"
             textClassName="text-white"
             onClick={() => {
-              if (currentSubs.cancel_at_period_end) {
+              if (currentSubs.cancel_at) {
                 setShowReactiveModal(true)
               } else {
                 setShowModal(true)
@@ -117,7 +119,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
             }}
             disableRipple
           >
-            {currentSubs.cancel_at_period_end ? 'Reactive' : isUpgrade ? 'Upgrade' : 'Downgrade'}
+            {currentSubs.cancel_at ? 'Reactive' : isUpgrade ? 'Upgrade' : 'Downgrade'}
           </Button>
           <Typography variant="bodyBold" className="text-fill-grey text-center max-w-[290px] sm:max-w-full">
             All transactions are secure and encrypted by{' '}
@@ -132,7 +134,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
           </Typography>
         </div>
       </div>
-      {currentSubs.cancel_at_period_end ? (
+      {currentSubs.cancel_at ? (
         <ReActiveSub
           userSubs={currentSubs}
           classname="my-[30px] sm:mt-[53px] mb-[4.188rem]"

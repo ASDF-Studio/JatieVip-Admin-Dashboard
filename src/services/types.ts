@@ -36,6 +36,22 @@ export type ISub = {
   status: 'active' | 'canceled'
 }
 
+type StatusTransitions = {
+  finalized_at: number
+  paid_at: number
+}
+
+export type IInvoice = {
+  amount_due: number
+  amount_paid: number
+  hosted_invoice_url: string
+  attemped: boolean
+  billing_reason: 'upcoming' | 'subscription_create'
+  next_payment_attempt: number
+  created: number
+  status_transitions: StatusTransitions
+}
+
 // {
 //     "id": 4,
 //     "username": "test",
