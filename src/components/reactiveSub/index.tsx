@@ -31,7 +31,7 @@ export const ReActiveSub: FC<Props> = ({ classname, onCancel, userSubs }): React
             textClassName="text-white"
             onClick={onCancel}
           >
-            Reactive
+            Reactivate
           </Button>
         </div>
       </div>

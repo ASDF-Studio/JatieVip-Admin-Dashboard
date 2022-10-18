@@ -22,8 +22,6 @@ const Home: NextPage<Props> = ({ user }) => {
     fetch()
   }, [])
 
-  console.log(userSubs)
-
   const fetch = async () => {
     try {
       setLoading(true)
@@ -42,11 +40,13 @@ const Home: NextPage<Props> = ({ user }) => {
     }
   }, [loading, userSubs])
 
+  console.log(userSubs)
+
   return (
     <AuthProvider userContext={user}>
       <MainLayout className="pt-[66px] px-5">
         {loading ? (
-          <div>Loading</div>
+          <div className="px-5 min-h-[calc(100vh-160px)]">Loading</div>
         ) : (
           userSubs && (
             <ManageSub

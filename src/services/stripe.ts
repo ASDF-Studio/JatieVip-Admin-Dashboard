@@ -110,4 +110,17 @@ export const StripeService = {
       }
     }
   },
+  removePayment: async (): Promise<any> => {
+    try {
+      const stripeSesion = await AxiosInstance.post('/api/stripe/removePayment')
+
+      return stripeSesion.data.data
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        throw new StripeError(e.response.data.message, { statusCode: e.response.status })
+      } else {
+        throw new Error(e.message)
+      }
+    }
+  },
 }

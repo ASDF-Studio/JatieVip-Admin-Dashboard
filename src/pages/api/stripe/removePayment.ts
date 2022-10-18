@@ -1,7 +1,7 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs, updateStripeScheduleSub, updateStripeSub } from 'lib/stripe'
+import { getStripeUserSubs, removePaymentMethod } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import Stripe from 'stripe'
@@ -51,22 +51,18 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  const { endAtThePeriod = undefined } = req.body
-
-  if (endAtThePeriod === undefined) {
-    res.status(400).json({
-      message: 'please include endoftheperiod',
-    })
-
-    return
+  let stripeSub: Stripe.Subscription & {
+    schedule: Stripe.SubscriptionSchedule
+    default_payment_method: Stripe.PaymentMethod
   }
-
-  let stripeSub: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
 
   try {
     stripeSub = (await getStripeUserSubs({
       stripeCustomerId: req.session.user.stripe_customer_id,
-    })) as Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
+    })) as Stripe.Subscription & {
+      schedule: Stripe.SubscriptionSchedule
+      default_payment_method: Stripe.PaymentMethod
+    }
   } catch (e) {
     res.status(400).json({
       message: e.message,
@@ -79,37 +75,19 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     })
   }
 
-  if (!isEmpty(stripeSub.schedule)) {
-    try {
-      const updateSub = await updateStripeScheduleSub({
-        subscription: stripeSub,
-        endBehavior: endAtThePeriod ? 'cancel' : 'release',
-      })
-
-      res.status(200).json({
-        data: updateSub,
-      })
-
-      return
-    } catch (e) {
-      if (e instanceof StripeError) {
-        res.status(e.statusCode).json({
-          message: e.message,
-        })
-
-        return
-      }
-    }
+  if (!stripeSub.default_payment_method) {
+    res.status(400).json({
+      message: 'no payment method attached to subs',
+    })
   }
 
   try {
-    const updateSub = await updateStripeSub({
-      currentSub: stripeSub,
-      cancelAtPeriod: endAtThePeriod,
+    await removePaymentMethod({
+      paymentMethodId: stripeSub.default_payment_method.id,
     })
-
+    stripeSub.default_payment_method = null
     res.status(200).json({
-      data: updateSub,
+      data: stripeSub,
     })
   } catch (e) {
     if (e instanceof StripeError) {

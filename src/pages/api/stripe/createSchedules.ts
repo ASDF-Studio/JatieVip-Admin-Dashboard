@@ -60,7 +60,9 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  if (subscriptionPlans.findIndex((prods) => prods === selectedProduct) === -1) {
+  const index = subscriptionPlans.findIndex((prods) => prods.name === selectedProduct)
+
+  if (index === -1) {
     res.status(400).json({
       message: 'please inculed valid product name',
     })
@@ -115,7 +117,7 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const scheduleSub = await createSubSchedules({
       subscription: stripeSub,
-      productName: selectedProduct,
+      productName: subscriptionPlans[index].stripePriceId,
     })
 
     res.status(200).json({

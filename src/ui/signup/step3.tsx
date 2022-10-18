@@ -18,7 +18,9 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+
     if (username === '') {
       return
     }
@@ -49,7 +51,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
-          <form onSubmit={handleUpdate}>
+          <form onSubmit={(e) => handleUpdate(e)}>
             <div className="flex flex-col gap-4">
               <Input
                 focus

@@ -1,5 +1,7 @@
 import { Typography } from '@mui/material'
 import { AccountSubs, Billing, BoxSelect, Button, ConfirmationModal, Hello, ReActiveSub } from 'components'
+import { StripeError } from 'lib/error'
+import { useRouter } from 'next/router'
 import { FC, ReactElement, useCallback, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { ISelectedProduct, ISub } from 'services/types'
@@ -18,13 +20,13 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
   const [selected, setSelected] = useState<ISelectedProduct>(null)
   const [currentSubs, setCurrentSubs] = useState<ISub>(sub)
   const [showReactiveModal, setShowReactiveModal] = useState(false)
+  const [linkModal, setLinkModal] = useState(false)
+  const router = useRouter()
   const { plan } = currentSubs
 
   const currentPlan = useCallback(() => {
     return getSubsName(plan)
   }, [plan])
-
-  console.log(sub)
 
   const isUpgrade = currentPlan().weight < selected?.weight
 
@@ -60,9 +62,12 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         selectedProduct: selected.title,
       })
       setCurrentSubs(res)
-      console.log(res)
     } catch (e) {
-      console.log(e)
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
     }
   }, [selected])
 
@@ -71,10 +76,13 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       const res = await StripeService.updateCurrentSub({
         endAtThePeriod: true,
       })
-      console.log(res)
       setCurrentSubs(res)
     } catch (e) {
-      console.log(e)
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
     }
   }, [])
 
@@ -85,7 +93,24 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       })
       setCurrentSubs(res)
     } catch (e) {
-      console.log(e)
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
+    }
+  }, [])
+
+  const removePayment = useCallback(async () => {
+    try {
+      const res = await StripeService.removePayment()
+      setCurrentSubs(res)
+    } catch (e) {
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
     }
   }, [])
 
@@ -121,7 +146,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
             }}
             disableRipple
           >
-            {currentSubs.cancel_at ? 'Reactive' : isUpgrade ? 'Upgrade' : 'Downgrade'}
+            {currentSubs.cancel_at ? 'Reactivate' : isUpgrade ? 'Upgrade' : 'Downgrade'}
           </Button>
           <Typography variant="bodyBold" className="text-fill-grey text-center max-w-[290px] sm:max-w-full">
             All transactions are secure and encrypted by{' '}
@@ -150,7 +175,11 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         />
       )}
 
-      <Billing setShowBillingModal={() => setShowBillingModal(true)} />
+      <Billing
+        cardName={currentSubs?.default_payment_method?.billing_details.name}
+        setShowLinkModal={() => setLinkModal(true)}
+        setShowBillingModal={() => setShowBillingModal(true)}
+      />
       <ConfirmationModal
         open={showModal}
         onAccept={createScheduleSub}
@@ -170,6 +199,13 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         setOpen={setShowReactiveModal}
         onAccept={reActiveSubs}
         contentText="Are you sure you want to activate Auto Renewal?"
+      />
+      <ConfirmationModal
+        open={linkModal}
+        setOpen={setLinkModal}
+        cancelText="No"
+        onAccept={removePayment}
+        contentText="Are you sure you want to unlink card?"
       />
       <BillingModal open={showBillingModal} setOpen={setShowBillingModal} />
     </div>

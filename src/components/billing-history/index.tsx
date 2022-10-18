@@ -9,9 +9,15 @@ import { History } from './history'
 
 type Props = {
   setShowBillingModal: () => void
+  setShowLinkModal: () => void
+  cardName: string
 }
 
-export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactElement => {
+export const Billing: React.FC<Props> = ({
+  setShowBillingModal = null,
+  setShowLinkModal,
+  cardName,
+}): React.ReactElement => {
   const [invoices, setInvoices] = useState<IInvoice[]>([])
   const [isMore, setIsMore] = useState<boolean>(false)
 
@@ -19,7 +25,7 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
     fetcher('')
   }, [])
 
-  const fetcher = async (startAfter: '') => {
+  const fetcher = async (startAfter = '') => {
     try {
       const data = await StripeService.listUserInvoice({
         startingAfter: startAfter,
@@ -44,7 +50,7 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
             {invoices &&
               invoices.map(({ hosted_invoice_url, amount_paid, status_transitions, status }, index) => {
                 return (
-                  <div className="flex flex-col gap-[30px]">
+                  <div key={index} className="flex flex-col gap-[30px]">
                     {index !== 0 && <div className="h-px w-full bg-[#f5f7f9]" />}
                     <History amount={amount_paid} date={status_transitions.paid_at} url={hosted_invoice_url} />
                   </div>
@@ -71,10 +77,12 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
         <div className="w-full flex flex-col gap-[12px]">
           <Typography variant="heading3">Linked Card</Typography>
           <div className="rounded-[18px] bg-fill-lightBlue h-[67px] flex justify-between items-center pl-[29px] pr-[17px] ">
-            <Typography className="text-primary-grey text-[16px] font-medium">Louis Griffin</Typography>
+            <Typography className="text-primary-grey text-[16px] font-medium">
+              {cardName || 'No card attached'}
+            </Typography>
             <IconButton
               aria-label="edit"
-              // onClick={setShowBillingModal}
+              onClick={setShowLinkModal}
               disableRipple
               sx={{
                 '&.MuiButtonBase-root:hover': {
@@ -91,7 +99,7 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
             </IconButton>
           </div>
         </div>
-        <div className="w-full flex flex-col gap-[12px] mt-[40px] sm:mt-[44px] order-2 sm:order-3">
+        {/* <div className="w-full flex flex-col gap-[12px] mt-[40px] sm:mt-[44px] order-2 sm:order-3">
           <Typography variant="heading3">Billing Address</Typography>
           <div className="pl-[29px] pr-[17px] py-[17px] rounded-[18px] bg-fill-lightBlue flex justify-between">
             <div className="flex flex-col w-full">
@@ -126,7 +134,7 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
               </Typography>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

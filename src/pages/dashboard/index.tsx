@@ -43,7 +43,7 @@ const Home: NextPage = ({ user }: Props) => {
     <AuthProvider userContext={user}>
       <MainLayout className="pt-[66px]">
         {loading ? (
-          <div className="px-5">Loading</div>
+          <div className="px-5 min-h-[calc(100vh-160px)]">Loading</div>
         ) : (
           <div>
             {userSubs?.status === 'past_due' && <Warning paymentUrl={userSubs?.latest_invoice.hosted_invoice_url} />}

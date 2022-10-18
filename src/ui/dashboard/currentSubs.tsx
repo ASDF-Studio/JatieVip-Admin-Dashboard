@@ -2,6 +2,8 @@ import { Typography } from '@mui/material'
 import { Button, Tag, Hello, TagExpire } from 'components'
 import { DownloadApp } from 'components/download-app'
 import { useNavigate } from 'hooks/UseRouter'
+import { StripeError } from 'lib/error'
+import { useRouter } from 'next/router'
 import { FC, ReactElement, useCallback, useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { IInvoice, ISub } from 'services/types'
@@ -16,6 +18,7 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
   const { plan } = subs
   const { navigateTo } = useNavigate()
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   const [upcomingInvoice, setUpcomingInvoice] = useState<IInvoice>(null)
 
@@ -31,7 +34,11 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
       const res = await StripeService.getUpcomingInvoice()
       setUpcomingInvoice(res)
     } catch (e) {
-      console.log(e)
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
     } finally {
       setLoading(false)
     }
@@ -40,8 +47,6 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
   const subsTitle = useCallback(() => {
     return getSubsName(plan)
   }, [plan])
-
-  console.log(subs)
 
   return (
     <div className={`${className}`}>

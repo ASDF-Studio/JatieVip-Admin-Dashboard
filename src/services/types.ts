@@ -35,6 +35,7 @@ export type ISub = {
   current_period_end: number
   status: 'active' | 'canceled' | 'trialing' | 'past_due'
   latest_invoice: IInvoice
+  default_payment_method: DefaultPaymentMethod
 }
 
 type StatusTransitions = {
@@ -44,6 +45,7 @@ type StatusTransitions = {
 
 export type IInvoice = {
   amount_due: number
+  id: string
   amount_paid: number
   hosted_invoice_url: string
   attemped: boolean
@@ -52,6 +54,15 @@ export type IInvoice = {
   created: number
   status_transitions: StatusTransitions
   status: 'draft' | 'paid'
+}
+
+type BillingDetails = {
+  name: string
+  email: string
+}
+
+export type DefaultPaymentMethod = {
+  billing_details: BillingDetails
 }
 
 // {

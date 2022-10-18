@@ -60,6 +60,7 @@ type Props = {
   contentText: string
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  cancelText?: string
 }
 
 export const ConfirmationModal: React.FC<Props> = ({
@@ -67,6 +68,7 @@ export const ConfirmationModal: React.FC<Props> = ({
   contentText = '',
   open = false,
   setOpen,
+  cancelText = 'No, Keep my current plan',
 }): React.ReactElement => {
   const [loading, setLoading] = React.useState(false)
   const handleClose = () => {
@@ -99,7 +101,7 @@ export const ConfirmationModal: React.FC<Props> = ({
             Yes
           </Button>
           <Button variant="fill" textClassName="text-white" className="w-full" onClick={handleClose}>
-            No, Keep my current plan
+            {cancelText}
           </Button>
         </DialogActions>
       </BootstrapDialog>

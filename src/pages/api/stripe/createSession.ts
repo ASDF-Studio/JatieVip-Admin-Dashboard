@@ -59,7 +59,9 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     return
   }
 
-  if (subscriptionPlans.findIndex((prods) => prods === selectedProduct) === -1) {
+  const plan = subscriptionPlans.findIndex((prods) => prods.name === selectedProduct)
+
+  if (plan === -1) {
     res.status(400).json({
       message: 'please inculed valid product name',
     })
@@ -98,7 +100,10 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
   }
 
   try {
-    const session = await createStripeSession({ stripeUserId: stripeCustomerId, productName: selectedProduct })
+    const session = await createStripeSession({
+      stripeUserId: stripeCustomerId,
+      productName: subscriptionPlans[plan].stripePriceId,
+    })
 
     res.status(200).json({
       data: session,

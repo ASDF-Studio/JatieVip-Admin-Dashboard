@@ -1,13 +1,33 @@
 /* eslint-disable no-useless-escape */
-import { isEmpty, xor } from 'lodash'
-import { release } from 'process'
+import { isEmpty } from 'lodash'
+
 import { IProductNames, IUser } from 'services/types'
 import Stripe from 'stripe'
 import { StripeError } from './error'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {})
 
-export const subscriptionPlans: IProductNames[] = ['Monthly', '3-Months', '6-Months', '1 Year']
+export const subscriptionPlans: {
+  name: IProductNames
+  stripePriceId: string
+}[] = [
+  {
+    name: 'Monthly',
+    stripePriceId: 'price_1Ls1HvK51b8tcFyywJCs5T4D',
+  },
+  {
+    name: '6-Months',
+    stripePriceId: 'price_1Ls1XWK51b8tcFyyUfEnSXrr',
+  },
+  {
+    name: '3-Months',
+    stripePriceId: 'price_1Ls1WoK51b8tcFyyvYokiIuy',
+  },
+  {
+    name: '1 Year',
+    stripePriceId: 'price_1Ls1eDK51b8tcFyyT6HS4FsN',
+  },
+]
 
 export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> => {
   if (!user) {
@@ -47,7 +67,7 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
 
 type CreateSessionType = {
   stripeUserId: string
-  productName: IProductNames
+  productName: string
 }
 
 export const createStripeSession = async ({
@@ -61,26 +81,15 @@ export const createStripeSession = async ({
   }
 
   try {
-    const { data } = await stripe.products.search({
-      query: `active:\'true\' AND name:\'${productName}\'`,
-      limit: 1,
-    })
-
-    if (data.length === 0) {
-      throw new StripeError('product not found', {
-        statusCode: 400,
-      })
-    }
-
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: process.env.STRIPE_SUCCESS_URL,
       cancel_url: process.env.STRIPE_CANCEL_URL,
       mode: 'subscription',
       customer: stripeUserId,
-      billing_address_collection: 'required',
+      // billing_address_collection: 'required',
       line_items: [
         {
-          price: data[0].default_price as string,
+          price: productName,
           quantity: 1,
         },
       ],
@@ -113,7 +122,7 @@ export const getStripeUserSubs = async ({
   try {
     const stripeSub = await stripe.subscriptions.list({
       customer: stripeCustomerId,
-      expand: ['data.schedule.phases.plans', 'data.latest_invoice'],
+      expand: ['data.schedule.phases.plans', 'data.latest_invoice', 'data.default_payment_method'],
       status: 'all',
     })
 
@@ -179,17 +188,6 @@ export const createSubSchedules = async ({
   subscription,
 }: SchedulesType): Promise<Stripe.Subscription> => {
   try {
-    const { data } = await stripe.products.search({
-      query: `active:\'true\' AND name:\'${productName}\'`,
-      limit: 1,
-    })
-
-    if (data.length === 0) {
-      throw new StripeError('product not found', {
-        statusCode: 400,
-      })
-    }
-
     let { schedule } = subscription
 
     if (isEmpty(schedule)) {
@@ -213,7 +211,7 @@ export const createSubSchedules = async ({
           start_date: subscription.current_period_end,
           items: [
             {
-              price: data[0].default_price as string,
+              price: productName,
             },
           ],
         },
@@ -363,17 +361,6 @@ export const addNewPhaseToSubs = async ({
   currentSubs,
 }: AddNewPhaseToSubs): Promise<Stripe.SubscriptionSchedule> => {
   try {
-    const { data } = await stripe.products.search({
-      query: `active:\'true\' AND name:\'${productName}\'`,
-      limit: 1,
-    })
-
-    if (data.length === 0) {
-      throw new StripeError('product not found', {
-        statusCode: 400,
-      })
-    }
-
     const updatedSchedulesSub = await stripe.subscriptionSchedules.update(schedule.id, {
       phases: [
         {
@@ -389,7 +376,7 @@ export const addNewPhaseToSubs = async ({
           start_date: currentSubs.current_period_end,
           items: [
             {
-              price: data[0].default_price as string,
+              price: productName,
             },
           ],
         },
@@ -451,17 +438,6 @@ type UpdateTrialSubs = {
 
 export const updateTrialSubs = async ({ currentSubs, productName }: UpdateTrialSubs) => {
   try {
-    const { data } = await stripe.products.search({
-      query: `active:\'true\' AND name:\'${productName}\'`,
-      limit: 1,
-    })
-
-    if (data.length === 0) {
-      throw new StripeError('product not found', {
-        statusCode: 400,
-      })
-    }
-
     const updateTrialSubs = await stripe.subscriptions.update(currentSubs.id, {
       cancel_at_period_end: false,
       proration_behavior: 'create_prorations',
@@ -473,12 +449,32 @@ export const updateTrialSubs = async ({ currentSubs, productName }: UpdateTrialS
         },
         {
           quantity: 1,
-          price: data[0].default_price as string,
+          price: productName,
         },
       ],
     })
 
     return updateTrialSubs
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type DetachPaymentParams = {
+  paymentMethodId: string
+}
+
+export const removePaymentMethod = async ({ paymentMethodId }: DetachPaymentParams) => {
+  try {
+    await stripe.paymentMethods.detach(paymentMethodId)
   } catch (e) {
     if (e instanceof Stripe.errors.StripeError) {
       throw new StripeError(e.code, {

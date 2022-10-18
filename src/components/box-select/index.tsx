@@ -45,6 +45,7 @@ export const BoxSelect: FC<Props> = ({
         data.map(({ title, value, discountValue = null }, index) => {
           return (
             <div
+              key={index}
               onClick={() => handleOnChange(index)}
               className={`h-[100px] w-full rounded-[24px] flex gap-[1.188rem] items-center pl-[2.125rem] hover:cursor-pointer ${[
                 index === state && 'border-2 border-border-blue shadow-boxSelect',
