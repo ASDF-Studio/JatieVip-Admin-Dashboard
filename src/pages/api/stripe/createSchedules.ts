@@ -1,7 +1,7 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { createSubSchedules, getStripeUserSubs, subscriptionPlans } from 'lib/stripe'
+import { createSubSchedules, getStripeUserSubs, subscriptionPlans, updateTrialSubs } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { StripeError } from 'lib/error'
@@ -86,6 +86,30 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
     })
 
     return
+  }
+
+  if (stripeSub.status === 'trialing') {
+    const stripeSubs = await updateTrialSubs({
+      currentSubs: stripeSub,
+      productName: selectedProduct,
+    })
+
+    try {
+      res.status(200).json({
+        data: stripeSubs,
+      })
+
+      return
+    } catch (e) {
+      if (e instanceof StripeError) {
+        res.status(e.statusCode).json({
+          message: e.message,
+        })
+
+        return
+      }
+      res.status(500).send('')
+    }
   }
 
   try {

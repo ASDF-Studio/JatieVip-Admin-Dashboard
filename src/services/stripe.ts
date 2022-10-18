@@ -95,9 +95,11 @@ export const StripeService = {
       }
     }
   },
-  listUserInvoice: async (): Promise<any> => {
+  listUserInvoice: async (body: { startingAfter?: string }): Promise<{ data: IInvoice[]; has_more: boolean }> => {
     try {
-      const stripeSesion = await AxiosInstance.post('/api/stripe/getListInvoice')
+      const stripeSesion = await AxiosInstance.post('/api/stripe/getListInvoice', {
+        ...body,
+      })
 
       return stripeSesion.data.data
     } catch (e) {

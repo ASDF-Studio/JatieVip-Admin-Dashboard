@@ -1,29 +1,25 @@
 import { Typography } from '@mui/material'
-import { useCallback, useEffect } from 'react'
-import { StripeService } from 'services/stripe'
 import { Button } from './Button'
 
-export const Warning = () => {
-  useEffect(() => {
-    fetcher()
-  }, [])
+type Props = {
+  paymentUrl: string
+}
 
-  const fetcher = useCallback(async () => {
-    try {
-      const res = await StripeService.getSubsSchedule()
-      console.log(res)
-    } catch (e) {
-      console.log(e)
-    }
-  }, [])
-
+export const Warning = ({ paymentUrl = '' }: Props) => {
   return (
-    <div className="h-[70px] bg-primary-brand/10 flex justify-between items-center px-[34px]">
-      <Typography className="text-primary-brand" variant="body2">
-        Your subscription plane is going to change dadada at{' '}
+    <div className="h-[70px] bg-[#e92346]/10 flex justify-between items-center px-[34px]">
+      <Typography className="text-[#e92346]" variant="body2">
+        Your last payment failed. Please update your payment method.
       </Typography>
-      <Button variant="fill" textClassName="text-white" className='w-[165px]'>
-        Cancel
+      <Button
+        variant="error"
+        textClassName="text-white"
+        className="w-[165px]"
+        onClick={() => {
+          window.open(paymentUrl, '_blank')
+        }}
+      >
+        Update
       </Button>
     </div>
   )

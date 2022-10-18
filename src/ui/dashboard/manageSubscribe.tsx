@@ -24,6 +24,8 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
     return getSubsName(plan)
   }, [plan])
 
+  console.log(sub)
+
   const isUpgrade = currentPlan().weight < selected?.weight
 
   const SubsPLans = [

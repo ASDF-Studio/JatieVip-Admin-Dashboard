@@ -27,13 +27,13 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       const stripeCustomer = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
-      await axios.post('https://09d2-3-144-33-1.ngrok.io/api/', {
-        user_id: stripeCustomer?.metadata?.moveUserId,
-        valid_from: '2022-09-26 10:00:00',
-        valid_to: '2022-10-26 10:00:00',
-        type: 'month',
-        secret_key: process.env.BACK_END_SECRET_KEY,
-      })
+      // await axios.post('https://09d2-3-144-33-1.ngrok.io/api/', {
+      //   user_id: stripeCustomer?.metadata?.moveUserId,
+      //   valid_from: '2022-09-26 10:00:00',
+      //   valid_to: '2022-10-26 10:00:00',
+      //   type: 'month',
+      //   secret_key: process.env.BACK_END_SECRET_KEY,
+      // })
     } catch (e) {
       console.log(e)
     }

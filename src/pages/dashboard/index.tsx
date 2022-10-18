@@ -3,7 +3,7 @@ import { MainLayout, Warning } from 'components'
 import { CreateSub, CurrentSub } from 'ui/dashboard/'
 import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
-import { IUser } from 'services/types'
+import { ISub, IUser } from 'services/types'
 import { AuthProvider } from 'Contexts/Auth'
 import { useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
@@ -16,7 +16,7 @@ type Props = {
 
 const Home: NextPage = ({ user }: Props) => {
   const [loading, setLoading] = useState(false)
-  const [userSubs, setUserSubs] = useState(null)
+  const [userSubs, setUserSubs] = useState<ISub>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Home: NextPage = ({ user }: Props) => {
           <div className="px-5">Loading</div>
         ) : (
           <div>
-            {/* {userSubs?.schedule && <Warning />} */}
+            {userSubs?.status === 'past_due' && <Warning paymentUrl={userSubs?.latest_invoice.hosted_invoice_url} />}
             {userSubs ? (
               <CurrentSub
                 subs={userSubs}

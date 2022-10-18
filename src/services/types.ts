@@ -33,7 +33,8 @@ export type ISub = {
   cancel_at_period_end: boolean
   cancel_at: number
   current_period_end: number
-  status: 'active' | 'canceled'
+  status: 'active' | 'canceled' | 'trialing' | 'past_due'
+  latest_invoice: IInvoice
 }
 
 type StatusTransitions = {
@@ -50,6 +51,7 @@ export type IInvoice = {
   next_payment_attempt: number
   created: number
   status_transitions: StatusTransitions
+  status: 'draft' | 'paid'
 }
 
 // {

@@ -6,6 +6,7 @@ import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { StripeError } from 'lib/error'
 import Stripe from 'stripe'
+import { isString } from 'lodash'
 
 const getListInvoice = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.session.token) {
@@ -50,6 +51,14 @@ const getListInvoice = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
+  const { startingAfter } = req.body
+
+  if (!isString(startingAfter)) {
+    res.status(400).json({
+      message: 'please include valid value to req',
+    })
+  }
+
   const stripeSub = (await getStripeUserSubs({
     stripeCustomerId: req.session.user.stripe_customer_id,
   })) as Stripe.Subscription
@@ -65,6 +74,7 @@ const getListInvoice = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const listInvoice = await ListAllCustomerInvoices({
       subscriptionId: stripeSub.id,
+      startingAfter: startingAfter === '' ? null : startingAfter,
     })
 
     res.status(200).json({

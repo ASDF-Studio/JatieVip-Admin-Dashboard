@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { isEmpty } from 'lodash'
+import { isEmpty, xor } from 'lodash'
 import { release } from 'process'
 import { IProductNames, IUser } from 'services/types'
 import Stripe from 'stripe'
@@ -16,6 +16,11 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
     })
   }
 
+  const testClock = await stripe.testHelpers.testClocks.create({
+    frozen_time: 1666084914,
+    name: 'Annual renewal',
+  })
+
   try {
     const newCustomer = await stripe.customers.create({
       phone: user.phone_number,
@@ -23,6 +28,7 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
       metadata: {
         moveUserId: user.id,
       },
+      test_clock: testClock.id,
     })
 
     return newCustomer
@@ -78,9 +84,9 @@ export const createStripeSession = async ({
           quantity: 1,
         },
       ],
-      // subscription_data: {
-      //   trial_period_days: 7,
-      // },
+      subscription_data: {
+        trial_period_days: 7,
+      },
     })
 
     return stripeSession
@@ -107,16 +113,25 @@ export const getStripeUserSubs = async ({
   try {
     const stripeSub = await stripe.subscriptions.list({
       customer: stripeCustomerId,
-      status: 'active',
-      expand: ['data.schedule.phases.plans'],
+      expand: ['data.schedule.phases.plans', 'data.latest_invoice'],
+      status: 'all',
     })
 
-    if (stripeSub.data.length === 1) {
-      return stripeSub.data[0]
+    const subscription = stripeSub.data.filter(
+      (x) =>
+        x.status !== 'canceled' &&
+        x.status !== 'incomplete_expired' &&
+        x.status !== 'unpaid' &&
+        x.status !== 'incomplete',
+    )
+
+    if (subscription.length === 1) {
+      return subscription[0]
     }
 
     return null
   } catch (e) {
+    console.log(e)
     if (e instanceof Stripe.errors.StripeError) {
       throw new StripeError(e.code, {
         statusCode: e.statusCode,
@@ -398,16 +413,72 @@ export const addNewPhaseToSubs = async ({
 
 type ListAllCustomerInvoieParams = {
   subscriptionId: string
+  startingAfter: string
 }
 
-export const ListAllCustomerInvoices = async ({ subscriptionId }: ListAllCustomerInvoieParams) => {
+export const ListAllCustomerInvoices = async ({
+  subscriptionId,
+  startingAfter = null,
+}: ListAllCustomerInvoieParams) => {
   try {
     const userInvpois = await stripe.invoices.list({
       subscription: subscriptionId,
       limit: 3,
+      status: 'paid',
+      ...(startingAfter && {
+        starting_after: startingAfter,
+      }),
     })
 
-    return userInvpois.data
+    return userInvpois
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type UpdateTrialSubs = {
+  currentSubs: Stripe.Subscription
+  productName: string
+}
+
+export const updateTrialSubs = async ({ currentSubs, productName }: UpdateTrialSubs) => {
+  try {
+    const { data } = await stripe.products.search({
+      query: `active:\'true\' AND name:\'${productName}\'`,
+      limit: 1,
+    })
+
+    if (data.length === 0) {
+      throw new StripeError('product not found', {
+        statusCode: 400,
+      })
+    }
+
+    const updateTrialSubs = await stripe.subscriptions.update(currentSubs.id, {
+      cancel_at_period_end: false,
+      proration_behavior: 'create_prorations',
+      items: [
+        {
+          quantity: 1,
+          id: currentSubs.items.data[0].id,
+          deleted: true,
+        },
+        {
+          quantity: 1,
+          price: data[0].default_price as string,
+        },
+      ],
+    })
+
+    return updateTrialSubs
   } catch (e) {
     if (e instanceof Stripe.errors.StripeError) {
       throw new StripeError(e.code, {

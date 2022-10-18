@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { IconButton, Typography } from '@mui/material'
+import { Button } from 'components/Button'
 import { LinkSlashIcon } from 'components/icons'
 import { useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
@@ -11,16 +12,20 @@ type Props = {
 }
 
 export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactElement => {
-  const [invoices, setInvoices] = useState<IInvoice[]>(null)
+  const [invoices, setInvoices] = useState<IInvoice[]>([])
+  const [isMore, setIsMore] = useState<boolean>(false)
 
   useEffect(() => {
-    fetcher()
+    fetcher('')
   }, [])
 
-  const fetcher = async () => {
+  const fetcher = async (startAfter: '') => {
     try {
-      const data = await StripeService.listUserInvoice()
-      setInvoices(data)
+      const data = await StripeService.listUserInvoice({
+        startingAfter: startAfter,
+      })
+      setInvoices([...invoices, ...data.data])
+      setIsMore(data.has_more)
     } catch (e) {
       console.log(e)
     }
@@ -37,11 +42,28 @@ export const Billing: React.FC<Props> = ({ setShowBillingModal }): React.ReactEl
           </Typography>
           <div className="flex flex-col gap-[30px] mt-[23px]">
             {invoices &&
-              invoices.map(({ hosted_invoice_url, amount_paid, status_transitions }) => {
-                return <History amount={amount_paid} date={status_transitions.paid_at} url={hosted_invoice_url} />
+              invoices.map(({ hosted_invoice_url, amount_paid, status_transitions, status }, index) => {
+                return (
+                  <div className="flex flex-col gap-[30px]">
+                    {index !== 0 && <div className="h-px w-full bg-[#f5f7f9]" />}
+                    <History amount={amount_paid} date={status_transitions.paid_at} url={hosted_invoice_url} />
+                  </div>
+                )
               })}
-
-            <div className="h-px w-full bg-[#f5f7f9]" />
+            {isMore && (
+              <div className="flex justify-center">
+                <Button
+                  onClick={() => {
+                    fetcher(invoices[invoices.length - 1].id)
+                  }}
+                  variant="text"
+                  textVariant="bodyBold"
+                  disableRipple
+                >
+                  Load More…
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
