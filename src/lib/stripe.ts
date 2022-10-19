@@ -10,22 +10,27 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {})
 export const subscriptionPlans: {
   name: IProductNames
   stripePriceId: string
+  weight: number
 }[] = [
   {
     name: 'Monthly',
     stripePriceId: 'price_1Ls1HvK51b8tcFyywJCs5T4D',
+    weight: 1,
   },
   {
     name: '6-Months',
     stripePriceId: 'price_1Ls1XWK51b8tcFyyUfEnSXrr',
+    weight: 6,
   },
   {
     name: '3-Months',
     stripePriceId: 'price_1Ls1WoK51b8tcFyyvYokiIuy',
+    weight: 3,
   },
   {
     name: '1 Year',
     stripePriceId: 'price_1Ls1eDK51b8tcFyyT6HS4FsN',
+    weight: 12,
   },
 ]
 
@@ -188,17 +193,14 @@ export const createSubSchedules = async ({
   subscription,
 }: SchedulesType): Promise<Stripe.Subscription> => {
   try {
-    let { schedule } = subscription
-
-    if (isEmpty(schedule)) {
-      schedule = await stripe.subscriptionSchedules.create({
-        from_subscription: subscription.id,
-      })
-    }
+    const schedule = await stripe.subscriptionSchedules.create({
+      from_subscription: subscription.id,
+    })
 
     const updatedSchedulesSub = await stripe.subscriptionSchedules.update(schedule.id, {
       phases: [
         {
+          proration_behavior: 'none',
           start_date: subscription.current_period_start,
           end_date: subscription.current_period_end,
           items: [
@@ -208,6 +210,7 @@ export const createSubSchedules = async ({
           ],
         },
         {
+          proration_behavior: 'none',
           start_date: subscription.current_period_end,
           items: [
             {
@@ -432,15 +435,15 @@ export const ListAllCustomerInvoices = async ({
 }
 
 type UpdateTrialSubs = {
-  currentSubs: Stripe.Subscription
+  currentSubs: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
   productName: string
 }
 
 export const updateTrialSubs = async ({ currentSubs, productName }: UpdateTrialSubs) => {
   try {
     const updateTrialSubs = await stripe.subscriptions.update(currentSubs.id, {
-      cancel_at_period_end: false,
-      proration_behavior: 'create_prorations',
+      payment_behavior: 'error_if_incomplete',
+      proration_behavior: 'none',
       items: [
         {
           quantity: 1,
@@ -452,13 +455,15 @@ export const updateTrialSubs = async ({ currentSubs, productName }: UpdateTrialS
           price: productName,
         },
       ],
+      off_session: true,
     })
 
     return updateTrialSubs
   } catch (e) {
     if (e instanceof Stripe.errors.StripeError) {
-      throw new StripeError(e.code, {
-        statusCode: e.statusCode,
+      console.log(e)
+      throw new StripeError(e?.code, {
+        statusCode: e?.statusCode,
       })
     } else {
       throw new StripeError('cannot connect to server', {
@@ -475,6 +480,28 @@ type DetachPaymentParams = {
 export const removePaymentMethod = async ({ paymentMethodId }: DetachPaymentParams) => {
   try {
     await stripe.paymentMethods.detach(paymentMethodId)
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
+
+type RealeaseScheduleParams = {
+  scheduleId: string
+}
+
+export const ReleaseSchedule = async ({ scheduleId }: RealeaseScheduleParams) => {
+  try {
+    await stripe.subscriptionSchedules.release(scheduleId, {
+      preserve_cancel_date: true,
+    })
   } catch (e) {
     if (e instanceof Stripe.errors.StripeError) {
       throw new StripeError(e.code, {

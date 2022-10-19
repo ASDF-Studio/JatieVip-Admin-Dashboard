@@ -176,7 +176,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       )}
 
       <Billing
-        cardName={currentSubs?.default_payment_method?.billing_details.name}
+        cardName={currentSubs?.default_payment_method?.billing_details?.name}
         setShowLinkModal={() => setLinkModal(true)}
         setShowBillingModal={() => setShowBillingModal(true)}
       />

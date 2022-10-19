@@ -97,6 +97,8 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     res.status(400).json({
       message: 'user already has subs',
     })
+
+    return
   }
 
   try {

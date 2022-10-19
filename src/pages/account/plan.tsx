@@ -40,7 +40,6 @@ const Home: NextPage<Props> = ({ user }) => {
     }
   }, [loading, userSubs])
 
-  console.log(userSubs)
 
   return (
     <AuthProvider userContext={user}>

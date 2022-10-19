@@ -1,11 +1,12 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { createSubSchedules, getStripeUserSubs, subscriptionPlans, updateTrialSubs } from 'lib/stripe'
+import { createSubSchedules, getStripeUserSubs, ReleaseSchedule, subscriptionPlans, updateTrialSubs } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { StripeError } from 'lib/error'
 import Stripe from 'stripe'
+import { isEmpty } from 'lodash'
 
 const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.session.token) {
@@ -90,13 +91,29 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  if (stripeSub.status === 'trialing') {
-    const stripeSubs = await updateTrialSubs({
-      currentSubs: stripeSub,
-      productName: selectedProduct,
-    })
-
+  if (!isEmpty(stripeSub.schedule)) {
     try {
+      await ReleaseSchedule({ scheduleId: stripeSub.schedule.id })
+    } catch (e) {
+      if (e instanceof StripeError) {
+        res.status(e.statusCode).json({
+          message: e.message,
+        })
+
+        return
+      }
+      res.status(500).send('')
+
+      return
+    }
+  }
+
+  if (stripeSub.status === 'trialing') {
+    try {
+      const stripeSubs = await updateTrialSubs({
+        currentSubs: stripeSub,
+        productName: subscriptionPlans[index].stripePriceId,
+      })
       res.status(200).json({
         data: stripeSubs,
       })
@@ -114,24 +131,53 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 
-  try {
-    const scheduleSub = await createSubSchedules({
-      subscription: stripeSub,
-      productName: subscriptionPlans[index].stripePriceId,
-    })
+  const currentPlanIndex = subscriptionPlans.findIndex(
+    (prods) => prods.stripePriceId === stripeSub?.items?.data?.[0].price.id,
+  )
 
-    res.status(200).json({
-      data: scheduleSub,
-    })
-  } catch (e) {
-    if (e instanceof StripeError) {
-      res.status(e.statusCode).json({
-        message: e.message,
+  const isDowngrade = subscriptionPlans[index].weight < subscriptionPlans[currentPlanIndex].weight
+
+  if (isDowngrade) {
+    try {
+      const scheduleSub = await createSubSchedules({
+        subscription: stripeSub,
+        productName: subscriptionPlans[index].stripePriceId,
+      })
+
+      res.status(200).json({
+        data: scheduleSub,
+      })
+    } catch (e) {
+      if (e instanceof StripeError) {
+        res.status(e.statusCode).json({
+          message: e.message,
+        })
+
+        return
+      }
+      res.status(500).send('')
+    }
+  } else {
+    try {
+      const stripeSubs = await updateTrialSubs({
+        currentSubs: stripeSub,
+        productName: subscriptionPlans[index].stripePriceId,
+      })
+      res.status(200).json({
+        data: stripeSubs,
       })
 
       return
+    } catch (e) {
+      if (e instanceof StripeError) {
+        res.status(e.statusCode).json({
+          message: e.message,
+        })
+
+        return
+      }
+      res.status(500).send('')
     }
-    res.status(500).send('')
   }
 }
 

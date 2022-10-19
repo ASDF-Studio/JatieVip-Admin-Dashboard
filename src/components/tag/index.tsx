@@ -26,7 +26,7 @@ export const TagExpire = ({ date = null }): React.ReactElement => {
   return (
     <div className="rounded-[14px] px-4 pt-1.5 pb-1 bg-primary-brand/10 w-fit shrink-0">
       <Typography className="text-primary-brand" variant="label2">
-        {`Expires: ${dayjs.unix(date).format('MMMM DD,YYYY')}`}
+        {`Expires: ${dayjs.unix(date).format('MMMM DD, YYYY')}`}
       </Typography>
     </div>
   )

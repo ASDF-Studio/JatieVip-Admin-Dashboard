@@ -1,7 +1,7 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs, updateStripeScheduleSub, updateStripeSub } from 'lib/stripe'
+import { getStripeUserSubs, ReleaseSchedule, updateStripeSub } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import Stripe from 'stripe'
@@ -19,7 +19,6 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     const user = await AuthService.getAccount({
       token: req.session.token,
     })
-
     req.session.user = user
     await req.session.save()
   } catch (e) {
@@ -81,16 +80,7 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (!isEmpty(stripeSub.schedule)) {
     try {
-      const updateSub = await updateStripeScheduleSub({
-        subscription: stripeSub,
-        endBehavior: endAtThePeriod ? 'cancel' : 'release',
-      })
-
-      res.status(200).json({
-        data: updateSub,
-      })
-
-      return
+      await ReleaseSchedule({ scheduleId: stripeSub.schedule.id })
     } catch (e) {
       if (e instanceof StripeError) {
         res.status(e.statusCode).json({
@@ -99,6 +89,9 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
 
         return
       }
+      res.status(500).send('')
+
+      return
     }
   }
 
