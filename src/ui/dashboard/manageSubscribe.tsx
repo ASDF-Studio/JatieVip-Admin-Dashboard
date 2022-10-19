@@ -198,6 +198,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         open={showReactiveModal}
         setOpen={setShowReactiveModal}
         onAccept={reActiveSubs}
+        cancelText="No, Keep Me Canceled"
         contentText="Are you sure you want to activate Auto Renewal?"
       />
       <ConfirmationModal
