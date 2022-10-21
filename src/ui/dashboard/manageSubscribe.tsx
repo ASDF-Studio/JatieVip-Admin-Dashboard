@@ -124,11 +124,11 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       </div>
       <div className="flex flex-col gap-[15px] sm:gap-[37px] mt-[15px] sm:mt-5">
         <BoxSelect
+          disabled={currentSubs?.cancel_at}
           data={SubsPLans.filter((x) => x.title !== currentPlan().title)}
           onChange={(value) => {
             setSelected(value)
           }}
-          defaultValue={1}
           gap="sm:gap-[25px] gap-[15px]"
           classname="bg-fill-blue max-w-[360px] sm:max-w-[320px]"
         />
@@ -161,7 +161,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
           </Typography>
         </div>
       </div>
-      {currentSubs.cancel_at ? (
+      {currentSubs?.cancel_at ? (
         <ReActiveSub
           userSubs={currentSubs}
           classname="my-[30px] sm:mt-[53px] mb-[4.188rem]"

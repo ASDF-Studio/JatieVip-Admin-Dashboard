@@ -15,6 +15,7 @@ type Props = {
   classname?: string
   gap?: string
   defaultValue?: number
+  disabled?: boolean
 }
 
 export const BoxSelect: FC<Props> = ({
@@ -22,11 +23,13 @@ export const BoxSelect: FC<Props> = ({
   data,
   classname = '',
   gap,
-  defaultValue = null,
+  defaultValue = 1,
+  disabled = false,
 }): ReactElement => {
   const [state, setState] = useState<number>(defaultValue)
 
   const handleOnChange = (index: number) => {
+    if (disabled) return
     if (onChange !== undefined) {
       onChange(data[index])
     }
@@ -34,10 +37,13 @@ export const BoxSelect: FC<Props> = ({
   }
 
   useEffect(() => {
-    if (defaultValue) {
-      onChange(data[state])
+    if (disabled) {
+      setState(null)
+    } else {
+      setState(defaultValue)
+      onChange(data[defaultValue])
     }
-  }, [defaultValue])
+  }, [defaultValue, disabled])
 
   return (
     <div className={`flex flex-col sm:flex-row w-full items-center ${gap}`}>

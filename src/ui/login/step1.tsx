@@ -19,13 +19,12 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    
+
     try {
       setLoading(true)
       await sendCode(phoneNumber)
       onChangeStep('step2')
     } catch (err) {
-      
       if (err instanceof ApiErrorResponse) {
         if (err.message.includes('is not a valid')) {
           setError(err.message)
@@ -74,7 +73,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
                 loading={loading}
                 disabled={loading}
               >
-                Login
+                Continue
               </Button>
             </div>
           </form>

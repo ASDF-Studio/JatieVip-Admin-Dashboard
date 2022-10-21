@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { IconButton, Typography } from '@mui/material'
+import { CircularProgress, IconButton, Typography } from '@mui/material'
 import { Button } from 'components/Button'
 import { LinkSlashIcon } from 'components/icons'
 import { useEffect, useState } from 'react'
@@ -20,6 +20,7 @@ export const Billing: React.FC<Props> = ({
 }): React.ReactElement => {
   const [invoices, setInvoices] = useState<IInvoice[]>([])
   const [isMore, setIsMore] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     fetcher('')
@@ -27,6 +28,7 @@ export const Billing: React.FC<Props> = ({
 
   const fetcher = async (startAfter = '') => {
     try {
+      setLoading(true)
       const data = await StripeService.listUserInvoice({
         startingAfter: startAfter,
       })
@@ -34,6 +36,8 @@ export const Billing: React.FC<Props> = ({
       setIsMore(data.has_more)
     } catch (e) {
       console.log(e)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -56,24 +60,30 @@ export const Billing: React.FC<Props> = ({
                   </div>
                 )
               })}
-            {isMore && (
+            {loading ? (
               <div className="flex justify-center">
-                <Button
-                  onClick={() => {
-                    fetcher(invoices[invoices.length - 1].id)
-                  }}
-                  variant="text"
-                  textVariant="bodyBold"
-                  disableRipple
-                >
-                  Load More…
-                </Button>
+                <CircularProgress className="w-5 h-5" />
               </div>
+            ) : (
+              isMore && (
+                <div className="flex justify-center h-5">
+                  <Button
+                    onClick={() => {
+                      fetcher(invoices[invoices.length - 1].id)
+                    }}
+                    variant="text"
+                    textVariant="bodyBold"
+                    disableRipple
+                  >
+                    Load More…
+                  </Button>
+                </div>
+              )
             )}
           </div>
         </div>
       </div>
-      <div className="max-w-[380px] sm:max-w-[490px] w-full order-1 flex flex-col sm:order-2">
+      {/* <div className="max-w-[380px] sm:max-w-[490px] w-full order-1 flex flex-col sm:order-2">
         <div className="w-full flex flex-col gap-[12px]">
           <Typography variant="heading3">Linked Card</Typography>
           <div className="rounded-[18px] bg-fill-lightBlue h-[67px] flex justify-between items-center pl-[29px] pr-[17px] ">
@@ -98,8 +108,8 @@ export const Billing: React.FC<Props> = ({
               </div>
             </IconButton>
           </div>
-        </div>
-        {/* <div className="w-full flex flex-col gap-[12px] mt-[40px] sm:mt-[44px] order-2 sm:order-3">
+        </div> */}
+      {/* <div className="w-full flex flex-col gap-[12px] mt-[40px] sm:mt-[44px] order-2 sm:order-3">
           <Typography variant="heading3">Billing Address</Typography>
           <div className="pl-[29px] pr-[17px] py-[17px] rounded-[18px] bg-fill-lightBlue flex justify-between">
             <div className="flex flex-col w-full">
@@ -135,7 +145,7 @@ export const Billing: React.FC<Props> = ({
             </div>
           </div>
         </div> */}
-      </div>
+      {/* </div> */}
     </div>
   )
 }
