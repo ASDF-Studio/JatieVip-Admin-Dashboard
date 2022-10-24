@@ -60,10 +60,19 @@ type Props = {
   from?: string
   to?: string
   open: boolean
+  isUpgrade: boolean
+  isTrialing: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const SuccessModal: React.FC<Props> = ({ from = '', to = '', open = false, setOpen }): React.ReactElement => {
+export const SuccessModal: React.FC<Props> = ({
+  from = '',
+  to = '',
+  open = false,
+  setOpen,
+  isUpgrade,
+  isTrialing,
+}): React.ReactElement => {
   const handleClose = () => {
     setOpen(false)
   }
@@ -77,11 +86,18 @@ export const SuccessModal: React.FC<Props> = ({ from = '', to = '', open = false
         <div className="absolute bg-[#f5f7f9] h-[1px] w-full left-0 top-[74px]" />
         <DialogContent>
           <Typography className="text-[18px] leading-normal">
-            {`You have successfully upgraded to ${to} plan from ${from} Plan.`}
+            {`You have successfully ${isUpgrade ? 'upgraded' : 'downgrade'} to ${to} plan from ${from} Plan.`}
           </Typography>
-          <Typography className="text-[18px] leading-normal mt-2">
-            Please check the Billing History area for payment details.
-          </Typography>
+          {!isUpgrade && !isTrialing && (
+            <Typography className="text-[18px] leading-normal mt-2">
+              Your plan will downgrade end of the current plan.
+            </Typography>
+          )}
+          {(isTrialing || isUpgrade) && (
+            <Typography className="text-[18px] leading-normal mt-2">
+              Please check the Billing History area for payment details.
+            </Typography>
+          )}
         </DialogContent>
         <DialogActions className="gap-[9px]">
           <Button variant="fill" onClick={handleClose} textClassName="text-white" className="w-full">

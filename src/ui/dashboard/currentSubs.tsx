@@ -60,7 +60,7 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
         <div className="flex flex-col  w-full justify-between items-center sm:items-start gap-y-2.5 sm:gap-y-[5px]">
           <div className="flex flex-col items-center sm:items-start">
             <Typography variant="heading4">
-              {subs.cancel_at ? 'You were subscribed to' : `You are subscribed to`}
+              {subs?.cancel_at ? 'You were subscribed to' : `You are subscribed to`}
             </Typography>
 
             <Typography className="text-primary-brand" variant="heading4">
@@ -68,10 +68,12 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
             </Typography>
           </div>
           <div className="flex items-center  flex-col gap-y-[15px] sm:flex-row gap-x-[9px]">
-            <Typography variant="subhead" className="text-fill-grey text-center sm:text-left">
-              {`Your payment will be automatically renewed every ${subsTitle().nickName}`}
-            </Typography>
-            {subs.cancel_at ? (
+            {!subs?.cancel_at && (
+              <Typography variant="subhead" className="text-fill-grey text-center sm:text-left">
+                {`Your payment will be automatically renewed every ${subsTitle().nickName}`}
+              </Typography>
+            )}
+            {subs?.cancel_at ? (
               <TagExpire date={subs.current_period_end} />
             ) : (
               <Tag loading={loading} date={upcomingInvoice?.created} price={upcomingInvoice?.amount_due} />

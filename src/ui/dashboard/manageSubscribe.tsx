@@ -20,6 +20,13 @@ type FunctionParams = {
   retry?: boolean
 }
 
+type SuccesInfo = {
+  from: string
+  to: string
+  isUpgrade: boolean
+  isTrialing: boolean
+}
+
 const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [showAutoRenewalModal, setShowAutoRenewalModal] = useState(false)
@@ -32,7 +39,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
   const [showError, setShowError] = useState(false)
   const [error, setError] = useState<string>(null)
   const [reactivateText, setReactivateText] = useState<string>('Are you sure you want to activate Auto Renewal?')
-  const [from, setFrom] = useState<string>(null)
+  const [successInfo, setSuccessInfo] = useState<SuccesInfo>(null)
   const router = useRouter()
   const { plan } = currentSubs
 
@@ -52,11 +59,16 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         const res = await StripeService.createScheduleSub({
           selectedProduct: selected.title,
         })
+        setShowError(false)
         setCurrentSubs(res)
-        if (isUpgrade) {
-          setFrom(currentPlan().title)
-          setSuccessModal(true)
-        }
+        setSuccessInfo({
+          isUpgrade,
+          isTrialing: currentSubs.status === 'trialing',
+          from: currentPlan().title,
+          to: '',
+        })
+
+        setSuccessModal(true)
       } catch (e) {
         if (e instanceof StripeError) {
           if (e.statusCode === 401) {
@@ -74,20 +86,25 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
     [selected],
   )
 
-  const cancelAutoRenewal = useCallback(async () => {
+  const cancelAutoRenewal = useCallback(async (params: FunctionParams) => {
+    const { retry = false } = params || {}
     try {
       const res = await StripeService.updateCurrentSub({
         endAtThePeriod: true,
       })
       setCurrentSubs(res)
       setSelected(null)
+      setShowError(false)
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
           router.push('/')
         } else {
+          if (!retry) {
+            retryFunRef.current = cancelAutoRenewal
+            setShowError(true)
+          }
           setError(e.message)
-          setShowError(true)
         }
       }
     }
@@ -95,22 +112,26 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
 
   useEffect(() => {
     setSelected(SubsPLans.filter((x) => x.title !== currentPlan().title)[1] as ISelectedProduct)
-  }, [])
+  }, [currentPlan])
 
-  const reActiveSubs = useCallback(async () => {
+  const reActiveSubs = useCallback(async (params: FunctionParams) => {
+    const { retry = false } = params || {}
     try {
       const res = await StripeService.updateCurrentSub({
         endAtThePeriod: false,
       })
       setCurrentSubs(res)
-      setSelected(SubsPLans.filter((x) => x.title !== currentPlan().title)[1] as ISelectedProduct)
+      setShowError(false)
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
           router.push('/')
         } else {
+          if (!retry) {
+            retryFunRef.current = reActiveSubs
+            setShowError(true)
+          }
           setError(e.message)
-          setShowError(true)
         }
       }
     }
@@ -206,6 +227,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       )}
 
       <Billing
+        // sub={currentSubs}
         // cardName={currentSubs?.default_payment_method?.billing_details?.name}
         setShowLinkModal={() => setLinkModal(true)}
         setShowBillingModal={() => setShowBillingModal(true)}
@@ -240,7 +262,14 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         contentText="Are you sure you want to unlink card?"
       />
       <ErrorModal onAccept={retryFunRef.current} open={showError} setOpen={setShowError} error={error} />
-      <SuccessModal to={currentPlan()?.title} open={succesModal} setOpen={setSuccessModal} from={from} />
+      <SuccessModal
+        to={currentPlan()?.title}
+        isTrialing={successInfo?.isTrialing}
+        isUpgrade={successInfo?.isUpgrade}
+        open={succesModal}
+        setOpen={setSuccessModal}
+        from={successInfo?.from}
+      />
       <BillingModal open={showBillingModal} setOpen={setShowBillingModal} />
     </div>
   )

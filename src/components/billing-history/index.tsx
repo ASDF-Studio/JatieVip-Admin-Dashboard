@@ -8,21 +8,24 @@ import { IInvoice } from 'services/types'
 import { History } from './history'
 
 type Props = {
-  setShowBillingModal: () => void
-  setShowLinkModal: () => void
+  setShowBillingModal?: () => void
+  setShowLinkModal?: () => void
   // cardName: string
+  //  sub: ISub
 }
 
 export const Billing: React.FC<Props> = ({
   setShowBillingModal = null,
   setShowLinkModal,
   cardName,
+  // sub,
 }): React.ReactElement => {
   const [invoices, setInvoices] = useState<IInvoice[]>([])
   const [isMore, setIsMore] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    setInvoices([])
     fetcher('')
   }, [])
 
