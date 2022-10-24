@@ -218,7 +218,7 @@ const Step4: React.FC = (): React.ReactElement => {
 
       <div className=" flex-col items-center self-end justify-start hidden x:flex">
         <div className="flex items-center gap-3">
-          <Link href="/landing/terms">
+          <Link href="/terms">
             <a>
               <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
                 Terms of service
@@ -228,7 +228,7 @@ const Step4: React.FC = (): React.ReactElement => {
           <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
             •
           </Typography>
-          <Link href="/landing/terms">
+          <Link href="/privacy">
             <a>
               <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
                 Privacy Policy

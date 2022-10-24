@@ -32,7 +32,7 @@ export const LandingHeader = ({ inView, dark }) => {
         showMenu ? 'bg-white' : inView ? 'bg-[#64edff]/20' : ''
       }`}
     >
-      <Link href="/landing">
+      <Link href="/">
         <a onClick={() => setShowMenu(false)}>
           <img
             src={
@@ -145,11 +145,7 @@ export const LandingHeader = ({ inView, dark }) => {
           <div className="flex flex-col gap-5 5xl:mt[220px] mt-[113px]">
             <Link href="/login">
               <a>
-                <Button
-                  className="max-w-[360px] w-full shadow-buttonShadow2"
-                  textClassName="text-white"
-                  variant="fill"
-                >
+                <Button className="max-w-[360px] w-full shadow-buttonShadow2" textClassName="text-white" variant="fill">
                   Login
                 </Button>
               </a>
@@ -243,7 +239,7 @@ export const LandingHeader = ({ inView, dark }) => {
           </div>
           <div className="mt-[30px] flex flex-col leading-[32px]">
             <div className="flex gap-2 justify-center items-center">
-              <Link href="/landing/terms">
+              <Link href="/terms">
                 <a>
                   <Typography variant="body2" className="leading-[2] text-black text-center">
                     Terms of Service
@@ -253,7 +249,7 @@ export const LandingHeader = ({ inView, dark }) => {
               <Typography variant="body2" className="leading-[2] text-black text-center">
                 •
               </Typography>
-              <Link href="/landing/privacy">
+              <Link href="/privacy">
                 <a>
                   <Typography variant="body2" className="leading-[2] text-black text-center">
                     Privacy Policy

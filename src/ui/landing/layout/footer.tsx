@@ -119,7 +119,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
             © Move, Inc. All rights reserved.
           </Typography>
           <div className="flex items-center gap-3 x:mt-[10px]">
-            <Link href="/landing/terms">
+            <Link href="/terms">
               <a>
                 <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
                   Terms of service
@@ -129,7 +129,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
             <Typography className="leading-[2] text-white" variant="body2">
               •
             </Typography>
-            <Link href="/landing/privacy">
+            <Link href="/privacy">
               <a>
                 <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
                   Privacy Policy

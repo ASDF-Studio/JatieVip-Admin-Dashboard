@@ -14,7 +14,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
   return (
     <div className="max-w-left-bar pt-[30px] pl-[30px] fixed flex-col hidden xl:flex z-30 overflow-y-auto h-screen  h700:justify-between ">
       <div>
-        <Link href="/landing">
+        <Link href="/">
           <a>
             <img
               src={inView ? '/assets/logos/logo.svg' : '/assets/logos/move-white.svg'}
@@ -188,7 +188,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
         </div>
         <div className="mt-[6px] flex flex-col leading-[32px] mb-[19px]">
           <div className="flex gap-2 items-center">
-            <Link href="/landing/terms">
+            <Link href="/terms">
               <a>
                 <Typography
                   variant="body2"
@@ -203,7 +203,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
             <Typography variant="body2" className={`${inView ? 'leading-[2] text-black' : 'leading-[2] text-white'}`}>
               •
             </Typography>
-            <Link href="/landing/privacy">
+            <Link href="/privacy">
               <a>
                 <Typography
                   variant="body2"

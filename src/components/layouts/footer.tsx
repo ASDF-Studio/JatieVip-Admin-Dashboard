@@ -66,7 +66,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
       </div>
       <div className="flex gap-2.5 x:gap-10 flex-col x:flex-row mt-[22px] x:mt-0">
         <div className="flex gap-2">
-          <Link href="/landing/terms">
+          <Link href="/terms">
             <a>
               <Typography variant="body2" className="leading-[2]  underline-offset-1 hover:underline">
                 Terms of Service
@@ -76,7 +76,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           <Typography variant="body2" className="leading-[2]  underline-offset-1 hover:underline">
             •
           </Typography>
-          <Link href="/landing/terms">
+          <Link href="/privacy">
             <a>
               <Typography variant="body2" className="leading-[2]   underline-offset-1 hover:underline">
                 Privacy Policy

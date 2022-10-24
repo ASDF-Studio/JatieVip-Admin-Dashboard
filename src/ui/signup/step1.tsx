@@ -80,7 +80,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
       <div className=" flex-col items-center  hidden x:flex self-end justify-start">
         <div className="flex items-center gap-3">
-          <Link href="/landing/terms">
+          <Link href="/terms">
             <a>
               <Typography
                 className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"
@@ -96,7 +96,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
           >
             •
           </Typography>
-          <Link href="/landing/terms">
+          <Link href="/privacy">
             <a>
               <Typography
                 className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"
