@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { StripeError } from 'lib/error'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 type Props = {
   user: IUser
@@ -32,7 +33,7 @@ const Home: NextPage = ({ user }: Props) => {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
           router.push('/')
-        } 
+        }
       }
     } finally {
       setLoading(false)
@@ -41,6 +42,9 @@ const Home: NextPage = ({ user }: Props) => {
 
   return (
     <AuthProvider userContext={user}>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       <MainLayout className="pt-[66px]">
         {loading ? (
           <div className="px-5 min-h-[calc(100vh-160px)]">Loading</div>

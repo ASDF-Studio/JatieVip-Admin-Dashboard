@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { useRouter } from 'next/router'
 import { StripeError } from 'lib/error'
+import Head from 'next/head'
 
 type Props = {
   user: IUser
@@ -47,6 +48,9 @@ const Home: NextPage<Props> = ({ user }) => {
 
   return (
     <AuthProvider userContext={user}>
+      <Head>
+        <title>Manage Plan</title>
+      </Head>
       <MainLayout className="pt-[66px] px-5">
         {loading ? (
           <div className="max-w-screen-move-fit mx-auto px-5 min-h-[calc(100vh-160px)]">Loading</div>

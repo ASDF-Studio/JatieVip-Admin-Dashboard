@@ -5,6 +5,7 @@ import { withIronSessionSsr } from 'iron-session/next'
 import { sessionOptions } from 'lib/session'
 import { IUser } from 'services/types'
 import { Profile } from 'ui/account'
+import Head from 'next/head'
 
 type Props = {
   user: IUser
@@ -13,6 +14,9 @@ type Props = {
 const Account: NextPage = ({ user }: Props) => {
   return (
     <AuthProvider userContext={user}>
+      <Head>
+        <title>Profile</title>
+      </Head>
       <MainLayout className="pt-[66px] px-5">
         <Profile />
       </MainLayout>
