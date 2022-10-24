@@ -1,10 +1,14 @@
 import { Typography } from '@mui/material'
 import { Button, CloudExclamtionIcon } from 'components'
+import Head from 'next/head'
 import Link from 'next/link'
 
 const FourOhFour = () => {
   return (
     <div className="flex flex-col h-screen w-screen">
+      <Head>
+        <title>Not Found</title>
+      </Head>
       <div className="h-[66px] flex justify-center items-center border-b border-b-[#f5f7f9]">
         <Link href="/landing">
           <a>
