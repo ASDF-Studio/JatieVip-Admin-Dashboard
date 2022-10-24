@@ -72,7 +72,7 @@ export const LandingHeader = ({ inView, dark }) => {
         <div className="max-w-[420px] mx-auto w-full px-[30px] pb-[24px]">
           <div className="flex flex-col gap-5 mt-[25px] items-center">
             <div className="flex flex-col gap-2.5 items-center">
-              <Link href="/landing">
+              <Link href="/">
                 <a
                   onClick={() => {
                     setShowMenu(false)
@@ -83,7 +83,7 @@ export const LandingHeader = ({ inView, dark }) => {
                   </Typography>
                 </a>
               </Link>
-              <Link href="/landing#video">
+              <Link href="/#video">
                 <a
                   onClick={() => {
                     setShowMenu(false)
@@ -95,7 +95,7 @@ export const LandingHeader = ({ inView, dark }) => {
                 </a>
               </Link>
 
-              <Link href="/landing#mwf">
+              <Link href="/#mwf">
                 <a
                   onClick={() => {
                     setShowMenu(false)
@@ -106,7 +106,7 @@ export const LandingHeader = ({ inView, dark }) => {
                   </Typography>
                 </a>
               </Link>
-              <Link href="/landing#habit-tracking">
+              <Link href="/#habit-tracking">
                 <a
                   onClick={() => {
                     setShowMenu(false)
@@ -118,7 +118,7 @@ export const LandingHeader = ({ inView, dark }) => {
                 </a>
               </Link>
             </div>
-            <Link href="/landing#our-vision">
+            <Link href="/#our-vision">
               <a
                 onClick={() => {
                   setShowMenu(false)
@@ -129,7 +129,7 @@ export const LandingHeader = ({ inView, dark }) => {
                 </Typography>
               </a>
             </Link>
-            <Link href="/landing#brand-story">
+            <Link href="/#brand-story">
               <a
                 onClick={() => {
                   setShowMenu(false)

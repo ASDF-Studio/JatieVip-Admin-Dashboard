@@ -5,6 +5,7 @@ import { LoginSteps } from 'types'
 import { useAuth } from 'Contexts/Auth'
 import { ApiErrorResponse } from 'services/api'
 import Link from 'next/link'
+import { isEmpty } from 'lodash'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
@@ -19,6 +20,12 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
   const handleLogin = async (e) => {
     e.preventDefault()
+
+    if (isEmpty(phoneNumber)) {
+      setError('Phone number is required')
+
+      return
+    }
 
     try {
       setLoading(true)

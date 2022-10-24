@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { FC, ReactElement, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { ISelectedProduct } from 'services/types'
+import { SubsPLans } from '../../constants'
 
 type Props = {
   className?: string
@@ -12,7 +13,7 @@ type Props = {
 
 const CreateSubs: FC<Props> = ({ className }): ReactElement => {
   const [loading, setLoading] = useState(false)
-  const [selected, setSelected] = useState<ISelectedProduct>(null)
+  const [selected, setSelected] = useState<ISelectedProduct>(SubsPLans[1] as ISelectedProduct)
   const router = useRouter()
 
   const handleSubscribe = async () => {
@@ -42,28 +43,9 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
       <div className="w-full max-w-[380px] sm:max-w-full mx-auto sm:mx-0 bg-fill-blue pt-[18px] mt-[21px] px-5 sm:px-[30px] sm:pt-[39px] sm:pb-[27px] rounded-[27px] pb-[23px] gap-5 sm:gap-[32px] flex flex-col items-center">
         <BoxSelect
           onChange={(index) => setSelected(index)}
-          data={[
-            {
-              title: 'Monthly',
-              value: '$17.99',
-            },
-            {
-              title: '3-Months',
-              value: '$14.99/mo',
-              discountValue: '$44.97 Total',
-            },
-            {
-              title: '6-Months',
-              value: '$12.99/mo',
-              discountValue: '$77.94 Total',
-            },
-            {
-              title: '1 Year',
-              value: '$9.99/mo',
-              discountValue: '$119.88 Total',
-            },
-          ]}
+          data={SubsPLans}
           gap="gap-[15px]"
+          selected={selected}
           classname="bg-primary-white sm:w-[226px]"
         />
         <div className="flex flex-col gap-2.5 items-center">

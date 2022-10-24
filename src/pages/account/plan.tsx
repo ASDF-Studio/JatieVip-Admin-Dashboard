@@ -5,9 +5,10 @@ import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
 import { AuthProvider } from 'Contexts/Auth'
 import { IUser } from 'services/types'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { useRouter } from 'next/router'
+import { StripeError } from 'lib/error'
 
 type Props = {
   user: IUser
@@ -22,17 +23,21 @@ const Home: NextPage<Props> = ({ user }) => {
     fetch()
   }, [])
 
-  const fetch = async () => {
+  const fetch = useCallback(async () => {
     try {
       setLoading(true)
       const res = await StripeService.getUserSubs()
       setUserSubs(res)
     } catch (e) {
-      console.log(e)
+      if (e instanceof StripeError) {
+        if (e.statusCode === 401) {
+          router.push('/')
+        }
+      }
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     if (!loading && !userSubs) {
@@ -40,12 +45,11 @@ const Home: NextPage<Props> = ({ user }) => {
     }
   }, [loading, userSubs])
 
-
   return (
     <AuthProvider userContext={user}>
       <MainLayout className="pt-[66px] px-5">
         {loading ? (
-          <div className="px-5 min-h-[calc(100vh-160px)]">Loading</div>
+          <div className="max-w-screen-move-fit mx-auto px-5 min-h-[calc(100vh-160px)]">Loading</div>
         ) : (
           userSubs && (
             <ManageSub

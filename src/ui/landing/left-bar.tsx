@@ -26,7 +26,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
 
         <div className=" flex-col gap-5 mt-[25px] hidden h700:flex">
           <div className="flex flex-col gap-2.5">
-            <Link href="/landing">
+            <Link href="/">
               <a>
                 <Typography
                   variant="title3"
@@ -36,7 +36,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
                 </Typography>
               </a>
             </Link>
-            <Link href="/landing#video">
+            <Link href="/#video">
               <a>
                 <Typography
                   variant="body"
@@ -46,7 +46,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
                 </Typography>
               </a>
             </Link>
-            <Link href="/landing#mwf">
+            <Link href="/#mwf">
               <a>
                 <Typography
                   variant="body"
@@ -56,7 +56,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
                 </Typography>
               </a>
             </Link>
-            <Link href="/landing#habit-tracking">
+            <Link href="/#habit-tracking">
               <a>
                 <Typography
                   variant="body"
@@ -67,7 +67,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
               </a>
             </Link>
           </div>
-          <Link href="/landing#our-vision">
+          <Link href="/#our-vision">
             <a>
               <Typography
                 variant="title3"
@@ -77,7 +77,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
               </Typography>
             </a>
           </Link>
-          <Link href="/landing#brand-story">
+          <Link href="/#brand-story">
             <a>
               <Typography
                 variant="title3"

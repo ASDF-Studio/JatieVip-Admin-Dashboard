@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { StripeError } from 'lib/error'
-import { IInvoice } from './types'
+import { IInvoice, ISub } from './types'
 
 const AxiosInstance = axios.create({
   baseURL: '',
@@ -26,7 +26,7 @@ export const StripeService = {
     }
   },
 
-  getUserSubs: async (): Promise<any> => {
+  getUserSubs: async (): Promise<ISub> => {
     try {
       const stripeSesion = await AxiosInstance.post('/api/stripe/getUserSub', {})
 

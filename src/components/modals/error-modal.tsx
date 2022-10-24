@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
+import { ExclamationIcon } from 'components/icons'
 import { Button } from '../Button'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -57,57 +58,57 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 }
 
 type Props = {
-  onAccept?: ({ retry }: { retry?: boolean }) => Promise<void>
-  contentText: string
+  onAccept?: ({ retry }: { retry: boolean }) => Promise<void>
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   cancelText?: string
-  onClose?: () => void
+  error?: string
 }
 
-export const ConfirmationModal: React.FC<Props> = ({
+export const ErrorModal: React.FC<Props> = ({
   onAccept,
-  contentText = '',
   open = false,
   setOpen,
-  cancelText = 'No, Keep my current plan',
-  onClose = undefined,
+  cancelText = 'Cancel',
+  error,
 }): React.ReactElement => {
   const [loading, setLoading] = React.useState(false)
   const handleClose = () => {
     setOpen(false)
-    if (onClose !== undefined) {
-      onClose()
-    }
   }
 
   return (
     <div>
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Confirmation
+          Unsuccessful
         </BootstrapDialogTitle>
         <div className="absolute bg-[#f5f7f9] h-[1px] w-full left-0 top-[74px]" />
-        <DialogContent>
-          <Typography variant="heading3">{contentText}</Typography>
+        <DialogContent className="flex items-start gap-[21px]">
+          <ExclamationIcon fill="#e92346" className=" w-[50px] pt-2" />
+          <Typography className="text-[18px] leading-normal">{`We couldn’t complete the upgrading process due to an error ${error}. Please retry.`}</Typography>
         </DialogContent>
         <DialogActions className="gap-[9px]">
           <Button
-            variant="secondry"
-            textClassName="text-text-blue"
             loading={loading}
             disabled={loading}
-            className="w-full bg-fill-lightBlue2 shadow-none"
+            className="w-full"
+            variant="fill"
+            textClassName="text-white"
             onClick={async () => {
               setLoading(true)
-              await onAccept({ retry: false })
+              await onAccept({ retry: true })
               setLoading(false)
-              setOpen(false)
             }}
           >
-            Yes
+            Retry
           </Button>
-          <Button variant="fill" textClassName="text-white" className="w-full" onClick={handleClose}>
+          <Button
+            variant="secondry"
+            textClassName="text-text-blue"
+            className="w-full bg-fill-lightBlue2 shadow-none"
+            onClick={handleClose}
+          >
             {cancelText}
           </Button>
         </DialogActions>

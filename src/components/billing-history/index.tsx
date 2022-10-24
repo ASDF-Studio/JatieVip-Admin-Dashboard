@@ -10,7 +10,7 @@ import { History } from './history'
 type Props = {
   setShowBillingModal: () => void
   setShowLinkModal: () => void
-  cardName: string
+  // cardName: string
 }
 
 export const Billing: React.FC<Props> = ({

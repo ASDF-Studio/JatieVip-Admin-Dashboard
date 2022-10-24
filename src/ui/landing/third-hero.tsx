@@ -29,7 +29,7 @@ const GetPhone = () => {
 
 export const ThirdHero = React.forwardRef((props, ref) => {
   return (
-    <div id='mwf' ref={ref} className="w-full sm:h-[855px] x:h-[936px]  xl:h-[927px] 2xl:h-[927px]">
+    <div id="mwf" ref={ref} className="w-full sm:h-[855px] x:h-[936px]  xl:h-[927px] 2xl:h-[927px]">
       <div className="relative bg-[url('/assets/landing/bg-2-phone.png')] sm:bg-[url('/assets/landing/bg-2-720.png')] -top-[22px] sm:-top-[75px] x:-top-[55px] xl:-top-[65px] 2xl:-top-[70px]  x:bg-[url('/assets/landing/bg-2-1024.webp')] 2xl:bg-[url('/assets/landing/bg-2-1440.png')] 5xl:bg-[url('/assets/landing/bg-2-1920.png')]  flex sm:h-[931px] x:h-[992px] xl:h-[993px] 2xl:h-[995px] bg-no-repeat bg-cover">
         {/* <GetBg /> */}
 
@@ -48,7 +48,7 @@ export const ThirdHero = React.forwardRef((props, ref) => {
                 progress, and share how you Move with others.
               </Typography>
             </div>
-            <div className="flex flex-wrap sm:gap-x-[43.5px] mt-[50px] sm:mt-[33px] px-2.5 sm:px-0 sm:gap-y-[17px] x:sm:gap-x-[30px] x:gap-y-[20px] x:mt-[52px] 2xl:mt-[61px]">
+            <div className="flex flex-wrap sm:gap-x-[43.5px] mt-[50px] sm:mt-[33px] px-2.5 sm:px-0 sm:gap-y-[17px] x:gap-x-[30px]  2xl:gap-x-[75px] x:gap-y-[20px] x:mt-[52px] 2xl:mt-[61px]">
               <Card
                 className="order-1 sm:order-1"
                 icon={
@@ -96,11 +96,11 @@ export const ThirdHero = React.forwardRef((props, ref) => {
                 alt=""
                 className="max-w-[280px] sm:max-w-[200px] order-4  mx-auto sm:mx-0 mt-[20px] mb-[39px] sm:order-6 sm:mb-0 sm:mt-0 x:max-w-[280px]"
               />
-              <img
+              {/* <img
                 src="/assets/landing/piece.png"
                 alt=""
                 className="max-w-[230px] xs:max-w-[260px] absolute -top-[80px] left-[34vw] sm:max-w-[278px] sm:left-[300px] sm:-top-[105px] x:max-w-[393px] x:left-[400px] x:-top-[135px] xl:left-[330px] 2xl:-top-[130px] 2xl:left-[400px] "
-              />
+              /> */}
             </div>
           </div>
           <div className="w-full mx-auto sm:px-[20px] x:max-w-[1024px] x:px-[61.3px] xl:px-0 xl:max-w-[900px] 2xl:max-w-[995px]">

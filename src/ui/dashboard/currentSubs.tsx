@@ -28,7 +28,7 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
     }
   }, [subs])
 
-  const fetcher = async () => {
+  const fetcher = useCallback(async () => {
     try {
       setLoading(true)
       const res = await StripeService.getUpcomingInvoice()
@@ -42,7 +42,7 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   const subsTitle = useCallback(() => {
     return getSubsName(plan)

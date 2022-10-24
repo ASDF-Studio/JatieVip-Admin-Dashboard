@@ -57,7 +57,6 @@ export const ForthHero: React.FC = (): React.ReactElement => {
               <span className="text-[#86949F]">Stay on track with </span>
               Habit ✌️ Tracker
             </Heading1>
-            
           </div>
           <Typography
             variant="body3"
@@ -67,7 +66,7 @@ export const ForthHero: React.FC = (): React.ReactElement => {
             goals the top priority.
           </Typography>
         </div>
-        <div className="flex  flex-wrap sm:gap-x-[43.5px] x:gap-x-[30px] mt-[45.5px] sm:mt-[40px] px-[30px] sm:px-0 sm:pl-[41.5px] sm:pr-[39px] x:pr-0 x:pl-0 gap-y-[30px] x:mt-[72px] 2xl:mt-[61px]">
+        <div className="flex  flex-wrap sm:gap-x-[43.5px] x:gap-x-[30px] 2xl:gap-x-[75px] mt-[45.5px] sm:mt-[40px] px-[30px] sm:px-0 sm:pl-[41.5px] sm:pr-[39px] x:pr-0 x:pl-0 gap-y-[30px] x:mt-[72px] 2xl:mt-[61px]">
           <Card
             className="order-1"
             icon={<img src="/assets/svg/bell-on.svg" alt="person running icon" className="w-[1.875rem] h-[1.875rem]" />}

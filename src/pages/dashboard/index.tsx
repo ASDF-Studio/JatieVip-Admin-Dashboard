@@ -5,7 +5,7 @@ import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
 import { ISub, IUser } from 'services/types'
 import { AuthProvider } from 'Contexts/Auth'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { StripeError } from 'lib/error'
 import { useRouter } from 'next/router'
@@ -23,7 +23,7 @@ const Home: NextPage = ({ user }: Props) => {
     fetch()
   }, [])
 
-  const fetch = async () => {
+  const fetch = useCallback(async () => {
     try {
       setLoading(true)
       const res = await StripeService.getUserSubs()
@@ -32,12 +32,12 @@ const Home: NextPage = ({ user }: Props) => {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
           router.push('/')
-        }
+        } 
       }
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   return (
     <AuthProvider userContext={user}>

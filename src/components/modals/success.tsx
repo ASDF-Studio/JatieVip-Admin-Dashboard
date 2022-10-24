@@ -39,7 +39,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
   const { children, onClose, ...other } = props
 
   return (
-    <DialogTitle className="flex items-center justify-between px-2 py-0 m-0" {...other}>
+    <DialogTitle className="flex  border-b-violet-50 items-center justify-between px-2 py-0 m-0" {...other}>
       <Typography variant="heading3">{children}</Typography>
       {onClose ? (
         <IconButton
@@ -57,58 +57,35 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 }
 
 type Props = {
-  onAccept?: ({ retry }: { retry?: boolean }) => Promise<void>
-  contentText: string
+  from?: string
+  to?: string
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  cancelText?: string
-  onClose?: () => void
 }
 
-export const ConfirmationModal: React.FC<Props> = ({
-  onAccept,
-  contentText = '',
-  open = false,
-  setOpen,
-  cancelText = 'No, Keep my current plan',
-  onClose = undefined,
-}): React.ReactElement => {
-  const [loading, setLoading] = React.useState(false)
+export const SuccessModal: React.FC<Props> = ({ from = '', to = '', open = false, setOpen }): React.ReactElement => {
   const handleClose = () => {
     setOpen(false)
-    if (onClose !== undefined) {
-      onClose()
-    }
   }
 
   return (
     <div>
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Confirmation
+          Successful
         </BootstrapDialogTitle>
         <div className="absolute bg-[#f5f7f9] h-[1px] w-full left-0 top-[74px]" />
         <DialogContent>
-          <Typography variant="heading3">{contentText}</Typography>
+          <Typography className="text-[18px] leading-normal">
+            {`You have successfully upgraded to ${to} plan from ${from} Plan.`}
+          </Typography>
+          <Typography className="text-[18px] leading-normal mt-2">
+            Please check the Billing History area for payment details.
+          </Typography>
         </DialogContent>
         <DialogActions className="gap-[9px]">
-          <Button
-            variant="secondry"
-            textClassName="text-text-blue"
-            loading={loading}
-            disabled={loading}
-            className="w-full bg-fill-lightBlue2 shadow-none"
-            onClick={async () => {
-              setLoading(true)
-              await onAccept({ retry: false })
-              setLoading(false)
-              setOpen(false)
-            }}
-          >
-            Yes
-          </Button>
-          <Button variant="fill" textClassName="text-white" className="w-full" onClick={handleClose}>
-            {cancelText}
+          <Button variant="fill" onClick={handleClose} textClassName="text-white" className="w-full">
+            Okay
           </Button>
         </DialogActions>
       </BootstrapDialog>
