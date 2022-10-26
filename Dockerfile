@@ -2,8 +2,8 @@ FROM node:16-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 ENV HUSKY_SKIP_INSTALL=1
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package.json ./
+RUN yarn install 
 
 FROM node:16-alpine AS builder
 WORKDIR /app
