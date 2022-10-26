@@ -1,5 +1,6 @@
 import { Title, Heading, Button } from 'components'
 import { useBreakPoint } from 'hooks'
+import Link from 'next/link'
 import { useCallback } from 'react'
 
 export const HeroSection: React.FC = (): React.ReactElement => {
@@ -47,20 +48,28 @@ export const HeroSection: React.FC = (): React.ReactElement => {
           </div>
 
           <div className="flex gap-2.5 flex-col sm:flex-row gap-y-[17px]">
-            <Button
-              variant="landingButton"
-              className="bg-primary-brand max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px] shadow-buttonShadow2 hover:shadow-hoverShadow active:bg-primary-brand"
-              textClassName="text-white"
-            >
-              Get Started
-            </Button>
-            <Button
-              variant="landingButton"
-              className="bg-white max-w-[185px] w-full sm:max-w-[180px] xl:max-w-[200px] shadow-glassShadow hover:hoverShadow hover:border-[#19a3d1] border border-solid border-border-lightBlue"
-              textClassName="text-primary-brand"
-            >
-              Learn More
-            </Button>
+            <Link href="/login">
+              <a className="xl:max-w-[200px] max-w-[185px] sm:max-w-[180px] w-full">
+                <Button
+                  variant="landingButton"
+                  className="bg-primary-brand  w-full shadow-buttonShadow2 hover:shadow-hoverShadow active:bg-primary-brand"
+                  textClassName="text-white"
+                >
+                  Get Started
+                </Button>
+              </a>
+            </Link>
+            <Link href="/#video">
+              <a className="xl:max-w-[200px] max-w-[185px] sm:max-w-[180px] w-full">
+                <Button
+                  variant="landingButton"
+                  className="bg-white w-full shadow-glassShadow hover:hoverShadow hover:border-[#19a3d1] border border-solid border-border-lightBlue"
+                  textClassName="text-primary-brand"
+                >
+                  Learn More
+                </Button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

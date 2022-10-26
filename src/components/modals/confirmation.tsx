@@ -62,6 +62,7 @@ type Props = {
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   cancelText?: string
+  acceptText?: string
   onClose?: () => void
 }
 
@@ -71,6 +72,7 @@ export const ConfirmationModal: React.FC<Props> = ({
   open = false,
   setOpen,
   cancelText = 'No, Keep my current plan',
+  acceptText = 'Yes',
   onClose = undefined,
 }): React.ReactElement => {
   const [loading, setLoading] = React.useState(false)
@@ -105,7 +107,7 @@ export const ConfirmationModal: React.FC<Props> = ({
               setOpen(false)
             }}
           >
-            Yes
+            {acceptText}
           </Button>
           <Button variant="fill" textClassName="text-white" className="w-full" onClick={handleClose}>
             {cancelText}

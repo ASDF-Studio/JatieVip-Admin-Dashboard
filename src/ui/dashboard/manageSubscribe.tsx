@@ -111,8 +111,10 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
   }, [])
 
   useEffect(() => {
-    setSelected(SubsPLans.filter((x) => x.title !== currentPlan().title)[1] as ISelectedProduct)
-  }, [currentPlan])
+    if (!currentSubs.cancel_at) {
+      setSelected(SubsPLans.filter((x) => x.title !== currentPlan().title)[1] as ISelectedProduct)
+    }
+  }, [currentSubs])
 
   const reActiveSubs = useCallback(async (params: FunctionParams) => {
     const { retry = false } = params || {}
@@ -251,6 +253,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         setOpen={setShowReactiveModal}
         onAccept={reActiveSubs}
         onClose={onClose}
+        acceptText="Reactivate"
         cancelText="No, Keep Me Canceled"
         contentText={reactivateText}
       />

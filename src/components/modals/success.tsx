@@ -81,7 +81,7 @@ export const SuccessModal: React.FC<Props> = ({
     <div>
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Successful
+          Success
         </BootstrapDialogTitle>
         <div className="absolute bg-[#f5f7f9] h-[1px] w-full left-0 top-[74px]" />
         <DialogContent>

@@ -50,21 +50,55 @@ export const LandingFooter = React.forwardRef((props, ref) => {
           </Button>
         </div>
         <div className="flex flex-col mt-[51px] gap-[15px] items-center order-4 x:order-3 x:flex-row x:justify-center x:gap-[47px] x:mt-[90px]">
-          <Typography variant="title2" className="font-medium text-white leading-normal">
-            Real Videos
-          </Typography>
-          <Typography variant="title2" className="font-medium text-white leading-normal">
-            Habit Tracking
-          </Typography>
-          <Typography variant="title2" className="font-medium text-white leading-normal">
-            Move with Friends
-          </Typography>
-          <Typography variant="title2" className="font-medium text-white leading-normal">
-            Brand Story
-          </Typography>
-          <Typography variant="title2" className="font-medium text-white leading-normal">
+          <Link href="/#video">
+            <a>
+              <Typography
+                variant="title2"
+                className="font-medium text-white leading-normal underline-offset-1 hover:underline"
+              >
+                Real Videos
+              </Typography>
+            </a>
+          </Link>
+          <Link href="/#habit-tracking">
+            <a>
+              <Typography
+                variant="title2"
+                className="font-medium text-white leading-normal underline-offset-1 hover:underline"
+              >
+                Habit Tracking
+              </Typography>
+            </a>
+          </Link>
+          <Link href="/#mwf">
+            <a>
+              <Typography
+                variant="title2"
+                className="font-medium text-white leading-normal underline-offset-1 hover:underline"
+              >
+                Move with Friends
+              </Typography>
+            </a>
+          </Link>
+          <Link href="/#brand-story">
+            <a>
+              <Typography
+                variant="title2"
+                className="font-medium text-white leading-normal underline-offset-1 hover:underline"
+              >
+                Brand Story
+              </Typography>
+            </a>
+          </Link>
+          <Link href="/#our-vision">
+            <a>
+          <Typography
+            variant="title2"
+            className="font-medium text-white leading-normal underline-offset-1 hover:underline"
+          >
             Our Vision
           </Typography>
+          </a></Link>
         </div>
         <div className="flex gap-[36px] x:gap-[50px] justify-center mt-[58px] order-5 x:mt-[43px]">
           <IconButton

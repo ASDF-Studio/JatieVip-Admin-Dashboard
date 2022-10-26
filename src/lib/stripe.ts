@@ -42,8 +42,8 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
   }
 
   const testClock = await stripe.testHelpers.testClocks.create({
-    frozen_time: 1666084914,
-    name: 'Annual renewal',
+    frozen_time: Math.floor(Date.now() / 1000),
+    name: 'Test',
   })
 
   try {
