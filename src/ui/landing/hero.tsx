@@ -18,6 +18,7 @@ export const HeroSection: React.FC = (): React.ReactElement => {
         muted
         loop
         playsInline
+        poster="/assets/videos/poster.jpg"
         autoPlay
         className="absolute left-0 top-0 -z-10 w-full h-screen sm:h-[871px] object-cover"
         src={getUrl()}
