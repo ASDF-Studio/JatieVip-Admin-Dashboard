@@ -6,7 +6,7 @@ export const sessionOptions: IronSessionOptions = {
   cookieName: 'move-cookie',
   ttl: 24 * 3600,
   cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: false,
     maxAge: 24 * 3600,
   },
 }
