@@ -3,9 +3,7 @@ import React, { Dispatch, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps, SignUpSteps } from 'types'
 import { useAuth } from 'Contexts/Auth'
-import { setToken } from 'services/api'
 import { useNavigate } from 'hooks/UseRouter'
-import { AuthService } from 'services'
 import Link from 'next/link'
 
 type Props = {

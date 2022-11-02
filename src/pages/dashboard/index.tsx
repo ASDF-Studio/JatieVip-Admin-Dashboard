@@ -66,41 +66,6 @@ const Home: NextPage = ({ user }: Props) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
-  const { token, destroy, user } = req.session
-
-  if (!token || !user) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/login',
-        permanent: true,
-      },
-    }
-  }
-
-  try {
-    if (!user?.first_name || !user?.last_name || !user?.username) {
-      return {
-        redirect: {
-          destination: '/signup',
-          permanent: true,
-        },
-      }
-    }
-
-    return {
-      props: {
-        user,
-      },
-    }
-  } catch (e) {
-    destroy()
-  }
-
-  return {
-    props: {},
-  }
-}, sessionOptions)
+export { default as getServerSideProps } from 'lib/ssr'
 
 export default Home

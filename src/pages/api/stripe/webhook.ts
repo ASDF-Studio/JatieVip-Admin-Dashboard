@@ -2,7 +2,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 import { buffer } from 'micro'
-import axios from 'axios'
+import { SubsService } from 'services'
+import dayjs from 'dayjs'
 
 export const config = { api: { bodyParser: false } }
 
@@ -27,12 +28,27 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       const stripeCustomer = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
-      // await axios.post('https://09d2-3-144-33-1.ngrok.io/api/', {
-      //   user_id: stripeCustomer?.metadata?.moveUserId,
-      //   valid_from: '2022-09-26 10:00:00',
-      //   valid_to: '2022-10-26 10:00:00',
+      const { metadata } = stripeCustomer
+      const { moveUserId } = metadata || {}
+
+      if (!moveUserId) {
+        res.send({ received: true })
+
+        return
+      }
+
+      const stripeSubs = await stripe.subscriptions.retrieve(invoicePaid.subscription as string)
+
+      console.log(stripeSubs.status)
+      
+      console.log(dayjs.unix(invoicePaid.period_start).format('YYYY-MM-DD HH:MM:SS'))
+
+      // await SubsService.createSubs({
+      //   user_id: Number(metadata.moveUserId),
+      //   valid_from: '',
+      //   valid_to: '',
       //   type: 'month',
-      //   secret_key: process.env.BACK_END_SECRET_KEY,
+      //   secret_key: process.env.BACK_END_SECRET_KEY || '',
       // })
     } catch (e) {
       console.log(e)

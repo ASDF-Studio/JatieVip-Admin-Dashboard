@@ -1,8 +1,6 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import { MainLayout } from 'components'
 import { ManageSub } from 'ui/dashboard/'
-import { sessionOptions } from 'lib/session'
-import { withIronSessionSsr } from 'iron-session/next'
 import { AuthProvider } from 'Contexts/Auth'
 import { IUser } from 'services/types'
 import { useCallback, useEffect, useState } from 'react'
@@ -67,41 +65,6 @@ const Home: NextPage<Props> = ({ user }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
-  const { token, destroy, user } = req.session
-
-  if (!token || !user) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/login',
-        permanent: true,
-      },
-    }
-  }
-
-  try {
-    if (!user?.first_name || !user?.last_name || !user?.username) {
-      return {
-        redirect: {
-          destination: '/signup',
-          permanent: true,
-        },
-      }
-    }
-
-    return {
-      props: {
-        user,
-      },
-    }
-  } catch (e) {
-    destroy()
-  }
-
-  return {
-    props: {},
-  }
-}, sessionOptions)
+export { default as getServerSideProps } from 'lib/ssr'
 
 export default Home
