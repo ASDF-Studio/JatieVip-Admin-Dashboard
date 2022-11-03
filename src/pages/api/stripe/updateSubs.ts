@@ -1,7 +1,7 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs, ReleaseSchedule, updateStripeSub } from 'lib/stripe'
+import { getStripeUserSubs, ReleaseSchedule, updateStripeSub, UserSubsType } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import Stripe from 'stripe'
@@ -63,9 +63,10 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   let stripeSub: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
 
   try {
-    stripeSub = (await getStripeUserSubs({
+    const subscription = (await getStripeUserSubs({
       stripeCustomerId: req.session.user.stripe_customer_id,
-    })) as Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
+    })) as UserSubsType
+    stripeSub = subscription.subs
   } catch (e) {
     res.status(400).json({
       message: e.message,

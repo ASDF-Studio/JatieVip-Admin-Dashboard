@@ -1,7 +1,7 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { getStripeUserSubs } from 'lib/stripe'
+import { getStripeUserSubs, UserSubsType } from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { StripeError } from 'lib/error'
@@ -50,9 +50,10 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const stripeSub = await getStripeUserSubs({
-      stripeCustomerId: req.session.user.stripe_customer_id,
-    })
+    const { subs: stripeSub } =
+      ((await getStripeUserSubs({
+        stripeCustomerId: req.session.user.stripe_customer_id,
+      })) as UserSubsType) || {}
 
     res.status(200).json({
       data: stripeSub,

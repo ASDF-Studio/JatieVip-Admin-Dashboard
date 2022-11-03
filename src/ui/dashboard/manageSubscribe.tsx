@@ -65,7 +65,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
           isUpgrade,
           isTrialing: currentSubs.status === 'trialing',
           from: currentPlan().title,
-          to: '',
+          to: selected.title,
         })
 
         setSuccessModal(true)
@@ -266,7 +266,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       />
       <ErrorModal onAccept={retryFunRef.current} open={showError} setOpen={setShowError} error={error} />
       <SuccessModal
-        to={currentPlan()?.title}
+        to={successInfo?.to}
         isTrialing={successInfo?.isTrialing}
         isUpgrade={successInfo?.isUpgrade}
         open={succesModal}

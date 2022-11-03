@@ -1,11 +1,17 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { createSubSchedules, getStripeUserSubs, ReleaseSchedule, subscriptionPlans, updateTrialSubs } from 'lib/stripe'
+import {
+  createSubSchedules,
+  getStripeUserSubs,
+  ReleaseSchedule,
+  subscriptionPlans,
+  updateTrialSubs,
+  UserSubsType,
+} from 'lib/stripe'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { StripeError } from 'lib/error'
-import Stripe from 'stripe'
 import { isEmpty } from 'lodash'
 
 const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -71,9 +77,10 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  const stripeSub = (await getStripeUserSubs({
-    stripeCustomerId: req.session.user.stripe_customer_id,
-  })) as Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
+  const { subs: stripeSub } =
+    ((await getStripeUserSubs({
+      stripeCustomerId: req.session.user.stripe_customer_id,
+    })) as UserSubsType) || {}
 
   if (!stripeSub) {
     res.status(400).json({
@@ -82,7 +89,7 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return
   }
-
+  
   if (stripeSub.cancel_at) {
     res.status(400).json({
       message: 'please reactive subs first',

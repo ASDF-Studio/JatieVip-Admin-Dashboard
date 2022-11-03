@@ -1,7 +1,7 @@
 import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
-import { createStripeSession, createStripeUser, getStripeUserSubs, subscriptionPlans } from 'lib/stripe'
+import { createStripeSession, createStripeUser, getStripeUserSubs, subscriptionPlans, UserSubsType } from 'lib/stripe'
 import { AccountService, AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 
@@ -89,13 +89,14 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
 
   const stripeCustomerId = req.session.user.stripe_customer_id
 
-  const stripeSub = await getStripeUserSubs({
-    stripeCustomerId,
-  })
+  const { subs: stripeSub, isTrialUsed } =
+    ((await getStripeUserSubs({
+      stripeCustomerId,
+    })) as UserSubsType) || {}
 
   if (stripeSub) {
     res.status(400).json({
-      message: 'user already has subs',
+      message: 'user already has active subs',
     })
 
     return
@@ -105,6 +106,7 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     const session = await createStripeSession({
       stripeUserId: stripeCustomerId,
       productName: subscriptionPlans[plan].stripePriceId,
+      withTrial: !isTrialUsed,
     })
 
     res.status(200).json({

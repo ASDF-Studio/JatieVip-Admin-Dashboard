@@ -36,9 +36,9 @@ const GetPhone = () => {
 
   return (
     <img
-      src={`${!isTablet ? '/assets/landing/hero-4-mobile.png' : '/assets/landing/hero-4-720.webp'}`}
+      src={`${!isTablet ? '/assets/landing/hero-4/main-phone.webp' : '/assets/landing/hero-4/main.webp'}`}
       alt=""
-      className="max-w-full relative mt-[30px] sm:mt-0 x:mt-[14px] x:bottom-0 sm:bottom-2.5"
+      className="max-w-full w-full relative mt-[30px] sm:mt-0 x:mt-[14px] x:bottom-0 sm:bottom-2.5"
     />
   )
 }
@@ -91,9 +91,9 @@ export const ForthHero: React.FC = (): React.ReactElement => {
           />
         </div>
         <img
-          src="/assets/landing/group-9@3x.png"
+          src="/assets/landing/hero-3/side.webp"
           alt=""
-          className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[375px]"
+          className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[390px]"
         />
         {GetPhone()}
       </div>

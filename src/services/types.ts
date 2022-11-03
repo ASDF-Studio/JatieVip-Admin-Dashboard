@@ -25,6 +25,7 @@ export type IPlan = {
   interval: 'year' | 'month'
   amount: number
   nickName: string
+  planName: string
 }
 
 export type ISub = {

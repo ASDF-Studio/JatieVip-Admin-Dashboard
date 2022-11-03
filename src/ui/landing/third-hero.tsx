@@ -9,13 +9,13 @@ const GetPhone = () => {
 
   const getUrl = () => {
     if (isBigTablet) {
-      return '/assets/landing/mobile@3x.webp'
+      return '/assets/landing/hero-3/main.webp'
     }
     if (isTablet) {
-      return '/assets/landing/mobile@3x.webp'
+      return '/assets/landing/hero-3/main.webp'
     }
 
-    return '/assets/landing/hero-3-mobile.webp'
+    return '/assets/landing/hero-3/main-phone.webp'
   }
 
   return (

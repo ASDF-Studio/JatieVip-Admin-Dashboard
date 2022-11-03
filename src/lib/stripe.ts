@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { isEmpty } from 'lodash'
+import { isEmpty, xor } from 'lodash'
 
 import { IProductNames, IUser } from 'services/types'
 import Stripe from 'stripe'
@@ -73,11 +73,13 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
 type CreateSessionType = {
   stripeUserId: string
   productName: string
+  withTrial: boolean
 }
 
 export const createStripeSession = async ({
   stripeUserId,
   productName,
+  withTrial,
 }: CreateSessionType): Promise<Stripe.Checkout.Session> => {
   if (!stripeUserId || !productName) {
     throw new StripeError('please fill required values', {
@@ -98,9 +100,11 @@ export const createStripeSession = async ({
           quantity: 1,
         },
       ],
-      subscription_data: {
-        trial_period_days: 7,
-      },
+      ...(withTrial && {
+        subscription_data: {
+          trial_period_days: 7,
+        },
+      }),
     })
 
     return stripeSession
@@ -121,9 +125,14 @@ type GetSubsParams = {
   stripeCustomerId: string
 }
 
+export type UserSubsType = {
+  subs: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
+  isTrialUsed: boolean
+}
+
 export const getStripeUserSubs = async ({
   stripeCustomerId,
-}: GetSubsParams): Promise<Stripe.Subscription | null | StripeError> => {
+}: GetSubsParams): Promise<UserSubsType | null | StripeError> => {
   try {
     const stripeSub = await stripe.subscriptions.list({
       customer: stripeCustomerId,
@@ -139,11 +148,12 @@ export const getStripeUserSubs = async ({
         x.status !== 'incomplete',
     )
 
-    if (subscription.length === 1) {
-      return subscription[0]
-    }
+    const isTrialUsed = stripeSub.data.filter((x) => x.status === 'canceled').length > 0
 
-    return null
+    return {
+      subs: subscription[0] as Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule },
+      isTrialUsed,
+    }
   } catch (e) {
     console.log(e)
     if (e instanceof Stripe.errors.StripeError) {

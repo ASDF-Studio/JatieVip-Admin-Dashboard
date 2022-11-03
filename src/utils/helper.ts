@@ -15,6 +15,7 @@ type ReturnSubsName = {
   title: string
   weight: number
   nickName: string
+  planName?: string
 }
 
 export const getSubsName = (plan: IPlan): ReturnSubsName => {
@@ -24,6 +25,7 @@ export const getSubsName = (plan: IPlan): ReturnSubsName => {
         title: '1 Year',
         weight: 12,
         nickName: '1 Year',
+        planName: 'year',
       }
     }
 
@@ -39,6 +41,7 @@ export const getSubsName = (plan: IPlan): ReturnSubsName => {
       title: 'Monthly',
       weight: 1,
       nickName: 'month',
+      planName: 'month',
     }
   }
 
@@ -46,5 +49,6 @@ export const getSubsName = (plan: IPlan): ReturnSubsName => {
     title: `${plan?.interval_count}-Months`,
     weight: plan?.interval_count,
     nickName: `${plan?.interval_count}-months`,
+    planName: `${plan?.interval_count}months`,
   }
 }
