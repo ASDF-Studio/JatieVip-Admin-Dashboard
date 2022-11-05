@@ -45,9 +45,13 @@ export const LandingHeader = ({ inView, dark }) => {
       </Link>
 
       <div className="flex gap-5">
-        <Button variant="fill" textClassName="text-white" className="px-[30px]">
-          Get Started
-        </Button>
+        <Link href="/login">
+          <a>
+            <Button variant="fill" textClassName="text-white" className="px-[30px]">
+              Get Started
+            </Button>
+          </a>
+        </Link>
 
         <IconButton onClick={() => setShowMenu(!showMenu)} disableRipple className="p-0">
           {showMenu ? (

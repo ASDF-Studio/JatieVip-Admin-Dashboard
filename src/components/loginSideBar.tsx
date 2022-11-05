@@ -32,7 +32,7 @@ export const LoginSideBar = ({ className }: Props) => {
           </div>
           <div className="relative">
             <img
-              src="/assets/images/phone.webp"
+              src="/assets/landing/hero-2/main.webp"
               className="w40h100:max-w-[700px] w40h80:max-w-[600px] w40h70:max-w-[500px] w24h100:max-w-[700px] w24h80:max-w-[500px] w24h70:max-w-[350px] w1024h100:max-w-[450px] w1024h80:max-w-[450px] w1024h70:max-w-[400px] wmaxhmax:max-w-[800px]"
               alt="phone"
             />
