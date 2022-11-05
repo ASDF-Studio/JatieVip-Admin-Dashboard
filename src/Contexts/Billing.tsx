@@ -31,7 +31,7 @@ export const BillingProvider: FC<{ children: React.ReactNode }> = ({ children })
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
-          router.push('/')
+          router.push('/login')
         }
       }
     } finally {

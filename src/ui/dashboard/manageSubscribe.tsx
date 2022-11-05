@@ -72,7 +72,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
       } catch (e) {
         if (e instanceof StripeError) {
           if (e.statusCode === 401) {
-            router.push('/')
+            router.push('/login')
           } else {
             if (!retry) {
               retryFunRef.current = createScheduleSub
@@ -98,7 +98,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
-          router.push('/')
+          router.push('/login')
         } else {
           if (!retry) {
             retryFunRef.current = cancelAutoRenewal
@@ -127,7 +127,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
-          router.push('/')
+          router.push('/login')
         } else {
           if (!retry) {
             retryFunRef.current = reActiveSubs
@@ -146,7 +146,7 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
-          router.push('/')
+          router.push('/login')
         } else {
           setError(e.message)
           setShowError(true)

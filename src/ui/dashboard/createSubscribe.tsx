@@ -25,7 +25,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
-          router.push('/')
+          router.push('/login')
         }
       }
     }

@@ -52,6 +52,7 @@ const Step4: React.FC = (): React.ReactElement => {
       } catch (e) {
         if (e instanceof ApiErrorResponse) {
           if (e.statusCode === 401) {
+            router.push('/login')
             // navigateTo('/login')
           }
         }

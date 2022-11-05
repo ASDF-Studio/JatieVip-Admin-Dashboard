@@ -30,7 +30,7 @@ const Home: NextPage<Props> = ({ user }) => {
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
-          router.push('/')
+          router.push('/login')
         }
       }
     } finally {
