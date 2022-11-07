@@ -23,7 +23,7 @@ const UpdateSubsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     await req.session.save()
   } catch (e) {
     if (e instanceof ApiErrorResponse) {
-      if (e.statusText === 'Unauthorized') {
+      if (e.statusCode === 401) {
         req.session.destroy()
         res.status(401).json({
           message: 'unauthorized',

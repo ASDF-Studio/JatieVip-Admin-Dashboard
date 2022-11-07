@@ -12,7 +12,7 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return
   }
-
+  
   try {
     const user = await AuthService.getAccount({
       token: req.session.token,
@@ -22,7 +22,7 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     await req.session.save()
   } catch (e) {
     if (e instanceof ApiErrorResponse) {
-      if (e.statusText === 'Unauthorized') {
+      if (e.statusCode === 401) {
         req.session.destroy()
         res.status(401).json({
           message: 'unauthorized',
@@ -63,6 +63,8 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(e.statusCode).json({
         message: e.message,
       })
+      
+      return
     }
     res.status(500).send('')
   }

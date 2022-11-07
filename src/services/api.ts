@@ -36,16 +36,12 @@ const getAuth = (hasAuth = null) =>
 const genHeader = (hasAuth = null, headers = {}) => Object.assign(headers, getAuth(hasAuth))
 
 const handleError = (err: AxiosError<{ message: string }>, reject: any) => {
-  if (err.code === 'ECONNRESET') {
-    reject(new ApiErrorResponse(500, 'unknown', 'socket hang up'))
-  } else {
-    reject(
-      new ApiErrorResponse(
-        err.response.status,
-        err.response.data.message ? err.response.data.message : err.response.data,
-      ),
-    )
-  }
+  reject(
+    new ApiErrorResponse(
+      err.response.status,
+      err.response.statusText,
+    ),
+  )
 }
 
 export class ApiErrorResponse extends Error {
