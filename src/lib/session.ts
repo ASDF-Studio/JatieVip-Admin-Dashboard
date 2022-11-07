@@ -6,7 +6,7 @@ export const sessionOptions: IronSessionOptions = {
   cookieName: 'move-cookie',
   ttl: 24 * 3600,
   cookieOptions: {
-    secure: false,
+    secure: true,
     maxAge: 24 * 3600,
   },
 }
