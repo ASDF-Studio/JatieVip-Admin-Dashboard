@@ -58,7 +58,36 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       } catch (e) {
         console.log(e)
       }
-    }
+    } 
+    if (subscription.status === 'active') {
+      try {
+        const customerId = subscription.customer as string
+        const { current_period_end, current_period_start, plan } = subscription
+        const { metadata } = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
+
+        const moveUserId = Number(metadata?.moveUserId)
+
+        if (!moveUserId) {
+          console.log('user not found!', customerId)
+          res.send({ received: true })
+
+          return
+        }
+
+        const subs = getSubsName(plan)
+
+        await SubsService.createSubs({
+          user_id: moveUserId,
+          valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
+          valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+          type: subs.planName as CreateSubsTypes,
+          secret_key: process.env.BACK_END_SECRET_KEY || '',
+        })
+        console.log('succesfully created subscription for: ', customerId, ' ', metadata?.moveUserId)
+      } catch (e) {
+        console.log(e)
+      }
+    } 
   }
 
   if (event.type === 'customer.subscription.updated') {
