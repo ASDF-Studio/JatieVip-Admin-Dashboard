@@ -36,9 +36,9 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
       },
     }
   }
-
+  
   try {
-    if (!user?.first_name || !user?.last_name || !user?.username) {
+    if (!user?.first_name || !user?.last_name || !user?.username || !user.date_of_birth || !user.gender) {
       return {
         redirect: {
           destination: '/signup',

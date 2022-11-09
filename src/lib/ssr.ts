@@ -6,6 +6,8 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
   const { token, user } = req.session
 
   if (!token || !user) {
+    req.session.destroy()
+
     return {
       props: {},
       redirect: {
@@ -15,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
     }
   }
 
-  if (!user?.first_name || !user?.last_name || !user?.username) {
+  if (!user?.first_name || !user?.last_name || !user?.username || !user.date_of_birth || !user.gender) {
     return {
       redirect: {
         destination: '/signup',

@@ -14,7 +14,7 @@ export const subscriptionPlans: {
 }[] = [
   {
     name: 'Monthly',
-    stripePriceId: 'price_1Ls1HvK51b8tcFyywJCs5T4D',
+    stripePriceId: 'price_1M00tbK51b8tcFyyXS4GnT4F',
     weight: 1,
   },
   {
@@ -126,7 +126,7 @@ type GetSubsParams = {
 }
 
 export type UserSubsType = {
-  subs: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule }
+  subs: Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule; latest_invoice: Stripe.Invoice }
   isTrialUsed: boolean
 }
 
@@ -151,7 +151,10 @@ export const getStripeUserSubs = async ({
     const isTrialUsed = stripeSub.data.filter((x) => x.status === 'canceled').length > 0
 
     return {
-      subs: subscription[0] as Stripe.Subscription & { schedule: Stripe.SubscriptionSchedule },
+      subs: subscription[0] as Stripe.Subscription & {
+        schedule: Stripe.SubscriptionSchedule
+        latest_invoice: Stripe.Invoice
+      },
       isTrialUsed,
     }
   } catch (e) {

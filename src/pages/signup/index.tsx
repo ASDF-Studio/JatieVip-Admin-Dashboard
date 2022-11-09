@@ -1,3 +1,4 @@
+/* eslint-disable padding-line-between-statements */
 import type { GetServerSideProps, NextPage } from 'next'
 import { MainLayout } from 'components'
 import React, { useState } from 'react'
@@ -8,6 +9,8 @@ import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
 import { IUser } from 'services/types'
 import { AuthProvider } from 'Contexts/Auth'
+import { AuthService } from 'services'
+import { ApiErrorResponse } from 'services/api'
 
 const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
   const getStateDefault = (): SignUpSteps => {
@@ -50,9 +53,11 @@ const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
 }
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
-  const { token, destroy, user } = req.session
+  const { token, user } = req.session
 
   if (!token || !user) {
+    req.session.destroy()
+
     return {
       props: {},
       redirect: {
@@ -63,27 +68,52 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
   }
 
   try {
-    if (user?.username && user?.last_name && user?.first_name) {
+    const user = await AuthService.getAccount({ token })
+    req.session.user = user
+    await req.session.save()
+  } catch (e) {
+    if (e instanceof ApiErrorResponse) {
+      if (e.statusCode === 401) {
+        req.session.destroy()
+        return {
+          props: {},
+          redirect: {
+            destination: '/login',
+            permanent: true,
+          },
+        }
+      }
       return {
         props: {},
         redirect: {
-          destination: '/dashboard',
+          destination: '/500',
           permanent: true,
         },
       }
     }
-
     return {
-      props: {
-        user,
+      props: {},
+      redirect: {
+        destination: '/500',
+        permanent: true,
       },
     }
-  } catch (e) {
-    destroy()
+  }
+
+  if (user?.username && user?.last_name && user?.first_name && user?.date_of_birth && user?.gender) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/dashboard',
+        permanent: true,
+      },
+    }
   }
 
   return {
-    props: {},
+    props: {
+      user,
+    },
   }
 }, sessionOptions)
 

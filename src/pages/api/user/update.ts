@@ -5,6 +5,14 @@ import { AccountService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { IUser } from 'services/types'
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '5mb',
+    },
+  },
+}
+
 const userRoute = async (
   req: NextApiRequest,
   res: NextApiResponse<(Partial<IUser> & { isLoggedIn: boolean }) | { message: string }>,

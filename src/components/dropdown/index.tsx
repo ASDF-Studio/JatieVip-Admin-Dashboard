@@ -16,6 +16,7 @@ type Props = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   items: { value: string; label: string }[]
   name?: string
+  error?: boolean
 }
 
 const useStyles = makeStyles({
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
   },
 })
 
-export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name = null }) => {
+export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name = null, error = false }) => {
   const [state, setState] = React.useState<string>(value || '')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,12 +44,14 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
   }
 
   const classes = useStyles()
-  
+
   return (
     <Select
       name={name}
       IconComponent={sortIcon}
-      className={`w-full rounded-[22px] bg-border-grey  hover:cursor-pointer ${value !== '' && 'border-primary-brand'}`}
+      className={`w-full rounded-[22px] bg-border-grey  hover:cursor-pointer ${
+        error ? 'border-[#e92346]' : value && 'border-primary-brand'
+      }`}
       style={{
         fontSize: '14px',
         fontWeight: '500',

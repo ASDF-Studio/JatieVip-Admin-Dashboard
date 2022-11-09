@@ -55,6 +55,7 @@ const Step4: React.FC = (): React.ReactElement => {
             router.push('/login')
             // navigateTo('/login')
           }
+          console.log(e)
         }
       } finally {
         setLoading(false)
@@ -166,7 +167,16 @@ const Step4: React.FC = (): React.ReactElement => {
                     />
                   </div>
                   <div className="max-w-[48%] w-full">
-                    <BasicSelect value={gender} name="gender" items={items} onChange={(e) => handleInputChange(e)} />
+                    <BasicSelect
+                      error={touched.gender && errors.gender}
+                      value={gender}
+                      name="gender"
+                      items={items}
+                      onChange={(e) => {
+                        setFieldTouched('gender', true)
+                        handleInputChange(e)
+                      }}
+                    />
                   </div>
                 </div>
               </div>

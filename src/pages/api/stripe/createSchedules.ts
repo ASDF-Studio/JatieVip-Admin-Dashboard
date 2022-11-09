@@ -89,7 +89,7 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return
   }
-  
+
   if (stripeSub.cancel_at) {
     res.status(400).json({
       message: 'please reactive subs first',
@@ -144,6 +144,8 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const isDowngrade = subscriptionPlans[index].weight < subscriptionPlans[currentPlanIndex].weight
 
+  const isLatestInvoicePaid = stripeSub.latest_invoice.status === 'paid'
+
   if (isDowngrade) {
     try {
       const scheduleSub = await createSubSchedules({
@@ -165,6 +167,14 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(500).send('')
     }
   } else {
+    if (!isLatestInvoicePaid) {
+      res.status(400).json({
+        message: 'latest invoice is not paid',
+      })
+
+      return
+    }
+
     try {
       const stripeSubs = await updateTrialSubs({
         currentSubs: stripeSub,
