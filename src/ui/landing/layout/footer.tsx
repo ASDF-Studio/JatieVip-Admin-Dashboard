@@ -124,7 +124,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
               className="w-[31px] hover:opacity-80"
               fill="white"
               onClick={() => {
-                window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+                window.open('https://www.snapchat.com/add/themovefitapp', '_blank')
               }}
             />
           </IconButton>

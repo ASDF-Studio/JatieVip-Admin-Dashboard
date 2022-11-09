@@ -189,7 +189,7 @@ export const LandingHeader = ({ inView, dark }) => {
                 className="p-0"
                 disableRipple
                 onClick={() => {
-                  window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+                  window.open('https://www.snapchat.com/add/themovefitapp', '_blank')
                 }}
               >
                 <SnapChat className="w-[32px]" fill="black" />

@@ -39,7 +39,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           className="p-0"
           disableRipple
           onClick={() => {
-            window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+            window.open('https://www.snapchat.com/add/themovefitapp', '_blank')
           }}
         >
           <SnapChat className="w-[21px] hover:opacity-80" fill="black" />

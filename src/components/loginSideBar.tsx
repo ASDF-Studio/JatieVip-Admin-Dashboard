@@ -63,7 +63,7 @@ export const LoginSideBar = ({ className }: Props) => {
             className="p-0"
             disableRipple
             onClick={() => {
-              window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+              window.open('https://www.snapchat.com/add/themovefitapp', '_blank')
             }}
           >
             <SnapChat className="w-[21px] xl:w-[32px] hover:opacity-80" fill="white" />

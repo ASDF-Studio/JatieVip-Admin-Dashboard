@@ -134,7 +134,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
               className="p-0"
               disableRipple
               onClick={() => {
-                window.open('https://www.snapchat.com/add/movefitapp', '_blank')
+                window.open('https://www.snapchat.com/add/themovefitapp', '_blank')
               }}
             >
               <SnapChat className="w-[21px] hover:opacity-80" fill={`${inView ? 'black' : 'white'}`} />
