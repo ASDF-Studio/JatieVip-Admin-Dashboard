@@ -2,7 +2,7 @@ import { sessionOptions } from 'lib/session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { getStripeUserSubs, UserSubsType } from 'lib/stripe'
-import { AuthService } from 'services'
+import { AccountService, AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { StripeError } from 'lib/error'
 
@@ -12,7 +12,7 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return
   }
-  
+
   try {
     const user = await AuthService.getAccount({
       token: req.session.token,
@@ -60,10 +60,29 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     })
   } catch (e) {
     if (e instanceof StripeError) {
+      if (e.message.includes('No such customer:')) {
+        try {
+          const acc = await AccountService.updateAccount({
+            stripe_customer_id: null,
+            jwttoken: req.session.token,
+          })
+          req.session.user = acc
+          await req.session.save()
+
+          res.status(200).json({
+            data: null,
+          })
+
+          return
+        } catch (e) {
+          console.log(e)
+        }
+      }
+
       res.status(e.statusCode).json({
         message: e.message,
       })
-      
+
       return
     }
     res.status(500).send('')

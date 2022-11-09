@@ -158,8 +158,13 @@ export const getStripeUserSubs = async ({
       isTrialUsed,
     }
   } catch (e) {
-    console.log(e)
     if (e instanceof Stripe.errors.StripeError) {
+      if (e.message.includes('No such customer')) {
+        throw new StripeError(e.message, {
+          statusCode: e.statusCode,
+        })
+      }
+
       throw new StripeError(e.code, {
         statusCode: e.statusCode,
       })
