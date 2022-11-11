@@ -12,7 +12,9 @@ export const config = { api: { bodyParser: false } }
 
 const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
   const sig = req.headers['stripe-signature']
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {})
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2022-08-01',
+  })
   const reqBuffer = await buffer(req)
 
   let event: Stripe.Event
@@ -58,7 +60,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       } catch (e) {
         console.log(e)
       }
-    } 
+    }
     if (subscription.status === 'active') {
       try {
         const customerId = subscription.customer as string
@@ -87,7 +89,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       } catch (e) {
         console.log(e)
       }
-    } 
+    }
   }
 
   if (event.type === 'customer.subscription.updated') {
@@ -139,17 +141,6 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
         console.log('succesfully updated subscription for: ', customerId, ' ', metadata?.moveUserId)
       } catch (e) {
         console.log(e)
-      }
-    }
-    if (subscription.status === 'canceled') {
-      try {
-        await SubsService.deleteSubs({
-          userId: moveUserId,
-          secret_key: process.env.BACK_END_SECRET_KEY || '',
-        })
-        console.log('succesfully deleted subscription for: ', customerId, ' ', metadata?.moveUserId)
-      } catch (e) {
-        console.log('cannot delete -->', e)
       }
     }
   }

@@ -1,6 +1,6 @@
 import { Button, VerifyCodeInput } from 'components'
 import React, { Dispatch, useState } from 'react'
-import { Typography } from '@mui/material'
+import { CircularProgress, Typography } from '@mui/material'
 import { LoginSteps } from 'types'
 import { useAuth } from 'Contexts/Auth'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ type Props = {
   handleChangeForm: any
   sumbitForm: any
   error: boolean
-  setError: () => void
+  setError: (err: boolean) => void
 }
 
 const Step2: React.FC<Props> = ({
@@ -26,11 +26,13 @@ const Step2: React.FC<Props> = ({
 }): React.ReactElement => {
   const { sendCode } = useAuth()
   const [loading, setLoading] = useState(false)
+  const [resendLoading, setResendLoading] = useState(false)
 
   const handleSumbitForm = async () => {
     if (code.length !== 5) {
       return
     }
+    setError(false)
 
     try {
       setLoading(true)
@@ -44,10 +46,13 @@ const Step2: React.FC<Props> = ({
 
   const handleResendCode = async () => {
     try {
-      await sendCode(phoneNumber)
+      setResendLoading(true)
+      await sendCode(`+${phoneNumber}`)
       setError(false)
     } catch (e) {
       console.log(e)
+    } finally {
+      setResendLoading(false)
     }
   }
 
@@ -73,7 +78,7 @@ const Step2: React.FC<Props> = ({
                 </Typography>
                 <div className="flex">
                   <Typography className="text-[#86949f] font-semibold" variant="body2">
-                    that was sent to {`${phoneNumber}`}&nbsp;&nbsp;
+                    that was sent to {`+${phoneNumber}`}&nbsp;&nbsp;
                   </Typography>
                   <span onClick={() => onChangeStep('step1')} className="hover:cursor-pointer">
                     <Typography variant="body2" className=" text-primary-brand font-semibold">
@@ -86,12 +91,22 @@ const Step2: React.FC<Props> = ({
             <div className="flex flex-col gap-4">
               <VerifyCodeInput error={error} length={5} code={code} onChange={(cd) => handleChangeForm('code', cd)} />
               {error && (
-                <Typography className="text-text-error font-medium" variant="body2">
-                  Sorry, the code didn’t match.{` `}
-                  <span onClick={handleResendCode} className="underline hover:cursor-pointer">
-                    Resend
-                  </span>
-                </Typography>
+                <div className="flex items-center">
+                  <Typography className="text-text-error font-medium" variant="body2">
+                    Sorry, the code didn’t match.&nbsp;
+                  </Typography>
+                  {resendLoading ? (
+                    <CircularProgress size={15} color="error" />
+                  ) : (
+                    <Typography
+                      onClick={handleResendCode}
+                      className="text-text-error underline hover:cursor-pointer font-medium"
+                      variant="body2"
+                    >
+                      Resend
+                    </Typography>
+                  )}
+                </div>
               )}
             </div>
           </div>

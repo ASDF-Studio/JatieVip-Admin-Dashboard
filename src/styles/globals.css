@@ -200,3 +200,14 @@ input:-webkit-autofill:active {
   width: 0px;
   height: 0px;
 }
+
+.react-tel-input .selected-flag .arrow {
+  border-top-color: #19A3D1 !important;
+}
+.react-tel-input .selected-flag:focus .arrow {
+  border-top-color: #19A3D1 !important;
+}
+.react-tel-input .selected-flag .arrow.up {
+  border-bottom-color: #19A3D1 !important;
+  
+}

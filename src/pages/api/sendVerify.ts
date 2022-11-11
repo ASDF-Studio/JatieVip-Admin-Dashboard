@@ -3,25 +3,23 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
+import { isEmpty } from 'lodash'
 
-const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { phoneNumber, token } = req.body
+const verifyRoute = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { phoneNumber } = req.body
 
-  if (typeof phoneNumber !== 'string' || typeof token !== 'number') {
-    res.status(401).json({ message: 'validation error' })
+  if (typeof phoneNumber !== 'string' || isEmpty(phoneNumber)) {
+    res.status(400).json({ message: 'validation error' })
   }
-
+  
   try {
-    const data = await AuthService.verifyLogin({
+    await AuthService.login({
       phoneNumber,
-      token,
     })
-    const user = await AuthService.getAccount({ token: data.token })
-    req.session.token = data.token
-    req.session.user = user
-    await req.session.save()
+
     res.status(200).json({})
   } catch (error) {
+    
     if (error instanceof ApiErrorResponse) {
       if (error.statusCode === 401) {
         req.session.destroy()
@@ -39,4 +37,4 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default withIronSessionApiRoute(loginRoute, sessionOptions)
+export default withIronSessionApiRoute(verifyRoute, sessionOptions)

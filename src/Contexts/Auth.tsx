@@ -33,14 +33,13 @@ export const AuthProvider: FC<{ children: React.ReactNode; userContext?: IUser }
     setUser(arg)
   }
 
-  const sendCode = async (phoneNumber: string) =>
-    await AuthService.login({
+  const sendCode = async (phoneNumber: string) => {
+    await axios.post('/api/sendVerify', {
       phoneNumber,
     })
+  }
 
-  return (
-    <AuthContext.Provider value={{ sendCode, ready, user, updateUser }}>{children}</AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={{ sendCode, ready, user, updateUser }}>{children}</AuthContext.Provider>
 }
 
 export const useAuth: () => AuthState = () => useContext<AuthState>(AuthContext)

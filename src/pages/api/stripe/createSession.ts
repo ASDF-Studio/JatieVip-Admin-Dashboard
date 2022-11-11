@@ -102,6 +102,12 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     return
   }
 
+  if (req.session.user.subscribed) {
+    res.status(400).json({
+      message: 'user subscribed using mobile app',
+    })
+  }
+
   try {
     const session = await createStripeSession({
       stripeUserId: stripeCustomerId,

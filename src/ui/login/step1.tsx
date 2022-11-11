@@ -1,11 +1,15 @@
-import { Button, Input } from 'components'
+/* eslint-disable react/jsx-curly-brace-presence */
+import { Button } from 'components'
 import React, { Dispatch, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps } from 'types'
-import { useAuth } from 'Contexts/Auth'
-import { ApiErrorResponse } from 'services/api'
-import Link from 'next/link'
 import { isEmpty } from 'lodash'
+import { useAuth } from 'Contexts/Auth'
+import Link from 'next/link'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/material.css'
+import { AxiosError } from 'axios'
+
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
@@ -14,9 +18,9 @@ type Props = {
 }
 
 const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
-  const { sendCode } = useAuth()
   const [error, setError] = useState<string>(null)
   const [loading, setLoading] = useState<boolean>(false)
+  const { sendCode } = useAuth()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -29,13 +33,11 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
     try {
       setLoading(true)
-      await sendCode(phoneNumber)
+      await sendCode(`+${phoneNumber}`)
       onChangeStep('step2')
     } catch (err) {
-      if (err instanceof ApiErrorResponse) {
-        if (err.message.includes('is not a valid')) {
-          setError(err.message)
-        }
+      if (err instanceof AxiosError) {
+          setError(`The 'To' number ${phoneNumber} is not a valid phone number.`)
       }
     } finally {
       setLoading(false)
@@ -57,14 +59,32 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
         <div className="flex flex-col gap-4">
           <form onSubmit={(e) => handleLogin(e)}>
             <div className="flex flex-col gap-4">
-              <Input
-                focus
-                placeholder="Enter Phone Number"
+            <PhoneInput
+                country={'us'}
                 value={phoneNumber}
-                name="phoneNumber"
-                onChange={(e) => handleChangeForm(e)}
-                className="rounded-[22px] py-[2px] px-3 bg-border-grey"
+                specialLabel=""
+                placeholder='Enter Phone Number'
+                inputStyle={{
+                  fontFamily: "Avenir Next"
+                }}
+                dropdownStyle={{
+                  fontFamily: "Avenir Next"
+                }}
+                autoFormat={false}
+                onChange={(phone) => {
+                  setError(null)
+                  handleChangeForm({
+                    target: {
+                      name:"phoneNumber",
+                      value: phone
+                    }
+                  })
+                }}
+                searchClass="bg-black font-medium"
+                dropdownClass='text-[14px]'
+                inputClass="rounded-[22px] py-[9px]  bg-border-grey text-[14px] w-full font-medium hover:border-primary-transparent bg-border-grey focus:border-primary-transparent border-primary-transparent focus:shadow-none"
               />
+
               {error && (
                 <Typography className="text-text-error font-medium" variant="body2">
                   {error}
