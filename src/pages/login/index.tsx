@@ -33,7 +33,7 @@ const Home: NextPage = (): React.ReactElement => {
     onSubmit: async ({ phoneNumber, code }) => {
       setShowError(false)
       try {
-        await verifyCode(phoneNumber, Number(code))
+        await verifyCode(`+${phoneNumber}`, Number(code))
         router.replace('/dashboard')
       } catch (e) {
         if (e instanceof AxiosError) {
