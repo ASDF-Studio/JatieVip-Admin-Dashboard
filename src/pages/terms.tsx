@@ -1,10 +1,14 @@
 import { Typography } from '@mui/material'
 import { NextPage } from 'next'
+import Head from 'next/head'
 import { LandingLayout, LeftBar } from 'ui/landing'
 
 const Terms: NextPage = () => {
   return (
     <LandingLayout dark inView>
+      <Head>
+        <title>Terms of Service</title>
+      </Head>
       <LeftBar isBlue={false} inView />
       <div className="flex">
         <div className="xl:max-w-[302px]  w-full hidden xl:flex" />

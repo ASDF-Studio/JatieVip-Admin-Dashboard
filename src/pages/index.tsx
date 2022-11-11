@@ -1,6 +1,7 @@
 import { NextPage } from 'next'
 import { HeroSection, SecondHero, ThirdHero, ForthHero, Apple, LandingLayout, LeftBar } from 'ui/landing'
 import { useInView } from 'react-intersection-observer'
+import Head from 'next/head'
 
 const Landing: NextPage = () => {
   const { ref, inView } = useInView({
@@ -16,6 +17,9 @@ const Landing: NextPage = () => {
 
   return (
     <LandingLayout inView={inView || inViewFooter} ref={footerRef}>
+      <Head>
+        <title>Movefit</title>
+      </Head>
       <LeftBar isBlue={inViewSecondHero} inView={inView || inViewFooter} />
       <HeroSection />
       <SecondHero ref={heroRef} />

@@ -1,11 +1,10 @@
 import '../styles/globals.css'
-import type { AppContext, AppProps } from 'next/app'
+import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'theme'
 import NProgress from 'nprogress'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Router } from 'next/router'
-
-
+import TagManager from 'react-gtm-module'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -13,6 +12,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     Router.events.on('routeChangeStart', () => NProgress.start())
     Router.events.on('routeChangeComplete', () => NProgress.done())
     Router.events.on('routeChangeError', () => NProgress.done())
+  }, [])
+
+  useEffect(() => {
+    TagManager.initialize({ gtmId: 'GTM-XXXXXX' })
   }, [])
 
   return (
