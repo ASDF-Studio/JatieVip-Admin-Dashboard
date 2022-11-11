@@ -106,6 +106,8 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
     res.status(400).json({
       message: 'user subscribed using mobile app',
     })
+
+    return
   }
 
   try {

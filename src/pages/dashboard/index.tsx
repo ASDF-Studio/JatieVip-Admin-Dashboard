@@ -45,7 +45,7 @@ const Home: NextPage = ({ user }: Props) => {
       </Head>
       <MainLayout className="pt-[66px]">
         {loading ? (
-          <div className="px-5 min-h-[calc(100vh-160px)]">Loading</div>
+          <div className="max-w-screen-move-fit mx-auto px-5 min-h-[calc(100vh-160px)]">Loading</div>
         ) : (
           <div>
             {userSubs?.status === 'past_due' && <Warning paymentUrl={userSubs?.latest_invoice.hosted_invoice_url} />}

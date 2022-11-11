@@ -135,6 +135,8 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
         return
       }
       res.status(500).send('')
+
+      return
     }
   }
 
@@ -165,6 +167,7 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
         return
       }
       res.status(500).send('')
+
     }
   } else {
     if (!isLatestInvoicePaid) {

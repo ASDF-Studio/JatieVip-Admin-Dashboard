@@ -2,11 +2,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 import { buffer } from 'micro'
-import { SubsService } from 'services'
 import dayjs from 'dayjs'
 import { getSubsName } from 'utils/helper'
 import { CreateSubsTypes } from 'services/subs'
 import { IPlan } from 'services/types'
+import { isEmpty, isNaN } from 'lodash'
+import { createUserSubOnApp, deleteUserSubsOnApp } from 'lib/app'
 
 export const config = { api: { bodyParser: false } }
 
@@ -32,73 +33,53 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       plan: IPlan
     }
 
+    const customerId = subscription.customer as string
+    const { trial_end, trial_start, plan, current_period_end, current_period_start } = subscription
+    const { metadata } = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
+    const moveUserId = Number(metadata?.moveUserId)
+    const subs = getSubsName(plan)
+
+    if (!moveUserId || isNaN(moveUserId)) {
+      console.log('user not found!', customerId)
+      res.send({ received: true })
+
+      return
+    }
+
     if (subscription.status === 'trialing') {
-      try {
-        const customerId = subscription.customer as string
-        const { trial_end, trial_start, plan } = subscription
-        const { metadata } = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
-
-        const moveUserId = Number(metadata?.moveUserId)
-
-        if (!moveUserId) {
-          console.log('user not found!', customerId)
-          res.send({ received: true })
-
-          return
-        }
-
-        const subs = getSubsName(plan)
-
-        await SubsService.createSubs({
-          user_id: moveUserId,
-          valid_from: dayjs.unix(trial_start).format('YYYY-MM-DD hh:mm:ss'),
-          valid_to: dayjs.unix(trial_end).format('YYYY-MM-DD hh:mm:ss'),
-          type: subs.planName as CreateSubsTypes,
-          secret_key: process.env.BACK_END_SECRET_KEY || '',
-        })
-        console.log('succesfully created subscription for: ', customerId, ' ', metadata?.moveUserId)
-      } catch (e) {
-        console.log(e)
-      }
+      await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(trial_start).format('YYYY-MM-DD hh:mm:ss'),
+        valid_to: dayjs.unix(trial_end).format('YYYY-MM-DD hh:mm:ss'),
+        type: subs.planName as CreateSubsTypes,
+      })
     }
     if (subscription.status === 'active') {
-      try {
-        const customerId = subscription.customer as string
-        const { current_period_end, current_period_start, plan } = subscription
-        const { metadata } = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
-
-        const moveUserId = Number(metadata?.moveUserId)
-
-        if (!moveUserId) {
-          console.log('user not found!', customerId)
-          res.send({ received: true })
-
-          return
-        }
-
-        const subs = getSubsName(plan)
-
-        await SubsService.createSubs({
-          user_id: moveUserId,
-          valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
-          valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
-          type: subs.planName as CreateSubsTypes,
-          secret_key: process.env.BACK_END_SECRET_KEY || '',
-        })
-        console.log('succesfully created subscription for: ', customerId, ' ', metadata?.moveUserId)
-      } catch (e) {
-        console.log(e)
-      }
+      await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
+        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+        type: subs.planName as CreateSubsTypes,
+      })
     }
+
+    res.send({ received: true })
+
+    return
   }
 
   if (event.type === 'customer.subscription.updated') {
     const subscription = event.data.object as Stripe.Subscription & {
       plan: IPlan
     }
+
     const previousvalues = event.data.previous_attributes as {
       cancel_at: null | number
       schedule: null | string
+      plan?: null | Stripe.Plan
+      status?: Stripe.Subscription.Status
+      current_period_end?: number
+      current_period_start?: number
     }
 
     const customerId = subscription.customer as string
@@ -108,7 +89,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     const subs = getSubsName(plan)
     const moveUserId = Number(metadata?.moveUserId)
 
-    if (!moveUserId) {
+    if (!moveUserId || isNaN(moveUserId)) {
       console.log('user not found!', customerId)
       res.send({ received: true })
 
@@ -116,7 +97,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'active' && previousvalues?.cancel_at !== undefined) {
-      console.log('subscription canceled at end of the current period')
+      console.log('subscription canceled or reactivated at end of the current period')
       res.send({ received: true })
 
       return
@@ -129,21 +110,56 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
-    if (subscription.status === 'active') {
-      try {
-        await SubsService.createSubs({
-          user_id: moveUserId,
-          valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
-          valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
-          type: subs.planName as CreateSubsTypes,
-          secret_key: process.env.BACK_END_SECRET_KEY || '',
-        })
-        console.log('succesfully updated subscription for: ', customerId, ' ', metadata?.moveUserId)
-      } catch (e) {
-        console.log(e)
-      }
+    if (subscription.status === 'active' && !isEmpty(previousvalues.plan)) {
+      await deleteUserSubsOnApp({
+        moveUserId,
+      })
+
+      await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
+        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+        type: subs.planName as CreateSubsTypes,
+      })
+
+      res.send({ received: true })
+
+      return
+    }
+
+    if (subscription.status === 'active' && previousvalues?.status) {
+      await deleteUserSubsOnApp({
+        moveUserId,
+      })
+
+      await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
+        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+        type: subs.planName as CreateSubsTypes,
+      })
+      res.send({ received: true })
+
+      return
+    }
+
+    if (subscription.status === 'active' && previousvalues?.current_period_end && previousvalues.current_period_start) {
+      await deleteUserSubsOnApp({
+        moveUserId,
+      })
+
+      await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
+        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+        type: subs.planName as CreateSubsTypes,
+      })
+      res.send({ received: true })
+
+      return
     }
   }
+
   if (event.type === 'customer.subscription.deleted') {
     const subscription = event.data.object as Stripe.Subscription & {
       plan: IPlan
@@ -152,7 +168,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     const { metadata } = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
     const moveUserId = Number(metadata?.moveUserId)
 
-    if (!moveUserId) {
+    if (!moveUserId || isNaN(moveUserId)) {
       console.log('user not found!', customerId)
       res.send({ received: true })
 
@@ -160,15 +176,12 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'canceled') {
-      try {
-        await SubsService.deleteSubs({
-          userId: moveUserId,
-          secret_key: process.env.BACK_END_SECRET_KEY || '',
-        })
-        console.log('succesfully deleted subscription for: ', customerId, ' ', metadata?.moveUserId)
-      } catch (e) {
-        console.log('cannot delete -->', e)
-      }
+      await deleteUserSubsOnApp({
+        moveUserId,
+      })
+      res.send({ received: true })
+
+      return
     }
   } else {
     console.log(`unhandled event ${event.type}`)
