@@ -4,7 +4,6 @@ import { Step1, Step2 } from 'ui/login'
 import { LoginSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
-
 import { useFormik } from 'formik'
 import { AuthProvider } from 'Contexts/Auth'
 import { useRouter } from 'next/router'
@@ -12,8 +11,6 @@ import axios, { AxiosError } from 'axios'
 import { loginSchema } from 'utils/schema'
 import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 const Home: NextPage = (): React.ReactElement => {
   const router = useRouter()
