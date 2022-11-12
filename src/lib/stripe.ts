@@ -42,7 +42,7 @@ export const createStripeUser = async (user: IUser): Promise<Stripe.Customer> =>
   }
   let testClock = null
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env?.STATUS === 'development') {
     testClock = await stripe.testHelpers.testClocks.create({
       frozen_time: Math.floor(Date.now() / 1000),
       name: 'Test',
