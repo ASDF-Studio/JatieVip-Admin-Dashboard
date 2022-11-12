@@ -96,7 +96,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
-    if (subscription.status === 'active' && previousvalues?.cancel_at !== undefined) {
+    if (previousvalues?.cancel_at !== undefined) {
       console.log('subscription canceled or reactivated at end of the current period')
       res.send({ received: true })
 
@@ -111,6 +111,23 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'active' && !isEmpty(previousvalues.plan)) {
+      await deleteUserSubsOnApp({
+        moveUserId,
+      })
+
+      await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
+        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+        type: subs.planName as CreateSubsTypes,
+      })
+
+      res.send({ received: true })
+
+      return
+    }
+
+    if (subscription.status === 'trialing' && !isEmpty(previousvalues.plan)) {
       await deleteUserSubsOnApp({
         moveUserId,
       })

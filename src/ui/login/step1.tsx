@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/jsx-curly-brace-presence */
 import { Button } from 'components'
 import React, { Dispatch, useState } from 'react'
@@ -9,7 +10,6 @@ import Link from 'next/link'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/material.css'
 import { AxiosError } from 'axios'
-
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
@@ -37,7 +37,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
       onChangeStep('step2')
     } catch (err) {
       if (err instanceof AxiosError) {
-          setError(`The 'To' number ${phoneNumber} is not a valid phone number.`)
+        setError(`The 'To' number ${phoneNumber} is not a valid phone number.`)
       }
     } finally {
       setLoading(false)
@@ -47,7 +47,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
   return (
     <div className="flex max-w-[520px] mx-auto px-[26px] h-[calc(100vh-67px)] x:h-screen overflow-y-auto x:gap-[100px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
       <div />
-      <div className="w-full x:w-[447px] mx-auto flex-col">
+      <div className="w-full x:max-w-[447px]  mx-auto flex-col">
         <div className="flex mt-[28px] x:mt-0 flex-col gap-[12px] mb-[28px] x:mb-[51px]">
           <Typography className="text-primary-brand tracking-[1.5px] leading-normal text-[18px] font-medium uppercase hidden x:block">
             Move Your Way
@@ -59,29 +59,30 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
         <div className="flex flex-col gap-4">
           <form onSubmit={(e) => handleLogin(e)}>
             <div className="flex flex-col gap-4">
-            <PhoneInput
+              <PhoneInput
                 country={'us'}
                 value={phoneNumber}
                 specialLabel=""
-                placeholder='Enter Phone Number'
+                onEnterKeyPress={(e) => handleLogin(e)}
+                placeholder="Enter Phone Number"
                 inputStyle={{
-                  fontFamily: "Avenir Next"
+                  fontFamily: 'Avenir Next',
                 }}
                 dropdownStyle={{
-                  fontFamily: "Avenir Next"
+                  fontFamily: 'Avenir Next',
                 }}
                 autoFormat={false}
                 onChange={(phone) => {
                   setError(null)
                   handleChangeForm({
                     target: {
-                      name:"phoneNumber",
-                      value: phone
-                    }
+                      name: 'phoneNumber',
+                      value: phone,
+                    },
                   })
                 }}
                 searchClass="bg-black font-medium"
-                dropdownClass='text-[14px]'
+                dropdownClass="text-[14px]"
                 inputClass="rounded-[22px] py-[9px]  bg-border-grey text-[14px] w-full font-medium hover:border-primary-transparent bg-border-grey focus:border-primary-transparent border-primary-transparent focus:shadow-none"
               />
 
@@ -93,6 +94,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
               <Button
                 color="success"
+                type="submit"
                 className="bg-secondary-light-blue shadow-buttonShadow3"
                 textClassName="text-white"
                 variant="fill"

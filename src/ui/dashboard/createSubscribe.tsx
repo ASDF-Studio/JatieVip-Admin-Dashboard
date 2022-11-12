@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import { BoxSelect, Button, Hello } from 'components'
+import { ErrorModal } from 'components/modals/error-modal'
 import { StripeError } from 'lib/error'
 import { useRouter } from 'next/router'
 import { FC, ReactElement, useState } from 'react'
@@ -14,10 +15,13 @@ type Props = {
 const CreateSubs: FC<Props> = ({ className }): ReactElement => {
   const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState<ISelectedProduct>(SubsPLans[1] as ISelectedProduct)
+  const [error, setError] = useState<string>(null)
+  const [showError, setShowError] = useState<boolean>(false)
   const router = useRouter()
 
   const handleSubscribe = async () => {
     setLoading(true)
+    setShowError(false)
     try {
       const stripeSesion = await StripeService.createSession({ selectedProduct: selected.title })
 
@@ -26,6 +30,9 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
           router.push('/login')
+        } else {
+          setError(e.message)
+          setShowError(true)
         }
       }
     }
@@ -83,6 +90,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
           </div>
         </div>
       </div>
+      <ErrorModal onAccept={handleSubscribe} open={showError} setOpen={setShowError} error={error} />
     </div>
   )
 }

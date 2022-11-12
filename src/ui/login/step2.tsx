@@ -60,7 +60,7 @@ const Step2: React.FC<Props> = ({
     <div className="flex max-w-[520px] mx-auto px-[26px] x:h-screen overflow-y-auto x:gap-[100px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
       <div />
       <form onKeyUp={(e) => e.code === 'Enter' && handleSumbitForm()}>
-        <div className="w-full x:w-[447px] mx-auto flex-col mt-[36px] x:mt-0">
+        <div className="w-full x:max-w-[447px] mx-auto flex-col mt-[36px] x:mt-0">
           <div className="flex justify-center x:justify-start">
             <Typography variant="heading7" className="text-center x:text-left">
               Verify Login

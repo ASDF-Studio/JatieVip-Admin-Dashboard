@@ -17,6 +17,7 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
       token,
     })
     const user = await AuthService.getAccount({ token: data.token })
+
     req.session.token = data.token
     req.session.user = user
     await req.session.save()
