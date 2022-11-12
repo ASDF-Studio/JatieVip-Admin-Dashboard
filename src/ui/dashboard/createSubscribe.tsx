@@ -90,7 +90,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
           </div>
         </div>
       </div>
-      <ErrorModal onAccept={handleSubscribe} open={showError} setOpen={setShowError} error={error} />
+      <ErrorModal isCreate onAccept={handleSubscribe} open={showError} setOpen={setShowError} error={error} />
     </div>
   )
 }

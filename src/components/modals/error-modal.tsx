@@ -63,6 +63,7 @@ type Props = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   cancelText?: string
   error?: string
+  isCreate?: boolean
 }
 
 export const ErrorModal: React.FC<Props> = ({
@@ -71,6 +72,7 @@ export const ErrorModal: React.FC<Props> = ({
   setOpen,
   cancelText = 'Cancel',
   error,
+  isCreate = false,
 }): React.ReactElement => {
   const [loading, setLoading] = React.useState(false)
   const handleClose = () => {
@@ -86,7 +88,9 @@ export const ErrorModal: React.FC<Props> = ({
         <div className="absolute bg-[#f5f7f9] h-[1px] w-full left-0 top-[74px]" />
         <DialogContent className="flex items-start gap-[21px]">
           <ExclamationIcon fill="#e92346" className=" w-[50px] pt-2" />
-          <Typography className="text-[18px] leading-normal">{`We couldn’t complete the upgrading process due to an error ${error}. Please retry.`}</Typography>
+          <Typography className="text-[18px] leading-normal">{`We couldn’t complete the ${
+            isCreate ? 'creating' : 'upgrading'
+          } process due to an error ${error}. Please retry.`}</Typography>
         </DialogContent>
         <DialogActions className="gap-[9px]">
           <Button
