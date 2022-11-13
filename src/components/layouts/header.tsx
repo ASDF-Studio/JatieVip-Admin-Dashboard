@@ -6,7 +6,7 @@ import { useAuth } from 'Contexts/Auth'
 import { useBreakPoint } from 'hooks'
 import { useNavigate } from 'hooks/UseRouter'
 import { useRouter } from 'next/router'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useState } from 'react'
 
 type Props = {
@@ -34,6 +34,21 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
     }
   }
 
+  const listenClickEvent = (e) => {
+    if (showProfileMenu) {
+      const el = document.getElementById('user-menu')
+      if (!el.contains(e.target)) {
+        setShowProfileMenu(false)
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', listenClickEvent)
+
+    return () => document.removeEventListener('click', listenClickEvent)
+  }, [showProfileMenu])
+
   return (
     <div
       className={`h-[66px] flex z-10 fixed w-full bg-white ${
@@ -45,7 +60,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
       </div>
 
       {withNavBar && (
-        <div className="flex gap-[23px] sm:gap-[50px] items-center h-full hover:cursor-pointer">
+        <div className="flex gap-[23px] sm:gap-[50px] items-center h-full">
           <div
             className={`${
               isDashBoard ? 'border-primary-brand' : 'border-transparent'
@@ -68,7 +83,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
             )}
           </div>
 
-          <div className="flex gap-[23px] sm:gap-[37px] h-full items-center hover:cursor-pointer">
+          <div className="flex gap-[23px] sm:gap-[37px] h-full items-center">
             <div
               className={`${
                 isAccount ? 'border-primary-brand' : 'border-transparent'
@@ -90,7 +105,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
                 </Button>
               )}
             </div>
-            <div className="relative">
+            <div id="user-menu" className="relative">
               <IconButton className="p-0" disableRipple onClick={() => setShowProfileMenu(!showProfileMenu)}>
                 <Avatar
                   src={user?.photo}
