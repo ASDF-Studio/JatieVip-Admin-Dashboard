@@ -19,6 +19,8 @@ const userRoute = async (
 ) => {
   if (req.session.token) {
     try {
+      delete req.body?.stripe_customer_id
+
       const acc = await AccountService.updateAccount({
         ...req.body,
         jwttoken: req.session.token,
