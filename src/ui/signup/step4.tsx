@@ -239,7 +239,7 @@ const Step4: React.FC = (): React.ReactElement => {
           <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
             •
           </Typography>
-          <Link href="privacy-policy">
+          <Link href="/privacy-policy">
             <a>
               <Typography className="leading-[1.88] font-semibold text-black" variant="body2">
                 Privacy Policy

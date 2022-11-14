@@ -98,7 +98,7 @@ const Step2: React.FC<Props> = ({ onChangeStep, phoneNumber = '99032894' }): Rea
           >
             •
           </Typography>
-          <Link href="privacy-policy">
+          <Link href="/privacy-policy">
             <a>
               <Typography
                 className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"

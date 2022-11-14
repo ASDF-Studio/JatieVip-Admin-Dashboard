@@ -168,7 +168,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
             <Typography className="leading-[2] text-white" variant="body2">
               •
             </Typography>
-            <Link href="privacy-policy">
+            <Link href="/privacy-policy">
               <a>
                 <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
                   Privacy Policy

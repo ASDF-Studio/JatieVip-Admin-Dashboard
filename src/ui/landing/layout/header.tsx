@@ -257,7 +257,7 @@ export const LandingHeader = ({ inView, dark }) => {
               <Typography variant="body2" className="leading-[2] text-black text-center">
                 •
               </Typography>
-              <Link href="privacy-policy">
+              <Link href="/privacy-policy">
                 <a>
                   <Typography variant="body2" className="leading-[2] text-black text-center">
                     Privacy Policy

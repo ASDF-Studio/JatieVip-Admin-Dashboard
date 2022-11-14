@@ -66,7 +66,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
               <div className="max-w-[380px]">
                 <Typography className="text-[#86949f] font-semibold" variant="body2">
                   By continuing you accept our{' '}
-                  <Link href="privacy-policy">
+                  <Link href="/privacy-policy">
                     <a className="underline">Privacy Policy</a>
                   </Link>{' '}
                   and{' '}
@@ -110,7 +110,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
           >
             •
           </Typography>
-          <Link href="privacy-policy">
+          <Link href="/privacy-policy">
             <a>
               <Typography
                 className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"

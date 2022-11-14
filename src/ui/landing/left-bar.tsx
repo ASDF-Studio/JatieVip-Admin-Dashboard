@@ -207,7 +207,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
             <Typography variant="body2" className={`${inView ? 'leading-[2] text-black' : 'leading-[2] text-white'}`}>
               •
             </Typography>
-            <Link href="privacy-policy">
+            <Link href="/privacy-policy">
               <a>
                 <Typography
                   variant="body2"
