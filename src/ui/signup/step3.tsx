@@ -66,11 +66,11 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
               <div className="max-w-[380px]">
                 <Typography className="text-[#86949f] font-semibold" variant="body2">
                   By continuing you accept our{' '}
-                  <Link href="landing/terms">
+                  <Link href="/privacy">
                     <a className="underline">Privacy Policy</a>
                   </Link>{' '}
                   and{' '}
-                  <Link href="landing/terms">
+                  <Link href="/terms">
                     <a className="underline">Terms of Use</a>
                   </Link>
                 </Typography>
