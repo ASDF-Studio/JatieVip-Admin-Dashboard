@@ -76,7 +76,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           <Typography variant="body2" className="leading-[2]  underline-offset-1 hover:underline">
             •
           </Typography>
-          <Link href="/privacy">
+          <Link href="privacy-policy">
             <a>
               <Typography variant="body2" className="leading-[2]   underline-offset-1 hover:underline">
                 Privacy Policy

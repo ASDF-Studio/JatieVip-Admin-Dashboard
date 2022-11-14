@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 import { BoxSelect, Button, Hello } from 'components'
 import { ErrorModal } from 'components/modals/error-modal'
 import { StripeError } from 'lib/error'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, ReactElement, useState } from 'react'
 import { StripeService } from 'services/stripe'
@@ -81,13 +82,17 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
               alt="play store logo"
             />
           </div>
-          <div className="hover:cursor-pointer">
-            <img
-              src="/assets/logos/app-store.png"
-              className="max-w-[149px] w-full sm:max-w-[122px] shadow-logoShadow2"
-              alt="app store logo"
-            />
-          </div>
+          <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+            <a>
+              <div className="hover:cursor-pointer">
+                <img
+                  src="/assets/logos/app-store.png"
+                  className="max-w-[149px] w-full sm:max-w-[122px] shadow-logoShadow2"
+                  alt="app store logo"
+                />
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
       <ErrorModal isCreate onAccept={handleSubscribe} open={showError} setOpen={setShowError} error={error} />

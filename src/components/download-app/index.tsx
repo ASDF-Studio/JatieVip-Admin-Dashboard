@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material'
+import Link from 'next/link'
 import React, { FC } from 'react'
 
 export const DownloadApp: FC = (): React.ReactElement => {
@@ -13,13 +14,17 @@ export const DownloadApp: FC = (): React.ReactElement => {
             alt="play store logo"
           />
         </div>
-        <div className="hover:cursor-pointer">
-          <img
-            src="/assets/logos/app-store.png"
-            className="max-w-[149px] w-full x:max-w-[122px] shadow-logoShadow2"
-            alt="app store logo"
-          />
-        </div>
+        <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+          <a>
+            <div className="hover:cursor-pointer">
+              <img
+                src="/assets/logos/app-store.png"
+                className="max-w-[149px] w-full x:max-w-[122px] shadow-logoShadow2"
+                alt="app store logo"
+              />
+            </div>
+          </a>
+        </Link>
       </div>
     </div>
   )

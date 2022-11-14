@@ -176,13 +176,17 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
                 className="max-w-[139px] h-[41px] shadow-logoShadow"
               />
             </div>
-            <div className="hover:cursor-pointer w-fit">
-              <img
-                src="/assets/logos/app-store.png"
-                alt="app store logo"
-                className="max-w-[121px] h-[41px] shadow-logoShadow"
-              />
-            </div>
+            <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+              <a>
+                <div className="hover:cursor-pointer w-fit">
+                  <img
+                    src="/assets/logos/app-store.png"
+                    alt="app store logo"
+                    className="max-w-[121px] h-[41px] shadow-logoShadow"
+                  />
+                </div>
+              </a>
+            </Link>
           </div>
           <div className={`h-[1px] w-full mt-5 ${inView ? 'bg-black opacity-[0.15]' : 'bg-white/50'}`} />
         </div>
@@ -203,7 +207,7 @@ export const LeftBar: React.FC<Props> = ({ inView, isBlue }) => {
             <Typography variant="body2" className={`${inView ? 'leading-[2] text-black' : 'leading-[2] text-white'}`}>
               •
             </Typography>
-            <Link href="/privacy">
+            <Link href="privacy-policy">
               <a>
                 <Typography
                   variant="body2"

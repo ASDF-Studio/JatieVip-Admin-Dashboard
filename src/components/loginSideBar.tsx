@@ -1,4 +1,5 @@
 import { IconButton } from '@mui/material'
+import Link from 'next/link'
 import { FacebookIcon, TikTokIcon, InstagramIcon, YoutubeIcon, SnapChat } from './icons'
 import { Title, Heading } from './landing'
 
@@ -92,9 +93,13 @@ export const LoginSideBar = ({ className }: Props) => {
           <div className="hover:cursor-pointer w-fit">
             <img src="/assets/logos/google-play.png" alt="google play logo" className="max-w-[149px] h-[44px]" />
           </div>
-          <div className="hover:cursor-pointer w-fit">
-            <img src="/assets/logos/app-store.png" alt="app store logo" className="max-w-[133px] h-[44px]" />
-          </div>
+          <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+            <a>
+              <div className="hover:cursor-pointer w-fit">
+                <img src="/assets/logos/app-store.png" alt="app store logo" className="max-w-[133px] h-[44px]" />
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
     </div>

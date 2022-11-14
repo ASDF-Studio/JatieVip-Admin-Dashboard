@@ -143,7 +143,7 @@ const Step2: React.FC<Props> = ({
           >
             •
           </Typography>
-          <Link href="/privacy">
+          <Link href="privacy-policy">
             <a>
               <Typography
                 className="leading-[1.88] font-semibold text-black hover:underline underline-offset-1"

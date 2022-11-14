@@ -231,13 +231,17 @@ export const LandingHeader = ({ inView, dark }) => {
                   className="max-w-[177px] h-[52px] shadow-logoShadow"
                 />
               </div>
-              <div className="hover:cursor-pointer">
-                <img
-                  src="/assets/logos/app-store.png"
-                  alt="app store logo"
-                  className="max-w-[157px] h-[52px] shadow-logoShadow"
-                />
-              </div>
+              <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+                <a>
+                  <div className="hover:cursor-pointer">
+                    <img
+                      src="/assets/logos/app-store.png"
+                      alt="app store logo"
+                      className="max-w-[157px] h-[52px] shadow-logoShadow"
+                    />
+                  </div>
+                </a>
+              </Link>
             </div>
             <div className="h-[1px] w-full bg-black opacity-[0.15] mt-5" />
           </div>
@@ -253,7 +257,7 @@ export const LandingHeader = ({ inView, dark }) => {
               <Typography variant="body2" className="leading-[2] text-black text-center">
                 •
               </Typography>
-              <Link href="/privacy">
+              <Link href="privacy-policy">
                 <a>
                   <Typography variant="body2" className="leading-[2] text-black text-center">
                     Privacy Policy

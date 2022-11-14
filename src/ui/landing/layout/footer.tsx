@@ -29,13 +29,17 @@ export const LandingFooter = React.forwardRef((props, ref) => {
               className="max-w-[220px] sm:max-w-[247px] x:max-w-[221px] shadow-logoShadow"
             />
           </div>
-          <div className="hover:cursor-pointer w-fit mx-auto sm:mx-0">
-            <img
-              src="/assets/logos/app-store.png"
-              alt="app store logo"
-              className="max-w-[220px] sm:max-w-[220px] shadow-logoShadow x:max-w-[221px]"
-            />
-          </div>
+          <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+            <a >
+              <div className="hover:cursor-pointer w-fit mx-auto sm:mx-0">
+                <img
+                  src="/assets/logos/app-store.png"
+                  alt="app store logo"
+                  className="max-w-[220px] sm:max-w-[220px] shadow-logoShadow x:max-w-[221px]"
+                />
+              </div>
+            </a>
+          </Link>
         </div>
         <div className="flex flex-col gap-5 mt-[67px] items-center order-3 x:order-4 x:flex-row x:justify-center x:mt-[39px]">
           <Button variant="ghost" className="w-[300px] shadow-glassShadow x:w-[180px]">
@@ -92,13 +96,14 @@ export const LandingFooter = React.forwardRef((props, ref) => {
           </Link>
           <Link href="/#our-vision">
             <a>
-          <Typography
-            variant="title2"
-            className="font-medium text-white leading-normal underline-offset-1 hover:underline"
-          >
-            Our Vision
-          </Typography>
-          </a></Link>
+              <Typography
+                variant="title2"
+                className="font-medium text-white leading-normal underline-offset-1 hover:underline"
+              >
+                Our Vision
+              </Typography>
+            </a>
+          </Link>
         </div>
         <div className="flex gap-[36px] x:gap-[50px] justify-center mt-[58px] order-5 x:mt-[43px]">
           <IconButton
@@ -163,7 +168,7 @@ export const LandingFooter = React.forwardRef((props, ref) => {
             <Typography className="leading-[2] text-white" variant="body2">
               •
             </Typography>
-            <Link href="/privacy">
+            <Link href="privacy-policy">
               <a>
                 <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
                   Privacy Policy
