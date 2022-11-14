@@ -17,10 +17,9 @@ const Terms: NextPage = () => {
           <Typography variant="heading6">Terms of Service</Typography>
           <Typography variant="body" className="leading-normal">
             <p>
-              This End User License Agreement (&ldquo;Agreement&rdquo;) is a binding agreement between you (&ldquo;End
-              User&rdquo; or &ldquo;you&rdquo;) and Teddy B, LLC (&ldquo;Company&rdquo;). This Agreement governs your
-              use of Company&rsquo;s Move Fit mobile application, (including all related documentation, the
-              &ldquo;Application&rdquo;). The Application is licensed, not sold, to you. &nbsp;&nbsp;
+              This End User License Agreement (“Agreement”) is a binding agreement between you (“End User” or “you”) and
+              Teddy B, LLC (“Company”). This Agreement governs your use of Company’s Move Fit mobile application,
+              (including all related documentation, the “Application”). The Application is licensed, not sold, to you.
             </p>
             <p>
               <br />
@@ -41,14 +40,14 @@ const Terms: NextPage = () => {
             </p>
             <p>
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (a) Download, install, and use the Application for your use on a
-              mobile, desktop, or other device owned or otherwise controlled by you (&ldquo;Device&rdquo;) strictly in
-              accordance with the Application&rsquo;s documentation; and&nbsp;
+              mobile, desktop, or other device owned or otherwise controlled by you (“Device”) strictly in accordance
+              with the Application’s documentation; and
             </p>
             <p>
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (b) Access, stream, download, and use on such Device the Content and
               Services (as defined in Section 5) made available in or otherwise accessible through the Application,
               strictly in accordance with the grants and restrictions defined in the following Sections of this
-              Agreement (&ldquo;Terms of Use&rdquo;).
+              Agreement (“Terms of Use”)..
             </p>
             <p>
               <br />
@@ -118,9 +117,9 @@ const Terms: NextPage = () => {
               certain information about yourself as a condition to downloading, installing, or using the Application or
               certain of its features or functionality, and the Application may provide you with opportunities to share
               information about yourself with others. All information we collect through or in connection with this
-              Application is subject to our{' '}
+              Application is subject to our&nbsp;
               <Link href="/privacy">
-                <a className="underline-offset-1 hover:underline">Privacy Policy</a>
+                <a className="underline-offset-1 underline">Privacy Policy</a>
               </Link>
               . By downloading, installing, using, and providing information to or through this Application, you consent
               to all actions taken by us with respect to your information in compliance with the Privacy Policy. You
@@ -137,15 +136,16 @@ const Terms: NextPage = () => {
             </p>
             <p>
               5. Content and Services. The Application provides you with access to products, services, features,
-              functionality, and content accessible on or through the Application and/or hosted on Company&rsquo;s
-              website or other online sources (collectively, &ldquo;Content and Services&rdquo;). Your access to and use
-              of such Content and Services are governed by these Terms of Use and our Privacy Policy, which is
-              incorporated herein by this reference. YOU ASSUME THE RISK of using the Content and Services. Your access
-              to and use of such Content and Services may require you to acknowledge your acceptance of such Terms of
-              Use and Privacy Policy and/or to create a user account or otherwise register your usage of the
-              Application, and your failure to do so may restrict you from accessing or using certain of the
-              Application&rsquo;s features and functionality. Any violation of the Terms of Use will also be deemed a
-              violation of this Agreement.&nbsp;
+              functionality, and content accessible on or through the Application and/or hosted on Company’s website or
+              other online sources (collectively, “Content and Services”). Your access to and use of such Content and
+              Services are governed by these Terms of Use and our Privacy Policy, which is incorporated herein by this
+              reference. YOU ASSUME THE RISK of using the Content and Services. Your access to and use of such Content
+              and Services may require you to acknowledge your acceptance of such Terms of Use and Privacy Policy and/or
+              to create a user account or otherwise register your usage of the Application, and your failure to do so
+              may restrict you from accessing or using certain of the Application’s features and functionality. Some
+              Content and Services are available only to Users who select one of our Plans and complete the payment
+              process for the Selected Plan, as defined in Section 10. Any violation of the Terms of Use will also be
+              deemed a violation of this Agreement.&nbsp;
             </p>
             <p>
               <br />
@@ -163,15 +163,15 @@ const Terms: NextPage = () => {
             <p>
               7. Updates. Company may from time-to-time in its sole discretion develop and provide Application updates,
               which may include upgrades, bug fixes, patches, other error corrections, and/or new features
-              (collectively, including related documentation, &ldquo;Updates&rdquo;). Updates may also modify or delete
-              in their entirety certain features and functionality. You agree that Company has no obligation to provide
-              any Updates or to continue to provide or enable any particular features or functionality. Based on your
-              Device settings, when your Device is connected to the internet either (a) The Application will
-              automatically download and install all available Updates, or (b) You may receive notice of or be prompted
-              to download and install available Updates. You shall promptly download and install all Updates and
-              acknowledge and agree that the Application or portions thereof may not properly operate should you fail to
-              do so. You further agree that all Updates will be deemed part of the Application and be subject to all
-              terms and conditions of this Agreement.&nbsp;
+              (collectively, including related documentation, “Updates”). Updates may also modify or delete in their
+              entirety certain features and functionality. You agree that Company has no obligation to provide any
+              Updates or to continue to provide or enable any particular features or functionality. Based on your Device
+              settings, when your Device is connected to the internet either (a) The Application will automatically
+              download and install all available Updates, or (b) You may receive notice of or be prompted to download
+              and install available Updates. You shall promptly download and install all Updates and acknowledge and
+              agree that the Application or portions thereof may not properly operate should you fail to do so. You
+              further agree that all Updates will be deemed part of the Application and be subject to all terms and
+              conditions of this Agreement.&nbsp;
             </p>
             <p>
               <br />
@@ -180,13 +180,13 @@ const Terms: NextPage = () => {
               8. Third-Party Materials. The Application may display, include, or make available third-party content
               (including audiovisual content, data, information, applications, and other products, services, and/or
               materials) or provide links to third-party websites or services, including through third-party advertising
-              (&ldquo;Third-Party Materials&rdquo;). You acknowledge and agree that Company is not responsible for
-              Third-Party Materials, including their accuracy, completeness, timeliness, validity, copyright compliance,
-              legality, decency, quality, safety, or any other aspect thereof. YOU ASSUME THE RISK of using the
-              Third-Party Materials; Company does not assume and will not have any liability or responsibility to you or
-              any other person or entity for any Third-Party Materials or your use thereof. Third-Party Materials and
-              links thereto are provided solely as a convenience to you, and you access and use them entirely at your
-              own risk and subject to such third parties&rsquo; terms and conditions.&nbsp;
+              (“Third-Party Materials”). You acknowledge and agree that Company is not responsible for Third-Party
+              Materials, including their accuracy, completeness, timeliness, validity, copyright compliance, legality,
+              decency, quality, safety, or any other aspect thereof. YOU ASSUME THE RISK of using the Third-Party
+              Materials; Company does not assume and will not have any liability or responsibility to you or any other
+              person or entity for any Third-Party Materials or your use thereof. Third-Party Materials and links
+              thereto are provided solely as a convenience to you, and you access and use them entirely at your own risk
+              and subject to such third parties’ terms and conditions.&nbsp;
             </p>
             <p>
               <br />
@@ -220,7 +220,42 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              10. Disclaimer of Warranties. THE APPLICATION IS PROVIDED TO END USER &ldquo;AS IS&rdquo; AND WITH ALL
+              10. Subscriptions and Subscribers. We make some of our Content and Services available, and restrict their
+              use, as prescribed in a set of “Plans” to which a User may subscribe by selecting a plan and providing
+              payment details so we can charge the fee for the service subscription the User has selected (“Selected
+              Plan”); details of the current Plans are always available in the Application. The Application allows for
+              in-app purchase of any available Plan. A User who subscribes to a Selected Plan becomes a Subscriber and
+              is subject to the following additional terms.
+              <p>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(a) This Agreement applies to all Content and Services including those
+                available to the Subscriber pursuant to the Subscriber’s Selected Plan; however, we are not obligated to
+                continue providing the Content and Services associated with the Selected Plan after expiration of the
+                associated subscription period.
+              </p>
+              <p>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(b) All Plans that automatically renew at the end of the plan period
+                are identified as such in the Application; the Subscriber agrees to pay the fee for the Selected Plan at
+                the renewal price when the subscription is renewed, using the payment method previously provided.
+              </p>
+              <p>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(c) Users who elect to participate in any demonstration or promotion
+                of an available Plan, such as a free trial or a promotional rate, much complete the payment process and
+                agree that, at the end of a free trial or reduced-fee period, the User much either affirmatively cancel
+                the associated Selected Plan using the communication tool in the Application, or become a Subscriber by
+                paying the fee for the Selected Plan; and
+              </p>
+              <p>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(d) Except as provided in the refund policy of the application
+                platform (e.g., Apple App Store, Google Play Store) from where a Subscriber obtained the Application, we
+                will not honor requests for refunds of subscription fees for Selected Plans that are more than one month
+                in duration.
+              </p>
+            </p>
+            <p>
+              <br />
+            </p>
+            <p>
+              11. Disclaimer of Warranties. THE APPLICATION IS PROVIDED TO END USER &ldquo;AS IS&rdquo; AND WITH ALL
               FAULTS AND DEFECTS WITHOUT WARRANTY OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED UNDER APPLICABLE LAW,
               COMPANY, ON ITS OWN BEHALF AND ON BEHALF OF ITS AFFILIATES AND ITS AND THEIR RESPECTIVE LICENSORS AND
               SERVICE PROVIDERS, EXPRESSLY DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE,
@@ -244,7 +279,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              11. Limitation of Liability. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL COMPANY
+              12. Limitation of Liability. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL COMPANY
               OR ITS AFFILIATES, OR ANY OF ITS OR THEIR RESPECTIVE LICENSORS OR SERVICE PROVIDERS, HAVE ANY LIABILITY
               ARISING FROM OR RELATED TO YOUR USE OF OR INABILITY TO USE THE APPLICATION OR THE CONTENT AND SERVICES
               FOR: (a) PERSONAL INJURY, PROPERTY DAMAGE, LOST PROFITS, COST OF SUBSTITUTE GOODS OR SERVICES, LOSS OF
@@ -265,7 +300,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              12. Indemnification. You agree to indemnify, defend, and hold harmless Company and its officers,
+              13. Indemnification. You agree to indemnify, defend, and hold harmless Company and its officers,
               directors, employees, agents, affiliates, successors, and assigns from and against any and all losses,
               damages, liabilities, deficiencies, claims, actions, judgments, settlements, interest, awards, penalties,
               fines, costs, or expenses of whatever kind, including attorney&rsquo;s fees, arising from or relating to
@@ -277,7 +312,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              13. Export Regulation. The Application may be subject to U.S. export control laws, including the U.S.
+              14. Export Regulation. The Application may be subject to U.S. export control laws, including the U.S.
               Export Administration Act and its associated regulations. You shall not, directly or indirectly, export,
               re-export, or release the Application to, or make the Application accessible from, any jurisdiction or
               country to which export, re-export, or release is prohibited by law, rule, or regulation. You shall comply
@@ -289,7 +324,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              14. U.S. Government Rights. The Application is commercial computer software, as such term is defined in 48
+              15. U.S. Government Rights. The Application is commercial computer software, as such term is defined in 48
               C.F.R. &sect; 2.101. Accordingly, if you are an agency of the U.S. Government or any contractor therefor,
               you receive only those rights with respect to the Application as are granted to all other end users under
               license, in accordance with: (a) 48 C.F.R. &sect; 227.7201 through 48 C.F.R. &sect; 227.7204, with respect
@@ -300,7 +335,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              15. Severability. If any provision of this Agreement is illegal or unenforceable under applicable law, the
+              16. Severability. If any provision of this Agreement is illegal or unenforceable under applicable law, the
               remainder of the provision will be amended to achieve as closely as possible the effect of the original
               term and all other provisions of this Agreement will continue in full force and effect.&nbsp;
             </p>
@@ -308,7 +343,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              16. Governing Law. This Agreement is governed by and construed in accordance with the internal laws of the
+              17. Governing Law. This Agreement is governed by and construed in accordance with the internal laws of the
               State of Arizona without giving effect to any choice or conflict of law provision or rule. Any legal suit,
               action, or proceeding arising out of or related to this Agreement or the Application shall be instituted
               exclusively in the federal courts of the United States or the courts of the State of Arizona in each case
@@ -319,7 +354,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              17. Limitation of Time to File Claims. ANY CAUSE OF ACTION OR CLAIM YOU MAY HAVE ARISING OUT OF OR
+              18. Limitation of Time to File Claims. ANY CAUSE OF ACTION OR CLAIM YOU MAY HAVE ARISING OUT OF OR
               RELATING TO THIS AGREEMENT OR THE APPLICATION MUST BE COMMENCED WITHIN ONE (1) YEAR AFTER THE CAUSE OF
               ACTION ACCRUES OTHERWISE SUCH CAUSE OF ACTION OR CLAIM IS PERMANENTLY BARRED.&nbsp;
             </p>
@@ -327,7 +362,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              18. Entire Agreement. This Agreement, and our Privacy Policy constitute the entire agreement between you
+              19. Entire Agreement. This Agreement, and our Privacy Policy constitute the entire agreement between you
               and Company with respect to the Application and supersede all prior or contemporaneous understandings and
               agreements, whether written or oral, with respect to the Application.
             </p>
@@ -335,7 +370,7 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              19. Waiver. No failure to exercise, and no delay in exercising, on the part of either party, any right or
+              20. Waiver. No failure to exercise, and no delay in exercising, on the part of either party, any right or
               any power hereunder shall operate as a waiver thereof, nor shall any single or partial exercise of any
               right or power hereunder preclude further exercise of that or any other right hereunder. In the event of a
               conflict between this Agreement and any applicable purchase or other terms, the terms of this Agreement
