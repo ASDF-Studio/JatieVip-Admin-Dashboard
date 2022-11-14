@@ -1,7 +1,7 @@
 import { Button, Input } from 'components'
 import React, { Dispatch, useState } from 'react'
 import { Typography } from '@mui/material'
-import { LoginSteps, SignUpSteps } from 'types'
+import { SignUpSteps } from 'types'
 import { useNavigate } from 'hooks/UseRouter'
 import { ApiErrorResponse } from 'services/api'
 import Link from 'next/link'

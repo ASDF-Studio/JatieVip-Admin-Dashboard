@@ -14,10 +14,16 @@ const Terms: NextPage = () => {
       <div className="flex">
         <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
         <div className="flex flex-col x:max-w-[1000px] xl:max-w-[800px] 2xl:max-w-[1000px] 5xl:max-w-[1200px] w-full gap-[31px] xl:gap-[41px] mt-[98px] px-[30px] pb-[152px] xl:px-0 xl:mt-[62px] xl:mb-[199px] mx-auto">
-          <div className='flex flex-col'>
-            <Typography variant="heading6">MOVE FIT MOBILE APP</Typography>
-            <Typography variant="heading6">END USER LICENSE AGREEMENT</Typography>
-            <Typography variant="heading6">AND TERMS OF USE</Typography>
+          <div className="flex flex-col">
+            <Typography variant="heading6" className="leading-normal">
+              MOVE FIT MOBILE APP
+            </Typography>
+            <Typography variant="heading6" className="leading-normal">
+              END USER LICENSE AGREEMENT
+            </Typography>
+            <Typography variant="heading6" className="leading-normal">
+              AND TERMS OF USE
+            </Typography>
           </div>
 
           <Typography variant="body" className="leading-normal">
