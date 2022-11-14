@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material'
 import { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { LandingLayout, LeftBar } from 'ui/landing'
 
 const Terms: NextPage = () => {
@@ -117,16 +118,19 @@ const Terms: NextPage = () => {
               certain information about yourself as a condition to downloading, installing, or using the Application or
               certain of its features or functionality, and the Application may provide you with opportunities to share
               information about yourself with others. All information we collect through or in connection with this
-              Application is subject to our Privacy Policy [LINK TO PRIVACY POLICY]. By downloading, installing, using,
-              and providing information to or through this Application, you consent to all actions taken by us with
-              respect to your information in compliance with the Privacy Policy. You hereby grant us a perpetual
-              non-exclusive royalty free right and license to copy, modify, and use any information and data supplied by
-              you or collected on your behalf so that we may enhance the Application and our Services, including but not
-              limited to the right to use, repurpose, and monetize aggregate data and to create analytical trend data
-              (in anonymous form) that may be shared with or sold to third parties. In no event will any information be
-              disclosed in a manner that allows particular customers or individuals to be identified. Notwithstanding
-              the foregoing, you agree that your customer name may appear in a list of participating organizations for
-              reports containing such analytical trend data.&nbsp;
+              Application is subject to our{' '}
+              <Link href="/privacy">
+                <a className="underline-offset-1 hover:underline">Privacy Policy</a>
+              </Link>
+              . By downloading, installing, using, and providing information to or through this Application, you consent
+              to all actions taken by us with respect to your information in compliance with the Privacy Policy. You
+              hereby grant us a perpetual non-exclusive royalty free right and license to copy, modify, and use any
+              information and data supplied by you or collected on your behalf so that we may enhance the Application
+              and our Services, including but not limited to the right to use, repurpose, and monetize aggregate data
+              and to create analytical trend data (in anonymous form) that may be shared with or sold to third parties.
+              In no event will any information be disclosed in a manner that allows particular customers or individuals
+              to be identified. Notwithstanding the foregoing, you agree that your customer name may appear in a list of
+              participating organizations for reports containing such analytical trend data.&nbsp;
             </p>
             <p>
               <br />
