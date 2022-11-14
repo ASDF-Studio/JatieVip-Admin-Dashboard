@@ -10,6 +10,9 @@ export type IUser = {
   photo: string
   subscribed: boolean
   stripe_customer_id: string
+  myPreference: any
+  userGoals: any
+  enrolledPrograms: any
 }
 
 export type IProductNames = 'Monthly' | '3-Months' | '6-Months' | '1 Year'

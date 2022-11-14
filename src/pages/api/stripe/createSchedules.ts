@@ -26,6 +26,10 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
       token: req.session.token,
     })
 
+    delete user.myPreference
+    delete user.userGoals
+    delete user.enrolledPrograms
+
     req.session.user = user
     await req.session.save()
   } catch (e) {
@@ -167,7 +171,6 @@ const createScheduleSub = async (req: NextApiRequest, res: NextApiResponse) => {
         return
       }
       res.status(500).send('')
-
     }
   } else {
     if (!isLatestInvoicePaid) {

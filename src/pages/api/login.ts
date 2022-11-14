@@ -16,7 +16,13 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
       phoneNumber,
       token,
     })
+
     const user = await AuthService.getAccount({ token: data.token })
+
+    delete user.myPreference
+    delete user.userGoals
+    delete user.enrolledPrograms
+
 
     req.session.token = data.token
     req.session.user = user

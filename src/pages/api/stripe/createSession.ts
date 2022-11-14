@@ -26,6 +26,10 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
       token,
     })
 
+    delete user.myPreference
+    delete user.userGoals
+    delete user.enrolledPrograms
+
     req.session.user = user
     await req.session.save()
   } catch (e) {
