@@ -70,6 +70,11 @@ const loginRoute = async (req: NextApiRequest, res: NextApiResponse) => {
             stripe_customer_id: null,
             jwttoken: req.session.token,
           })
+
+          delete acc.myPreference
+          delete acc.userGoals
+          delete acc.enrolledPrograms
+          
           req.session.user = acc
           await req.session.save()
 

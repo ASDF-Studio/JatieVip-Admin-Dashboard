@@ -18,6 +18,10 @@ const getSubsSchedule = async (req: NextApiRequest, res: NextApiResponse) => {
       token: req.session.token,
     })
 
+    delete user.myPreference
+    delete user.userGoals
+    delete user.enrolledPrograms
+
     req.session.user = user
     await req.session.save()
   } catch (e) {

@@ -80,6 +80,9 @@ const createStripeSesionRoute = async (req: NextApiRequest, res: NextApiResponse
         stripe_customer_id: stripeUser.id,
         jwttoken: token,
       })
+      delete updatedUser.myPreference
+      delete updatedUser.userGoals
+      delete updatedUser.enrolledPrograms
       req.session.user = updatedUser
       await req.session.save()
     } catch (e) {
