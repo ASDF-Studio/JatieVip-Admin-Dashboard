@@ -55,7 +55,7 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
             <div className="flex flex-col gap-4">
               <Input
                 focus
-                placeholder="@sername"
+                placeholder="Username"
                 name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
