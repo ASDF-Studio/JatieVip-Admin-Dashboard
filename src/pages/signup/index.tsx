@@ -17,10 +17,7 @@ const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
     if (!user?.username) {
       return 'step1'
     }
-    if (!user?.last_name || !user?.first_name) {
-      return 'step2'
-    }
-
+    
     return 'step2'
   }
 
@@ -71,7 +68,7 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
     const user = await AuthService.getAccount({ token })
     delete user.myPreference
     delete user.userGoals
-    
+
     delete user.enrolledPrograms
 
     req.session.user = user

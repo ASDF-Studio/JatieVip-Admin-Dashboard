@@ -3,13 +3,14 @@ import React, { useRef, useState } from 'react'
 import { Typography } from '@mui/material'
 import Link from 'next/link'
 import { useFormik } from 'formik'
-import { getBase64 } from 'utils/helper'
+import { arrayBufferToBase64 } from 'utils/helper'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { ApiErrorResponse } from 'services/api'
 import { updateProfileSchema } from 'utils/schema'
 import { useAuth } from 'Contexts/Auth'
 import dayjs from 'dayjs'
+import { builtinDecode, getDimenstionSquare, imageToWebp, resize } from 'utils/image'
 
 type FormValues = {
   firstName: string
@@ -69,10 +70,28 @@ const Step4: React.FC = (): React.ReactElement => {
 
   const handleImageChange = async () => {
     const files = inputRef.current?.files
+    const resizedImage = {
+      buffer: null,
+      size: 0,
+    }
 
     if (files.length > 0) {
-      const file = await getBase64(files[0])
-      setFieldValue('imageURL', file)
+      const imageData = await builtinDecode(files[0])
+      const dimension = getDimenstionSquare(imageData.width, imageData.height)
+
+      const response = await resize(imageData, {
+        height: dimension.height,
+        width: dimension.width,
+        fitMethod: 'stretch',
+        linearRGB: true,
+        method: 'lanczos3',
+        premultiply: true,
+      })
+      const image = await imageToWebp(response, true)
+      resizedImage.buffer = image.image
+      resizedImage.size = image.size
+      const compressedImage = arrayBufferToBase64(resizedImage.buffer)
+      setFieldValue('imageURL', `data:image/webp;base64, ${compressedImage}`)
     }
   }
 

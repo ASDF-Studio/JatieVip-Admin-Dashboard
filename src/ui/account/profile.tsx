@@ -3,11 +3,12 @@ import { Typography } from '@mui/material'
 import { useRef, useState } from 'react'
 import { useAuth } from 'Contexts/Auth'
 import { useFormik } from 'formik'
-import { getBase64 } from 'utils/helper'
 import axios, { AxiosError } from 'axios'
 import { updateProfileSchema } from 'utils/schema'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
+import { builtinDecode, getDimenstionSquare, imageToWebp, resize } from 'utils/image'
+import { arrayBufferToBase64 } from 'utils/helper'
 
 type FormValues = {
   firstName: string
@@ -16,7 +17,7 @@ type FormValues = {
   birthDay: string
   gender: string
   isPublic: boolean
-  imageURL: string
+  imageURL: string | null
 }
 
 export const Profile = () => {
@@ -34,7 +35,7 @@ export const Profile = () => {
       birthDay: user?.date_of_birth || '',
       gender: user?.gender || 'male',
       isPublic: user?.public,
-      imageURL: user?.photo || '',
+      imageURL: user?.photo || null,
     },
     validationSchema: updateProfileSchema,
     onSubmit: async ({ firstName, lastName, birthDay, gender, isPublic, imageURL }) => {
@@ -67,10 +68,28 @@ export const Profile = () => {
 
   const handleImageChange = async () => {
     const files = inputRef.current?.files
+    const resizedImage = {
+      buffer: null,
+      size: 0,
+    }
 
     if (files.length > 0) {
-      const file = await getBase64(files[0])
-      setFieldValue('imageURL', file)
+      const imageData = await builtinDecode(files[0])
+      const dimension = getDimenstionSquare(imageData.width, imageData.height)
+
+      const response = await resize(imageData, {
+        height: dimension.height,
+        width: dimension.width,
+        fitMethod: 'stretch',
+        linearRGB: true,
+        method: 'lanczos3',
+        premultiply: true,
+      })
+      const image = await imageToWebp(response, true)
+      resizedImage.buffer = image.image
+      resizedImage.size = image.size
+      const compressedImage = arrayBufferToBase64(resizedImage.buffer)
+      setFieldValue('imageURL', `data:image/webp;base64, ${compressedImage}`)
     }
   }
 
@@ -106,7 +125,7 @@ export const Profile = () => {
             type="file"
             accept="image/*"
             ref={inputRef}
-            onChange={(e) => handleImageChange(e)}
+            onChange={() => handleImageChange()}
           />
           <div className="flex gap-2.5 w-full">
             <Button
@@ -125,7 +144,7 @@ export const Profile = () => {
                 onClick={async () => {
                   setRemLoading(true)
                   const res = await axios.post('/api/user/update', {
-                    photo: '',
+                    photo: null,
                   })
                   updateUser(res.data)
                   setRemLoading(false)

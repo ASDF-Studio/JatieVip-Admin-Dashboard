@@ -1,4 +1,5 @@
-import { IPlan } from 'services/types'
+/* eslint-disable no-plusplus */
+import { IPlan, IUser } from 'services/types'
 
 export const getBase64 = (file): Promise<string | ArrayBuffer> => {
   return new Promise((resolve) => {
@@ -51,4 +52,16 @@ export const getSubsName = (plan: IPlan): ReturnSubsName => {
     nickName: `${plan?.interval_count}-months`,
     planName: `${plan?.interval_count}months`,
   }
+}
+
+export const arrayBufferToBase64 = (buffer) => {
+  var binary = ''
+  var bytes = new Uint8Array(buffer)
+  var len = bytes.byteLength
+
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i])
+  }
+
+  return window.btoa(binary)
 }

@@ -26,7 +26,7 @@ const Account: NextPage = ({ user }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
   const { token, destroy, user } = req.session
-  
+
   if (!token || !user) {
     return {
       props: {},
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
       },
     }
   }
-  
+
   try {
     if (!user?.first_name || !user?.last_name || !user?.username || !user.date_of_birth || !user.gender) {
       return {
