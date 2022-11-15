@@ -35,7 +35,7 @@ const Step4: React.FC = (): React.ReactElement => {
       birthDay: user?.date_of_birth || '',
       gender: user?.gender,
       isPublic: user?.public || false,
-      imageURL: user?.photo || '',
+      imageURL: user?.photo || null,
     },
     validationSchema: updateProfileSchema,
     onSubmit: async ({ lastName, firstName, birthDay, isPublic, imageURL, gender }) => {
