@@ -90,9 +90,13 @@ export const LoginSideBar = ({ className }: Props) => {
           </IconButton>
         </div>
         <div className="flex gap-2.5 items-center">
-          <div className="hover:cursor-pointer w-fit">
-            <img src="/assets/logos/google-play.png" alt="google play logo" className="max-w-[149px] h-[44px]" />
-          </div>
+          <Link href="https://play.google.com/store/apps/details?id=com.movefitness.app">
+            <a>
+              <div className="hover:cursor-pointer w-fit">
+                <img src="/assets/logos/google-play.png" alt="google play logo" className="max-w-[149px] h-[44px]" />
+              </div>
+            </a>
+          </Link>
           <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
             <a>
               <div className="hover:cursor-pointer w-fit">

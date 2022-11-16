@@ -224,13 +224,17 @@ export const LandingHeader = ({ inView, dark }) => {
               DOWNLOAD
             </Typography>
             <div className="flex justify-between">
-              <div className="hover:cursor-pointer">
-                <img
-                  src="/assets/logos/google-play.png"
-                  alt="google play logo"
-                  className="max-w-[177px] h-[52px] shadow-logoShadow"
-                />
-              </div>
+              <Link href="https://play.google.com/store/apps/details?id=com.movefitness.app">
+                <a>
+                  <div className="hover:cursor-pointer">
+                    <img
+                      src="/assets/logos/google-play.png"
+                      alt="google play logo"
+                      className="max-w-[177px] h-[52px] shadow-logoShadow"
+                    />
+                  </div>
+                </a>
+              </Link>
               <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
                 <a>
                   <div className="hover:cursor-pointer">

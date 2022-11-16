@@ -22,15 +22,20 @@ export const LandingFooter = React.forwardRef((props, ref) => {
           </Typography>
         </div>
         <div className="flex order-2 flex-col gap-[15px] sm:flex-row sm:justify-center items-center sm:gap-2.5 sm:mt-[56px] mt-[53px] x:mt-[38px] x:gap-[47px]">
-          <div className="hover:cursor-pointer w-fit mx-auto sm:mx-0">
-            <img
-              src="/assets/logos/google-play.png"
-              alt="google play logo"
-              className="max-w-[220px] sm:max-w-[247px] x:max-w-[221px] shadow-logoShadow"
-            />
-          </div>
+          <Link href="https://play.google.com/store/apps/details?id=com.movefitness.app">
+            <a>
+              <div className="hover:cursor-pointer w-fit mx-auto sm:mx-0">
+                <img
+                  src="/assets/logos/google-play.png"
+                  alt="google play logo"
+                  className="max-w-[220px] sm:max-w-[247px] x:max-w-[221px] shadow-logoShadow"
+                />
+              </div>
+            </a>
+          </Link>
+
           <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
-            <a >
+            <a>
               <div className="hover:cursor-pointer w-fit mx-auto sm:mx-0">
                 <img
                   src="/assets/logos/app-store.png"
