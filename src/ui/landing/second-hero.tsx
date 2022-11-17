@@ -12,7 +12,7 @@ const PhoneImage = () => {
       src={`${
         isReady ? (!isTablet ? '/assets/landing/hero-2/main-phone.webp' : '/assets/landing/hero-2/main.webp') : ''
       }`}
-      alt="phone front"
+      alt=""
       className="relative max-w-full sm:max-w-[688px] x:max-w-[900px] 2xl:max-w-[969px] bottom-[10px] sm:bottom-[50px]  x:bottom-[20px] 2xl:bottom-[40px] 5xl:bottom-[50px]"
     />
   )

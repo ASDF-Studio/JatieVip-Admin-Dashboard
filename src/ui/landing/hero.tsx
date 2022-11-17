@@ -26,13 +26,7 @@ export const HeroSection: React.FC = (): React.ReactElement => {
 
       <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
       <div className="max-w-[420px] px-5 flex items-end pb-[150px] sm:pb-0 sm:block w-full mx-auto mt-[92.5px] relative sm:max-w-[768px] sm:px-[41.5px] sm:mt-[81px] x:max-w-[1024px] x:px-[61.3px] x:mt-[81px] xl:px-0 xl:max-w-[900px] xl:mt-[80.5px] 2xl:max-w-[995px]  sm:min-h-[726px] xl:min-h-[718px] 2xl:min-h-[840px] overflow-hidden">
-        {/* <img
-          src="/assets/images/landing/phone.webp"
-          className="hidden sm:block absolute max-w-[420px] left-1/2 -translate-x-1/2 transform sm:translate-x-0 top-[258px] sm:max-w-[515px] sm:top-0 sm:-left-[82px] x:-left-[12px] xl:-left-[74px]
-           2xl:max-w-[602px] 2xl:-left-[118px] z-10"
-          alt="phone"
-        /> */}
-
+      
         <div className="flex flex-col gap-[24.5px] sm:gap-[28px] xl:gap-4  sm:mb-0 z-10 sm:mt-[300px] x:mt-[300px] 2xl:mt-[400px]">
           <div className="flex flex-col">
             <Title className="text-white/80">Move Your Way</Title>

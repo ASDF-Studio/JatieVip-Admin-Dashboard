@@ -162,21 +162,33 @@ export const LandingFooter = React.forwardRef((props, ref) => {
           <Typography className="leading-[2] text-white x:mt-[25px]" variant="body2">
             © Move, Inc. All rights reserved.
           </Typography>
-          <div className="flex items-center gap-3 x:mt-[10px]">
-            <Link href="/terms">
-              <a>
-                <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
-                  Terms of service
-                </Typography>
-              </a>
-            </Link>
-            <Typography className="leading-[2] text-white" variant="body2">
+          <div className="flex items-center flex-col sm:flex-row sm:gap-3 x:mt-[10px]">
+            <div className="flex gap-3">
+              <Link href="/terms">
+                <a>
+                  <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
+                    Terms of service
+                  </Typography>
+                </a>
+              </Link>
+              <Typography className="leading-[2] text-white" variant="body2">
+                •
+              </Typography>
+              <Link href="/privacy-policy">
+                <a>
+                  <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
+                    Privacy Policy
+                  </Typography>
+                </a>
+              </Link>
+            </div>
+            <Typography className="leading-[2] text-white hidden sm:block" variant="body2">
               •
             </Typography>
-            <Link href="/privacy-policy">
-              <a>
-                <Typography className="leading-[2] text-white underline-offset-1 hover:underline" variant="body2">
-                  Privacy Policy
+            <Link href="mailto:customerservice@movefit.com">
+              <a className="rounded-[16px] w-[161px] flex justify-center items-center h-[32px] bg-[rgba(255,255,255,0.25)]">
+                <Typography className="leading-[2] text-white" variant="body2">
+                  Customer Support
                 </Typography>
               </a>
             </Link>
