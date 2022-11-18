@@ -15,7 +15,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [])
 
   useEffect(() => {
-    TagManager.initialize({ gtmId: 'GTM-XXXXXX' })
+    TagManager.initialize({ gtmId: 'GTM-NNSC655' })
   }, [])
 
   return (
