@@ -7,7 +7,7 @@ import { getSubsName } from 'utils/helper'
 import { CreateSubsTypes } from 'services/subs'
 import { IPlan } from 'services/types'
 import { isEmpty, isNaN } from 'lodash'
-import { createUserSubOnApp, deleteUserSubsOnApp } from 'lib/app'
+import { createUserSubOnApp, deleteUserSubsOnApp, deleteUserSubsOnAppV2 } from 'lib/app'
 
 export const config = { api: { bodyParser: false } }
 
@@ -47,19 +47,45 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'trialing') {
-      await createUserSubOnApp({
+      const { id } = await createUserSubOnApp({
         user_id: moveUserId,
-        valid_from: dayjs.unix(trial_start).format('YYYY-MM-DD hh:mm:ss'),
-        valid_to: dayjs.unix(trial_end).format('YYYY-MM-DD hh:mm:ss'),
+        valid_from: dayjs.unix(trial_start).toISOString(),
+        valid_to: dayjs.unix(trial_end).toISOString(),
         type: subs.planName as CreateSubsTypes,
+      })
+
+      if (!id) {
+        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+
+        return
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          moveUserId,
+          subscriptionId: id,
+        },
       })
     }
     if (subscription.status === 'active') {
-      await createUserSubOnApp({
+      const { id } = await createUserSubOnApp({
         user_id: moveUserId,
-        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
-        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+        valid_from: dayjs.unix(current_period_start).toISOString(),
+        valid_to: dayjs.unix(current_period_end).toISOString(),
         type: subs.planName as CreateSubsTypes,
+      })
+
+      if (!id) {
+        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+
+        return
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          moveUserId,
+          subscriptionId: id,
+        },
       })
     }
 
@@ -88,6 +114,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     const { current_period_end, current_period_start, plan } = subscription
     const subs = getSubsName(plan)
     const moveUserId = Number(metadata?.moveUserId)
+    const subscriptionId = Number(metadata?.subscriptionId)
 
     if (!moveUserId || isNaN(moveUserId)) {
       console.log('user not found!', customerId)
@@ -111,15 +138,40 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'active' && !isEmpty(previousvalues.plan)) {
-      await deleteUserSubsOnApp({
-        moveUserId,
+      if (subscriptionId) {
+        await deleteUserSubsOnAppV2({
+          moveUserId,
+          subscriptionId,
+        })
+      } else {
+        await deleteUserSubsOnApp({
+          moveUserId,
+        })
+      }
+
+      const { id } = await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).toISOString(),
+        valid_to: dayjs.unix(current_period_end).toISOString(),
+        type: subs.planName as CreateSubsTypes,
       })
 
-      await createUserSubOnApp({
-        user_id: moveUserId,
-        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
-        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
-        type: subs.planName as CreateSubsTypes,
+      if (!id) {
+        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+
+        await stripe.customers.update(customerId, {
+          metadata: {
+            subscriptionId: null,
+          },
+        })
+
+        return
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          subscriptionId: id,
+        },
       })
 
       res.send({ received: true })
@@ -128,15 +180,40 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'trialing' && !isEmpty(previousvalues.plan)) {
-      await deleteUserSubsOnApp({
-        moveUserId,
+      if (subscriptionId) {
+        await deleteUserSubsOnAppV2({
+          moveUserId,
+          subscriptionId,
+        })
+      } else {
+        await deleteUserSubsOnApp({
+          moveUserId,
+        })
+      }
+
+      const { id } = await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).toISOString(),
+        valid_to: dayjs.unix(current_period_end).toISOString(),
+        type: subs.planName as CreateSubsTypes,
       })
 
-      await createUserSubOnApp({
-        user_id: moveUserId,
-        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
-        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
-        type: subs.planName as CreateSubsTypes,
+      if (!id) {
+        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+
+        await stripe.customers.update(customerId, {
+          metadata: {
+            subscriptionId: null,
+          },
+        })
+
+        return
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          subscriptionId: id,
+        },
       })
 
       res.send({ received: true })
@@ -145,15 +222,40 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'active' && previousvalues?.status) {
-      await deleteUserSubsOnApp({
-        moveUserId,
+      if (subscriptionId) {
+        await deleteUserSubsOnAppV2({
+          moveUserId,
+          subscriptionId,
+        })
+      } else {
+        await deleteUserSubsOnApp({
+          moveUserId,
+        })
+      }
+
+      const { id } = await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).toISOString(),
+        valid_to: dayjs.unix(current_period_end).toISOString(),
+        type: subs.planName as CreateSubsTypes,
       })
 
-      await createUserSubOnApp({
-        user_id: moveUserId,
-        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
-        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
-        type: subs.planName as CreateSubsTypes,
+      if (!id) {
+        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+
+        await stripe.customers.update(customerId, {
+          metadata: {
+            subscriptionId: null,
+          },
+        })
+
+        return
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          subscriptionId: id,
+        },
       })
       res.send({ received: true })
 
@@ -161,16 +263,43 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'active' && previousvalues?.current_period_end && previousvalues.current_period_start) {
-      await deleteUserSubsOnApp({
-        moveUserId,
-      })
+      if (subscriptionId) {
+        await deleteUserSubsOnAppV2({
+          moveUserId,
+          subscriptionId,
+        })
+      } else {
+        await deleteUserSubsOnApp({
+          moveUserId,
+        })
+      }
 
-      await createUserSubOnApp({
+      const { id } = await createUserSubOnApp({
         user_id: moveUserId,
-        valid_from: dayjs.unix(current_period_start).format('YYYY-MM-DD hh:mm:ss'),
-        valid_to: dayjs.unix(current_period_end).format('YYYY-MM-DD hh:mm:ss'),
+        valid_from: dayjs.unix(current_period_start).toISOString(),
+        valid_to: dayjs.unix(current_period_end).toISOString(),
         type: subs.planName as CreateSubsTypes,
       })
+
+      if (!id) {
+        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+
+        await stripe.customers.update(customerId, {
+          metadata: {
+            subscriptionId: null,
+          },
+        })
+
+        return
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          subscriptionId: id,
+        },
+      })
+
+      // await stripe.customers.update('')
       res.send({ received: true })
 
       return
@@ -184,6 +313,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     const customerId = subscription.customer as string
     const { metadata } = (await stripe.customers.retrieve(customerId)) as Stripe.Customer
     const moveUserId = Number(metadata?.moveUserId)
+    const subscriptionId = Number(metadata?.subscriptionId)
 
     if (!moveUserId || isNaN(moveUserId)) {
       console.log('user not found!', customerId)
@@ -193,9 +323,23 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'canceled') {
-      await deleteUserSubsOnApp({
-        moveUserId,
+      if (subscriptionId) {
+        await deleteUserSubsOnAppV2({
+          moveUserId,
+          subscriptionId,
+        })
+      } else {
+        await deleteUserSubsOnApp({
+          moveUserId,
+        })
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          subscriptionId: null,
+        },
       })
+
       res.send({ received: true })
 
       return

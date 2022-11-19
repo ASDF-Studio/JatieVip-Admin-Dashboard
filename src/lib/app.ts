@@ -4,6 +4,7 @@ import { CreateSubsTypes } from 'services/subs'
 
 type DeleteUserSubType = {
   moveUserId: number
+  subscriptionId?: number
 }
 
 export const deleteUserSubsOnApp = async ({ moveUserId }: DeleteUserSubType): Promise<boolean> => {
@@ -31,14 +32,39 @@ type CreateUserSub = {
   type: CreateSubsTypes
 }
 
-export const createUserSubOnApp = async (params: CreateUserSub) => {
+export const createUserSubOnApp = async (params: CreateUserSub): Promise<{ id: number }> => {
   try {
-    await SubsService.createSubs({
+    const res = await SubsService.createSubs({
       ...params,
       secret_key: process.env.BACK_END_SECRET_KEY || '',
     })
-    console.log('succesfully updated subscription for: ', params.user_id)
+    console.log('succesfully updated subscription for: ', params.user_id, res.id)
+
+    return res
   } catch (e) {
     console.log(e)
+  }
+
+  return {
+    id: null,
+  }
+}
+
+export const deleteUserSubsOnAppV2 = async ({ moveUserId, subscriptionId }: DeleteUserSubType): Promise<boolean> => {
+  try {
+    await SubsService.deleteSubsV2({
+      userId: moveUserId,
+      secret_key: process.env.BACK_END_SECRET_KEY || '',
+      subsId: subscriptionId,
+    })
+    console.log('succesfully deleted subscription for using v2: ', moveUserId, subscriptionId)
+
+    return true
+  } catch (e) {
+    if (e instanceof ApiErrorResponse) {
+      console.log('cannot delete -->', e.message, subscriptionId)
+    }
+
+    return false
   }
 }
