@@ -290,23 +290,34 @@ const Terms: NextPage = () => {
               <br />
             </p>
             <p>
-              12. Limitation of Liability. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL COMPANY
-              OR ITS AFFILIATES, OR ANY OF ITS OR THEIR RESPECTIVE LICENSORS OR SERVICE PROVIDERS, HAVE ANY LIABILITY
-              ARISING FROM OR RELATED TO YOUR USE OF OR INABILITY TO USE THE APPLICATION OR THE CONTENT AND SERVICES
-              FOR: (a) PERSONAL INJURY, PROPERTY DAMAGE, LOST PROFITS, COST OF SUBSTITUTE GOODS OR SERVICES, LOSS OF
-              DATA, LOSS OF GOODWILL, BUSINESS INTERRUPTION, COMPUTER FAILURE OR MALFUNCTION, OR ANY OTHER
-              CONSEQUENTIAL, INCIDENTAL, INDIRECT, EXEMPLARY, SPECIAL, OR PUNITIVE DAMAGES; AND/OR (b) DIRECT DAMAGES IN
-              AMOUNTS THAT IN THE AGGREGATE EXCEED THE AMOUNT ACTUALLY PAID BY YOU FOR THE APPLICATION.&nbsp;
+              12. Disclaimer of Advice; Limitation of Liability.
+              <p>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (a) The features of the Application that promote or suggest physical
+                activity, nutrition or general wellness are for your informational purposes only and are not intended as
+                medical advice or services, or for diagnostic or treatment purposes. Before engaging in any physical
+                activity or making any changes to your diet or lifestyle, we suggest seeking advice from your relevant
+                health care professional. Never disregard any advice from a health care professional because of
+                something that you have read on the Application. To the maximum extent permitted under applicable laws,
+                Company is not responsible or liable for any loss or damage of any sort incurred that result from your
+                use of, or inability to use, the features of the Application.&nbsp;
+              </p>
+              <p>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (b) NOTWITHSTANDING THE ABOVE, TO THE FULLEST EXTENT PERMITTED BY
+                APPLICABLE LAW, IN NO EVENT WILL COMPANY OR ITS AFFILIATES, OR ANY OF ITS OR THEIR RESPECTIVE LICENSORS
+                OR SERVICE PROVIDERS, HAVE ANY LIABILITY ARISING FROM OR RELATED TO YOUR USE OF OR INABILITY TO USE THE
+                APPLICATION OR THE CONTENT AND SERVICES FOR: (a) PERSONAL INJURY, PROPERTY DAMAGE, LOST PROFITS, COST OF
+                SUBSTITUTE GOODS OR SERVICES, LOSS OF DATA, LOSS OF GOODWILL, BUSINESS INTERRUPTION, COMPUTER FAILURE OR
+                MALFUNCTION, OR ANY OTHER CONSEQUENTIAL, INCIDENTAL, INDIRECT, EXEMPLARY, SPECIAL, OR PUNITIVE DAMAGES;
+                AND/OR (b) DIRECT DAMAGES IN AMOUNTS THAT IN THE AGGREGATE EXCEED THE AMOUNT ACTUALLY PAID BY YOU FOR
+                THE APPLICATION.
+              </p>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(c) THE FOREGOING LIMITATIONS WILL APPLY WHETHER SUCH DAMAGES ARISE OUT
+              OF BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE AND REGARDLESS OF WHETHER SUCH DAMAGES
+              WERE FORESEEABLE OR COMPANY WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. SOME JURISDICTIONS DO NOT
+              ALLOW CERTAIN LIMITATIONS OF LIABILITY SO SOME OR ALL OF THE ABOVE LIMITATIONS OF LIABILITY MAY NOT APPLY
+              TO YOU.
             </p>
-            <p>
-              <br />
-            </p>
-            <p>
-              THE FOREGOING LIMITATIONS WILL APPLY WHETHER SUCH DAMAGES ARISE OUT OF BREACH OF CONTRACT, TORT (INCLUDING
-              NEGLIGENCE), OR OTHERWISE AND REGARDLESS OF WHETHER SUCH DAMAGES WERE FORESEEABLE OR COMPANY WAS ADVISED
-              OF THE POSSIBILITY OF SUCH DAMAGES. SOME JURISDICTIONS DO NOT ALLOW CERTAIN LIMITATIONS OF LIABILITY SO
-              SOME OR ALL OF THE ABOVE LIMITATIONS OF LIABILITY MAY NOT APPLY TO YOU.&nbsp;
-            </p>
+
             <p>
               <br />
             </p>

@@ -62,7 +62,6 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await stripe.customers.update(customerId, {
         metadata: {
-          moveUserId,
           subscriptionId: id,
         },
       })
@@ -83,7 +82,6 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await stripe.customers.update(customerId, {
         metadata: {
-          moveUserId,
           subscriptionId: id,
         },
       })
