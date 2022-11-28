@@ -1,16 +1,13 @@
 /* eslint-disable */
 import axios, { AxiosResponse } from 'axios'
-import { useNavigate } from 'hooks/UseRouter'
 import React, { createContext, FC, useContext, useEffect, useState } from 'react'
-import { AuthService } from 'services'
-import { getToken, remToken } from 'services/api'
 import { VerifyLoginResp } from 'services/auth'
 import { IUser } from 'services/types'
 
 export interface AuthState {
   user?: IUser
   setUser?: React.Dispatch<React.SetStateAction<IUser>>
-  sendCode: (phoneNumber: string) => Promise<unknown>
+  sendCode: (phoneNumber: string, captcha: string) => Promise<unknown>
   updateUser?: (value: IUser) => void
   logOut?: () => void
   ready?: boolean
@@ -33,9 +30,10 @@ export const AuthProvider: FC<{ children: React.ReactNode; userContext?: IUser }
     setUser(arg)
   }
 
-  const sendCode = async (phoneNumber: string) => {
+  const sendCode = async (phoneNumber: string, captcha: string) => {
     await axios.post('/api/sendVerify', {
       phoneNumber,
+      captcha,
     })
   }
 

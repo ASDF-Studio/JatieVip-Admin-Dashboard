@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/jsx-curly-brace-presence */
 import { Button } from 'components'
-import React, { Dispatch, useState } from 'react'
+import React, { Dispatch, useRef, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps } from 'types'
 import { isEmpty } from 'lodash'
@@ -10,6 +10,7 @@ import Link from 'next/link'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/material.css'
 import { AxiosError } from 'axios'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
@@ -21,8 +22,9 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
   const [error, setError] = useState<string>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const { sendCode } = useAuth()
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null)
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault()
 
     if (isEmpty(phoneNumber)) {
@@ -31,15 +33,24 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
       return
     }
 
+    recaptchaRef.current.execute()
+  }
+
+  const onReCAPTCHAChange = async (captchaCode) => {
+    if (!captchaCode) {
+      return
+    }
+  
     try {
       setLoading(true)
-      await sendCode(`+${phoneNumber}`)
+      await sendCode(`+${phoneNumber}`, captchaCode)
       onChangeStep('step2')
     } catch (err) {
       if (err instanceof AxiosError) {
         setError(`The 'To' number ${phoneNumber} is not a valid phone number.`)
       }
     } finally {
+      recaptchaRef.current.reset()
       setLoading(false)
     }
   }
@@ -58,6 +69,12 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
         </div>
         <div className="flex flex-col gap-4">
           <form onSubmit={(e) => handleLogin(e)}>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              size="invisible"
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              onChange={onReCAPTCHAChange}
+            />
             <div className="flex flex-col gap-4">
               <PhoneInput
                 country={'us'}

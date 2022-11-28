@@ -537,3 +537,26 @@ export const ReleaseSchedule = async ({ scheduleId }: RealeaseScheduleParams) =>
     }
   }
 }
+
+
+export const test = async ({ currentSub, cancelAtPeriod }: UpdateStripeSubParams) => {
+  try {
+    const updatedSub = await stripe.subscriptions.update(currentSub.id, {
+      cancel_at_period_end: cancelAtPeriod,
+    })
+
+
+
+    return updatedSub
+  } catch (e) {
+    if (e instanceof Stripe.errors.StripeError) {
+      throw new StripeError(e.code, {
+        statusCode: e.statusCode,
+      })
+    } else {
+      throw new StripeError('cannot connect to server', {
+        statusCode: 500,
+      })
+    }
+  }
+}
