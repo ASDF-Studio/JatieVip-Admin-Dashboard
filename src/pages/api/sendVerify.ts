@@ -5,11 +5,22 @@ import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
 import { isEmpty } from 'lodash'
 import axios from 'axios'
+import requestIp from 'request-ip'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance()
 
 const verifyRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   const { phoneNumber, captcha = null } = req.body
 
-  if (typeof phoneNumber !== 'string' || isEmpty(phoneNumber) || isEmpty(captcha)) {
+  if (typeof phoneNumber !== 'string' || isEmpty(phoneNumber) || isEmpty(captcha) || phoneNumber.length < 3) {
+    res.status(400).json({ message: 'validation error' })
+
+    return
+  }
+
+  const isValidPhoneNumber = phoneUtil.isValidNumber(phoneUtil.parse(phoneNumber))
+
+  if (!isValidPhoneNumber) {
     res.status(400).json({ message: 'validation error' })
 
     return
@@ -31,9 +42,12 @@ const verifyRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
+  const userIp = requestIp.getClientIp(req)
+
   try {
     await AuthService.login({
       phoneNumber,
+      userIp,
     })
 
     res.status(200).json({})

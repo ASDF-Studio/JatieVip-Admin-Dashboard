@@ -5,6 +5,7 @@ export const authTokenKey = 'jwt_token'
 
 export interface LoginParameter {
   phoneNumber: string
+  userIp: string
 }
 
 export interface LoginResponse {
@@ -25,6 +26,9 @@ const Service = {
   login: (body: LoginParameter) =>
     rest.post('auth/login', {
       body,
+      headers: {
+        'users-ip': body.userIp,
+      },
     }),
   verifyLogin: (body: VerifyLoginParams) =>
     rest.post<VerifyLoginResp>('auth/verify-login', {
