@@ -47,7 +47,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (subscription.status === 'trialing') {
-      const { id } = await createUserSubOnApp({
+      const { id = null, error = '' } = await createUserSubOnApp({
         user_id: moveUserId,
         valid_from: dayjs.unix(trial_start).toISOString(),
         valid_to: dayjs.unix(trial_end).toISOString(),
@@ -55,7 +55,9 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       })
 
       if (!id) {
-        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+        res
+          .status(500)
+          .send({ received: true, message: `subscription creating error for user ${moveUserId}, erroris: ${error}` })
 
         return
       }
@@ -67,7 +69,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       })
     }
     if (subscription.status === 'active') {
-      const { id } = await createUserSubOnApp({
+      const { id = null, error = '' } = await createUserSubOnApp({
         user_id: moveUserId,
         valid_from: dayjs.unix(current_period_start).toISOString(),
         valid_to: dayjs.unix(current_period_end).toISOString(),
@@ -75,7 +77,9 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       })
 
       if (!id) {
-        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+        res
+          .status(500)
+          .send({ received: true, message: `subscription creating error for user ${moveUserId}, erroris: ${error}` })
 
         return
       }
@@ -147,7 +151,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
         })
       }
 
-      const { id } = await createUserSubOnApp({
+      const { id = null, error = '' } = await createUserSubOnApp({
         user_id: moveUserId,
         valid_from: dayjs.unix(current_period_start).toISOString(),
         valid_to: dayjs.unix(current_period_end).toISOString(),
@@ -155,7 +159,9 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       })
 
       if (!id) {
-        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+        res
+          .status(500)
+          .send({ received: true, message: `subscription creating error for user ${moveUserId}, erroris: ${error}` })
 
         await stripe.customers.update(customerId, {
           metadata: {
@@ -189,7 +195,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
         })
       }
 
-      const { id } = await createUserSubOnApp({
+      const { id = null, error = '' } = await createUserSubOnApp({
         user_id: moveUserId,
         valid_from: dayjs.unix(current_period_start).toISOString(),
         valid_to: dayjs.unix(current_period_end).toISOString(),
@@ -197,7 +203,9 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       })
 
       if (!id) {
-        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+        res
+          .status(500)
+          .send({ received: true, message: `subscription creating error for user ${moveUserId}, erroris: ${error}` })
 
         await stripe.customers.update(customerId, {
           metadata: {
@@ -231,7 +239,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
         })
       }
 
-      const { id } = await createUserSubOnApp({
+      const { id = null, error = '' } = await createUserSubOnApp({
         user_id: moveUserId,
         valid_from: dayjs.unix(current_period_start).toISOString(),
         valid_to: dayjs.unix(current_period_end).toISOString(),
@@ -239,7 +247,9 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       })
 
       if (!id) {
-        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+        res
+          .status(500)
+          .send({ received: true, message: `subscription creating error for user ${moveUserId}, erroris: ${error}` })
 
         await stripe.customers.update(customerId, {
           metadata: {
@@ -272,7 +282,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
         })
       }
 
-      const { id } = await createUserSubOnApp({
+      const { id = null, error = '' } = await createUserSubOnApp({
         user_id: moveUserId,
         valid_from: dayjs.unix(current_period_start).toISOString(),
         valid_to: dayjs.unix(current_period_end).toISOString(),
@@ -280,7 +290,9 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       })
 
       if (!id) {
-        res.status(500).send({ received: true, message: `subscription creating error for user ${moveUserId}` })
+        res
+          .status(500)
+          .send({ received: true, message: `subscription creating error for user ${moveUserId}, erroris: ${error}` })
 
         await stripe.customers.update(customerId, {
           metadata: {

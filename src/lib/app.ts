@@ -32,7 +32,7 @@ type CreateUserSub = {
   type: CreateSubsTypes
 }
 
-export const createUserSubOnApp = async (params: CreateUserSub): Promise<{ id: number }> => {
+export const createUserSubOnApp = async (params: CreateUserSub): Promise<{ id?: number; error?: string }> => {
   try {
     const res = await SubsService.createSubs({
       ...params,
@@ -41,12 +41,10 @@ export const createUserSubOnApp = async (params: CreateUserSub): Promise<{ id: n
     console.log('succesfully updated subscription for: ', params.user_id, res.id)
 
     return res
-  } catch (e) {
-    console.log(e)
-  }
+  } catch (err) {
+    const stringErr = JSON.stringify(err)
 
-  return {
-    id: null,
+    return { error: stringErr }
   }
 }
 
