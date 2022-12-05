@@ -29,6 +29,7 @@ export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async (
   return {
     props: {
       user,
+      token,
     },
   }
 }, sessionOptions)

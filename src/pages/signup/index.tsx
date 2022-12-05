@@ -11,13 +11,14 @@ import { IUser } from 'services/types'
 import { AuthProvider } from 'Contexts/Auth'
 import { AuthService } from 'services'
 import { ApiErrorResponse } from 'services/api'
+import Head from 'next/head'
 
 const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
   const getStateDefault = (): SignUpSteps => {
     if (!user?.username) {
       return 'step1'
     }
-    
+
     return 'step2'
   }
 
@@ -38,6 +39,9 @@ const SignUp: NextPage = ({ user }: { user: IUser }): React.ReactElement => {
 
   return (
     <AuthProvider userContext={user}>
+      <Head>
+        <title>Movefit signup</title>
+      </Head>
       <MainLayout hiddenDesktop stickyFooter={state !== 'step2'} withNavBar={false}>
         <div className="flex justify-between mt-[66px] x:mt-0">
           <LoginSideBar className="w-[72%] hidden x:block" />

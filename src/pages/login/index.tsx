@@ -11,6 +11,7 @@ import axios, { AxiosError } from 'axios'
 import { loginSchema } from 'utils/schema'
 import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
+import Head from 'next/head'
 
 const Home: NextPage = (): React.ReactElement => {
   const router = useRouter()
@@ -76,6 +77,9 @@ const Home: NextPage = (): React.ReactElement => {
 
   return (
     <AuthProvider>
+      <Head>
+        <title>Movefit Login</title>
+      </Head>
       <MainLayout hiddenDesktop stickyFooter withNavBar={false}>
         <div className="flex justify-between mt-[66px] x:mt-0">
           <LoginSideBar className="w-[72%] hidden x:block" />
