@@ -16,7 +16,7 @@ type Props = {
 }
 
 const Home: NextPage = ({ user }: Props) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [userSubs, setUserSubs] = useState<ISub>(null)
   const router = useRouter()
 
@@ -26,7 +26,6 @@ const Home: NextPage = ({ user }: Props) => {
 
   const fetch = useCallback(async () => {
     try {
-      setLoading(true)
       const res = await StripeService.getUserSubs()
       if (!isEmpty(res)) setUserSubs(res)
     } catch (e) {
