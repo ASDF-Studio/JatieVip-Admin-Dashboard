@@ -36,8 +36,7 @@ const getAuth = (hasAuth = null) =>
 const genHeader = (hasAuth = null, headers = {}) => Object.assign(headers, getAuth(hasAuth))
 
 const handleError = (err: AxiosError<{ message: string }>, reject: any) => {
-  console.log(err)
-  reject(new ApiErrorResponse(err.response.status, err.response.statusText, err?.data?.message))
+  reject(new ApiErrorResponse(err.response.status, err.response.statusText, err?.response?.data?.message))
 }
 
 export class ApiErrorResponse extends Error {
@@ -61,6 +60,8 @@ const request = async <T>(options: AxiosRequestConfig, isLocal = false) => {
         ...options,
       })
       .then((resp) => {
+        const a = resp as AxiosResponse
+        console.log(a.request)
         resolve(resp.data)
       })
       .catch((err) => handleError(err, reject))

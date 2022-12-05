@@ -21,7 +21,7 @@ const verifyRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   const isValidPhoneNumber = phoneUtil.isValidNumber(phoneUtil.parse(phoneNumber))
 
   if (!isValidPhoneNumber) {
-    res.status(400).json({ message: 'validation error' })
+    res.status(400).json({ message: `The 'To' number ${phoneNumber} is not a valid phone number.` })
 
     return
   }
@@ -60,7 +60,7 @@ const verifyRoute = async (req: NextApiRequest, res: NextApiResponse) => {
         })
       } else {
         res.status(400).json({
-          message: error.message,
+          message: error.errorMessage,
         })
       }
     } else {

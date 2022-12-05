@@ -40,14 +40,14 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
     if (!captchaCode) {
       return
     }
-  
+
     try {
       setLoading(true)
       await sendCode(`+${phoneNumber}`, captchaCode)
       onChangeStep('step2')
     } catch (err) {
       if (err instanceof AxiosError) {
-        setError(`The 'To' number ${phoneNumber} is not a valid phone number.`)
+        setError(err.response.data.message)
       }
     } finally {
       recaptchaRef.current.reset()
