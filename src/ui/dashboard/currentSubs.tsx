@@ -23,6 +23,11 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
   const [upcomingInvoice, setUpcomingInvoice] = useState<IInvoice>(null)
 
   useEffect(() => {
+    if (subs.type === 'Mobile') {
+      setLoading(false)
+
+      return
+    }
     if (subs && !subs.cancel_at) {
       fetcher()
     }
@@ -73,11 +78,12 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
                 {`Your payment will be automatically renewed every ${subsTitle().nickName}`}
               </Typography>
             )}
-            {subs?.cancel_at ? (
-              <TagExpire date={subs.current_period_end} />
-            ) : (
-              <Tag loading={loading} date={upcomingInvoice?.created} price={upcomingInvoice?.amount_due} />
-            )}
+            {subs.type !== 'Mobile' &&
+              (subs?.cancel_at ? (
+                <TagExpire date={subs.current_period_end} />
+              ) : (
+                <Tag loading={loading} date={upcomingInvoice?.created} price={upcomingInvoice?.amount_due} />
+              ))}
           </div>
         </div>
         <Button

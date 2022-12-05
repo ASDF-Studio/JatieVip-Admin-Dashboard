@@ -8,6 +8,8 @@ import { StripeService } from 'services/stripe'
 import { StripeError } from 'lib/error'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { isEmpty } from 'lodash'
+import { mobileSub } from 'utils/helper'
 
 type Props = {
   user: IUser
@@ -26,7 +28,7 @@ const Home: NextPage = ({ user }: Props) => {
     try {
       setLoading(true)
       const res = await StripeService.getUserSubs()
-      setUserSubs(res)
+      if (!isEmpty(res)) setUserSubs(res)
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
@@ -37,6 +39,19 @@ const Home: NextPage = ({ user }: Props) => {
       setLoading(false)
     }
   }, [])
+
+  useEffect(() => {
+    if (!userSubs && user.subscribed && !loading) {
+      setUserSubs({
+        type: 'Mobile',
+        plan: {
+          interval: mobileSub[user.subscription.type].name,
+          interval_count: mobileSub[user.subscription.type].interval,
+        },
+        status: 'active',
+      })
+    }
+  }, [userSubs, loading])
 
   return (
     <AuthProvider userContext={user}>

@@ -4,27 +4,30 @@ import { Button } from 'components/Button'
 import { LinkSlashIcon } from 'components/icons'
 import { useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
-import { IInvoice } from 'services/types'
+import { IInvoice, ISub } from 'services/types'
 import { History } from './history'
 
 type Props = {
   setShowBillingModal?: () => void
   setShowLinkModal?: () => void
   // cardName: string
-  //  sub: ISub
+  sub: ISub
 }
 
 export const Billing: React.FC<Props> = ({
   setShowBillingModal = null,
   setShowLinkModal,
   cardName,
-  // sub,
+  sub,
 }): React.ReactElement => {
   const [invoices, setInvoices] = useState<IInvoice[]>([])
   const [isMore, setIsMore] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    if (sub.type === 'Mobile') {
+      return
+    }
     setInvoices([])
     fetcher('')
   }, [])

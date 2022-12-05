@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material'
 import { AccountSubs, Billing, BoxSelect, Button, ConfirmationModal, Hello, ReActiveSub } from 'components'
+import { CancelMobileSub } from 'components/modals/cancelMobile'
 import { ErrorModal } from 'components/modals/error-modal'
+import { MobileAlertModal } from 'components/modals/mobileAlert'
 import { SuccessModal } from 'components/modals/success'
 import { StripeError } from 'lib/error'
 import { useRouter } from 'next/router'
@@ -40,6 +42,8 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
   const [error, setError] = useState<string>(null)
   const [reactivateText, setReactivateText] = useState<string>('Are you sure you want to activate Auto Renewal?')
   const [successInfo, setSuccessInfo] = useState<SuccesInfo>(null)
+  const [showMobileCancel, setShowMobileCancel] = useState(false)
+  const [showMobileAlert, setShowMobileAlert] = useState(false)
   const router = useRouter()
   const { plan } = currentSubs
 
@@ -191,6 +195,11 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
                 setReactivateText('Are you sure you want to activate Auto Renewal?')
                 setShowReactiveModal(true)
               } else {
+                if (currentSubs.type === 'Mobile') {
+                  setShowMobileAlert(true)
+
+                  return
+                }
                 setShowModal(true)
               }
             }}
@@ -224,12 +233,12 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         <AccountSubs
           userSubs={currentSubs}
           classname="my-[30px] sm:mt-[53px] mb-[4.188rem]"
-          onCancel={() => setShowAutoRenewalModal(true)}
+          onCancel={() => (currentSubs.type === 'Mobile' ? setShowMobileCancel(true) : setShowAutoRenewalModal(true))}
         />
       )}
 
       <Billing
-        // sub={currentSubs}
+        sub={currentSubs}
         // cardName={currentSubs?.default_payment_method?.billing_details?.name}
         setShowLinkModal={() => setLinkModal(true)}
         setShowBillingModal={() => setShowBillingModal(true)}
@@ -273,6 +282,8 @@ const ManageSubs: FC<Props> = ({ className, sub }): ReactElement => {
         setOpen={setSuccessModal}
         from={successInfo?.from}
       />
+      <CancelMobileSub open={showMobileCancel} setOpen={setShowMobileCancel} />
+      <MobileAlertModal open={showMobileAlert} setOpen={setShowMobileAlert} />
       <BillingModal open={showBillingModal} setOpen={setShowBillingModal} />
     </div>
   )

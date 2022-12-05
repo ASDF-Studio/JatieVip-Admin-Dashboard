@@ -60,8 +60,6 @@ const request = async <T>(options: AxiosRequestConfig, isLocal = false) => {
         ...options,
       })
       .then((resp) => {
-        const a = resp as AxiosResponse
-        console.log(a.request)
         resolve(resp.data)
       })
       .catch((err) => handleError(err, reject))

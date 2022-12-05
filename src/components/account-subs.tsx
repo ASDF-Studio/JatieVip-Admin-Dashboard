@@ -18,6 +18,11 @@ export const AccountSubs: FC<Props> = ({ classname, onCancel, userSubs }): React
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (userSubs.type === 'Mobile') {
+      setLoading(false)
+
+      return
+    }
     if (userSubs) {
       fetcher()
     }
@@ -45,7 +50,9 @@ export const AccountSubs: FC<Props> = ({ classname, onCancel, userSubs }): React
           <Typography variant="heading3">{`${getSubsName(plan).title} Commitment Plan`}</Typography>
         </div>
         <div className="flex flex-col gap-[15px] max-w-[300px] sm:max-w-full sm:items-end">
-          <Tag loading={loading} date={upcomingInvoice?.created} price={upcomingInvoice?.amount_due} />
+          {userSubs.type !== 'Mobile' && (
+            <Tag loading={loading} date={upcomingInvoice?.created} price={upcomingInvoice?.amount_due} />
+          )}
           <Typography variant="subheadBold" className="w-[15.625rem] text-primary-grey text-left sm:text-right">
             {`Your payment will be automatically renewed every ${getSubsName(plan).nickName}`}
           </Typography>

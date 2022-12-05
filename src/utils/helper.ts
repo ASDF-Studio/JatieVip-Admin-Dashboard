@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-import { IPlan, IUser } from 'services/types'
+import { IPlan } from 'services/types'
 
 export const getBase64 = (file): Promise<string | ArrayBuffer> => {
   return new Promise((resolve) => {
@@ -64,4 +64,23 @@ export const arrayBufferToBase64 = (buffer) => {
   }
 
   return window.btoa(binary)
+}
+
+export const mobileSub = {
+  year: {
+    name: 'year',
+    interval: 1,
+  },
+  month: {
+    name: 'month',
+    interval: 1,
+  },
+  '3months': {
+    name: 'month',
+    interval: 3,
+  },
+  '6months': {
+    name: 'month',
+    interval: 6,
+  },
 }

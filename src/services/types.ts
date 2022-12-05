@@ -13,6 +13,13 @@ export type IUser = {
   myPreference: any
   userGoals: any
   enrolledPrograms: any
+  subscription: {
+    createdAt: string
+    type: string
+    valid_from: string
+    valid_To: string
+    transaction_id: string
+  }
 }
 
 export type IProductNames = 'Monthly' | '3-Months' | '6-Months' | '1 Year'
@@ -26,20 +33,22 @@ export type ISelectedProduct = {
 export type IPlan = {
   interval_count: number
   interval: 'year' | 'month'
-  amount: number
-  nickName: string
-  planName: string
+  amount?: number
+  nickName?: string
+  planName?: string
 }
 
 export type ISub = {
   plan: IPlan
-  id: string
-  cancel_at_period_end: boolean
-  cancel_at: number
-  current_period_end: number
+  id?: string
+  cancel_at_period_end?: boolean
+  cancel_at?: number
+  current_period_end?: number
   status: 'active' | 'canceled' | 'trialing' | 'past_due'
-  latest_invoice: IInvoice
-  default_payment_method: DefaultPaymentMethod
+  latest_invoice?: IInvoice
+  default_payment_method?: DefaultPaymentMethod
+  type?: 'Stripe' | 'Mobile'
+  typeName?: string
 }
 
 type StatusTransitions = {
