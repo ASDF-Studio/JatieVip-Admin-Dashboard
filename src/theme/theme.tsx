@@ -65,6 +65,7 @@ export const MoveTheme = {
     heading4: {
       fontSize: '22px',
       fontWeight: 600,
+      lineHeight: 'normal',
       '@media (max-width:1023px)': {
         fontSize: '22px',
         lineHeight: 'normal',
