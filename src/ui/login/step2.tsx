@@ -1,5 +1,5 @@
 import { Button, VerifyCodeInput } from 'components'
-import React, { Dispatch, useState } from 'react'
+import React, { Dispatch,  useState } from 'react'
 import { CircularProgress, Typography } from '@mui/material'
 import { LoginSteps } from 'types'
 import { useAuth } from 'Contexts/Auth'
@@ -80,7 +80,14 @@ const Step2: React.FC<Props> = ({
                   <Typography className="text-[#86949f] font-semibold" variant="body2">
                     that was sent to {`+${phoneNumber}`}&nbsp;&nbsp;
                   </Typography>
-                  <span onClick={() => onChangeStep('step1')} className="hover:cursor-pointer">
+                  <span
+                    onClick={() => {
+                      setError(null)
+                      handleChangeForm('code', '')
+                      onChangeStep('step1')
+                    }}
+                    className="hover:cursor-pointer"
+                  >
                     <Typography variant="body2" className=" text-primary-brand font-semibold">
                       Edit
                     </Typography>
