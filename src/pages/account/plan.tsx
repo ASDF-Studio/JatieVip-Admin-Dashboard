@@ -25,10 +25,27 @@ const Home: NextPage<Props> = ({ user }) => {
   }, [])
 
   const fetch = useCallback(async () => {
+    if (!user.subscribed) {
+      router.push('/dashboard')
+
+      return
+    }
+
     try {
       setLoading(true)
       const res = await StripeService.getUserSubs()
-      if (!isEmpty(res)) setUserSubs(res)
+      if (!isEmpty(res)) {
+        setUserSubs(res)
+      } else if (user.subscribed) {
+        setUserSubs({
+          type: 'Mobile',
+          plan: {
+            interval: mobileSub[user.subscription.type].name,
+            interval_count: mobileSub[user.subscription.type].interval,
+          },
+          status: 'active',
+        })
+      }
     } catch (e) {
       if (e instanceof StripeError) {
         if (e.statusCode === 401) {
@@ -39,25 +56,6 @@ const Home: NextPage<Props> = ({ user }) => {
       setLoading(false)
     }
   }, [])
-
-  useEffect(() => {
-    if (!userSubs && user.subscribed && !loading) {
-      setUserSubs({
-        type: 'Mobile',
-        plan: {
-          interval: mobileSub[user.subscription.type].name,
-          interval_count: mobileSub[user.subscription.type].interval,
-        },
-        status: 'active',
-      })
-    }
-  }, [userSubs, loading])
-
-  useEffect(() => {
-    if (!user.subscribed) {
-      router.push('/dashboard')
-    }
-  }, [loading])
 
   return (
     <AuthProvider userContext={user}>
