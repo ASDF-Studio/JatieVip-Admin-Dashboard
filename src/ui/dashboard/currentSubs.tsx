@@ -60,6 +60,7 @@ const CurrentSubs: FC<Props> = ({ className, subs }): ReactElement => {
         <Typography variant="heading3" className="text-center sm:text-left">
           Your Plan
         </Typography>
+        
       </div>
       <div className="w-full max-w-[380px] sm:max-w-full mx-auto sm:mx-0 mt-[12px] sm:mt-[21px] bg-fill-blue pt-[29px] sm:py-[39px] sm:px-[38px] pb-[22px] gap-5 px-5 rounded-[27px] flex flex-col sm:flex-row items-center">
         <div className="flex flex-col  w-full justify-between items-center sm:items-start gap-y-2.5 sm:gap-y-[5px]">
