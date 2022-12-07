@@ -24,6 +24,7 @@ const FourOhFour = () => {
             The page you were looking for does not exist
           </Typography>
         </div>
+        
         <Link href="/">
           <a>
             <Button variant="fill" textClassName="text-white" className="w-[200px] shadow-buttonShadow2">
