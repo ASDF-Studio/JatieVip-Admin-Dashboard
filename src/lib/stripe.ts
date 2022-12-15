@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-escape */
+import dayjs from 'dayjs'
 import { IProductNames, IUser } from 'services/types'
 import Stripe from 'stripe'
 import { StripeError } from './error'
@@ -107,7 +108,7 @@ export const createStripeSession = async ({
       ],
       ...(withTrial && {
         subscription_data: {
-          trial_period_days: 7,
+          trial_end: dayjs().add(7, 'day').endOf('day').unix(),
         },
       }),
     })
@@ -538,14 +539,11 @@ export const ReleaseSchedule = async ({ scheduleId }: RealeaseScheduleParams) =>
   }
 }
 
-
 export const test = async ({ currentSub, cancelAtPeriod }: UpdateStripeSubParams) => {
   try {
     const updatedSub = await stripe.subscriptions.update(currentSub.id, {
       cancel_at_period_end: cancelAtPeriod,
     })
-
-
 
     return updatedSub
   } catch (e) {

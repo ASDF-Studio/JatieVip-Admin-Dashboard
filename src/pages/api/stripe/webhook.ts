@@ -7,7 +7,7 @@ import { getSubsName } from 'utils/helper'
 import { CreateSubsTypes } from 'services/subs'
 import { IPlan } from 'services/types'
 import { isEmpty, isNaN } from 'lodash'
-import { createUserSubOnApp, deleteUserSubsOnApp, deleteUserSubsOnAppV2 } from 'lib/app'
+import { createUserSubOnApp, deleteUserSubsOnAppV2 } from 'lib/app'
 
 export const config = { api: { bodyParser: false } }
 
@@ -145,10 +145,6 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
           moveUserId,
           subscriptionId,
         })
-      } else {
-        await deleteUserSubsOnApp({
-          moveUserId,
-        })
       }
 
       const { id = null, error = '' } = await createUserSubOnApp({
@@ -188,10 +184,6 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
         await deleteUserSubsOnAppV2({
           moveUserId,
           subscriptionId,
-        })
-      } else {
-        await deleteUserSubsOnApp({
-          moveUserId,
         })
       }
 
@@ -233,10 +225,6 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
           moveUserId,
           subscriptionId,
         })
-      } else {
-        await deleteUserSubsOnApp({
-          moveUserId,
-        })
       }
 
       const { id = null, error = '' } = await createUserSubOnApp({
@@ -275,10 +263,6 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
         await deleteUserSubsOnAppV2({
           moveUserId,
           subscriptionId,
-        })
-      } else {
-        await deleteUserSubsOnApp({
-          moveUserId,
         })
       }
 
@@ -339,8 +323,9 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
           subscriptionId,
         })
       } else {
-        await deleteUserSubsOnApp({
-          moveUserId,
+        res.status(404).send({
+          recieved: true,
+          error: `user mobile subscription not found ${moveUserId}`,
         })
       }
 

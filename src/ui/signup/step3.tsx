@@ -6,7 +6,6 @@ import { useNavigate } from 'hooks/UseRouter'
 import { ApiErrorResponse } from 'services/api'
 import Link from 'next/link'
 import axios from 'axios'
-import { useRouter } from 'next/router'
 
 type Props = {
   onChangeStep: Dispatch<SignUpSteps>
@@ -21,7 +20,8 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
   const handleUpdate = async (e) => {
     e.preventDefault()
 
-    if (username === '') {
+    if (username.trim() === '' || username.length >= 15) {
+  
       return
     }
     try {
