@@ -6,40 +6,53 @@ import { useNavigate } from 'hooks/UseRouter'
 import { ApiErrorResponse } from 'services/api'
 import Link from 'next/link'
 import axios from 'axios'
+import { useFormik } from 'formik'
+import { updateUserNameSchema } from 'utils/schema'
 
 type Props = {
   onChangeStep: Dispatch<SignUpSteps>
 }
 
 const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
-  const [username, setUsername] = useState('')
   const { navigateTo } = useNavigate()
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const handleUpdate = async (e) => {
-    e.preventDefault()
-
-    if (username.trim() === '' || username.length >= 15) {
-  
-      return
-    }
-    try {
-      setLoading(true)
-      await axios.post('/api/user/update', {
-        username,
-      })
-      onChangeStep('step2')
-    } catch (e) {
-      if (e instanceof ApiErrorResponse) {
-        if (e.statusCode === 401) {
-          navigateTo('/login')
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+    },
+    validationSchema: updateUserNameSchema,
+    onSubmit: async ({ username }) => {
+      try {
+        setLoading(true)
+        await axios.post('/api/user/update', {
+          username: username.trim(),
+        })
+        onChangeStep('step2')
+      } catch (e) {
+        if (e instanceof ApiErrorResponse) {
+          if (e.statusCode === 401) {
+            navigateTo('/login')
+          }
         }
+      } finally {
+        setLoading(false)
       }
-    } finally {
-      setLoading(false)
-    }
+    },
+  })
+
+  const { setFieldTouched, setFieldValue, errors } = formik
+
+  const { username } = formik.values
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFieldTouched(name, true, true)
+    setFieldValue(name, value)
   }
+
+  console.log(errors)
 
   return (
     <div className="flex max-w-[520px] mx-auto px-[26px] x:h-screen overflow-y-auto x:gap-[100px]  x:px-[28px] w-full flex-col x:justify-between pb-[28px] relative">
@@ -51,17 +64,22 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
-          <form onSubmit={(e) => handleUpdate(e)}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              formik.submitForm()
+            }}
+          >
             <div className="flex flex-col gap-4">
               <Input
                 focus
                 placeholder="Username"
                 name="username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleInputChange}
                 className="rounded-[22px] py-[2px] px-3 bg-border-grey"
-                // status={username === '' ? 'error' : ''}
-                // helperText={username === '' && 'Required field'}
+                status={errors.username && 'error'}
+                helperText={errors.username}
               />
               <div className="max-w-[380px]">
                 <Typography className="text-[#86949f] font-semibold" variant="body2">
@@ -81,7 +99,8 @@ const Step1: React.FC<Props> = ({ onChangeStep }): React.ReactElement => {
                 className="bg-secondary-light-blue shadow-buttonShadow3"
                 textClassName="text-white"
                 variant="fill"
-                onClick={handleUpdate}
+                type="submit"
+                onClick={formik.submitForm}
                 loading={loading}
                 disabled={loading}
               >

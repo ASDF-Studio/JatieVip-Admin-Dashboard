@@ -11,3 +11,7 @@ export const loginSchema = yup.object({
   phoneNumber: yup.string().required('required field'),
   code: yup.string().required('required field'),
 })
+
+export const updateUserNameSchema = yup.object({
+  username: yup.string().trim().max(15).matches(/^\S*$/, "username must not contain whitespaces").required('required field'),
+})
