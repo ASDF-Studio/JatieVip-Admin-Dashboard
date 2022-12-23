@@ -21,7 +21,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <Script id="omnisend-script" strategy="lazyOnload">
+      <Script id="omnisend-script" type="text/javascript" strategy="afterInteractive">
         {`
           window.omnisend = window.omnisend || [];
           omnisend.push(["accountID", "6398ed6cad1251dab940b146"]);
