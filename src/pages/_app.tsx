@@ -21,12 +21,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <Script id="omnisend-script" type="text/javascript" strategy="afterInteractive">
+      <Script id="omnisend" type="text/javascript">
         {`
-          window.omnisend = window.omnisend || [];
-          omnisend.push(["accountID", "6398ed6cad1251dab940b146"]);
-          omnisend.push(["track", "$pageViewed"]);
-          !function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://omnisnippet1.com/inshop/launcher-v2.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();
+    window.omnisend = window.omnisend || [];
+    omnisend.push(["accountID", "6398ed6cad1251dab940b146"]);
+    omnisend.push(["track", "$pageViewed"]);
+    !function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://omnisnippet1.com/inshop/launcher-v2.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();
         `}
       </Script>
       <ThemeProvider>
