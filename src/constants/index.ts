@@ -3,7 +3,8 @@ import { IProductNames } from 'services/types'
 export const SubsPLans = [
   {
     title: 'Monthly',
-    value: '$17.99',
+    value: '$1.00',
+    discountValue: '$17.99/mo from next',
     weight: 1,
   },
   {

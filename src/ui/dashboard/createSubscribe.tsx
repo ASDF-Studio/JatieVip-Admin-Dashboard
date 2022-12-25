@@ -67,8 +67,11 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
           >
             Subscribe Now
           </Button>
-          <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
+          {/* <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
             7-Day Free trial included with every plan
+          </Typography> */}
+          <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
+            $1 only for the first month with any package. Regular pricing from 2nd month.
           </Typography>
         </div>
       </div>

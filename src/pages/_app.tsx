@@ -5,7 +5,6 @@ import NProgress from 'nprogress'
 import { useEffect } from 'react'
 import { Router } from 'next/router'
 import TagManager from 'react-gtm-module'
-import Script from 'next/script'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -20,19 +19,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [])
 
   return (
-    <>
-      <Script id="omnisend" type="text/javascript">
-        {`
-    window.omnisend = window.omnisend || [];
-    omnisend.push(["accountID", "6398ed6cad1251dab940b146"]);
-    omnisend.push(["track", "$pageViewed"]);
-    !function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://omnisnippet1.com/inshop/launcher-v2.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();
-        `}
-      </Script>
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
   )
 }
 
