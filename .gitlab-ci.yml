@@ -1,5 +1,6 @@
 stages:
   - runprod
+  - runstaging
 
 run_prod:
   only:
@@ -13,4 +14,17 @@ run_prod:
     - docker system prune -f
   tags:
     - prod
+
+run_staging:
+  only:
+    - staging
+  stage: runstaging
+  script:
+    - cp $ENV_PROD .env
+    - docker build -t movefit  .
+    - docker ps --quiet --filter="name=movefit" | xargs --no-run-if-empty docker rm -f
+    - docker run --name movefit -dt -p 3000:3000 --restart always movefit:latest
+    - docker system prune -f
+  tags:
+    - staging
 
