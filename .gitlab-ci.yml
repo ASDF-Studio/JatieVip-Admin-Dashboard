@@ -20,7 +20,8 @@ run_staging:
     - staging
   stage: runstaging
   script:
-    - echo "Hello world"
+    - var="Hello World"
+    - echo "$var"
     - cp $ENV_PROD .env
     - docker build -t movefit  .
     - docker ps --quiet --filter="name=movefit" | xargs --no-run-if-empty docker rm -f
