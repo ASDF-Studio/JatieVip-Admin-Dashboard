@@ -16,34 +16,26 @@ class MyDocument extends Document {
           <meta property="og:description" content="See amazing fitness results in 3-months" />
           <meta property="og:image" content="/assets/videos/poster.jpg" />
         </Head>
-        {/* <Script id="google-tag-manager" strategy="afterInteractive">
+        <Script id="google-tag-manager" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NNSC655');`}
-        </Script> */}
+        </Script>
         <Body>
           <div>ewqewqewqewq</div>
           <Main />
           <NextScript />
         </Body>
 
-        {/* <Script id="omnisend" strategy="afterInteractive" type="text/javascript">
-          {`
-    window.omnisend = window.omnisend || [];
-    omnisend.push(["accountID", "6398ed6cad1251dab940b146"]);
-    omnisend.push(["track", "$pageViewed"]);
-    !function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://omnisnippet1.com/inshop/launcher-v2.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();
-        `}
-        </Script> */}
-        {/* <Script id="gtm" strategy="afterInteractive">
+        <Script id="gtm" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NNSC655');`}
-        </Script> */}
+        </Script>
       </Html>
     )
   }
