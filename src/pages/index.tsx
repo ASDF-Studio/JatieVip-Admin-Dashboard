@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { HeroSection, SecondHero, ThirdHero, ForthHero, Apple, LandingLayout, LeftBar } from 'ui/landing'
 import { useInView } from 'react-intersection-observer'
 import Head from 'next/head'
+import { Reviews } from 'ui/landing/reviews'
 
 const Landing: NextPage = () => {
   const { ref, inView } = useInView({
@@ -27,6 +28,7 @@ const Landing: NextPage = () => {
         <ThirdHero />
         <ForthHero />
         <Apple />
+        <Reviews />
       </div>
     </LandingLayout>
   )
