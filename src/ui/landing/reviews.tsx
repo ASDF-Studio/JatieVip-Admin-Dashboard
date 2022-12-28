@@ -58,27 +58,33 @@ export const Reviews: React.FC = (): React.ReactElement => {
               Our users ❤️ love us
             </Heading1>
           </div>
-          <Typography
+          {/* <Typography
             variant="body3"
             className="text-center sm:text-left mt-[9px] sm:mt-[23px] x:mt-[19px] sm:max-w-[624px]"
           >
             Our Habit Tracker feature - designed to assist you in building and maintaining healthy habits to keep your
             goals the top priority.
-          </Typography>
+          </Typography> */}
         </div>
         <div className="flex  flex-wrap sm:gap-x-[43.5px] x:gap-x-[30px] 2xl:gap-x-[75px] mt-[45.5px] sm:mt-[40px] px-[30px] sm:px-0 sm:pl-[41.5px] sm:pr-[39px] x:pr-0 x:pl-0 gap-y-[30px] x:mt-[72px] 2xl:mt-[61px]">
-          <Card
+          {/* <Card
             className="order-1"
             icon={<img src="/assets/svg/bell-on.svg" alt="person running icon" className="w-[1.875rem] h-[1.875rem]" />}
             title="Create Personalized Habits"
             desc="Keep yourself accountable by adding daily reminders to your tracker."
+          /> */}
+          <img
+            src="/assets/landing/customer-rev-@3x.webp"
+            alt=""
+            // className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[390px]"
+            className="max-w-[380px] max-h-[274px]"
           />
           <Card
-            className="order-2 "
+            className="order-2 left-[20px]"
             icon={
               <img src="/assets/svg/badge-check.svg" alt="person running icon" className="w-[1.875rem] h-[1.875rem]" />
             }
-            title="Accomplishment Badges"
+            title="  I just love the Move App"
             desc="Gamify your life with winnable virtual badges to remind yourself of your accomplishments"
           />
           <Card
