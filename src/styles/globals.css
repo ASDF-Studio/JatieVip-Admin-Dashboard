@@ -202,12 +202,18 @@ input:-webkit-autofill:active {
 }
 
 .react-tel-input .selected-flag .arrow {
-  border-top-color: #19A3D1 !important;
+  border-top-color: #19a3d1 !important;
 }
 .react-tel-input .selected-flag:focus .arrow {
-  border-top-color: #19A3D1 !important;
+  border-top-color: #19a3d1 !important;
 }
 .react-tel-input .selected-flag .arrow.up {
-  border-bottom-color: #19A3D1 !important;
-  
+  border-bottom-color: #19a3d1 !important;
+}
+
+.star {
+  width: 25px;
+  height: 25px;
+  margin: 0 5px 0 0;
+  background-color: #f5853f;
 }
