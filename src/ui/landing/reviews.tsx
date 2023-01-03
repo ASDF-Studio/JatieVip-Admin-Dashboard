@@ -49,7 +49,7 @@ export const Reviews: React.FC = (): React.ReactElement => {
             title="I saw INCREDIBLE results"
             desc="I started following Katie and Josh workout videos on YouTube after I 
               had my first 2 kids. Within 3 months I saw INCREDIBLE results. 
-              I started looking better and most importantly FEELING better!!! 
+              I started looking better and most importantly FEELING better!!!! 
               Working out isn't just for physical health, it's also for mental health. 
               Since then, I had a 3rd baby and knew just who to go to if I wanted to get 
               my body and mind back!
