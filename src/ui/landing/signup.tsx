@@ -8,7 +8,7 @@ export const Signup: React.FC = (): React.ReactElement => {
   return (
     <div
       className="flex flex-col relative bg-[url('/assets/landing/signup/signup.svg')] 
-      bg-cover bg-no-repeat z-0 pt-[100px] pb-[50px] items-center"
+      bg-cover bg-no-repeat z-30 pt-[100px] pb-[50px] items-center"
     >
       <div className="flex flex-col">
         <div className="flex flex-col gap-[2px] items-center">
