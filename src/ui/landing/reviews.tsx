@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { Title, Heading1, Card } from 'components'
 import { CardReview } from 'components/card-review'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Reviews: React.FC = (): React.ReactElement => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -10,13 +10,21 @@ export const Reviews: React.FC = (): React.ReactElement => {
     {
       url: '/assets/landing/reviews/customer-rev-@3x.webp',
     },
-    {
-      url: '/assets/landing/reviews/customer-rev-@3x.webp',
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
-    },
+    // {
+    //   url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
+    // },
   ]
+
+  useEffect(() => {
+    const autoChange = () => {
+      const isLastSlide = currentIndex === slides.length - 1
+      const newIndex = isLastSlide ? 0 : currentIndex + 1
+      setCurrentIndex(newIndex)
+    }
+    setInterval(() => {
+      autoChange()
+    }, 4000)
+  }, [currentIndex, slides.length])
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0
@@ -123,8 +131,13 @@ export const Reviews: React.FC = (): React.ReactElement => {
           </div> */}
 
           <CardReview
-            className="order-2 sm:order-2"
+            className="order-2 sm:order-2 mt-[10px]"
             icons={[
+              <img
+                src="/assets/landing/reviews/double-quote.svg"
+                alt="star icon"
+                className="w-[86px] h-[60px] -mt-[35px] -ml-[100px]"
+              />,
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
@@ -134,7 +147,7 @@ export const Reviews: React.FC = (): React.ReactElement => {
             title="I saw INCREDIBLE results"
             desc="I started following Katie and Josh workout videos on YouTube after I 
               had my first 2 kids. Within 3 months I saw INCREDIBLE results. 
-              I started looking better and most importantly FEELING better!!!! 
+              I started looking better and most importantly FEELING better!!!
               Working out isn't just for physical health, it's also for mental health. 
               Since then, I had a 3rd baby and knew just who to go to if I wanted to get 
               my body and mind back!
