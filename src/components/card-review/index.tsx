@@ -26,7 +26,8 @@ export const CardReview: React.FC<Props> = ({ icons, title, desc, className = ''
 
       <Typography
         variant="desc"
-        className="leading-[1.47] tracking-[0.25px] text-[#191b1c]/70 w-[600px] font-medium text-center sm:text-start"
+        className="leading-[1.47] tracking-[0.25px] text-[#191b1c]/70  font-medium 
+        text-center sm:text-start sm:w-[350px] x:w-[600px]"
       >
         {desc}
       </Typography>
