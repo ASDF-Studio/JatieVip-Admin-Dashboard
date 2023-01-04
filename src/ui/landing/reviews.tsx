@@ -33,7 +33,7 @@ export const Reviews: React.FC = (): React.ReactElement => {
   return (
     <div
       id="habit-tracking"
-      className="relative flex -top-[100px] 
+      className="relative flex -top-[70px] h-[1100px] sm:h-[800px] x:h-[800px]
       bg-[url('/assets/landing/reviews/review-bg.svg')]"
     >
       <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
