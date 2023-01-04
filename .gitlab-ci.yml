@@ -27,4 +27,3 @@ run_staging:
     - docker system prune -f
   tags:
     - staging
-
