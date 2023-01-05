@@ -221,9 +221,9 @@ export const Reviews: React.FC = (): React.ReactElement => {
               </svg>
             </div>
             <hr
-              className="w-[240px] p-1 bg-[#e2fcff] rounded-full 
+              className={`w-[240px] p-1 bg-[#e2fcff] relative rounded-full 
                 after:absolute after:block after:inline-block after:-inset-1 
-                after:bg-[#19a3d1] after:w-[120px] relative after:left-[120px]"
+                after:bg-[#19a3d1] after:w-[120px] ${slidePointer[currentIndex].pointer}:left-[120px]`}
             />
           </div>
         </div>
