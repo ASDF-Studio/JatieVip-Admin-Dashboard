@@ -8,7 +8,7 @@ export const Reviews: React.FC = (): React.ReactElement => {
 
   const slides = [
     {
-      url: '/assets/landing/reviews/customer-rev-@3x.webp',
+      url: '/assets/landing/reviews/customer-rev-1@3x.webp',
       title: 'I saw INCREDIBLE results',
       desc: `I started following Katie and Josh workout videos on YouTube 
       after I had my first 2 kids. Within 3 months I saw INCREDIBLE results. 
@@ -18,12 +18,29 @@ export const Reviews: React.FC = (): React.ReactElement => {
       my body and mind back! Now that Josh and Katie have made the move app I can 
       have a whole variety  of workouts to chose from to reach my fitness goals. 
       The app is affordable,  easy to navigate, and IT WORKS!!! I will never go 
-      back to another workout program`,
+      back to another workout program.`,
+      authorName: 'Anna Hauger',
+    },
+    {
+      url: '/assets/landing/reviews/customer-rev-2@3x.webp',
+      title: 'I just love the Move App',
+      desc: `I can’t thank @j80fit ( @katiebrueckner & @joshbrueckner ) enough for 
+      creating such an awesome program!!!! So excited to continue my fitness journey 
+      with the @moveapp since it’s SO easy to use and the programs ACTUALLY work!!!!`,
       authorName: 'Anna Hauger',
     },
     // {
     //   url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
     // },
+  ]
+
+  const slidePointer = [
+    {
+      pointer: 'before',
+    },
+    {
+      pointer: 'after',
+    },
   ]
 
   useEffect(() => {
@@ -51,6 +68,10 @@ export const Reviews: React.FC = (): React.ReactElement => {
     setCurrentIndex(newIndex)
   }
 
+  // const goToSlide = (slideIndex) => {
+  //   setCurrentIndex(slideIndex)
+  // }
+
   return (
     <div
       id="habit-tracking"
@@ -74,25 +95,18 @@ export const Reviews: React.FC = (): React.ReactElement => {
               Our users ❤️ love us
             </Heading1>
           </div>
-          {/* <Typography
-            variant="body3"
-            className="text-center sm:text-left mt-[9px] sm:mt-[23px] x:mt-[19px] sm:max-w-[624px]"
-          >
-            Our Habit Tracker feature - designed to assist you in building and maintaining healthy habits to keep your
-            goals the top priority.
-          </Typography> */}
         </div>
         <div
           className="flex flex-wrap gap-x-[43.5px] sm:gap-x-[23px] x:gap-x-[23px] 2xl:gap-x-[23px] 
-          mt-[45.5px] sm:mt-[40px] px-[30px] sm:px-0 sm:pl-[41.5px] sm:pr-[39px] x:pr-0 x:pl-0 
-          gap-y-[30px] x:mt-[72px] 2xl:mt-[61px] mb-60"
+          mt-[20px] sm:mt-[40px] px-[30px] sm:px-0 sm:pl-[41.5px] sm:pr-[39px] x:pr-0 x:pl-0 
+           x:mt-[72px] 2xl:mt-[61px] mb-60"
         >
-          <div className="order-1 sm:order-1 max-w-[380px] h-[274px] w-full relative mb-20">
+          <div className="order-1 sm:order-1 max-w-[380px] h-[274px] w-full relative mb-20 z-10">
             <div
               style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-              className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
+              className="w-full h-full rounded-2xl bg-center bg-cover duration-500 "
             />
-            <div className="mt-10 flex items-center gap-x-3">
+            <div className="hidden sm:flex mt-10 flex items-center gap-x-3">
               {/* Left Arrow */}
               <div
                 className="rounded-full p-2 bg-[#19a3d1] text-white 
@@ -128,29 +142,38 @@ export const Reviews: React.FC = (): React.ReactElement => {
                 </svg>
               </div>
               <hr
-                className="w-[240px] p-1 bg-[#e2fcff] rounded-full 
+                className={`w-[240px] p-1 bg-[#e2fcff] relative rounded-full 
                 after:absolute after:block after:inline-block after:-inset-1 
-                after:bg-[#19a3d1] after:w-[120px] relative after:left-[120px]"
+                after:bg-[#19a3d1] after:w-[120px] ${slidePointer[currentIndex].pointer}:left-[120px]`}
               />
+              {/* <hr
+                className="w-[240px] p-1 bg-[#e2fcff] relative rounded-full 
+                after:absolute after:block after:inline-block after:-inset-1 
+                after:bg-[#19a3d1] after:w-[120px] after:left-[120px]"
+              /> */}
+              {/* <div className="flex  bg-[#e2fcff] w-[240px]">
+                {slides.map((slide, slideIndex) => (
+                  <div
+                    key={slideIndex}
+                    onClick={() => goToSlide(slideIndex)}
+                    className="text-[1opx] cursor-pointer text-[#19a3d1] w-[120px]"
+                  >
+                    _
+                  </div>
+                ))}
+              </div> */}
             </div>
           </div>
-          {/* <div className="order-1 sm:order-1">
-            <img
-              src="/assets/landing/reviews/customer-rev-@3x.webp"
-              alt=""
-              // className="max-w-[248px] -top-[135px] left-[125px] sm:max-w-[355px] sm:-top-[215px] sm:left-[285px] absolute ms:-top-[130px] ms:left-[135px] x:-top-[205px] x:left-[415px]  xl:left-[285px] 2xl:left-[345px] 5xl:left-[390px]"
-              className="max-w-[380px] max-h-[274px] m-0"
-            />
-          </div> */}
+
+          <img
+            src="/assets/landing/reviews/double-quote.svg"
+            alt="star icon"
+            className="absolute flex w-[86px] h-[60px] -mt-[25px] ml-[303px] z-0"
+          />
 
           <CardReview
-            className="order-2 sm:order-2 mt-[10px]"
+            className="order-2 sm:order-2 -mt-[70px] sm:-mt-[0px]"
             icons={[
-              <img
-                src="/assets/landing/reviews/double-quote.svg"
-                alt="star icon"
-                className="w-[86px] h-[60px] -mt-[35px] -ml-[100px]"
-              />,
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
@@ -161,6 +184,48 @@ export const Reviews: React.FC = (): React.ReactElement => {
             desc={slides[currentIndex].desc}
             authorName={slides[currentIndex].authorName}
           />
+
+          <div className="sm:hidden order-3 sm:order-3 mt-10 flex items-center gap-x-3">
+            {/* Left Arrow */}
+            <div
+              className="rounded-full p-2 bg-[#19a3d1] text-white 
+              text-2xl cursor-pointer"
+            >
+              <svg
+                onClick={prevSlide}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            </div>
+            {/* Right Arrow */}
+            <div
+              className="rounded-full  p-2 bg-[#19a3d1] 
+              text-2xl text-white cursor-pointer"
+            >
+              <svg
+                onClick={nextSlide}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
+            <hr
+              className="w-[240px] p-1 bg-[#e2fcff] rounded-full 
+                after:absolute after:block after:inline-block after:-inset-1 
+                after:bg-[#19a3d1] after:w-[120px] relative after:left-[120px]"
+            />
+          </div>
         </div>
       </div>
     </div>
