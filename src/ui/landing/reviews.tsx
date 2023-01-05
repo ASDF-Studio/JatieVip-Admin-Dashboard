@@ -9,6 +9,17 @@ export const Reviews: React.FC = (): React.ReactElement => {
   const slides = [
     {
       url: '/assets/landing/reviews/customer-rev-@3x.webp',
+      title: 'I saw INCREDIBLE results',
+      desc: `I started following Katie and Josh workout videos on YouTube 
+      after I had my first 2 kids. Within 3 months I saw INCREDIBLE results. 
+      I started looking better and most importantly FEELING better!!! 
+      Working out isn't just for physical health, it's also for mental health.  
+      Since then, I had a 3rd baby and knew just who to go to if I wanted to get  
+      my body and mind back! Now that Josh and Katie have made the move app I can 
+      have a whole variety  of workouts to chose from to reach my fitness goals. 
+      The app is affordable,  easy to navigate, and IT WORKS!!! I will never go 
+      back to another workout program`,
+      authorName: 'Anna Hauger',
     },
     // {
     //   url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
@@ -21,9 +32,11 @@ export const Reviews: React.FC = (): React.ReactElement => {
       const newIndex = isLastSlide ? 0 : currentIndex + 1
       setCurrentIndex(newIndex)
     }
-    setInterval(() => {
+    const interval = setInterval(() => {
       autoChange()
     }, 4000)
+
+    return () => clearInterval(interval)
   }, [currentIndex, slides.length])
 
   const prevSlide = () => {
@@ -144,17 +157,9 @@ export const Reviews: React.FC = (): React.ReactElement => {
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
               <img src="/assets/landing/reviews/star@3x.webp" alt="star icon" className="w-[25px] h-[25px]" />,
             ]}
-            title="I saw INCREDIBLE results"
-            desc="I started following Katie and Josh workout videos on YouTube after I 
-              had my first 2 kids. Within 3 months I saw INCREDIBLE results. 
-              I started looking better and most importantly FEELING better!!!
-              Working out isn't just for physical health, it's also for mental health. 
-              Since then, I had a 3rd baby and knew just who to go to if I wanted to get 
-              my body and mind back!
-              Now that Josh and Katie have made the move app I can have a whole variety 
-              of workouts to chose from to reach my fitness goals. The app is affordable, 
-              easy to navigate, and IT WORKS!!! I will never go back to another workout program"
-            authorName="Anna Hauger"
+            title={slides[currentIndex].title}
+            desc={slides[currentIndex].desc}
+            authorName={slides[currentIndex].authorName}
           />
         </div>
       </div>
