@@ -23,11 +23,16 @@ export const Reviews: React.FC = (): React.ReactElement => {
     },
     {
       url: '/assets/landing/reviews/customer-rev-2@3x.webp',
-      title: 'I just love the Move App',
-      desc: `I can’t thank @j80fit ( @katiebrueckner & @joshbrueckner ) enough for 
-      creating such an awesome program!!!! So excited to continue my fitness journey 
-      with the @moveapp since it’s SO easy to use and the programs ACTUALLY work!!!!`,
-      authorName: 'Anna Hauger',
+      title: `Let's Move!!`,
+      desc: `Let's Move and sweat either in the comfort of your living room or in the gym. 
+      You make that choice, try an App that won't disappoint you but will get you the 
+      results you've always wished for. This App will show you step by step on what 
+      workout to do, with breaks throughout the workout. Select the workout and get moving. 
+      You will not be disappointed BUT you will get fit.. You also will be given a FREE 7 
+      days trail just so you can test the App out before committing. Hands down, you will 
+      commit. Stay focused, hit your goals, never give up, and go for it! You've got this!! 
+      Let's Go!!! Reply…`,
+      authorName: 'Mary Pine-Calderon',
     },
     // {
     //   url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
