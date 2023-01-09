@@ -13,15 +13,23 @@ export const Signup: React.FC = (): React.ReactElement => {
       <div className="flex flex-col">
         <div className="flex flex-col gap-[2px] items-center">
           <Title className="text-center text-white/60">Subscribe to our newsletter</Title>
-          <Heading1 className="text-center text-white ">Sign up for Deals and Discounts</Heading1>
+          <div className="relative">
+            <Heading1 className="text-center text-white">Sign up for Deals and Discounts</Heading1>
+            <img
+              src="/assets/landing/path.svg"
+              className="w-[145px] h-[49px] absolute -bottom-1 -z-10 -right-1 object-cover 
+              sm:w-[200px] sm:h-[49px] sm:-bottom-1 x:w-[200px] x:h-[49px]"
+              alt=""
+            />
+          </div>
         </div>
       </div>
       <Button
         variant="ghost"
         className="bg-[#d663d5] text-white shadow-glassShadow 
-        w-[300px] sm:w-[368px] pt-[11px] pb-[10px] mt-[20px]"
+        w-[300px] sm:w-[330px] h-[44px] mt-[20px]"
       >
-        <Typography onClick={() => navigateTo('/signup')} variant="bodyBold">
+        <Typography onClick={() => navigateTo('https://web.movefit.com')} variant="bodyBold">
           Subscribe to our Newsletter
         </Typography>
       </Button>
