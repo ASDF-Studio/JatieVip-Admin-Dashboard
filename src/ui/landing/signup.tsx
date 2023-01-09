@@ -12,13 +12,15 @@ export const Signup: React.FC = (): React.ReactElement => {
     >
       <div className="flex flex-col">
         <div className="flex flex-col gap-[2px] items-center">
-          <Title className="text-center text-white/60">Subscribe to our newsletter</Title>
+          <Title className="text-center text-white/60 text-[14px] sm:text-[16px]">Subscribe to our newsletter</Title>
           <div className="relative">
-            <Heading1 className="text-center text-white">Sign up for Deals and Discounts</Heading1>
+            <Heading1 className="text-center text-white text-[25px] sm:text-[29.5px]">
+              Sign up for Deals and Discounts
+            </Heading1>
             <img
               src="/assets/landing/path.svg"
-              className="w-[145px] h-[49px] absolute -bottom-1 -z-10 -right-1 object-cover 
-              sm:w-[200px] sm:h-[49px] sm:-bottom-1 x:w-[200px] x:h-[49px]"
+              className="w-[125px] h-[49px] absolute -bottom-1 -z-10 -right-1 object-cover
+              sm:w-[145px] sm:h-[49px] sm:-bottom-1 x:w-[145px] x:h-[49px]"
               alt=""
             />
           </div>
