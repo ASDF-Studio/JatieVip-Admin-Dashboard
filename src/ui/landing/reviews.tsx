@@ -173,7 +173,10 @@ export const Reviews: React.FC = (): React.ReactElement => {
           <img
             src="/assets/landing/reviews/double-quote.svg"
             alt="star icon"
-            className="absolute flex w-[86px] h-[60px] -mt-[25px] ml-[303px] z-0"
+            className="absolute flex z-0 w-[86px] h-[60px] 
+            -mt-[25px] ml-[275px] 
+            xs:-mt-[25px] xs:ml-[290px] 
+            sm:-mt-[25px] sm:ml-[303px]"
           />
 
           <CardReview
