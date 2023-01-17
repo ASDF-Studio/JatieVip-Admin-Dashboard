@@ -8,7 +8,7 @@ export const Reviews: React.FC = (): React.ReactElement => {
 
   const slides = [
     {
-      url: '/assets/landing/reviews/customer-rev-1@3x.webp',
+      url: '/assets/landing/reviews/customer-rev-2@3x.webp',
       title: 'I saw INCREDIBLE results',
       desc: `I started following Katie and Josh workout videos on YouTube 
       after I had my first 2 kids. Within 3 months I saw INCREDIBLE results. 
@@ -22,7 +22,7 @@ export const Reviews: React.FC = (): React.ReactElement => {
       authorName: 'Anna Hauger',
     },
     {
-      url: '/assets/landing/reviews/customer-rev-2@3x.webp',
+      url: '/assets/landing/reviews/customer-rev-1@3x.webp',
       title: `Let's Move!!`,
       desc: `Let's Move and sweat either in the comfort of your living room or in the gym. 
       You make that choice, try an App that won't disappoint you but will get you the 
