@@ -16,8 +16,8 @@ export const Tag: FC<Props> = ({ date = null, price = 0, loading = false }): Rea
   ) : (
     <div className="rounded-[14px] px-4 pt-1.5 pb-1 bg-primary-brand/10">
       <Typography className="text-primary-brand" variant="label2">
-        {/* {`Next Payment: ${dayjs.unix(date).format('MMMM DD, YYYY')} | $${(price / 100).toFixed(2)}`} */}
-        {`Next Payment: ${dayjs.unix(date).format('MMMM DD, YYYY')}`}
+        {`Next Payment: ${dayjs.unix(date).format('MMMM DD, YYYY')} | $${(price / 100).toFixed(2)}`}
+        {/* {`Next Payment: ${dayjs.unix(date).format('MMMM DD, YYYY')}`} */}
       </Typography>
     </div>
   )
