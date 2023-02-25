@@ -21,11 +21,13 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
   const router = useRouter()
 
   const [showReactiveModal, setShowReactiveModal] = useState(false)
-  const [acknowledgeText, setAcknowledgeText] = useState<string>('I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.')
+  const [acknowledgeText, setAcknowledgeText] = useState<string>(
+    'I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.',
+  )
 
   const handleClickOpen = () => {
-    setShowReactiveModal(true);
-  };
+    setShowReactiveModal(true)
+  }
   const handleSubscribe = async () => {
     setLoading(true)
     setShowError(false)
@@ -73,8 +75,11 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
           >
             Subscribe Now
           </Button>
-          <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
+          {/* <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
             7-Day Free trial included with every plan
+          </Typography> */}
+          <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
+            $44.97 only for 3 mth and get next 3 mth free! Regular charges will occur at the start of your 7th month.
           </Typography>
         </div>
       </div>
