@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import { BoxSelect, Button, Hello } from 'components'
+import { BoxSelect, Button, ConfirmationModal, Hello } from 'components'
 import { ErrorModal } from 'components/modals/error-modal'
 import { StripeError } from 'lib/error'
 import Link from 'next/link'
@@ -20,6 +20,12 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
   const [showError, setShowError] = useState<boolean>(false)
   const router = useRouter()
 
+  const [showReactiveModal, setShowReactiveModal] = useState(false)
+  const [acknowledgeText, setAcknowledgeText] = useState<string>('I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.')
+
+  const handleClickOpen = () => {
+    setShowReactiveModal(true);
+  };
   const handleSubscribe = async () => {
     setLoading(true)
     setShowError(false)
@@ -63,7 +69,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
             className="w-full sm:w-[25rem]"
             variant="fill"
             textClassName="text-white"
-            onClick={handleSubscribe}
+            onClick={handleClickOpen}
           >
             Subscribe Now
           </Button>
@@ -100,6 +106,14 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
         </div>
       </div>
       <ErrorModal isCreate onAccept={handleSubscribe} open={showError} setOpen={setShowError} error={error} />
+      <ConfirmationModal
+        open={showReactiveModal}
+        setOpen={setShowReactiveModal}
+        cancelText="Cancel"
+        onAccept={handleSubscribe}
+        acceptText="Continue"
+        contentText={acknowledgeText}
+      />
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import Head from 'next/head'
 import { Reviews } from 'ui/landing/reviews'
 import { Signup } from 'ui/landing/signup'
+import CreateSubs from 'ui/dashboard/createSubscribe'
 
 const Landing: NextPage = () => {
   const { ref, inView } = useInView({
@@ -19,19 +20,20 @@ const Landing: NextPage = () => {
 
   return (
     <LandingLayout inView={inView || inViewFooter} ref={footerRef}>
-      <Head>
+      {/* <Head>
         <title>Movefit</title>
       </Head>
       <LeftBar isBlue={inViewSecondHero} inView={inView || inViewFooter} />
       <HeroSection />
-      <SecondHero ref={heroRef} />
-      <div ref={ref}>
-        <ThirdHero />
+      <SecondHero ref={heroRef} /> */}
+      {/* <div ref={ref}> */}
+        {/* <ThirdHero />
         <ForthHero />
         <Apple />
         <Reviews />
-        <Signup />
-      </div>
+        <Signup /> */}
+        <CreateSubs/>
+      {/* </div> */}
     </LandingLayout>
   )
 }
