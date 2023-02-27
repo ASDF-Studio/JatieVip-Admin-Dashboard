@@ -79,7 +79,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
             7-Day Free trial included with every plan
           </Typography> */}
           <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
-            $44.97 only for 3 mth and get next 3 mth free! Regular charges will occur at the start of your 7th month.
+            Buy 3-months and get 3-months free! Regular charges will start after month 6.
           </Typography>
         </div>
       </div>
