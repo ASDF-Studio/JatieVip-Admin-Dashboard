@@ -42,7 +42,9 @@ export const BoxSelect: FC<Props> = ({ onChange = undefined, data, classname = '
                     {value}
                   </Typography>
                   {discountValue && (
-                    <Typography className="text-fill-grey/70 text-[13px] font-normal">{discountValue}</Typography>
+                    <Typography className="text-fill-grey/70 text-[13px] font-normal -tracking-[.5px]">
+                      {discountValue}
+                    </Typography>
                   )}
                 </div>
               </div>
