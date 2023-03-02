@@ -108,6 +108,7 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
       status?: Stripe.Subscription.Status
       current_period_end?: number
       current_period_start?: number
+      latest_invoice?: string
     }
 
     const customerId = subscription.customer as string
@@ -127,6 +128,50 @@ const stripeWebhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (previousvalues?.cancel_at !== undefined) {
       console.log('subscription canceled or reactivated at end of the current period')
+      res.send({ received: true })
+
+      return
+    }
+
+    if (
+      previousvalues.schedule &&
+      previousvalues.current_period_end &&
+      previousvalues.current_period_start &&
+      previousvalues.latest_invoice
+    ) {
+      if (subscriptionId) {
+        await deleteUserSubsOnAppV2({
+          moveUserId,
+          subscriptionId,
+        })
+      }
+
+      const { id = null, error = '' } = await createUserSubOnApp({
+        user_id: moveUserId,
+        valid_from: dayjs.unix(current_period_start).toISOString(),
+        valid_to: dayjs.unix(current_period_end).toISOString(),
+        type: subs.planName as CreateSubsTypes,
+      })
+
+      if (!id) {
+        res
+          .status(500)
+          .send({ received: true, message: `subscription creating error for user ${moveUserId}, erroris: ${error}` })
+
+        await stripe.customers.update(customerId, {
+          metadata: {
+            subscriptionId: null,
+          },
+        })
+
+        return
+      }
+
+      await stripe.customers.update(customerId, {
+        metadata: {
+          subscriptionId: id,
+        },
+      })
       res.send({ received: true })
 
       return
