@@ -75,12 +75,12 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
           >
             Subscribe Now
           </Button>
-          {/* <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
+          <Typography variant="bodyBold" className="text-[#86949f] text-center sm:text-left">
             7-Day Free trial included with every plan
-          </Typography> */}
-          <Typography variant="bodyBold" className="text-[#191B1C] font-[700] text-center sm:text-left">
-            Buy 3-months and get 3-months free! Regular charges will start after month 6.
           </Typography>
+          {/* <Typography variant="bodyBold" className="text-[#191B1C] font-[700] text-center sm:text-left">
+            Buy 3-months and get 3-months free! Regular charges will start after month 6.
+          </Typography> */}
         </div>
       </div>
       <div className="w-full max-w-[385px] mx-auto sm:mx-0 sm:max-w-full flex-col sm:flex-row bg-fill-blue  py-[30px]  gap-y-[14px] rounded-[27px] flex justify-between items-center mt-[30px] px-[25px] sm:px-[40px]">

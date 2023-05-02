@@ -106,11 +106,11 @@ export const createStripeSession = async ({
           quantity: 1,
         },
       ],
-      // ...(withTrial && {
-      //   subscription_data: {
-      //     trial_end: dayjs().add(7, 'day').endOf('day').unix(),
-      //   },
-      // }),
+      ...(withTrial && {
+        subscription_data: {
+          trial_end: dayjs().add(7, 'day').endOf('day').unix(),
+        },
+      }),
     })
 
     return stripeSession
