@@ -109,6 +109,7 @@ module.exports = {
           black: colors.text.black,
           blue: colors.text.blue,
           error: colors.text.erorr,
+          grey: colors.text.grey,
         },
         fill: {
           orange: colors.fill.orange,
@@ -120,6 +121,11 @@ module.exports = {
           lightBlue2: colors.fill.lightBlue2,
           hover: colors.fill.hover,
           landingBlack: colors.fill.landingBlack,
+          // jatie
+          purple: colors.fill.purple,
+          lightPurple: colors.fill.lightPurple,
+          lightYellow: colors.fill.lightYellow,
+          lightestYellow: colors.fill.lightestYellow,
         },
         accent: {
           white: colors.accent.white,
@@ -128,6 +134,9 @@ module.exports = {
           blue: colors.border.blue,
           grey: colors.border.grey,
           lightBlue: colors.border.lightBlue,
+          yellow: colors.border.yellow,
+          lightYellow: colors.border.lightYellow,
+          lightGrey: colors.border.lightGrey,
         },
       },
       borderRadius: {

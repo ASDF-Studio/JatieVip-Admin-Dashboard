@@ -4,6 +4,8 @@ import { useInView } from 'react-intersection-observer'
 import Head from 'next/head'
 import { Reviews } from 'ui/landing/reviews'
 import { Signup } from 'ui/landing/signup'
+import { AdminDashBoard, CreateSub } from 'ui/dashboard'
+import { MainLayout } from 'components'
 
 const Landing: NextPage = () => {
   const { ref, inView } = useInView({
@@ -18,8 +20,9 @@ const Landing: NextPage = () => {
   })
 
   return (
-    <LandingLayout inView={inView || inViewFooter} ref={footerRef}>
-      <Head>
+    <div>
+    {/* <LandingLayout inView={inView || inViewFooter} ref={footerRef}> */}
+      {/* <Head>
         <title>Movefit</title>
       </Head>
       <LeftBar isBlue={inViewSecondHero} inView={inView || inViewFooter} />
@@ -31,8 +34,12 @@ const Landing: NextPage = () => {
         <Apple />
         <Reviews />
         <Signup />
+      </div> */}
+      <MainLayout className="pt-[66px]">
+        <AdminDashBoard className="max-w-screen-move-fit mx-auto flex flex-col mt-[23px] x:mt-[53px] min-h-[calc(100vh-209px)] px-5" />
+      </MainLayout>
       </div>
-    </LandingLayout>
+    // </LandingLayout>
   )
 }
 

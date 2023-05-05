@@ -56,7 +56,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
       }  px-5 items-center border-b border-accent-white ${classNames} ${hidden && 'x:hidden'}`}
     >
       <div className="hover:cursor-pointer" onClick={() => navigateTo('/dashboard')}>
-        <img className="h-[35px] w-[121px]" src="/assets/logos/logo.svg" alt="move logo" />
+        <img className="h-[65px] w-[121px]" src="/assets/logos/jatieVIP2.svg" alt="move logo" />
       </div>
 
       {withNavBar && (

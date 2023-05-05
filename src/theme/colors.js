@@ -28,7 +28,7 @@ module.exports = {
   text: {
     black: '#2b2d42',
     white: '#FFFFFF',
-    grey: 'rgba(127,127,127,1)',
+    grey: '#80818e',
     disabled: 'rgba(255, 255, 255, 0.5)',
     nest: '#00DCF0',
     hop: '#FF9500',
@@ -39,7 +39,10 @@ module.exports = {
   border: {
     blue: 'rgba(50,161,199, 1)',
     grey: 'rgba(245,247,249, 1)',
+    lightGrey: 'rgba(134, 148, 159, 0.1)',
     lightBlue: 'rgba(25, 163, 209, 0.2)',
+    yellow: '#d3a708',
+    lightYellow: 'rgba(211, 167, 8, 0.32)',
   },
   accent: {
     white: '#F5F7F9',
@@ -77,5 +80,12 @@ module.exports = {
     lightBlue2: 'rgb(213, 236, 244)',
     hover: '#D0F0FC',
     landingBlack: 'rgba(25,27,28,1)',
+
+    //jatie
+
+    purple: '#9381ff',
+    lightPurple: '#eae7ff',
+    lightYellow: '#faf4e1',
+    lightestYellow: 'rgba(211, 167, 8, 0.2)',
   },
 }
