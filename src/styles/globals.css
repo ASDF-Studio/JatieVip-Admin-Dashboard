@@ -31,6 +31,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Recoleta';
+  src: url('../../fonts/Recoleta/Recoleta-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -1,6 +1,7 @@
 /* eslint-ignore */
 const colors = require('./src/theme/colors.js')
 const defaultTheme = require('tailwindcss/defaultTheme')
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -62,6 +63,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Brandon Grotesque', ...defaultTheme.fontFamily.sans],
+        rec: ['Recoleta', ...defaultTheme.fontFamily.sans],
       },
       width: {
         28: '445px',
@@ -100,9 +102,11 @@ module.exports = {
         secondary: {
           light: {
             blue: colors.accent.blue,
+            yellow: colors.accent.yellow,
           },
         },
         text: {
+          black: colors.text.black,
           blue: colors.text.blue,
           error: colors.text.erorr,
         },
@@ -131,7 +135,7 @@ module.exports = {
       },
       boxShadow: {
         mainShadow: '0px 5px 6px rgba(50,161,199, 0.25), 0px 0px 1px rgba(50,161,199, 0.1)',
-        secondaryShadow: '0px 5px 6px rgba(111,166,252, 0.3), 0px 0px 1px rgba(111,166,252, 0.1)',
+        secondaryShadow: '0 5px 4px 0 rgba(211, 167, 8, 0.2)',
         boxSelect: '0px 8px 8px rgba(0,0,0, 0.1)',
         buttonShadow: 'rgba(14, 208, 233, 0.1)',
         singleSelct: '0px 8px 8px rgba(45,146,181, 0.2)',
@@ -140,7 +144,7 @@ module.exports = {
         glassShadow: '0 3px 4px 0 rgba(2, 32, 71, 0.1), 0 0 1px 0 rgba(2, 32, 71, 0.08)',
         buttonShadow2: '0 8px 10px 0 rgba(2, 32, 71, 0.1), 0 0 1px 0 rgba(2, 32, 71, 0.08)',
         buttonShadow3: '0 5px 4px 0 rgba(14, 208, 233, 0.1)',
-        hoverShadow: '0 5px 10px 0 rgba(14, 208, 233, 0.3)',
+        hoverShadow: '0 5px 4px 0 rgba(211, 167, 8, 0.2)',
         logoShadow2: '0 10px 10px -5px rgba(0, 0, 0, 0.2)',
         selectShadow: '0 10px 16px 0 rgba(2, 32, 71, 0.12), 0 0 1px 0 rgba(2, 32, 71, 0.1)',
       },
