@@ -13,7 +13,7 @@ import React from 'react'
 export type ThemeProps = Theme
 
 export type ButtonProperties = Omit<MuiButtonProperties, 'variant'> & {
-  variant?: 'fill' | 'ghost' | 'text' | 'link' | 'success' | 'secondry' | 'landingButton' | 'error'
+  variant?: 'fill' | 'ghost' | 'text' | 'link' | 'success' | 'primary' | 'secondry' | 'landingButton' | 'error' | 'action' | 'secondry2'
   children?: React.ReactNode | string
   textClassName?: string
   textVariant?: OverridableStringUnion<Variant | 'inherit', TypographyPropsVariantOverrides>
@@ -32,13 +32,16 @@ export const Button: React.FC<ButtonProperties> = (properties) => {
   } = properties
 
   const styles = {
-    root: 'rounded-[22px] py-2 box-border',
+    root: 'rounded-lg py-2 box-border',
     ghost: 'border-border-lightBlue border border-solid bg-white hover:hoverShadow hover:border-[#19a3d1]',
     fill: 'bg-secondary-light-blue rounded-lg hover:shadow-hoverShadow active:bg-primary-brand',
     text: 'bg-transparent active:bg-white w-fit py-0 px-0',
-    secondry: 'rounded-[22px] hover:bg-fill-hover bg-text-blue/20 active:bg-text-blue/20',
-    landingButton: 'rounded-[22px]',
-    error: 'bg-[#e92346] rounded-[22px]  active:bg-[#e92346]',
+    primary: 'bg-primary-brand rounded-lg hover:shadow-hoverShadow active:bg-primary-brand',
+    secondry: 'bg-fill-lightYellow rounded-lg hover:bg-fill-lightYellow active:bg-fill-lightYellow/20',
+    action: 'bg-fill-red rounded-full',
+    landingButton: 'rounded-lg',
+    secondry2: 'bg-primary-white border border-solid border-primary-brand rounded-lg',
+    error: 'bg-[#e92346] rounded-lg  active:bg-[#e92346]',
   }
 
   return (

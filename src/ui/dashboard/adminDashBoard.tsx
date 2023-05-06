@@ -1,5 +1,5 @@
 import { IconButton, Typography } from '@mui/material'
-import { BoxSelect, Button, ConfirmationModal, Input, Option, Search, Sort, UserIcon } from 'components'
+import { BoxSelect, Button, ConfirmationModal, Input, Option, Search, Sort, UserDetails, UserIcon } from 'components'
 import { ErrorModal } from 'components/modals/error-modal'
 import { StripeError } from 'lib/error'
 import Link from 'next/link'
@@ -23,12 +23,32 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
   const [orderItem, setOrderItem] = useState(false)
 
   const [showReactiveModal, setShowReactiveModal] = useState(false)
+  const [name, setName] = useState()
+  const [phone, setPhone] = useState()
+  const [userName, setUserName] = useState()
+  const [userType, setUserType] = useState()
+  const [country, setCountry] = useState()
+  const [memberSince, setMemberSince] = useState()
+  const [userImage, setUserImage] = useState()
+  const [gender, setGender] = useState()
+  const [email, setEmail] = useState()
+  const [acountStatus, setAccountStatus] = useState()
   const [acknowledgeText, setAcknowledgeText] = useState<string>(
     'I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.',
   )
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (item) => {
     setShowReactiveModal(true)
+    setName(item.Name)
+    setPhone(item.Phone)
+    setUserName(item.Username)
+    setUserType(item.UserType)
+    setCountry(item.Country)
+    setMemberSince(item.MemberSince)
+    setUserImage(item.Image)
+    setGender(item.Gender)
+    setEmail(item.email)
+    setAccountStatus(item.AccountStatus)
   }
   const handleSubscribe = async () => {
     setLoading(true)
@@ -58,69 +78,10 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
 		{ label: 'Country', id: 'Country' },
 		{ label: 'Member Since', id: 'action' },
 	]
-
-  const Data = [
-    {
-      id: 1,
-      Name: 'Jatie Vip',
-      Username: '@JatieVip',
-      Phone: '1234',
-      UserType:'know',
-      Country: 'Bangladesh',
-      MemberSince: '9/12/12',
-      image:
-      'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png',
-    },
-    {
-        id: 2,
-        Name: 'Jatie Vip',
-        Username: '@JatieVip',
-        Phone: '1234',
-        UserType:'know',
-        Country: 'Bangladesh',
-        MemberSince: '9/12/12',
-        image:
-      'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png',
-      },
-      {
-        id: 3,
-        Name: 'Jatie Vip',
-        Username: '@JatieVip',
-        Phone: '1234',
-        UserType:'know',
-        Country: 'Bangladesh',
-        MemberSince: '9/12/12',
-        image:
-      'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png',
-      },
-      {
-        id: 4,
-        Name: 'Jatie Vip',
-        Username: '@JatieVip',
-        Phone: '1234',
-        UserType:'know',
-        Country: 'Bangladesh',
-        MemberSince: '9/12/12',
-        image:
-      'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png',
-      },
-      {
-        id: 5,
-        Name: 'Jatie Vip',
-        Username: '@JatieVip',
-        Phone: '1234',
-        UserType:'know',
-        Country: 'Bangladesh',
-        MemberSince: '9/12/12',
-        image:
-      'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png',
-      },
-  ];
-  
   
   const HeaderColumn = ({ item }) => (
 		<th onClick={() => setOrderItem(!orderItem)} key={item.label} scope="col" className="py-2 hover:bg-fill-lightestYellow">
-			<div className={`flex flex-row items-center w-32 whitespace-nowrap ${item.id === "name" && 'w-48'} ${item.id === "Country" && 'w-48'} ${item.id === "action" && 'mr-2'}`}>
+			<div className={`flex flex-row items-center w-32 whitespace-nowrap ${item.id === "name" && 'w-52'} ${item.id === "Country" && "w-40"} ${item.id === "action" && 'mr-2'}`}>
 		    <span className="ml-2 font-DM_Sans font-normal leading-normal tracking-wide">{item.label}</span>
 		    {item.id && <div className="ml-1 w-3 h-3 text-[7px] flex justify-center items-center">
 			{
@@ -141,21 +102,22 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
     UserType,
     Country,
     MemberSince,
+    Image
    }) => (
-		<tr className="py-2 pr-5 bg-mian-black grid grid-flow-col justify-between border-b">
-			<td className={`w-48 cursor-pointer`}>
-      <div className="gap-2 flex flex-row items-center">
-        <img className="w-10 h-10 rounded-full" src={'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png'} />
-        <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{Name}</p>
-      </div>
-    </td>
+    <>
+        <td className={`w-52 cursor-pointer`}>
+        <div className="gap-2 flex flex-row items-center">
+          <img className="w-10 h-10 rounded-full" src={Image} />
+          <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{Name}</p>
+        </div>
+        </td>
 
-    <td className="flex flex-row items-center text-main-gray w-32 font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Username}</td>
-    <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Phone}</td>
-    <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{UserType}</td>
-    <td className="flex flex-row items-center w-48 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Country}</td>
-    <td className='flex flex-row items-center text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer'>{MemberSince}</td>
-    </tr>
+        <td className="flex flex-row items-center text-main-gray w-32 font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Username}</td>
+        <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Phone}</td>
+        <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{UserType}</td>
+        <td className="flex flex-row items-center w-44 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Country}</td>
+        <td className='flex flex-row items-center text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer'>{MemberSince}</td>
+      </>
 	)
 
   return (
@@ -205,81 +167,34 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
                     ))}
                 </tr>
               </thead>
-              <tbody>
-                {/* {Data.map(coin => {
-                    // <TableList key={coin.id} {...coin} />
-                    Console.log(coin)
-                  })} */}
-                  <tr className="py-2 pr-5 bg-mian-black grid grid-flow-col justify-between border-b border-border-lightGrey hover:bg-fill-lightYellow">
-                    <td className={`w-48 cursor-pointer`}>
-                    <div className="gap-2 flex flex-row items-center">
-                      <img className="w-10 h-10 rounded-full" src={'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png'} />
-                      <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{'Pan Feng'}</p>
-                    </div>
-                  </td>
-
-                  <td className="flex flex-row items-center text-main-gray w-32 font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'@username'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'01 293 3980'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Free User'}</td>
-                  <td className="flex flex-row items-center w-48 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Bangkok'}</td>
-                  <td className='flex flex-row items-center text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer'>{'9/13/2023'}</td>
-                  </tr>
-
-                  <tr className="py-2 pr-5 bg-mian-black grid grid-flow-col justify-between border-b border-border-lightGrey hover:bg-fill-lightYellow">
-                    <td className={`w-48 cursor-pointer`}>
-                    <div className="gap-2 flex flex-row items-center">
-                      <img className="w-10 h-10 rounded-full" src={'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png'} />
-                      <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{'Pan Feng'}</p>
-                    </div>
-                  </td>
-
-                  <td className="flex flex-row items-center text-main-gray w-32 font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'@username'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'01 293 3980'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Free User'}</td>
-                  <td className="flex flex-row items-center w-48 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Bangkok'}</td>
-                  <td className='flex flex-row items-center text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer'>{'9/13/2023'}</td>
-                </tr>
-
-                <tr className="py-2 pr-5 bg-mian-black grid grid-flow-col justify-between border-b border-border-lightGrey hover:bg-fill-lightYellow">
-                    <td className={`w-48 cursor-pointer`}>
-                    <div className="gap-2 flex flex-row items-center">
-                      <img className="w-10 h-10 rounded-full" src={'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png'} />
-                      <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{'Pan Feng'}</p>
-                    </div>
-                  </td>
-
-                  <td className="flex flex-row items-center text-main-gray w-32 font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'@username'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'01 293 3980'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Free User'}</td>
-                  <td className="flex flex-row items-center w-48 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Bangkok'}</td>
-                  <td className='flex flex-row items-center text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer'>{'9/13/2023'}</td>
-                </tr>
-
-                <tr className="py-2 pr-5 bg-mian-black grid grid-flow-col justify-between border-b border-border-lightGrey hover:bg-fill-lightYellow">
-                    <td className={`w-48 cursor-pointer`}>
-                    <div className="gap-2 flex flex-row items-center">
-                      <img className="w-10 h-10 rounded-full" src={'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png'} />
-                      <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{'Pan Feng'}</p>
-                    </div>
-                  </td>
-
-                  <td className="flex flex-row items-center text-main-gray w-32 font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'@username'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'01 293 3980'}</td>
-                  <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Free User'}</td>
-                  <td className="flex flex-row items-center w-48 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{'Bangkok'}</td>
-                  <td className='flex flex-row items-center text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer'>{'9/13/2023'}</td>
-                </tr>
-		        </tbody>
+                  <tbody>
+                    {Data.map((item, key) => {
+                      return (
+                        <tr onClick={() => handleClickOpen(item)} className="py-2 pr-5 bg-mian-black grid grid-flow-col justify-between border-b border-border-lightGrey hover:bg-fill-lightYellow">
+                          <TableList key={item.id} {...item}/>
+                        </tr>
+                      );
+                    })}
+                </tbody>
           </table>
         </div>
       <ErrorModal isCreate onAccept={handleSubscribe} open={showError} setOpen={setShowError} error={error} />
-      <ConfirmationModal
+      <UserDetails
         open={showReactiveModal}
         setOpen={setShowReactiveModal}
-        cancelText="Cancel"
+        cancel="Calcel"
         onAccept={handleSubscribe}
-        acceptText="Continue"
-        contentText={acknowledgeText}
+        save="Save"
+        Name={name}
+        Phone={phone}
+        Username={userName}
+        UserType={userType}
+        Country={country}
+        MemberSince={memberSince}
+        UserImage={userImage}
+        Gender={gender}
+        AccountStatus={acountStatus}
+        Email={email}
       />
     </div>
   )

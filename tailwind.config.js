@@ -110,6 +110,10 @@ module.exports = {
           blue: colors.text.blue,
           error: colors.text.erorr,
           grey: colors.text.grey,
+          white: colors.text.white,
+          primary: colors.primary.main,
+          green: colors.text.green,
+          red: colors.text.red,
         },
         fill: {
           orange: colors.fill.orange,
@@ -126,6 +130,7 @@ module.exports = {
           lightPurple: colors.fill.lightPurple,
           lightYellow: colors.fill.lightYellow,
           lightestYellow: colors.fill.lightestYellow,
+          red: colors.fill.red,
         },
         accent: {
           white: colors.accent.white,

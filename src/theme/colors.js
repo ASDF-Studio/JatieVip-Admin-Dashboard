@@ -35,6 +35,8 @@ module.exports = {
     blue: '#32A1C7',
     purple: '#9272FD',
     erorr: '#e92346',
+    green: '#5bd46f',
+    red: '#e92346',
   },
   border: {
     blue: 'rgba(50,161,199, 1)',
@@ -87,5 +89,6 @@ module.exports = {
     lightPurple: '#eae7ff',
     lightYellow: '#faf4e1',
     lightestYellow: 'rgba(211, 167, 8, 0.2)',
+    red: '#e92346'
   },
 }
