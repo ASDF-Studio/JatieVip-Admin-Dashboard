@@ -131,6 +131,7 @@ module.exports = {
           lightYellow: colors.fill.lightYellow,
           lightestYellow: colors.fill.lightestYellow,
           red: colors.fill.red,
+          lightRed: colors.fill.lightRed,
         },
         accent: {
           white: colors.accent.white,

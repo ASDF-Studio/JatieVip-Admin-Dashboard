@@ -9,7 +9,9 @@ import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import { Button } from '../Button'
 import { Input } from 'components/input'
-import { Sort } from 'components/icons'
+import { Calendar, Sort } from 'components/icons'
+import { VIPUpgrade } from './VIPUpgrade'
+import { ConfirmationModal } from './confirmation'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -96,11 +98,26 @@ export const UserDetails: React.FC<Props> = ({
   onClose = undefined,
 }): React.ReactElement => {
   const [loading, setLoading] = React.useState(false)
+  const [showVIPUpgradeModal, setShowVIPUpgradeModal] = React.useState(false)
+  const [showRemoveUserModal, setShowRemoveUsreModal] = React.useState(false)
   const handleClose = () => {
     setOpen(false)
     if (onClose !== undefined) {
       onClose()
     }
+  }
+  
+  const handleRemove = () => {
+    setShowRemoveUsreModal(true)
+  }
+
+  const handleDowngrade = () => {
+    setShowVIPUpgradeModal(true)
+  }
+
+  const handleAction = async () => {
+    setLoading(true)
+    setLoading(false)
   }
 
   return (
@@ -117,7 +134,7 @@ export const UserDetails: React.FC<Props> = ({
                 <Button variant="secondry" textClassName="text-text-primary," className="mt-2 px-6" onClick={handleClose}>
                   {"Replace"}
                 </Button>
-                <Button variant="secondry2" textClassName="text-text-primary," className="mt-2 px-6" onClick={handleClose}>
+                <Button variant="secondry2" textClassName="text-text-primary," className="mt-2 px-6" onClick={handleRemove}>
                   {"Remove"}
                 </Button>
               </div>
@@ -148,7 +165,7 @@ export const UserDetails: React.FC<Props> = ({
                   className={`bg-border-grey m-[4px] pl-3 font-sans font-normal leading-normal tracking-normal text-[13px] text-text-black appearance-none outline-none`} 
                 />     
                 <div className="ml-2 flex items-center justify-center outline-none focus:outline-none">
-                  <Sort className="w-[6px] fill-[#9381ff]" />
+                  <Calendar className="w-[6px] fill-[#9381ff]" />
                 </div>     
               </div>
 
@@ -182,16 +199,26 @@ export const UserDetails: React.FC<Props> = ({
             <div className='flex flex-row justify-between'>
               <div>
                 <Typography variant="subheadBold" className='text-text-grey font-sans pr-2'>{"Membership"}</Typography>
-                <Typography variant="subheadBold" className='text-text-primary font-sans'>{UserType}</Typography>
+                <Typography variant="subheadBold" className='text-text-primary font-sans'>{UserType + ' User'}</Typography>
               </div>
-              <div>
-                <Typography variant="subheadBold" className='text-text-grey font-sans pr-2'>{'Custom/Expires on'}</Typography>
-                <Typography variant="subheadBold" className='text-text-grey font-sans'>{MemberSince}</Typography>
-              </div>
+              {UserType == 'VIP' && 
+                <div>
+                  <Typography variant="subheadBold" className='text-text-grey font-sans pr-2'>{'Custom/Expires on'}</Typography>
+                  <Typography variant="subheadBold" className='text-text-grey font-sans'>{MemberSince}</Typography>
+                </div>
+              }
             </div>
-            <Button variant="secondry" textClassName="text-text-primary," className="w-full mt-2" onClick={handleClose}>
-              {"Downgrade to Free User"}
-            </Button>
+            {
+              UserType == 'VIP' ? 
+                <Button variant="secondry" textClassName="text-text-primary," className="w-full mt-2" onClick={handleDowngrade}>
+                  {"Downgrade to Free User"}
+                </Button>
+                 : 
+                <Button variant="secondry" textClassName="text-text-primary," className="w-full mt-2" onClick={handleDowngrade}>
+                {"Upgrade to VIP User"}
+              </Button>
+            }
+            
           </div>
 
           <div className="absolute bg-[#f5f7f9] h-[1px] w-full left-0" />
@@ -235,6 +262,22 @@ export const UserDetails: React.FC<Props> = ({
             {cancel}
           </Button>
         </DialogActions>
+        <ConfirmationModal
+          open={showRemoveUserModal}
+          onAccept={handleAction}
+          setOpen={setShowRemoveUsreModal}
+          contentText={`Are you sure you want to remove this user?`}
+          acceptText={'Yes'}
+          cancelText={`No, don’t remove user`}
+        />
+        <VIPUpgrade
+          open={showVIPUpgradeModal}
+          setOpen={setShowVIPUpgradeModal}
+          cancel="Cancel"
+          onAccept={handleAction}
+          save="Save"
+          MemberSince={MemberSince}
+      />
       </BootstrapDialog>
     </div>
   )

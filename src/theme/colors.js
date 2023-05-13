@@ -89,6 +89,7 @@ module.exports = {
     lightPurple: '#eae7ff',
     lightYellow: '#faf4e1',
     lightestYellow: 'rgba(211, 167, 8, 0.2)',
-    red: '#e92346'
+    red: '#e92346',
+    lightRed: 'rgba(233, 35, 70, 0.2)'
   },
 }

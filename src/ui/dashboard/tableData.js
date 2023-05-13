@@ -4,7 +4,7 @@ export const Data = [
       Name: 'Pan Feng',
       Username: '@username',
       Phone: '01 293 3980',
-      UserType:'Free User',
+      UserType:'VIP',
       Country: 'Bangladesh',
       MemberSince: '9/13/2023',
       Image:
@@ -18,7 +18,7 @@ export const Data = [
         Name: 'Gleb Ivanovich',
         Username: '@username',
         Phone: '01 293 3980',
-        UserType:'Free User',
+        UserType:'Free',
         Country: 'Bangkok',
         MemberSince: '9/13/2023',
         Image:
@@ -32,7 +32,7 @@ export const Data = [
         Name: 'Homayoun Shakibaii',
         Username: '@username',
         Phone: '01 293 3980',
-        UserType:'VIP User',
+        UserType:'VIP',
         Country: 'Zurich',
         MemberSince: '9/13/2023',
         Image:
@@ -46,7 +46,7 @@ export const Data = [
         Name: 'Jeremías Romero',
         Username: '@username',
         Phone: '01 293 3980',
-        UserType:'Free User',
+        UserType:'Free',
         Country: 'Los Angeles',
         MemberSince: '9/13/2023',
         Image:
@@ -60,7 +60,7 @@ export const Data = [
         Name: 'Freddy Kauschke',
         Username: '@username',
         Phone: '01 293 3980',
-        UserType:'Free User',
+        UserType:'Free',
         Country: 'Jeddah',
         MemberSince: '9/13/2023',
         Image:

@@ -4,7 +4,7 @@ import { ErrorModal } from 'components/modals/error-modal'
 import { StripeError } from 'lib/error'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, ReactElement, useState } from 'react'
+import { FC, ReactElement, useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { ISelectedProduct } from 'services/types'
 import { SubsPLans } from '../../constants'
@@ -37,6 +37,28 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
     'I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.',
   )
 
+  const [showProfileMenu, setShowProfileMenu] = useState(false)
+
+  const listenClickEvent = (e) => {
+    if (showProfileMenu) {
+      const el = document.getElementById('option')
+      if (!el.contains(e.target)) {
+        setShowProfileMenu(false)
+      }
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', listenClickEvent)
+
+    return () => document.removeEventListener('click', listenClickEvent)
+  }, [showProfileMenu])
+
+
+  const handleCSV = async () => {
+    console.log("CSV")
+  }
+
   const handleClickOpen = (item) => {
     setShowReactiveModal(true)
     setName(item.Name)
@@ -50,7 +72,7 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
     setEmail(item.email)
     setAccountStatus(item.AccountStatus)
   }
-  const handleSubscribe = async () => {
+  const handleAction = async () => {
     setLoading(true)
     setShowError(false)
     try {
@@ -80,20 +102,22 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
 	]
   
   const HeaderColumn = ({ item }) => (
-		<th onClick={() => setOrderItem(!orderItem)} key={item.label} scope="col" className="py-2 hover:bg-fill-lightestYellow">
+		<th onClick={() => setOrderItem(!orderItem)} key={item.label} scope="col" className={`py-2 hover:bg-fill-lightestYellow ${item.id === "name" && 'rounded-l-lg'} ${item.id === "action" && 'rounded-r-lg'}`}>
 			<div className={`flex flex-row items-center w-32 whitespace-nowrap ${item.id === "name" && 'w-52'} ${item.id === "Country" && "w-40"} ${item.id === "action" && 'mr-2'}`}>
-		    <span className="ml-2 font-DM_Sans font-normal leading-normal tracking-wide">{item.label}</span>
+		    <span className="ml-2 font-DM_Sans font-medium leading-normal tracking-wide">{item.label}</span>
 		    {item.id && <div className="ml-1 w-3 h-3 text-[7px] flex justify-center items-center">
 			{
 					orderItem === true ?
-            <Sort className="w-[8px] h-[13px] fill-[#9381ff]" />
+            <Sort className="w-[6px] h-[10px] fill-[#9381ff]" />
            : 
-            <Sort className="w-[8px] h-[13px] fill-[#9381ff]" />
+            <Sort className="w-[6px] h-[10px] fill-[#9381ff]" />
 				}
 				</div>}
 			</div>
 		</th>
 	)
+  
+  let tableRowStyle = 'flex items-center text-main-black font-DM_Sans font-normal leading-normal tracking-wide text-base cursor-pointer';
 
   const TableList = ({ 
     Name,
@@ -106,17 +130,26 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
    }) => (
     <>
         <td className={`w-52 cursor-pointer`}>
-        <div className="gap-2 flex flex-row items-center">
-          <img className="w-10 h-10 rounded-full" src={Image} />
-          <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{Name}</p>
-        </div>
+          <div className="gap-2 flex flex-row items-center">
+            <img className="w-10 h-10 rounded-full" src={Image} />
+            <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{Name}</p>
+          </div>
         </td>
-
-        <td className="flex flex-row items-center text-main-gray w-32 font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Username}</td>
-        <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Phone}</td>
-        <td className="flex flex-row items-center w-32 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{UserType}</td>
-        <td className="flex flex-row items-center w-44 text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer">{Country}</td>
-        <td className='flex flex-row items-center text-main-black font-DM_Sans font-medium leading-normal tracking-wide text-base cursor-pointer'>{MemberSince}</td>
+          <td className={`w-32 ${tableRowStyle}`}>
+            {Username}
+        </td>
+        <td className={`w-32 ${tableRowStyle}`}>
+            {Phone}
+        </td>
+        <td className={`w-32 ${tableRowStyle}`}>
+            {UserType + ' User'}
+        </td>
+        <td className={`w-44 ${tableRowStyle}`}>
+            {Country}
+        </td>
+        <td className={`${tableRowStyle}`}>
+            {MemberSince}
+        </td>
       </>
 	)
 
@@ -147,15 +180,38 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
               className={`m-[4px] font-sans font-normal leading-normal tracking-normal text-[13px] text-text-grey appearance-none outline-none`} 
             />          
           </div>
-          <div className='w-[50px] h-[50px] rounded-full bg-fill-lightYellow flex items-center justify-center'>
-            <Option className="w-[20px] h-[20px] fill-[#d3a708]" />
+          <div id="option" className={`rounded-full border-[2px] ${
+                    showProfileMenu && 'border-primary-brand'
+                  }`}>
+              <IconButton 
+                className="p-0 w-[50px] h-[50px] rounded-full bg-fill-lightYellow flex items-center justify-center" 
+                disableRipple
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+              >
+                <Option 
+                  className={`w-[20px] h-[20px] fill-[#d3a708]`} 
+                />
+              </IconButton>
+            {showProfileMenu && (
+                <div className="absolute w-[174px] py-[5px] right-[15px] sm:right-[290px] bg-white shadow-selectShadow border border-[#e5e7ec] rounded-lg top-[190px]  sm:top-[180px]">
+                  <div
+                    onClick={() => {
+                      handleCSV()
+                      setShowProfileMenu(false)
+                    }}
+                    className="px-[21px] hover:bg-fill-lightYellow py-[7px]"
+                  >
+                    <Typography className="text-black font-normal">Export as CSV</Typography>
+                  </div>
+                </div>
+              )}
           </div>
         </div>
       </div>
 
       {/* table */}
       
-        <div className="flex overflow-x-auto relative pt-8 sm:rounded-lg">
+        <div className="flex overflow-x-auto pt-8 sm:rounded-lg">
           <table className={`w-full text-sm text-left`}>
               <thead className='text-base cursor-pointer text-main-gray rounded-lg'>
                 <tr className='grid grid-flow-col justify-between rounded-lg border-[1px] border-border-lightYellow bg-fill-lightYellow'>
@@ -178,12 +234,12 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
                 </tbody>
           </table>
         </div>
-      <ErrorModal isCreate onAccept={handleSubscribe} open={showError} setOpen={setShowError} error={error} />
+      <ErrorModal isCreate onAccept={handleAction} open={showError} setOpen={setShowError} error={error} />
       <UserDetails
         open={showReactiveModal}
         setOpen={setShowReactiveModal}
-        cancel="Calcel"
-        onAccept={handleSubscribe}
+        cancel="Cancel"
+        onAccept={handleAction}
         save="Save"
         Name={name}
         Phone={phone}

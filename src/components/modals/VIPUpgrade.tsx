@@ -8,6 +8,9 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import { Button } from '../Button'
+import { Input } from 'components/input'
+import { Calendar, Sort } from 'components/icons'
+import { ConfirmationModal } from './confirmation'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -58,61 +61,97 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 type Props = {
   onAccept?: ({ retry }: { retry?: boolean }) => Promise<void>
-  contentText: string
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  cancelText?: string
-  acceptText?: string
+  cancel?: string
+  save?: string
   onClose?: () => void
+  MemberSince?: string
 }
 
-export const ConfirmationModal: React.FC<Props> = ({
+export const VIPUpgrade: React.FC<Props> = ({
   onAccept,
-  contentText = '',
   open = false,
   setOpen,
-  cancelText = 'No, Keep my current plan',
-  acceptText = 'Yes',
+  save = 'Save',
+  cancel = 'Cancel',
+  MemberSince = '',
   onClose = undefined,
 }): React.ReactElement => {
   const [loading, setLoading] = React.useState(false)
+  const [showReactiveModal, setShowReactiveModal] = React.useState(false)
+  const [isUpgrade, setIsUpgrade] = React.useState(true)
   const handleClose = () => {
     setOpen(false)
     if (onClose !== undefined) {
       onClose()
     }
   }
+  
+  const handleSave = () => {
+    setShowReactiveModal(true)
+  }
+  const handleAction = async () => {
+    setLoading(true)
+    setLoading(false)
+  }
 
   return (
     <div>
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Confirmation
+          Upgrade to VIP User
         </BootstrapDialogTitle>
-        <div className="absolute bg-[#f5f7f9] h-[1px] w-full left-0 top-[74px]" />
         <DialogContent>
-          <Typography variant="heading3" className="text-center font-rec">{contentText}</Typography>
+          <Typography variant="subheadBold" className='text-text-grey font-sans'>{"VIP Duration"}</Typography>
+            <div className={`bg-border-grey flex justify-between border border-border-lightGrey rounded-lg w-full h-[42px] my-2 px-3`}>
+              <input 
+                value={MemberSince}  
+                className={`bg-border-grey m-[4px] font-sans font-normal leading-normal tracking-normal text-[13px] text-text-black appearance-none outline-none`} 
+              />     
+              <div className="ml-2 flex items-center justify-center outline-none focus:outline-none">
+                <Sort className="w-[6px] fill-[#9381ff]" />
+              </div>     
+            </div>
+            <div>
+              <Typography variant="subheadBold" className='text-text-grey font-sans pr-1'>{'Will expire on'}</Typography>
+              <Typography variant="subheadBold" className='text-text-grey font-sans'>{MemberSince}</Typography>
+            </div>
         </DialogContent>
-        <DialogActions className="gap-[9px]">
+        <DialogActions className="gap-[9px] flex flex-row">
           <Button
-            variant="cancel"
-            textClassName="text-text-red"
+            variant="primary"
+            textClassName="text-text-white"
             loading={loading}
             disabled={loading}
-            className="w-full bg-fill-lightBlue2 shadow-none"
-            onClick={async () => {
-              setLoading(true)
-              await onAccept({ retry: false })
-              setLoading(false)
-              setOpen(false)
-            }}
+            className="w-full shadow-none"
+            // onClick={async () => {
+            //   setLoading(true)
+            //   await onAccept({ retry: false })
+            //   setLoading(false)
+            //   setOpen(false)
+            // }}
+            onClick={handleSave}
           >
-            {acceptText}
+            {save}
           </Button>
-          <Button variant="primary" textClassName="text-white" className="w-full" onClick={handleClose}>
-            {cancelText}
+          <Button variant="secondry" textClassName="text-text-primary," className="w-full" onClick={handleClose}>
+            {cancel}
           </Button>
         </DialogActions>
+
+        <ConfirmationModal
+          open={showReactiveModal}
+          onAccept={handleAction}
+          setOpen={setShowReactiveModal}
+          contentText={`Are you sure you want to ${
+            isUpgrade ? 'upgrade' : 'downgrade'
+          } this user?`}
+          acceptText={'Yes'}
+          cancelText={`No, don’t ${
+            isUpgrade ? 'upgrade' : 'downgrade'
+          } user`}
+        />
       </BootstrapDialog>
     </div>
   )
