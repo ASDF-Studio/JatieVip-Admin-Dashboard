@@ -49,8 +49,8 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
     <Select
       name={name}
       IconComponent={sortIcon}
-      className={`w-full rounded-[22px] bg-border-grey  hover:cursor-pointer ${
-        error ? 'border-[#e92346]' : value && 'border-primary-brand'
+      className={`w-full rounded-lg bg-border-grey font-sans  hover:cursor-pointer ${
+        error ? 'border-[#e92346]' : value && 'border-border-lightGrey'
       }`}
       style={{
         fontSize: '14px',
@@ -65,7 +65,7 @@ export const BasicSelect: React.FC<Props> = ({ value, onChange, items = [], name
         },
       }}
       onChange={handleChange}
-      input={<Input className="py-[3px] px-3 bg-border-grey" />}
+      input={<Input className="py-[3px] pr-2 bg-border-grey" />}
       renderValue={(value) => {
         return (
           <Typography variant="subhead" textTransform="capitalize">

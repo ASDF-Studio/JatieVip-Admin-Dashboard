@@ -12,6 +12,9 @@ import { Input } from 'components/input'
 import { Calendar, Sort } from 'components/icons'
 import { VIPUpgrade } from './VIPUpgrade'
 import { ConfirmationModal } from './confirmation'
+import { BasicSelect } from 'components/dropdown'
+import { CustomDatePicker } from 'components/date-input'
+import { gender, country } from './modalData'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -119,6 +122,12 @@ export const UserDetails: React.FC<Props> = ({
     setLoading(true)
     setLoading(false)
   }
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const { name, value } = event.target
+    // setFieldTouched(name, true, true)
+    // formik.setFieldValue(name, value)
+    console.log("")
+  }
 
   return (
     <div>
@@ -156,40 +165,28 @@ export const UserDetails: React.FC<Props> = ({
             </div>
             <Input value={Email} className="rounded-lg py-[2px] px-1 my-2 bg-border-grey font-sans" />
 
-            <div className='flex flex-row gap-5'>
-      
-
-              <div className={`bg-border-grey flex border border-border-lightGrey rounded-lg w-[340px] h-[42px] mt-2`}>
-                <input 
-                  placeholder="Birthday"  
-                  className={`bg-border-grey m-[4px] pl-3 font-sans font-normal leading-normal tracking-normal text-[13px] text-text-black appearance-none outline-none`} 
-                />     
-                <div className="ml-2 flex items-center justify-center outline-none focus:outline-none">
-                  <Calendar className="w-[6px] fill-[#9381ff]" />
-                </div>     
+             <div className="flex gap-5 justify-between pt-2">
+                <div className="max-w-[11.875rem] flex flex-row">
+                  <CustomDatePicker
+                    date={"birthDay"}
+                    // error={touched.birthDay && errors.birthDay}
+                    onChange={(value) => {
+                      // setFieldValue('birthDay', dayjs(value).format('YYYY-MM-DD'))
+                      // setFieldTouched('birthDay', true)
+                      console.log("")
+                    }}
+                  />
+                  <div className="relative -ml-4 flex items-center justify-center outline-none focus:outline-none">
+                    <Calendar className="w-[8px] fill-[#9381ff]" />
+                  </div> 
+                </div>
+                <div className="max-w-[48%] w-full">
+                  <BasicSelect value={"gender"} name="gender" items={gender} onChange={(e) => handleInputChange(e)} />
+                </div>
               </div>
-
-              <div className={`bg-border-grey flex border border-border-lightGrey rounded-lg w-[340px] h-[42px] mt-2`}>
-                <input 
-                  value={Gender}  
-                  className={`bg-border-grey m-[4px] pl-3 font-sans font-normal leading-normal tracking-normal text-[13px] text-text-black appearance-none outline-none`} 
-                />     
-                <div className="ml-2 flex items-center justify-center outline-none focus:outline-none">
-                  <Sort className="w-[6px] fill-[#9381ff]" />
-                </div>     
-              </div>
-
-            </div>
-
-             <div className={`bg-border-grey flex justify-between border border-border-lightGrey rounded-lg w-full h-[42px] mt-4 px-3`}>
-                <input 
-                  value={Country}  
-                  className={`bg-border-grey m-[4px] font-sans font-normal leading-normal tracking-normal text-[13px] text-text-black appearance-none outline-none`} 
-                />     
-                <div className="ml-2 flex items-center justify-center outline-none focus:outline-none">
-                  <Sort className="w-[6px] fill-[#9381ff]" />
-                </div>     
-              </div>
+               <div className="pt-4 w-full">
+                  <BasicSelect value={"Country"} name="gender" items={country} onChange={(e) => handleInputChange(e)} />
+                </div>
 
           </div>
 

@@ -11,6 +11,7 @@ import { Button } from '../Button'
 import { Input } from 'components/input'
 import { Calendar, Sort } from 'components/icons'
 import { ConfirmationModal } from './confirmation'
+import { BasicSelect } from 'components/dropdown'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -96,6 +97,23 @@ export const VIPUpgrade: React.FC<Props> = ({
     setLoading(false)
   }
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const { name, value } = event.target
+    // setFieldTouched(name, true, true)
+    // formik.setFieldValue(name, value)
+    console.log("")
+  }
+
+  const items = [
+    { value: '7 Days', label: '7 Days' },
+    { value: '14 Days', label: '14 Days' },
+    { value: '30 Days', label: '30 Days' },
+    { value: '3 Months', label: '3 Months' },
+    { value: '6 Months', label: '6 Months' },
+    { value: '1 Year', label: '1 Year' },
+    { value: 'Forever', label: 'Forever' },
+  ]
+
   return (
     <div>
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
@@ -104,14 +122,8 @@ export const VIPUpgrade: React.FC<Props> = ({
         </BootstrapDialogTitle>
         <DialogContent>
           <Typography variant="subheadBold" className='text-text-grey font-sans'>{"VIP Duration"}</Typography>
-            <div className={`bg-border-grey flex justify-between border border-border-lightGrey rounded-lg w-full h-[42px] my-2 px-3`}>
-              <input 
-                value={MemberSince}  
-                className={`bg-border-grey m-[4px] font-sans font-normal leading-normal tracking-normal text-[13px] text-text-black appearance-none outline-none`} 
-              />     
-              <div className="ml-2 flex items-center justify-center outline-none focus:outline-none">
-                <Sort className="w-[6px] fill-[#9381ff]" />
-              </div>     
+           <div className='py-2'>
+              <BasicSelect value={"Select"} name="gender" items={items} onChange={(e) => handleInputChange(e)} />
             </div>
             <div>
               <Typography variant="subheadBold" className='text-text-grey font-sans pr-1'>{'Will expire on'}</Typography>

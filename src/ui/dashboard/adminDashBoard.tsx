@@ -201,7 +201,7 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
                     }}
                     className="px-[21px] hover:bg-fill-lightYellow py-[7px]"
                   >
-                    <Typography className="text-black font-normal">Export as CSV</Typography>
+                    <Typography className="text-black font-normal cursor-pointer">Export as CSV</Typography>
                   </div>
                 </div>
               )}

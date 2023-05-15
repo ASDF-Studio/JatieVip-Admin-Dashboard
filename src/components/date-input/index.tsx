@@ -50,8 +50,8 @@ export const CustomDatePicker: React.FC<Props> = ({ date = '', onChange, error =
         disableFuture
         renderInput={({ inputRef, inputProps, InputProps }) => (
           <div
-            className={`rounded-[22px] bg-border-grey flex items-center px-6 w-full justify-between relative border ${
-              error ? 'border-[#e92346]' : date !== '' ? 'border-primary-brand' : ' border-[rgba(127,127,127, 0.1)]'
+            className={`rounded-lg bg-border-grey flex items-center px-5 w-full justify-between relative border ${
+              error ? 'border-[#e92346]' : date !== '' ? 'border-border-lightGrey' : ' border-[rgba(127,127,127, 0.1)]'
             }`}
           >
             <input
