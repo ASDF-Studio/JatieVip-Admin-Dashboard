@@ -27,14 +27,14 @@ const Home: NextPage = (): React.ReactElement => {
 
   const formik = useFormik({
     initialValues: {
-      phoneNumber: '',
-      code: '',
+      email: '',
+      password: '',
     },
     validationSchema: loginSchema,
-    onSubmit: async ({ phoneNumber, code }) => {
+    onSubmit: async ({ email, password }) => {
       setShowError(false)
       try {
-        await verifyCode(`+${phoneNumber}`, Number(code))
+        // await verifyCode(`+${phoneNumber}`, Number(code))
         router.replace('/dashboard')
       } catch (e) {
         if (e instanceof AxiosError) {
@@ -46,11 +46,12 @@ const Home: NextPage = (): React.ReactElement => {
 
   const { setFieldTouched, setFieldValue } = formik
 
-  const { phoneNumber, code } = formik.values
+  const { email, password } = formik.values
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFieldTouched(name, true, true)
+
     formik.setFieldValue(name, value)
   }
 
@@ -59,15 +60,22 @@ const Home: NextPage = (): React.ReactElement => {
   const getStepsUI = (step: LoginSteps) => {
     switch (step) {
       case 'step1':
-        return <Step1 phoneNumber={phoneNumber} handleChangeForm={handleInputChange} onChangeStep={handleChangeStep} />
+        return (
+          <Step1
+            email={email}
+            password={password}
+            handleChangeForm={handleInputChange}
+            onChangeStep={handleChangeStep}
+          />
+        )
       default:
         return (
           <Step2
             error={showError}
             sumbitForm={formik.submitForm}
             handleChangeForm={setFieldValue}
-            code={code}
-            phoneNumber={phoneNumber}
+            code={''}
+            phoneNumber={''}
             setError={setShowError}
             onChangeStep={handleChangeStep}
           />
@@ -90,6 +98,8 @@ const Home: NextPage = (): React.ReactElement => {
     </AuthProvider>
   )
 }
+
+const a = [2, 3, 1, 2, 4, 3]
 
 export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
   const { token, user } = req.session

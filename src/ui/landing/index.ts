@@ -1,7 +1,0 @@
-export * from './left-bar'
-export * from './second-hero'
-export * from './hero'
-export * from './third-hero'
-export * from './forth-hero'
-export * from './apple'
-export * from './layout'

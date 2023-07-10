@@ -6,7 +6,7 @@ export const Data = [
       Phone: '01 293 3980',
       UserType:'VIP',
       Country: 'Bangladesh',
-      MemberSince: '9/13/2023',
+      MemberSince: '9/13/2022',
       Image:
       'https://res.cloudinary.com/hawktech-cloud/image/upload/v1674712476/d24dae39-1a64-47d5-af65-e14b5a1c533c_tmcsua.png',
       Gender: 'Male',

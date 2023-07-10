@@ -15,10 +15,11 @@ import ReCAPTCHA from 'react-google-recaptcha'
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
   handleChangeForm: (event: React.ChangeEvent<HTMLInputElement>) => void
-  phoneNumber: string
+  email: string
+  password: string
 }
 
-const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
+const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, email, password }): React.ReactElement => {
   const [error, setError] = useState<string>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const { sendCode } = useAuth()
@@ -26,9 +27,10 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
   const handleLogin = (e) => {
     e.preventDefault()
-
-    if (isEmpty(phoneNumber)) {
-      setError('Phone number is required')
+    
+    if (isEmpty(email) || isEmpty(password)) {
+      
+      setError('Email and password is required')
 
       return
     }
@@ -43,7 +45,6 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
     try {
       setLoading(true)
-      await sendCode(`+${phoneNumber}`, captchaCode)
       onChangeStep('step2')
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -61,7 +62,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
       <div className="w-full x:max-w-[447px] mx-auto flex-col">
         <div className="flex mt-[28px] x:mt-0 flex-col gap-[12px] mb-[28px] x:mb-[20px]">
           <Typography variant="heading7" className="text-center font-rec x:text-left">
-              Admin Login
+            Admin Login
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
@@ -73,35 +74,22 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
               onChange={onReCAPTCHAChange}
             />
             <div className="flex flex-col gap-4">
-            <Input placeholder="Login Email" className="rounded-lg py-[2px] px-1 bg-border-grey font-sans" />
-            <Input placeholder="Type Password..." className="rounded-lg py-[2px] px-1 bg-border-grey font-sans" />
-            
-              {/* <PhoneInput
-                country={'us'}
-                value={phoneNumber}
-                specialLabel=""
-                onEnterKeyPress={(e) => handleLogin(e)}
-                placeholder="Enter Phone Number"
-                inputStyle={{
-                  fontFamily: 'Avenir Next',
-                }}
-                dropdownStyle={{
-                  fontFamily: 'Avenir Next',
-                }}
-                autoFormat={false}
-                onChange={(phone) => {
-                  setError(null)
-                  handleChangeForm({
-                    target: {
-                      name: 'phoneNumber',
-                      value: phone,
-                    },
-                  })
-                }}
-                searchClass="bg-black font-medium"
-                dropdownClass="text-[14px]"
-                inputClass="rounded-[22px] py-[9px]  bg-border-grey text-[14px] w-full font-medium hover:border-primary-transparent bg-border-grey focus:border-primary-transparent border-primary-transparent focus:shadow-none"
-              /> */}
+              <Input
+                name="email"
+                value={email}
+                onChange={handleChangeForm}
+                placeholder="Login Email"
+                className="rounded-lg py-[2px] px-1 bg-border-grey font-sans"
+              />
+
+              <Input
+                name="password"
+                value={password}
+                type="password"
+                onChange={handleChangeForm}
+                placeholder="Type Password..."
+                className="rounded-lg py-[2px] px-1 bg-border-grey font-sans"
+              />
 
               {error && (
                 <Typography className="text-text-error font-medium" variant="body2">
@@ -123,17 +111,6 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
               </Button>
             </div>
           </form>
-          {/* <div className="flex justify-between items-center">
-            <div className="w-[40%] h-[1px] bg-[#f5f7f9]" />
-            <Typography className="text-primary-grey">or</Typography>
-            <div className="w-[40%] h-[1px] bg-[#f5f7f9]" />
-          </div> */}
-          {/* <div className="flex flex-col gap-2.5 x:gap-4">
-            <Typography className="ml-[7px] text-[16px] font-semibold">Don’t have an account?</Typography>
-            <Button onClick={() => navigateTo('/signup')} className="bg-[#e3f2f7]" variant="landingButton">
-              Sign Up
-            </Button>
-          </div> */}
         </div>
       </div>
 

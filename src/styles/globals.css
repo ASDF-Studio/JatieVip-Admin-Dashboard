@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import '~antd/dist/antd.css'; */
+
 @font-face {
   font-family: 'Brandon Grotesque';
   src: url('../../fonts/BrandonGrotesque/Brandon_bld.otf');
@@ -223,4 +225,23 @@ input:-webkit-autofill:active {
   height: 25px;
   margin: 0 5px 0 0;
   background-color: #f5853f;
+}
+
+.MyReactTableClass {
+  .-sort-desc {
+    box-shadow: none !important;
+    &:before {
+      background-color: "black";
+      float: right;
+    }
+  }
+
+  .-sort-asc {
+    box-shadow: none !important;
+    &:before {
+      background-color: "black";
+       
+      float: right;
+    }
+  }
 }
