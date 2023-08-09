@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { Router } from 'next/router'
 import TagManager from 'react-gtm-module'
 import Script from 'next/script'
+import { AuthProvider } from 'Contexts/Auth'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -114,9 +115,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         &noscript=1"/>
         `}
       </noscript> */}
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AuthProvider>
     </>
   )
 }

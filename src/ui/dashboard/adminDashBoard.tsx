@@ -19,14 +19,17 @@ import { FC, ReactElement, useEffect, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { ISelectedProduct } from 'services/types'
 import { SubsPLans } from '../../constants'
+import dynamic from 'next/dynamic'
 import { Data } from './tableData'
+import { useAdmin } from 'hooks/useAdmin'
 
 type Props = {
   className?: string
 }
 
 const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
-  const [loading, setLoading] = useState(false)
+  const { users, count, changePage, loading } = useAdmin()
+
   const [selected, setSelected] = useState<ISelectedProduct>(SubsPLans[1] as ISelectedProduct)
   const [error, setError] = useState<string>(null)
   const [showError, setShowError] = useState<boolean>(false)
@@ -48,6 +51,8 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
     'I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.',
   )
 
+  const [selectedUser, setSelectedUser] = useState(null)
+
   const [showProfileMenu, setShowProfileMenu] = useState(false)
 
   const listenClickEvent = (e) => {
@@ -65,25 +70,11 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
     return () => document.removeEventListener('click', listenClickEvent)
   }, [showProfileMenu])
 
-  const handleCSV = async () => {
-    console.log('CSV')
-  }
-
   const handleClickOpen = (item) => {
+    setSelectedUser(item)
     setShowReactiveModal(true)
-    setName(item.Name)
-    setPhone(item.Phone)
-    setUserName(item.Username)
-    setUserType(item.UserType)
-    setCountry(item.Country)
-    setMemberSince(item.MemberSince)
-    setUserImage(item.Image)
-    setGender(item.Gender)
-    setEmail(item.email)
-    setAccountStatus(item.AccountStatus)
   }
   const handleAction = async () => {
-    setLoading(true)
     setShowError(false)
     try {
       const stripeSesion = await StripeService.createSession({ selectedProduct: selected.title })
@@ -99,64 +90,7 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
         }
       }
     }
-    setLoading(false)
   }
-
-  let headers = [
-    { label: 'Name', id: 'name', type: 'alphabet' },
-    { label: 'Username', id: 'value' },
-    { label: 'Phone', id: 'changepct_24hour' },
-    { label: 'User Type', id: 'changepct_7d' },
-    { label: 'Country', id: 'Country' },
-    { label: 'Member Since', id: 'action' },
-  ]
-
-  const HeaderColumn = ({ item }) => (
-    <th
-      onClick={() => setOrderItem(!orderItem)}
-      key={item.label}
-      scope="col"
-      className={`py-2 hover:bg-fill-lightestYellow ${item.id === 'name' && 'rounded-l-lg'} ${
-        item.id === 'action' && 'rounded-r-lg'
-      }`}
-    >
-      <div
-        className={`flex flex-row items-center w-32 whitespace-nowrap ${item.id === 'name' && 'w-52'} ${
-          item.id === 'Country' && 'w-40'
-        } ${item.id === 'action' && 'mr-2'}`}
-      >
-        <span className="ml-2 font-DM_Sans font-medium leading-normal tracking-wide">{item.label}</span>
-        {item.id && (
-          <div className="ml-1 w-3 h-3 text-[7px] flex justify-center items-center">
-            {orderItem === true ? (
-              <Sort className="w-[6px] h-[10px] fill-[#9381ff]" />
-            ) : (
-              <Sort className="w-[6px] h-[10px] fill-[#9381ff]" />
-            )}
-          </div>
-        )}
-      </div>
-    </th>
-  )
-
-  let tableRowStyle =
-    'flex items-center text-main-black font-DM_Sans font-normal leading-normal tracking-wide text-base cursor-pointer'
-
-  const TableList = ({ Name, Username, Phone, UserType, Country, MemberSince, Image }) => (
-    <>
-      <td className={`w-52 cursor-pointer`}>
-        <div className="gap-2 flex flex-row items-center">
-          <img className="w-10 h-10 rounded-full" src={Image} />
-          <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">{Name}</p>
-        </div>
-      </td>
-      <td className={`w-32 ${tableRowStyle}`}>{Username}</td>
-      <td className={`w-32 ${tableRowStyle}`}>{Phone}</td>
-      <td className={`w-32 ${tableRowStyle}`}>{UserType + ' User'}</td>
-      <td className={`w-44 ${tableRowStyle}`}>{Country}</td>
-      <td className={`${tableRowStyle}`}>{MemberSince}</td>
-    </>
-  )
 
   return (
     <div className={`${className}`}>
@@ -197,7 +131,6 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
               <div className="absolute w-[174px] py-[5px] right-[15px] sm:right-[290px] bg-white shadow-selectShadow border border-[#e5e7ec] rounded-lg top-[190px]  sm:top-[180px] z-10">
                 <div
                   onClick={() => {
-                    handleCSV()
                     setShowProfileMenu(false)
                   }}
                   className="px-[21px] hover:bg-fill-lightYellow py-[7px]"
@@ -212,14 +145,20 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
 
       {/* table */}
       <div className="mt-8 z-0">
-        <CustomTable onClick={(item) => handleClickOpen(item)} />
+        <CustomTable
+          changePage={changePage}
+          loading={loading}
+          users={users}
+          count={count}
+          onClick={(item) => handleClickOpen(item)}
+        />
       </div>
 
-      
       <ErrorModal isCreate onAccept={handleAction} open={showError} setOpen={setShowError} error={error} />
       <UserDetails
         open={showReactiveModal}
         setOpen={setShowReactiveModal}
+        user={selectedUser}
         cancel="Cancel"
         onAccept={handleAction}
         save="Save"

@@ -6,7 +6,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 type ImageProps = React.HTMLProps<ImageProps>
 
 const calendarIcon = forwardRef<HTMLImageElement, ImageProps>((props, ref) => (
-  <img {...props} ref={ref} src="/assets/svg/calendar.svg" alt="calendar icon" className="w-[20px] h-[10px]" />
+  <img {...props} ref={ref} src="/assets/svg/calendar.svg" alt="calendar icon" className="w-[20px] h-[10px] fill-[#9381ff]" />
 ))
 
 const switchPickerIcon = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {

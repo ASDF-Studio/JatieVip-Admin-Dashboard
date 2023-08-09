@@ -1,56 +1,60 @@
 import { Sort } from 'components/icons'
-import React from 'react'
+import { useAdmin } from 'hooks/useAdmin'
+import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
 import { Data } from 'ui/dashboard/tableData'
 
-export const CustomTable = ({ onClick, onDownload }) => {
-
-
+export const CustomTable = ({ onClick, users, loading, changePage, count }) => {
   const columns = [
     {
       name: 'Name',
       cell: (row) => {
         return (
           <div className="gap-2 flex flex-row items-center">
-            <img className="w-10 h-10 rounded-full" src={row.Image} />
+            <img
+              className="w-10 h-10 rounded-full"
+              src={
+                row?.profilePic ||
+                'https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg'
+              }
+            />
             <p className="font-DM_Sans font-normal leading-normal tracking-wide text-main-black text-base">
-              {row.Name}
+              {row.fullName}
             </p>
           </div>
         )
       },
-      // selector: (row) => row.title,
       sortable: true,
-      width: '220px',
+      width: '200px',
     },
     {
       name: 'Username',
-      selector: (row) => row.Username,
+      selector: (row) => row.username,
       sortable: true,
-      width: '140px',
+      width: '150px',
     },
     {
       name: 'Phone',
-      selector: (row) => row.Phone,
+      selector: (row) => row.contact,
       sortable: true,
-      width: '128px',
+      width: '140px',
     },
 
     {
       name: 'User Type',
-      selector: (row) => row.UserType,
+      selector: (row) => (row?.isVIP ? 'VIP' : 'FREE'),
       sortable: true,
       width: '128px',
     },
     {
       name: 'Country',
-      selector: (row) => row.Country,
+      selector: (row) => row.location,
       sortable: true,
       width: '176px',
     },
     {
       name: 'Member Since',
-      selector: (row) => row.MemberSince,
+      selector: (row) => new Date(row.created_at).toISOString().slice(0, 10),
       sortable: true,
       width: '170px',
     },
@@ -98,9 +102,10 @@ export const CustomTable = ({ onClick, onDownload }) => {
     link.click()
   }
 
-  
+  const handleChangePage = (page) => {
+    changePage(page - 1)
+  }
 
-  // grid grid-flow-col justify-between rounded-lg border-[1px] border-border-lightYellow bg-fill-lightYellow'
   return (
     <DataTable
       customStyles={{
@@ -141,8 +146,15 @@ export const CustomTable = ({ onClick, onDownload }) => {
       sortIcon={<Sort className="w-[10px] h-[10px] ml-[5px] fill-[#9381ff]" />}
       highlightOnHover
       pointerOnHover
+      progressPending={loading}
       columns={columns}
-      data={Data}
+      paginationTotalRows={count}
+      paginationServer
+      // paginationServerOptions={}
+      paginationPerPage={20}
+      paginationRowsPerPageOptions={[20]}
+      onChangePage={handleChangePage}
+      data={users}
       pagination
       // selectableRows
       onRowClicked={onClick}

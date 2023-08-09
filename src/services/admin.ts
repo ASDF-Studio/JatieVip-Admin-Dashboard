@@ -9,11 +9,25 @@ type BanUserParams = {
 
 type GetAllBannedUserParams = {}
 
+type GetAllUsers = {
+  offset: number
+}
+
 const Service = {
   updateAccount: (body: UpdateUserParams) =>
     rest.put<IUser>('auth/me', {
       body,
       jwttoken: body.jwttoken,
+    }),
+
+  getUsers: (body: GetAllUsers) =>
+    rest.post<{
+      data: {
+        count: number
+        users: IUser[]
+      }
+    }>('user/get_all_users', {
+      body,
     }),
 
   banUser: (body: BanUserParams) => {

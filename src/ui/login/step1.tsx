@@ -4,7 +4,6 @@ import { Button, Input } from 'components'
 import React, { Dispatch, useRef, useState } from 'react'
 import { Typography } from '@mui/material'
 import { LoginSteps } from 'types'
-import { isEmpty } from 'lodash'
 import { useAuth } from 'Contexts/Auth'
 import Link from 'next/link'
 import PhoneInput from 'react-phone-input-2'
@@ -15,11 +14,10 @@ import ReCAPTCHA from 'react-google-recaptcha'
 type Props = {
   onChangeStep: Dispatch<LoginSteps>
   handleChangeForm: (event: React.ChangeEvent<HTMLInputElement>) => void
-  email: string
-  password: string
+  phoneNumber: string
 }
 
-const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, email, password }): React.ReactElement => {
+const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber }): React.ReactElement => {
   const [error, setError] = useState<string>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const { sendCode } = useAuth()
@@ -27,13 +25,6 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, email, passwor
 
   const handleLogin = (e) => {
     e.preventDefault()
-    
-    if (isEmpty(email) || isEmpty(password)) {
-      
-      setError('Email and password is required')
-
-      return
-    }
 
     recaptchaRef.current.execute()
   }
@@ -45,6 +36,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, email, passwor
 
     try {
       setLoading(true)
+      await sendCode(phoneNumber)
       onChangeStep('step2')
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -74,22 +66,48 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, email, passwor
               onChange={onReCAPTCHAChange}
             />
             <div className="flex flex-col gap-4">
-              <Input
+              <PhoneInput
+                country={'us'}
+                value={phoneNumber}
+                specialLabel=""
+                onEnterKeyPress={(e) => handleLogin(e)}
+                placeholder="Enter Phone Number"
+                inputStyle={{
+                  fontFamily: 'Avenir Next',
+                }}
+                dropdownStyle={{
+                  fontFamily: 'Avenir Next',
+                }}
+                autoFormat={false}
+                onChange={(phone) => {
+                  setError(null)
+                  handleChangeForm({
+                    target: {
+                      name: 'phoneNumber',
+                      value: phone,
+                    },
+                  })
+                }}
+                searchClass="bg-black font-medium"
+                dropdownClass="text-[14px]"
+                inputClass="rounded-lg py-[9px]  bg-border-grey text-[14px] w-full font-sans font-medium hover:border-primary-transparent bg-border-grey focus:border-primary-transparent border-primary-transparent focus:shadow-none"
+              />
+              {/* <Input
                 name="email"
                 value={email}
                 onChange={handleChangeForm}
                 placeholder="Login Email"
                 className="rounded-lg py-[2px] px-1 bg-border-grey font-sans"
-              />
+              /> */}
 
-              <Input
+              {/* <Input
                 name="password"
                 value={password}
                 type="password"
                 onChange={handleChangeForm}
                 placeholder="Type Password..."
                 className="rounded-lg py-[2px] px-1 bg-border-grey font-sans"
-              />
+              /> */}
 
               {error && (
                 <Typography className="text-text-error font-medium" variant="body2">

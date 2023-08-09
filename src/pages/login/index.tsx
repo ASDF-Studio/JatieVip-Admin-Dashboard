@@ -1,41 +1,36 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { Step1, Step2 } from 'ui/login'
 import { LoginSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
 import { useFormik } from 'formik'
-import { AuthProvider } from 'Contexts/Auth'
+import { AuthProvider, useAuth } from 'Contexts/Auth'
 import { useRouter } from 'next/router'
 import axios, { AxiosError } from 'axios'
 import { loginSchema } from 'utils/schema'
 import { sessionOptions } from 'lib/session'
 import { withIronSessionSsr } from 'iron-session/next'
 import Head from 'next/head'
+import { useUser } from 'hooks/useUser'
 
 const Home: NextPage = (): React.ReactElement => {
   const router = useRouter()
   const [step, setStep] = useState<LoginSteps>('step1')
   const [showError, setShowError] = useState(false)
-
-  const verifyCode = async (phoneNumber: string, token: number) => {
-    await axios.post('/api/login', {
-      phoneNumber,
-      token,
-    })
-  }
+  const { verifyCode, user } = useAuth()
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      phoneNumber: '',
+      code: '',
     },
     validationSchema: loginSchema,
-    onSubmit: async ({ email, password }) => {
+    onSubmit: async ({ phoneNumber, code }) => {
       setShowError(false)
       try {
-        // await verifyCode(`+${phoneNumber}`, Number(code))
-        router.replace('/dashboard')
+        await verifyCode(phoneNumber, Number(code))
+        router.replace('/')
       } catch (e) {
         if (e instanceof AxiosError) {
           setShowError(true)
@@ -44,9 +39,11 @@ const Home: NextPage = (): React.ReactElement => {
     },
   })
 
+
+
   const { setFieldTouched, setFieldValue } = formik
 
-  const { email, password } = formik.values
+  const { phoneNumber, code } = formik.values
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -57,25 +54,23 @@ const Home: NextPage = (): React.ReactElement => {
 
   const handleChangeStep = (step: LoginSteps) => setStep(step)
 
+  if (user) {
+    router.push("/")
+    return <h1>redirecting to home</h1>
+  }
+
   const getStepsUI = (step: LoginSteps) => {
     switch (step) {
       case 'step1':
-        return (
-          <Step1
-            email={email}
-            password={password}
-            handleChangeForm={handleInputChange}
-            onChangeStep={handleChangeStep}
-          />
-        )
+        return <Step1 phoneNumber={phoneNumber} handleChangeForm={handleInputChange} onChangeStep={handleChangeStep} />
       default:
         return (
           <Step2
             error={showError}
             sumbitForm={formik.submitForm}
             handleChangeForm={setFieldValue}
-            code={''}
-            phoneNumber={''}
+            code={code}
+            phoneNumber={phoneNumber}
             setError={setShowError}
             onChangeStep={handleChangeStep}
           />
@@ -84,7 +79,7 @@ const Home: NextPage = (): React.ReactElement => {
   }
 
   return (
-    <AuthProvider>
+    <>
       <Head>
         <title>Movefit Login</title>
       </Head>
@@ -95,28 +90,8 @@ const Home: NextPage = (): React.ReactElement => {
           {getStepsUI(step)}
         </div>
       </MainLayout>
-    </AuthProvider>
+    </>
   )
 }
-
-const a = [2, 3, 1, 2, 4, 3]
-
-export const getServerSideProps: GetServerSideProps = withIronSessionSsr(async ({ req, res }) => {
-  const { token, user } = req.session
-
-  if (token && user) {
-    return {
-      props: {},
-      redirect: {
-        destination: '/dashboard',
-        permanent: true,
-      },
-    }
-  }
-
-  return {
-    props: {},
-  }
-}, sessionOptions)
 
 export default Home

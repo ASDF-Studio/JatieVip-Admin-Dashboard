@@ -1,8 +1,10 @@
 export type IUser = {
   id: number
+  contact: string
   username: string
   first_name: string
   last_name: string
+  fullName: string
   phone_number: string
   public: boolean
   date_of_birth: string
@@ -12,7 +14,12 @@ export type IUser = {
   stripe_customer_id: string
   myPreference: any
   userGoals: any
+  primaryEmail: string
   enrolledPrograms: any
+  isVIP: boolean
+  dob: string
+  location: string
+  profilePic: string
   subscription: {
     createdAt: string
     type: string

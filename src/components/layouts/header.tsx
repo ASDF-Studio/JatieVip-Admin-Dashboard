@@ -16,18 +16,18 @@ type Props = {
 }
 
 export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }): React.ReactElement => {
-  const { user } = useAuth()
+  const { user, logOut } = useAuth()
   const { navigateTo, pathname } = useNavigate()
   const { isTablet } = useBreakPoint()
   const [showProfileMenu, setShowProfileMenu] = useState(false)
   const router = useRouter()
 
-  const isDashBoard = pathname === '/dashboard'
+  const isDashBoard = pathname === '/'
   const isAccount = pathname === '/account'
 
   const handleLogOut = async () => {
     try {
-      await axios.post('/api/logout')
+      logOut()
       await router.push('/login')
     } catch (e) {
       console.log(e)
@@ -72,7 +72,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
               </IconButton>
             ) : (
               <Button
-                onClick={() => navigateTo('/dashboard')}
+                onClick={() => navigateTo('/')}
                 variant="text"
                 textVariant="title3"
                 disableRipple
@@ -108,7 +108,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
             <div id="user-menu" className="relative">
               <IconButton className="p-0" disableRipple onClick={() => setShowProfileMenu(!showProfileMenu)}>
                 <Avatar
-                  src={user?.photo}
+                  src={user?.profilePic}
                   className={`w-[35px] h-[35px] sm:w-10 sm:h-10  ${
                     showProfileMenu && ' border-[2px] border-primary-brand'
                   }`}
