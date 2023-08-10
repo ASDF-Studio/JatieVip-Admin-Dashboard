@@ -149,7 +149,7 @@ export const CustomTable = ({ onClick, users, loading, changePage, count }) => {
       pointerOnHover
       progressPending={loading}
       columns={columns}
-      progressComponent={<CircularProgress className='w-10 h-10' />}
+      progressComponent={<CircularProgress className='w-8 h-8' />}
       paginationTotalRows={count}
       paginationServer
       // paginationServerOptions={}

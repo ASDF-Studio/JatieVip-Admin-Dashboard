@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material'
+import { MainLayout } from 'components'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -6,11 +7,11 @@ import { LandingLayout, LeftBar } from 'ui/landing'
 
 const Terms: NextPage = () => {
   return (
-    <LandingLayout dark inView>
+    <MainLayout>
       <Head>
         <title>Terms of Service</title>
       </Head>
-      <LeftBar isBlue={false} inView />
+      {/* <LeftBar isBlue={false} inView /> */}
       <div className="flex">
         <div className="xl:max-w-[302px]  w-full hidden xl:flex" />
         <div className="flex flex-col x:max-w-[1000px] xl:max-w-[800px] 2xl:max-w-[1000px] 5xl:max-w-[1200px] w-full gap-[31px] xl:gap-[41px] mt-[98px] px-[30px] pb-[152px] xl:px-0 xl:mt-[62px] xl:mb-[199px] mx-auto">
@@ -401,7 +402,7 @@ const Terms: NextPage = () => {
           </Typography>
         </div>
       </div>
-    </LandingLayout>
+    </MainLayout>
   )
 }
 
