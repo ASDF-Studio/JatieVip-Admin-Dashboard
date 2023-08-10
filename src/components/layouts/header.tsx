@@ -43,6 +43,8 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
     }
   }
 
+  console.log(user)
+
   useEffect(() => {
     document.addEventListener('click', listenClickEvent)
 
@@ -98,6 +100,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
                   onClick={() => navigateTo('/account')}
                   variant="text"
                   textVariant="title3"
+                  disabled
                   disableRipple
                   textClassName={isAccount ? 'text-primary-black' : 'text-primary-grey'}
                 >

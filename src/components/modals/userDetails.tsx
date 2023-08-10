@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { styled } from '@mui/material/styles'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -18,6 +18,8 @@ import { genderData, country } from './modalData'
 import { IUser } from 'services/types'
 import { useFormik } from 'formik'
 import dayjs from 'dayjs'
+import { AdminService } from 'services'
+import { async } from 'rxjs'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -99,13 +101,11 @@ export const UserDetails: React.FC<Props> = ({
 }): React.ReactElement => {
   const [loading, setLoading] = React.useState(false)
   const inputRef = React.useRef<HTMLInputElement>(null)
+  const [banLoading, setBanLoading] = useState(false)
   const [showVIPUpgradeModal, setShowVIPUpgradeModal] = React.useState(false)
   const [showRemoveUserModal, setShowRemoveUsreModal] = React.useState(false)
   const handleClose = () => {
     setOpen(false)
-    if (onClose !== undefined) {
-      onClose()
-    }
   }
 
   const formik = useFormik({
@@ -113,16 +113,37 @@ export const UserDetails: React.FC<Props> = ({
     initialValues: {
       phone: user?.contact || '',
       email: user?.primaryEmail || '',
-      lastName: user?.fullName.split(' ')[0] || '',
-      firstName: user?.fullName.split(' ')[1] || '',
+      lastName: user?.fullName?.split(' ')[0] || '',
+      firstName: user?.fullName?.split(' ')[1] || '',
       dob: user?.dob || '',
       gender: user?.gender || '',
       country: user?.location || '',
       isVip: user?.isVIP || false,
-      imageUrl: user?.profilePic || '',
+      imageUrl: user?.profilePic || null,
+      filePath: null,
+      isBanned: user?.isBanned,
     },
-    onSubmit: async ({ email, lastName, firstName, gender, country, imageUrl, dob }) => {
-      
+    onSubmit: async ({ email, lastName, firstName, gender, country, imageUrl, dob, filePath }) => {
+      setLoading(true)
+      try {
+        await AdminService.updateAccount({
+          location: country,
+          profilePic: imageUrl,
+          fullname: `${lastName} ${firstName}`.trim(),
+          primaryEmail: email,
+          dob: dob,
+          gender,
+          id: user?.id,
+          username: user?.username,
+          filePath: filePath,
+        })
+        onClose()
+        handleClose()
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setLoading(false)
+      }
     },
   })
 
@@ -134,13 +155,38 @@ export const UserDetails: React.FC<Props> = ({
     setShowVIPUpgradeModal(true)
   }
 
-  const handleAction = async () => {
-    setLoading(true)
-    setLoading(false)
+  const { setFieldTouched, touched, errors, setFieldValue } = formik
+
+  const handleBanUser = async () => {
+    try {
+      setBanLoading(true)
+      if (isBanned) {
+        await AdminService.unBanUser({
+          userId: user.id,
+        })
+        setFieldValue('isBanned', false)
+      } else {
+        await AdminService.banUser({
+          userId: user.id,
+        })
+        setFieldValue('isBanned', true)
+      }
+      onClose()
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setBanLoading(false)
+    }
   }
 
-  const { setFieldTouched, touched, errors, setFieldValue } = formik
-  const { lastName, firstName, gender, imageUrl, phone, email, dob } = formik.values
+  const handleAction = async () => {
+    try {
+      setLoading(true)
+      setLoading(false)
+    } catch (err) {}
+  }
+
+  const { lastName, firstName, gender, imageUrl, phone, email, dob, country: countryValue, isBanned } = formik.values
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -150,13 +196,10 @@ export const UserDetails: React.FC<Props> = ({
 
   const handleImageChange = async () => {
     const files = inputRef.current?.files
-    const resizedImage = {
-      buffer: null,
-      size: 0,
-    }
 
     if (files.length > 0) {
-      // setFieldValue('imageURL', `data:image/webp;base64, ${compressedImage}`)
+      setFieldValue('filePath', files[0])
+      setFieldValue('imageUrl', URL.createObjectURL(files[0]))
     }
   }
 
@@ -198,7 +241,10 @@ export const UserDetails: React.FC<Props> = ({
                   variant="secondry2"
                   textClassName="text-text-primary,"
                   className="mt-2 px-6"
-                  onClick={handleRemove}
+                  onClick={() => {
+                    setFieldValue('imageUrl', '')
+                    formik.submitForm()
+                  }}
                 >
                   {'Remove'}
                 </Button>
@@ -229,11 +275,11 @@ export const UserDetails: React.FC<Props> = ({
               <Input
                 value={lastName}
                 onChange={handleInputChange}
-                name="lastname"
+                name="lastName"
                 className="rounded-lg py-[2px] px-1 my-2 bg-border-grey font-sans"
               />
               <Input
-                name="firstname"
+                name="firstName"
                 onChange={handleInputChange}
                 value={firstName}
                 className="rounded-lg py-[2px] px-1 my-2 bg-border-grey font-sans"
@@ -249,7 +295,7 @@ export const UserDetails: React.FC<Props> = ({
             <div className="flex gap-5 justify-between pt-2">
               <div className="max-w-[11.875rem] flex flex-row">
                 <CustomDatePicker
-                  date={user?.dob || 'birthday'}
+                  date={dob || 'birthday'}
                   // error={touched.birthDay && errors.birthDay}
                   onChange={(value) => {
                     setFieldValue('dob', dayjs(value).format('YYYY-MM-DD'))
@@ -262,12 +308,7 @@ export const UserDetails: React.FC<Props> = ({
               </div>
             </div>
             <div className="pt-4 w-full">
-              <BasicSelect
-                value={user?.location}
-                name="gender"
-                items={country}
-                onChange={(e) => handleInputChange(e)}
-              />
+              <BasicSelect value={countryValue} name="country" items={country} onChange={(e) => handleInputChange(e)} />
             </div>
           </div>
 
@@ -322,18 +363,26 @@ export const UserDetails: React.FC<Props> = ({
               <Typography variant="subheadBold" className="text-text-grey font-sans pr-2">
                 {'Account Status'}
               </Typography>
-              <Typography variant="subheadBold" className="text-text-green font-sans">
-                {AccountStatus}
-              </Typography>
+
+              {isBanned ? (
+                <Typography variant="subheadBold" className="text-text-red font-sans">
+                  Deactive
+                </Typography>
+              ) : (
+                <Typography variant="subheadBold" className="text-text-green font-sans">
+                  Active
+                </Typography>
+              )}
             </div>
             <div className="gap-2 flex flex-row whitespace-nowrap">
               <Button
                 variant="action"
                 textClassName="text-text-red text-[13px]"
                 className="w-full bg-opacity-10 h-[30] px-4"
-                onClick={handleClose}
+                loading={banLoading}
+                onClick={handleBanUser}
               >
-                {'Ban User'}
+                {isBanned ? 'Unban User' : 'Ban User'}
               </Button>
               <Button
                 variant="action"
@@ -355,12 +404,7 @@ export const UserDetails: React.FC<Props> = ({
             loading={loading}
             disabled={loading}
             className="w-full shadow-none"
-            onClick={async () => {
-              setLoading(true)
-              // await onAccept({ retry: false })
-              setLoading(false)
-              setOpen(false)
-            }}
+            onClick={formik.submitForm}
           >
             {save}
           </Button>

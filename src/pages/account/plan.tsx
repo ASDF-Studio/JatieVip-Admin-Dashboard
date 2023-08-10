@@ -58,7 +58,7 @@ const Home: NextPage<Props> = ({ user }) => {
   }, [])
 
   return (
-    <AuthProvider userContext={user}>
+    <>
       <Head>
         <title>Manage Plan</title>
       </Head>
@@ -74,7 +74,7 @@ const Home: NextPage<Props> = ({ user }) => {
           )
         )}
       </MainLayout>
-    </AuthProvider>
+    </>
   )
 }
 

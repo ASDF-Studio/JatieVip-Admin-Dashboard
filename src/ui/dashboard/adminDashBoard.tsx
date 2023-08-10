@@ -28,8 +28,9 @@ type Props = {
 }
 
 const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
-  const { users, count, changePage, loading } = useAdmin()
+  const { users, count, changePage, loading, debouncedSearch, reFetch } = useAdmin()
 
+  const [searchValue, setSearchValue] = useState('')
   const [selected, setSelected] = useState<ISelectedProduct>(SubsPLans[1] as ISelectedProduct)
   const [error, setError] = useState<string>(null)
   const [showError, setShowError] = useState<boolean>(false)
@@ -37,16 +38,6 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
   const [orderItem, setOrderItem] = useState(false)
 
   const [showReactiveModal, setShowReactiveModal] = useState(false)
-  const [name, setName] = useState()
-  const [phone, setPhone] = useState()
-  const [userName, setUserName] = useState()
-  const [userType, setUserType] = useState()
-  const [country, setCountry] = useState()
-  const [memberSince, setMemberSince] = useState()
-  const [userImage, setUserImage] = useState()
-  const [gender, setGender] = useState()
-  const [email, setEmail] = useState()
-  const [acountStatus, setAccountStatus] = useState()
   const [acknowledgeText, setAcknowledgeText] = useState<string>(
     'I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.',
   )
@@ -70,10 +61,6 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
     return () => document.removeEventListener('click', listenClickEvent)
   }, [showProfileMenu])
 
-  const handleClickOpen = (item) => {
-    setSelectedUser(item)
-    setShowReactiveModal(true)
-  }
   const handleAction = async () => {
     setShowError(false)
     try {
@@ -104,7 +91,7 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
               <UserIcon className="w-[12px] fill-[#eae7ff]" />
             </IconButton>
             <Typography variant="label2" className="pt-1 font-rec text-white x:text-left">
-              12,3098
+              {count}
             </Typography>
           </div>
         </div>
@@ -115,6 +102,10 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
               <Search className="w-[12px] fill-[#9381ff]" />
             </div>
             <input
+              // value={searchValue}
+              onChange={(e) => {
+                debouncedSearch(e.target.value)
+              }}
               placeholder="Search Users…"
               className={`m-[4px] font-sans font-normal leading-normal tracking-normal text-[13px] text-text-grey appearance-none outline-none`}
             />
@@ -150,29 +141,25 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
           loading={loading}
           users={users}
           count={count}
-          onClick={(item) => handleClickOpen(item)}
+          onClick={(item: any) => {
+            setSelectedUser(item)
+            setShowReactiveModal(true)
+          }}
         />
       </div>
 
       <ErrorModal isCreate onAccept={handleAction} open={showError} setOpen={setShowError} error={error} />
-      <UserDetails
-        open={showReactiveModal}
-        setOpen={setShowReactiveModal}
-        user={selectedUser}
-        cancel="Cancel"
-        onAccept={handleAction}
-        save="Save"
-        Name={name}
-        Phone={phone}
-        Username={userName}
-        UserType={userType}
-        Country={country}
-        MemberSince={memberSince}
-        UserImage={userImage}
-        Gender={gender}
-        AccountStatus={acountStatus}
-        Email={email}
-      />
+      {showReactiveModal && (
+        <UserDetails
+          open={showReactiveModal}
+          setOpen={setShowReactiveModal}
+          user={selectedUser}
+          cancel="Cancel"
+          onClose={reFetch}
+          onAccept={handleAction}
+          save="Save"
+        />
+      )}
     </div>
   )
 }

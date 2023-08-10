@@ -5,7 +5,7 @@ import { LoginSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
 import { useFormik } from 'formik'
-import { AuthProvider, useAuth } from 'Contexts/Auth'
+import {  useAuth } from 'Contexts/Auth'
 import { useRouter } from 'next/router'
 import axios, { AxiosError } from 'axios'
 import { loginSchema } from 'utils/schema'
@@ -32,9 +32,10 @@ const Home: NextPage = (): React.ReactElement => {
         await verifyCode(phoneNumber, Number(code))
         router.replace('/')
       } catch (e) {
-        if (e instanceof AxiosError) {
-          setShowError(true)
-        }
+        setShowError(true)
+        // if (e instanceof AxiosError) {
+          
+        // }
       }
     },
   })

@@ -30,7 +30,7 @@ export const AuthProvider: FC<{ children: React.ReactNode; userContext?: IUser }
   const [ready, setReady] = useState<boolean>(false)
   const { push } = useRouter()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const user = localStorage.getItem('user')
     if (user) {
       setUser(JSON.parse(user))

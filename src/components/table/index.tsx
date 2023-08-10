@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material'
 import { Sort } from 'components/icons'
 import { useAdmin } from 'hooks/useAdmin'
 import React, { useEffect, useState } from 'react'
@@ -148,9 +149,11 @@ export const CustomTable = ({ onClick, users, loading, changePage, count }) => {
       pointerOnHover
       progressPending={loading}
       columns={columns}
+      progressComponent={<CircularProgress className='w-10 h-10' />}
       paginationTotalRows={count}
       paginationServer
       // paginationServerOptions={}
+      paginationResetDefaultPage={true}
       paginationPerPage={20}
       paginationRowsPerPageOptions={[20]}
       onChangePage={handleChangePage}

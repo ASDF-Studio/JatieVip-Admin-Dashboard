@@ -1,8 +1,8 @@
 
 export const genderData = [
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' },
-    { value: 'other', label: 'Other' },
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+    { value: 'Other', label: 'Other' },
     { value: 'prefer', label: 'Prefer not to say' },
   ]
 
@@ -124,7 +124,6 @@ export const country = [
     { value: 'Kazakhstan', label: 'Kazakhstan' },
     { value: 'Kenya', label: 'Kenya' },
     { value: 'Kiribati', label: 'Kiribati' },
-    { value: 'Korea,', label: "Korea, Democratic People's Republic of" },
     { value: 'Korea,', label: 'Korea, Republic of' },
     { value: 'Kuwait', label: 'Kuwait' },
     { value: 'Kyrgyzstan', label: 'Kyrgyzstan' },
@@ -243,14 +242,12 @@ export const country = [
     { value: 'United Arab', label: 'United Arab Emirates' },
     { value: 'United Kingdom', label: 'United Kingdom' },
     { value: 'United States', label: 'United States' },
-    { value: 'United States', label: 'United States Minor Outlying Islands' },
     { value: 'Uruguay', label: 'Uruguay' },
     { value: 'Uzbekistan', label: 'Uzbekistan' },
     { value: 'Vanuatu', label: 'Vanuatu' },
     { value: 'Venezuela,', label: 'Venezuela, Bolivarian Republic of' },
     { value: 'Viet Nam', label: 'Viet Nam' },
     { value: 'Virgin Islands', label: 'Virgin Islands, British' },
-    { value: 'Virgin Islands', label: 'Virgin Islands, U.S.' },
     { value: 'Wallis and', label: 'Wallis and Futuna' },
     { value: 'Western Sahara', label: 'Western Sahara' },
     { value: 'Yemen', label: 'Yemen' },
