@@ -59,7 +59,7 @@ export const AuthProvider: FC<{ children: React.ReactNode; userContext?: IUser }
       phoneNumber,
       otp,
     })
-
+    setUser(res)
     localStorage.setItem('user', JSON.stringify(res))
   }
 

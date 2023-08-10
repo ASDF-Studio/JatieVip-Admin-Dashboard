@@ -5,7 +5,7 @@ import { LoginSteps } from 'types'
 import { LoginSideBar } from 'components/loginSideBar'
 import { MainLayout } from 'components'
 import { useFormik } from 'formik'
-import {  useAuth } from 'Contexts/Auth'
+import { useAuth } from 'Contexts/Auth'
 import { useRouter } from 'next/router'
 import axios, { AxiosError } from 'axios'
 import { loginSchema } from 'utils/schema'
@@ -30,17 +30,15 @@ const Home: NextPage = (): React.ReactElement => {
       setShowError(false)
       try {
         await verifyCode(phoneNumber, Number(code))
-        router.replace('/')
+        router.push('/')
       } catch (e) {
         setShowError(true)
         // if (e instanceof AxiosError) {
-          
+
         // }
       }
     },
   })
-
-
 
   const { setFieldTouched, setFieldValue } = formik
 
@@ -56,7 +54,7 @@ const Home: NextPage = (): React.ReactElement => {
   const handleChangeStep = (step: LoginSteps) => setStep(step)
 
   if (user) {
-    router.push("/")
+    router.push('/')
     return <h1>redirecting to home</h1>
   }
 

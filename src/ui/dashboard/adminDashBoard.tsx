@@ -22,6 +22,7 @@ import { SubsPLans } from '../../constants'
 import dynamic from 'next/dynamic'
 import { Data } from './tableData'
 import { useAdmin } from 'hooks/useAdmin'
+import { useAuth } from 'Contexts/Auth'
 
 type Props = {
   className?: string
@@ -29,19 +30,14 @@ type Props = {
 
 const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
   const { users, count, changePage, loading, debouncedSearch, reFetch } = useAdmin()
+  const { user } = useAuth()
 
-  const [searchValue, setSearchValue] = useState('')
   const [selected, setSelected] = useState<ISelectedProduct>(SubsPLans[1] as ISelectedProduct)
   const [error, setError] = useState<string>(null)
   const [showError, setShowError] = useState<boolean>(false)
   const router = useRouter()
-  const [orderItem, setOrderItem] = useState(false)
 
   const [showReactiveModal, setShowReactiveModal] = useState(false)
-  const [acknowledgeText, setAcknowledgeText] = useState<string>(
-    'I acknowledge that I signed up through the MoveFit website & I must cancel my membership on the website.',
-  )
-
   const [selectedUser, setSelectedUser] = useState(null)
 
   const [showProfileMenu, setShowProfileMenu] = useState(false)
@@ -77,6 +73,10 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
         }
       }
     }
+  }
+
+  if (!user) {
+    return <h1 className='my-5'>redirecting to login</h1>
   }
 
   return (
