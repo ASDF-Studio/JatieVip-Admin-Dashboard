@@ -31,9 +31,9 @@ export const AuthProvider: FC<{ children: React.ReactNode; userContext?: IUser }
   const { push } = useRouter()
 
   useEffect(() => {
-    const user = localStorage.getItem('user')
-    if (user) {
-      setUser(JSON.parse(user))
+    const item = localStorage.getItem('user')
+    if (item) {
+      setUser(JSON.parse(item))
     } else {
       push('/login')
     }

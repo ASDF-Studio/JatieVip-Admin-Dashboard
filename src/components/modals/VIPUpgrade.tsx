@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useCallback } from 'react'
 import { styled } from '@mui/material/styles'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -12,6 +12,7 @@ import { Input } from 'components/input'
 import { Calendar, Sort } from 'components/icons'
 import { ConfirmationModal } from './confirmation'
 import { BasicSelect } from 'components/dropdown'
+import dayjs from 'dayjs'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -44,7 +45,9 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
   return (
     <DialogTitle className="flex items-center justify-between px-2 py-0 m-0" {...other}>
-      <Typography variant="heading3" className="text-center font-rec">{children}</Typography>
+      <Typography variant="heading3" className="text-center font-rec">
+        {children}
+      </Typography>
       {onClose ? (
         <IconButton
           aria-label="close"
@@ -61,7 +64,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 }
 
 type Props = {
-  onAccept?: ({ retry }: { retry?: boolean }) => Promise<void>
+  onAccept?: (duration: string) => Promise<void>
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   cancel?: string
@@ -82,37 +85,71 @@ export const VIPUpgrade: React.FC<Props> = ({
   const [loading, setLoading] = React.useState(false)
   const [showReactiveModal, setShowReactiveModal] = React.useState(false)
   const [isUpgrade, setIsUpgrade] = React.useState(true)
+  const [duration, setDuration] = React.useState('7d')
   const handleClose = () => {
     setOpen(false)
     if (onClose !== undefined) {
       onClose()
     }
   }
-  
+
   const handleSave = () => {
     setShowReactiveModal(true)
   }
-  const handleAction = async () => {
-    setLoading(true)
-    setLoading(false)
-  }
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // const { name, value } = event.target
-    // setFieldTouched(name, true, true)
-    // formik.setFieldValue(name, value)
-    console.log("")
+  const handleAction = async () => {
+    try {
+      setLoading(true)
+      await onAccept(duration)
+      handleClose()
+    } catch (err) {
+      console.log('error')
+    } finally {
+      setLoading(false)
+    }
   }
+  
 
   const items = [
-    { value: '7 Days', label: '7 Days' },
-    { value: '14 Days', label: '14 Days' },
-    { value: '30 Days', label: '30 Days' },
-    { value: '3 Months', label: '3 Months' },
-    { value: '6 Months', label: '6 Months' },
-    { value: '1 Year', label: '1 Year' },
-    { value: 'Forever', label: 'Forever' },
+    { value1: '7d', value: '7 Days', label: '7 Days' },
+    { value1: '14d', value: '14 Days', label: '14 Days' },
+    { value1: '30d', value: '30 Days', label: '30 Days' },
+    { value1: '3m', value: '3 Months', label: '3 Months' },
+    { value1: '6m', value: '6 Months', label: '6 Months' },
+    { value1: '1y', value: '1 Year', label: '1 Year' },
+    { value1: 'forever', value: 'Forever', label: 'Forever' },
   ]
+
+  const calculateDate = useCallback((val) => {
+    let expireDate = ''
+    switch (val) {
+      case '7d':
+        expireDate = dayjs().add(7, 'day').toString()
+        break
+      case '14d':
+        expireDate = dayjs().add(14, 'day').toString()
+        break
+      case '30d':
+        expireDate = dayjs().add(30, 'day').toString()
+        break
+      case '3m':
+        expireDate = dayjs().add(3, 'month').toString()
+        break
+      case '6m':
+        expireDate = dayjs().add(6, 'month').toString()
+        break
+      case '1y':
+        expireDate = dayjs().add(1, 'year').toString()
+        break
+      case 'forever':
+        expireDate = dayjs().add(1000, 'year').toString()
+        break
+      default:
+        break
+    }
+
+    return expireDate
+  }, [])
 
   return (
     <div>
@@ -121,14 +158,27 @@ export const VIPUpgrade: React.FC<Props> = ({
           Upgrade to VIP User
         </BootstrapDialogTitle>
         <DialogContent>
-          <Typography variant="subheadBold" className='text-text-grey font-sans'>{"VIP Duration"}</Typography>
-           <div className='py-2'>
-              <BasicSelect value={"Select"} name="gender" items={items} onChange={(e) => handleInputChange(e)} />
-            </div>
-            <div>
-              <Typography variant="subheadBold" className='text-text-grey font-sans pr-1'>{'Will expire on'}</Typography>
-              <Typography variant="subheadBold" className='text-text-grey font-sans'>{MemberSince}</Typography>
-            </div>
+          <Typography variant="subheadBold" className="text-text-grey font-sans">
+            {'VIP Duration'}
+          </Typography>
+          <div className="py-2">
+            <BasicSelect
+              value={duration}
+              name="gender"
+              items={items}
+              onChange={(e) => {
+                setDuration(items.filter((x) => x.value === e.target.value)[0].value1)
+              }}
+            />
+          </div>
+          <div>
+            <Typography variant="subheadBold" className="text-text-grey font-sans pr-1">
+              {'Will expire on'}
+            </Typography>
+            <Typography variant="subheadBold" className="text-text-grey font-sans">
+              {calculateDate(duration)}
+            </Typography>
+          </div>
         </DialogContent>
         <DialogActions className="gap-[9px] flex flex-row">
           <Button
@@ -143,7 +193,7 @@ export const VIPUpgrade: React.FC<Props> = ({
             //   setLoading(false)
             //   setOpen(false)
             // }}
-            onClick={handleSave}
+            onClick={handleAction}
           >
             {save}
           </Button>
@@ -152,18 +202,7 @@ export const VIPUpgrade: React.FC<Props> = ({
           </Button>
         </DialogActions>
 
-        <ConfirmationModal
-          open={showReactiveModal}
-          onAccept={handleAction}
-          setOpen={setShowReactiveModal}
-          contentText={`Are you sure you want to ${
-            isUpgrade ? 'upgrade' : 'downgrade'
-          } this user?`}
-          acceptText={'Yes'}
-          cancelText={`No, don’t ${
-            isUpgrade ? 'upgrade' : 'downgrade'
-          } user`}
-        />
+        
       </BootstrapDialog>
     </div>
   )

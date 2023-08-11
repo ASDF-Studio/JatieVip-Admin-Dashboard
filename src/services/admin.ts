@@ -19,6 +19,10 @@ type SearchParams = {
   loggedInUserId: string
 }
 
+type UpgradeMembershipParams = {
+  userId: string
+  receipt: '7d' | '14d' | '30d' | '3m' | '6m' | '9m' | '1y' | 'forever'
+}
 const Service = {
   searchUser: (body: SearchParams) => {
     return rest.post<{
@@ -71,6 +75,14 @@ const Service = {
   getAllBannedUser: (body: GetAllBannedUserParams) => {
     return rest.post('user/ban_user', {
       body,
+    })
+  },
+  upgradeMembership: (body: UpgradeMembershipParams) => {
+    return rest.post('vip/receipt_validation', {
+      body: {
+        ...body,
+        platform: 'admin',
+      },
     })
   },
 }

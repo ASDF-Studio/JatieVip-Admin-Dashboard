@@ -22,13 +22,14 @@ export type IUser = {
   isBanned: boolean
   location: string
   profilePic: string
-  subscription: {
+  subscriptions: {
     createdAt: string
     type: string
     valid_from: string
     valid_To: string
     transaction_id: string
-  }
+    expiryDate: number
+  }[]
 }
 
 export type IProductNames = 'Monthly' | '3-Months' | '6-Months' | '1 Year'

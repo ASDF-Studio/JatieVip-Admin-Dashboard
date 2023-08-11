@@ -104,6 +104,7 @@ export const UserDetails: React.FC<Props> = ({
   const [banLoading, setBanLoading] = useState(false)
   const [showVIPUpgradeModal, setShowVIPUpgradeModal] = React.useState(false)
   const [showRemoveUserModal, setShowRemoveUsreModal] = React.useState(false)
+  const [showDownGradeModal, setShowDownGradeModal] = useState(false)
   const handleClose = () => {
     setOpen(false)
   }
@@ -179,14 +180,35 @@ export const UserDetails: React.FC<Props> = ({
     }
   }
 
-  const handleAction = async () => {
+  const handleAction = async (period: any) => {
     try {
-      setLoading(true)
-      setLoading(false)
-    } catch (err) {}
+      await AdminService.upgradeMembership({
+        userId: user.id,
+        receipt: period,
+      })
+      onClose()
+      setFieldValue('isVip', true)
+    } catch (err) {
+    } finally {
+    }
   }
 
-  const { lastName, firstName, gender, imageUrl, phone, email, dob, country: countryValue, isBanned } = formik.values
+  const handleDownGrade = async () => {
+    console.log("downgrade")
+  }
+
+  const {
+    lastName,
+    firstName,
+    gender,
+    imageUrl,
+    phone,
+    email,
+    dob,
+    country: countryValue,
+    isBanned,
+    isVip,
+  } = formik.values
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -321,26 +343,26 @@ export const UserDetails: React.FC<Props> = ({
                   {'Membership'}
                 </Typography>
                 <Typography variant="subheadBold" className="text-text-primary font-sans">
-                  {user?.isVIP ? 'VIP' : 'FREE' + ' User'}
+                  {`${isVip ? 'VIP' : 'FREE'} User`}
                 </Typography>
               </div>
-              {user?.isVIP && (
+              {isVip && (
                 <div>
                   <Typography variant="subheadBold" className="text-text-grey font-sans pr-2">
                     {'Custom/Expires on'}
                   </Typography>
                   <Typography variant="subheadBold" className="text-text-grey font-sans">
-                    {MemberSince}
+                    {dayjs(user?.subscriptions?.[0]?.expiryDate).format("YYYY/MM/DD")}
                   </Typography>
                 </div>
               )}
             </div>
-            {user?.isVIP ? (
+            {isVip ? (
               <Button
                 variant="secondry"
                 textClassName="text-text-primary,"
                 className="w-full mt-2"
-                onClick={handleDowngrade}
+                onClick={() => setShowDownGradeModal(true)}
               >
                 {'Downgrade to Free User'}
               </Button>
@@ -427,6 +449,14 @@ export const UserDetails: React.FC<Props> = ({
           onAccept={handleAction}
           save="Save"
           MemberSince={MemberSince}
+        />
+        <ConfirmationModal
+          open={showDownGradeModal}
+          onAccept={handleDownGrade}
+          setOpen={setShowDownGradeModal}
+          contentText={`Are you sure you want to downgrade this user?`}
+          acceptText={'Yes'}
+          cancelText={`No, don’t downgrade user`}
         />
       </BootstrapDialog>
     </div>
