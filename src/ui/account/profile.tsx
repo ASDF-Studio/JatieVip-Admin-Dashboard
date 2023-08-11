@@ -138,7 +138,7 @@ export const Profile = () => {
             >
               Replace
             </Button>
-            {user.photo && (
+            {user?.photo && (
               <Button
                 onClick={async () => {
                   setRemLoading(true)

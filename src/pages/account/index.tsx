@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import { MainLayout } from 'components'
-import { IUser } from 'services/types'
 import { Profile } from 'ui/account'
 import Head from 'next/head'
 
