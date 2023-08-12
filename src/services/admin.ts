@@ -21,7 +21,7 @@ type SearchParams = {
 
 type UpgradeMembershipParams = {
   userId: string
-  receipt: '7d' | '14d' | '30d' | '3m' | '6m' | '9m' | '1y' | 'forever'
+  receipt: '7d' | '14d' | '30d' | '3m' | '6m' | '9m' | '1y' | 'forever' | "expire"
 }
 const Service = {
   searchUser: (body: SearchParams) => {

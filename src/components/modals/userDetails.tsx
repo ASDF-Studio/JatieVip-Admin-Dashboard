@@ -194,7 +194,16 @@ export const UserDetails: React.FC<Props> = ({
   }
 
   const handleDownGrade = async () => {
-    console.log("downgrade")
+    try {
+      await AdminService.upgradeMembership({
+        userId: user.id,
+        receipt: 'expire',
+      })
+      onClose()
+      setFieldValue('isVip', false)
+    } catch (err) {
+    } finally {
+    }
   }
 
   const {
@@ -352,7 +361,7 @@ export const UserDetails: React.FC<Props> = ({
                     {'Custom/Expires on'}
                   </Typography>
                   <Typography variant="subheadBold" className="text-text-grey font-sans">
-                    {dayjs(user?.subscriptions?.[0]?.expiryDate).format("YYYY/MM/DD")}
+                    {dayjs(user?.subscriptions?.[0]?.expiryDate).format('YYYY/MM/DD')}
                   </Typography>
                 </div>
               )}
