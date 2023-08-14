@@ -57,7 +57,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
         withNavBar ? 'justify-between' : 'justify-center'
       }  px-5 items-center border-b border-accent-white ${classNames} ${hidden && 'x:hidden'}`}
     >
-      <div className="hover:cursor-pointer" onClick={() => navigateTo('/dashboard')}>
+      <div className="hover:cursor-pointer" onClick={() => navigateTo('/')}>
         <img className="h-[65px] w-[121px]" src="/assets/logos/jatieVIP2.svg" alt="move logo" />
       </div>
 
@@ -69,7 +69,7 @@ export const Header: FC<Props> = ({ classNames = '', withNavBar = true, hidden }
             } flex flex-col border-b-[4px] h-full  justify-center items-center w-[30px] sm:w-full`}
           >
             {!isTablet ? (
-              <IconButton className="p-0" disableRipple onClick={() => navigateTo('/dashboard')}>
+              <IconButton className="p-0" disableRipple onClick={() => navigateTo('/')}>
                 <Dashboard className="w-[18px]" />
               </IconButton>
             ) : (

@@ -75,7 +75,7 @@ export const LoginSideBar = ({ className }: Props) => {
               </div>
             </a>
           </Link>
-          <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+          <Link href="https://apps.apple.com/us/app/jatievip/id1665362080">
             <a>
               <div className="hover:cursor-pointer w-fit">
                 <img src="/assets/logos/app-store.png" alt="app store logo" className="max-w-[133px] h-[44px]" />

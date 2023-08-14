@@ -80,7 +80,7 @@ const Home: NextPage = (): React.ReactElement => {
   return (
     <>
       <Head>
-        <title>Movefit Login</title>
+        <title>JatieVip Login</title>
       </Head>
       <MainLayout hiddenDesktop stickyFooter withNavBar={false}>
         <div className="flex justify-between mt-[66px] x:mt-0">

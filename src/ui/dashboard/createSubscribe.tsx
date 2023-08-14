@@ -97,7 +97,7 @@ const CreateSubs: FC<Props> = ({ className }): ReactElement => {
               </div>
             </a>
           </Link>
-          <Link href="https://apps.apple.com/us/app/move-fitness-app/id1623388100">
+          <Link href="https://apps.apple.com/us/app/jatievip/id1665362080">
             <a>
               <div className="hover:cursor-pointer">
                 <img
