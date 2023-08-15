@@ -180,6 +180,18 @@ export const UserDetails: React.FC<Props> = ({
     }
   }
 
+  const handleDeleteUser = async () => {
+    try {
+      await AdminService.deleteUser({
+        id: user.id,
+      })
+      onClose()
+      handleClose()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const handleAction = async (period: any) => {
     try {
       await AdminService.upgradeMembership({
@@ -419,7 +431,7 @@ export const UserDetails: React.FC<Props> = ({
                 variant="action"
                 textClassName="text-text-red text-[13px]"
                 className="w-full bg-opacity-10 h-[30] px-4"
-                onClick={handleClose}
+                onClick={handleRemove}
               >
                 {'Delete User'}
               </Button>
@@ -445,7 +457,7 @@ export const UserDetails: React.FC<Props> = ({
         </DialogActions>
         <ConfirmationModal
           open={showRemoveUserModal}
-          onAccept={handleAction}
+          onAccept={handleDeleteUser}
           setOpen={setShowRemoveUsreModal}
           contentText={`Are you sure you want to remove this user?`}
           acceptText={'Yes'}

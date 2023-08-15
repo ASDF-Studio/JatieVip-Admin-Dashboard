@@ -21,7 +21,7 @@ type SearchParams = {
 
 type UpgradeMembershipParams = {
   userId: string
-  receipt: '7d' | '14d' | '30d' | '3m' | '6m' | '9m' | '1y' | 'forever' | "expire"
+  receipt: '7d' | '14d' | '30d' | '3m' | '6m' | '9m' | '1y' | 'forever' | 'expire'
 }
 const Service = {
   searchUser: (body: SearchParams) => {
@@ -64,6 +64,11 @@ const Service = {
 
   banUser: (body: BanUserParams) => {
     return rest.post('user/ban_user', {
+      body,
+    })
+  },
+  deleteUser: (body: { id: string }) => {
+    return rest.post('user/delete', {
       body,
     })
   },
