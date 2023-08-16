@@ -21,7 +21,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           className="p-0"
           disableRipple
           onClick={() => {
-            window.open('https://www.facebook.com/movefitapp', '_blank')
+            window.open('https://www.facebook.com/JatieVlogsVideos', '_blank')
           }}
         >
           <FacebookIcon className="w-[20px] hover:opacity-80" fill="black" />
@@ -30,7 +30,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           className="p-0"
           disableRipple
           onClick={() => {
-            window.open('https://www.tiktok.com/@joshxkatiefit', '_blank')
+            window.open('https://www.tiktok.com/@joshxkatie', '_blank')
           }}
         >
           <TikTokIcon className="w-[18px] hover:opacity-80" fill="black" />
@@ -39,7 +39,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           className="p-0"
           disableRipple
           onClick={() => {
-            window.open('https://www.snapchat.com/add/themovefitapp', '_blank')
+            window.open('https://www.snapchat.com/add/joshbrueckner', '_blank')
           }}
         >
           <SnapChat className="w-[21px] hover:opacity-80" fill="black" />
@@ -48,7 +48,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           className="p-0"
           disableRipple
           onClick={() => {
-            window.open('https://youtube.com/channel/UCHtMq7sjroEvqdWIjFne7NA', '_blank')
+            window.open('https://www.youtube.com/c/JatieVlogs', '_blank')
           }}
         >
           <YoutubeIcon className="w-[25px] hover:opacity-80" fill="black" />
@@ -58,7 +58,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
           className="p-0"
           disableRipple
           onClick={() => {
-            window.open('https://www.instagram.com/moveapp/', '_blank')
+            window.open('https://www.instagram.com/jatievip', '_blank')
           }}
         >
           <InstagramIcon className="w-[20px] hover:opacity-80" fill="black" />
@@ -86,7 +86,7 @@ export const Footer: FC<Props> = ({ classNames, sticky, hidden }): React.ReactEl
         </div>
 
         <Typography variant="body2" className="leading-[2]">
-          © Move, Inc. All rights reserved.
+          © Jatie Vip, Inc. All rights reserved.
         </Typography>
       </div>
     </div>

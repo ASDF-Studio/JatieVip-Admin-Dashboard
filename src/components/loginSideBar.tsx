@@ -24,7 +24,7 @@ export const LoginSideBar = ({ className }: Props) => {
             className="p-0"
             disableRipple
             onClick={() => {
-              window.open('https://www.facebook.com/movefitapp', '_blank')
+              window.open('https://www.facebook.com/JatieVlogsVideos', '_blank')
             }}
           >
             <FacebookIcon className="w-[20px] xl:w-[30px] hover:opacity-80 " fill="white" />
@@ -33,7 +33,7 @@ export const LoginSideBar = ({ className }: Props) => {
             className="p-0"
             disableRipple
             onClick={() => {
-              window.open('https://www.tiktok.com/@joshxkatiefit', '_blank')
+              window.open('https://www.tiktok.com/@joshxkatie', '_blank')
             }}
           >
             <TikTokIcon className="w-[18px] xl:w-[26px] hover:opacity-80" fill="white" />
@@ -42,7 +42,7 @@ export const LoginSideBar = ({ className }: Props) => {
             className="p-0"
             disableRipple
             onClick={() => {
-              window.open('https://www.snapchat.com/add/themovefitapp', '_blank')
+              window.open('https://www.snapchat.com/add/joshbrueckner', '_blank')
             }}
           >
             <SnapChat className="w-[21px] xl:w-[32px] hover:opacity-80" fill="white" />
@@ -51,7 +51,7 @@ export const LoginSideBar = ({ className }: Props) => {
             className="p-0"
             disableRipple
             onClick={() => {
-              window.open('https://youtube.com/channel/UCHtMq7sjroEvqdWIjFne7NA', '_blank')
+              window.open('https://www.youtube.com/c/JatieVlogs', '_blank')
             }}
           >
             <YoutubeIcon className="w-[25px] xl:w-[38px] hover:opacity-80" fill="white" />
@@ -61,14 +61,14 @@ export const LoginSideBar = ({ className }: Props) => {
             className="p-0"
             disableRipple
             onClick={() => {
-              window.open('https://www.instagram.com/moveapp/', '_blank')
+              window.open('https://www.instagram.com/jatievip', '_blank')
             }}
           >
             <InstagramIcon className="w-[20px] xl:w-[30px] hover:opacity-80" fill="white" />
           </IconButton>
         </div>
         <div className="flex gap-2.5 items-center">
-          <Link href="https://play.google.com/store/apps/details?id=com.movefitness.app">
+          <Link href="https://play.google.com/store/apps/details?id=com.airlystudio.jatievip">
             <a>
               <div className="hover:cursor-pointer w-fit">
                 <img src="/assets/logos/google-play.png" alt="google play logo" className="max-w-[149px] h-[44px]" />
