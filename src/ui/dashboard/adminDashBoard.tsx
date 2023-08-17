@@ -76,8 +76,32 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
   }
 
   if (!user) {
-    return <h1 className='my-5'>redirecting to login</h1>
+    return <h1 className="my-5">redirecting to login</h1>
   }
+
+  const Card = ({ title, isLast }) => {
+    return (
+      <div
+        className={['flex gap-[12px] shrink-0 px-5 py-[12px] items-center', !isLast && 'border-r-2 border-r-[#D3A708]'].join(
+          ' ',
+        )}
+      >
+        <Typography variant="body1" className="font-normal text-[16px]">
+          {title}
+        </Typography>
+        <div className="h-[26px] flex justify-center items-center border rounded-full bg-fill-purple pr-2">
+          <IconButton className="" disableRipple>
+            <UserIcon className="w-[12px] fill-[#eae7ff]" />
+          </IconButton>
+          <Typography variant="label2" className="font-rec text-white x:text-left">
+            {count}
+          </Typography>
+        </div>
+      </div>
+    )
+  }
+
+  const analytics = ['Total User', 'VIP User', 'Free User', "New Post Today"]
 
   return (
     <div className={`${className}`}>
@@ -86,14 +110,6 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
           <Typography variant="heading1" className="text-center font-rec x:text-left">
             Manage Users
           </Typography>
-          <div className="h-[26px] flex justify-center items-center border rounded-full bg-fill-purple pr-2">
-            <IconButton className="" disableRipple>
-              <UserIcon className="w-[12px] fill-[#eae7ff]" />
-            </IconButton>
-            <Typography variant="label2" className="pt-1 font-rec text-white x:text-left">
-              {count}
-            </Typography>
-          </div>
         </div>
 
         <div className="flex flex-row items-center gap-[12px] sm:gap-[16px]">
@@ -133,9 +149,14 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
           </div>
         </div>
       </div>
+      <div className="flex w-full bg-[#FAF4E1] rounded-[8px] mt-[10px] overflow-x-auto">
+        {analytics.map((title, index) => {
+          return <Card title={title} isLast={index === analytics.length - 1} />
+        })}
+      </div>
 
       {/* table */}
-      <div className="mt-8 z-0">
+      <div className="mt-[18px] z-0">
         <CustomTable
           changePage={changePage}
           loading={loading}

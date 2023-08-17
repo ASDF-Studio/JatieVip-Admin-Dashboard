@@ -7,12 +7,9 @@ import { MainLayout } from 'components'
 import { useFormik } from 'formik'
 import { useAuth } from 'Contexts/Auth'
 import { useRouter } from 'next/router'
-import axios, { AxiosError } from 'axios'
 import { loginSchema } from 'utils/schema'
-import { sessionOptions } from 'lib/session'
-import { withIronSessionSsr } from 'iron-session/next'
 import Head from 'next/head'
-import { useUser } from 'hooks/useUser'
+
 
 const Home: NextPage = (): React.ReactElement => {
   const router = useRouter()
@@ -54,7 +51,7 @@ const Home: NextPage = (): React.ReactElement => {
   const handleChangeStep = (step: LoginSteps) => setStep(step)
 
   if (user) {
-    router.push('/')
+    router.push('/') 
     return <h1>redirecting to home</h1>
   }
 
@@ -76,6 +73,7 @@ const Home: NextPage = (): React.ReactElement => {
         )
     }
   }
+  
 
   return (
     <>
