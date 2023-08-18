@@ -12,6 +12,7 @@ type GetAllBannedUserParams = {}
 
 type GetAllUsers = {
   offset: number
+  limit?: number
 }
 
 type SearchParams = {

@@ -40,10 +40,10 @@ export const useAdmin = () => {
   const [users, setUsers] = useState<IUser[]>([])
   const [loading, setLoading] = useState(false)
   const [infos, setInfo] = useState<{
-    "Total User": number,
-    "VIP User": number,
-    "Free User": number,
-    "Total posts": number,
+    'Total User': number
+    'VIP User': number
+    'Free User': number
+    'Total posts': number
   }>()
   const { user } = useAuth()
   const { id } = user || {}
@@ -54,13 +54,14 @@ export const useAdmin = () => {
       setLoading(true)
       const res = await AdminService.getUsers({
         offset: offset,
+        limit: 20,
       })
       setUsers(res.data.users)
       setInfo({
-        "Free User": res.data.freeUserscount,
-        "VIP User": res.data.vipUsers,
-        "Total posts": res.data.totalPost,
-        "Total User": res.data.count
+        'Free User': res.data.freeUserscount,
+        'VIP User': res.data.vipUsers,
+        'Total posts': res.data.totalPost,
+        'Total User': res.data.count,
       })
     } catch (e) {
     } finally {
@@ -105,6 +106,6 @@ export const useAdmin = () => {
     infos,
     debouncedSearch,
     page,
-    reFetch
+    reFetch,
   }
 }

@@ -15,14 +15,19 @@ import { ErrorModal } from 'components/modals/error-modal'
 import { StripeError } from 'lib/error'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, ReactElement, useEffect, useState } from 'react'
+import { FC, ReactElement, useEffect, useRef, useState } from 'react'
 import { StripeService } from 'services/stripe'
 import { ISelectedProduct } from 'services/types'
-import { SubsPLans } from '../../constants'
+import { SubsPLans, tableData } from '../../constants'
 import dynamic from 'next/dynamic'
 import { Data } from './tableData'
 import { useAdmin } from 'hooks/useAdmin'
 import { useAuth } from 'Contexts/Auth'
+import { async } from 'rxjs'
+import { AdminService } from 'services'
+import { isArray, isEmpty, keys } from 'lodash'
+import { CSVLink } from 'react-csv'
+import { CSVDownload } from 'components/csvDownload'
 
 type Props = {
   className?: string
@@ -39,6 +44,8 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
 
   const [showReactiveModal, setShowReactiveModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
+
+  const ref = useRef(null)
 
   const [showProfileMenu, setShowProfileMenu] = useState(false)
 
@@ -102,7 +109,9 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
     )
   }
 
-  const analytics = ['Total User','Total posts', 'VIP User', 'Free User']
+  
+
+  const analytics = ['Total User', 'Total posts', 'VIP User', 'Free User']
 
   return (
     <div className={`${className}`}>
@@ -137,14 +146,7 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
             </IconButton>
             {showProfileMenu && (
               <div className="absolute w-[174px] py-[5px] right-[15px] sm:right-[290px] bg-white shadow-selectShadow border border-[#e5e7ec] rounded-lg top-[190px]  sm:top-[180px] z-10">
-                <div
-                  onClick={() => {
-                    setShowProfileMenu(false)
-                  }}
-                  className="px-[21px] hover:bg-fill-lightYellow py-[7px]"
-                >
-                  <Typography className="text-black font-normal cursor-pointer">Export as CSV</Typography>
-                </div>
+                <CSVDownload onClose={() => setShowProfileMenu(false)}/>
               </div>
             )}
           </div>

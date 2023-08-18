@@ -429,3 +429,25 @@ export const countries: CountryType[] = [
   { code: 'ZM', label: 'Zambia', phone: '260' },
   { code: 'ZW', label: 'Zimbabwe', phone: '263' },
 ]
+
+
+export const tableData = [
+  'id',
+  'username',
+  'fullName',
+  'contact',
+  'dob',
+  'followers',
+  'following',
+  'gender',
+  'isAdmin',
+  'isBanned',
+  'isVIP',
+  'location',
+  'primaryEmail',
+  'profilePic',
+  'profileRole',
+  'subscriptions',
+  'created_at',
+  'updated_at',
+]
