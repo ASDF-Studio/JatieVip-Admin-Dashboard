@@ -39,7 +39,12 @@ export const useAdmin = () => {
   // const [state, dispatch] = useReducer(reducer, initState)
   const [users, setUsers] = useState<IUser[]>([])
   const [loading, setLoading] = useState(false)
-  const [count, setCount] = useState<number>()
+  const [infos, setInfo] = useState<{
+    "Total User": number,
+    "VIP User": number,
+    "Free User": number,
+    "Total posts": number,
+  }>()
   const { user } = useAuth()
   const { id } = user || {}
   const [page, setPage] = useState(0)
@@ -51,7 +56,12 @@ export const useAdmin = () => {
         offset: offset,
       })
       setUsers(res.data.users)
-      setCount(res.data.count)
+      setInfo({
+        "Free User": res.data.freeUserscount,
+        "VIP User": res.data.vipUsers,
+        "Total posts": res.data.totalPost,
+        "Total User": res.data.count
+      })
     } catch (e) {
     } finally {
       setLoading(false)
@@ -92,7 +102,7 @@ export const useAdmin = () => {
     users,
     loading,
     changePage,
-    count,
+    infos,
     debouncedSearch,
     page,
     reFetch

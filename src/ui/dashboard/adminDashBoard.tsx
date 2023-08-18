@@ -29,7 +29,7 @@ type Props = {
 }
 
 const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
-  const { users, count, changePage, loading, debouncedSearch, reFetch } = useAdmin()
+  const { users, infos, changePage, loading, debouncedSearch, reFetch } = useAdmin()
   const { user } = useAuth()
 
   const [selected, setSelected] = useState<ISelectedProduct>(SubsPLans[1] as ISelectedProduct)
@@ -82,9 +82,10 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
   const Card = ({ title, isLast }) => {
     return (
       <div
-        className={['flex gap-[12px] shrink-0 px-5 py-[12px] items-center', !isLast && 'border-r-2 border-r-[#D3A708]'].join(
-          ' ',
-        )}
+        className={[
+          'flex gap-[12px] shrink-0 px-5 py-[12px] items-center',
+          !isLast && 'border-r-2 border-r-[#D3A708]',
+        ].join(' ')}
       >
         <Typography variant="body1" className="font-normal text-[16px]">
           {title}
@@ -94,14 +95,14 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
             <UserIcon className="w-[12px] fill-[#eae7ff]" />
           </IconButton>
           <Typography variant="label2" className="font-rec text-white x:text-left">
-            {count}
+            {infos?.[title]}
           </Typography>
         </div>
       </div>
     )
   }
 
-  const analytics = ['Total User', 'VIP User', 'Free User', "New Post Today"]
+  const analytics = ['Total User','Total posts', 'VIP User', 'Free User']
 
   return (
     <div className={`${className}`}>
@@ -161,7 +162,7 @@ const AdminDashBoard: FC<Props> = ({ className }): ReactElement => {
           changePage={changePage}
           loading={loading}
           users={users}
-          count={count}
+          count={infos?.['Total User']}
           onClick={(item: any) => {
             setSelectedUser(item)
             setShowReactiveModal(true)

@@ -56,7 +56,10 @@ const Service = {
     rest.post<{
       data: {
         count: number
+        freeUserscount: number
         users: IUser[]
+        vipUsers: number
+        totalPost: number
       }
     }>('user/get_all_users', {
       body,
