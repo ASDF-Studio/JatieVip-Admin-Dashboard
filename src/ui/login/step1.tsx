@@ -36,7 +36,7 @@ const Step1: React.FC<Props> = ({ onChangeStep, handleChangeForm, phoneNumber })
 
     try {
       setLoading(true)
-      await sendCode(phoneNumber)
+      await sendCode(phoneNumber, captchaCode)
       onChangeStep('step2')
     } catch (err) {
       if (err instanceof AxiosError) {

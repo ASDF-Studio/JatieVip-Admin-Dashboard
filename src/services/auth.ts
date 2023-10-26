@@ -5,6 +5,7 @@ export const authTokenKey = 'jwt_token'
 
 export interface LoginParameter {
   phoneNumber: string
+  captcha: string
 }
 
 export interface LoginResponse {

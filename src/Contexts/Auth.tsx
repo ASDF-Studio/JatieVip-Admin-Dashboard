@@ -10,7 +10,7 @@ import { IUser } from 'services/types'
 export interface AuthState {
   user?: IUser
   setUser?: React.Dispatch<React.SetStateAction<IUser>>
-  sendCode: (phoneNumber: string) => Promise<unknown>
+  sendCode: (phoneNumber: string, captcha: string) => Promise<unknown>
   updateUser?: (value: IUser) => void
   logOut?: () => void
   ready?: boolean
@@ -48,9 +48,10 @@ export const AuthProvider: FC<{ children: React.ReactNode; userContext?: IUser }
     setUser(arg)
   }
 
-  const sendCode = (phoneNumber: string) => {
+  const sendCode = (phoneNumber: string, captcha: string) => {
     return AuthService.login({
       phoneNumber: `+${phoneNumber}`,
+      captcha
     })
   }
 
